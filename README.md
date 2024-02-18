@@ -40,7 +40,12 @@ Estudar
     https://python.langchain.com/docs/use_cases/sql/quickstart
 
     Neste abaixo a parte do Leonard de Caprio e' desnecessario, mas vale muito a pena estudar  
+    Verificar se rola com o banco de dados mencionado
 
     https://blog.futuresmart.ai/langchain-sql-agents-openai-llms-query-database-using-natural-language    
 
 
+
+## Exemplo de uso do comando curtl para testes local com endpoint customer_service
+
+nelljr@raspberrypi:~ $ curl -X POST -H "Content-Type: application/json" -d '{"question": "Eu quero saber se tem uma cabelereira ai na quinta feira", "requester":"Angela"}' http://localhost:5000/customer_service
