@@ -57,13 +57,13 @@ def customer_service():
         {"role": "user", "content": response}
     ]
 
-    # chat_completion = client.chat.completions.create(
-    #    messages=message,
-    #    model="gpt-3.5-turbo",
-    #    temperature=0.7
-    # )
+    chat_completion = client.chat.completions.create(
+        messages=message,
+        model="gpt-3.5-turbo",
+        temperature=0.7
+    )
 
-    # response = chat_completion.choices[0].message.content
+    response = chat_completion.choices[0].message.content
 
     return jsonify({'answer': response})
 
