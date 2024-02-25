@@ -50,7 +50,7 @@ def customer_service():
     message_info["requester"] = data.get('requester') 
 
     response = nucleoNeural(message_info) 
-    response = f"user: {response}"
+    response = f"{message_info['requester']}: {response}"
 
     message=[
         {"role": "system", "content": system_msg},
@@ -58,11 +58,10 @@ def customer_service():
     ]
 
     chat_completion = client.chat.completions.create(
-        messages=message,
-        model="gpt-3.5-turbo",
-        temperature=0.7
+       messages=message,
+       model="gpt-3.5-turbo",
+       temperature=0.7
     )
-
     response = chat_completion.choices[0].message.content
 
     return jsonify({'answer': response})

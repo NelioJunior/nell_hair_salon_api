@@ -398,7 +398,7 @@ def buscarFuncionarioPorEspecialidades(lstEspecialidades):
                 cont = 0 
 
             for item in lstEspecialidades:
-                if item['idEspecialidade'] == funcionario['id_especialidade']:
+                if item['id_especialidade'] == funcionario['id_especialidade']:
                     cont += 1 
 
             if cont == numeroEspecialidade:
@@ -1175,7 +1175,7 @@ def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento)
     msgResposta = ""
     if especialidade != []: 
         if stts["reservas"][0]['especialidades'][0]["idEspecialidade"] == "":
-            stts["reservas"][0]['especialidades'][0]["idEspecialidade"] = especialidade[0]["idEspecialidade"] 
+            stts["reservas"][0]['especialidades'][0]["idEspecialidade"] = especialidade[0]["id_especialidade"] 
             stts["reservas"][0]['especialidades'][0]["especialidade"] = especialidade[0]["nome"] 
             stts["reservas"][0]['especialidades'][0]["preco"] = especialidade[0]["preco"] 
             stts["reservas"][0]['especialidades'][0]["sessoes"] = especialidade[0]["sessoes"] 
