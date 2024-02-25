@@ -399,7 +399,7 @@ def buscarFuncionarioPorEspecialidades(lstEspecialidades):
 
             for item in lstEspecialidades:
                 if item['id_especialidade'] == funcionario['id_especialidade']:
-                    cont += 1 
+                    cont += 1   # teste 
 
             if cont == numeroEspecialidade:
                 lstFunc.append(funcionario)
