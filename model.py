@@ -215,7 +215,7 @@ def findStatePosition(states,contato):
                         "data": "", 
                         "inicio": "", 
                         "especialidades" :  [{
-                                               "idEspecialidade":"" , 
+                                               "id_especialidade":"" , 
                                                "especialidade" : "" , 
                                                "preco": 0,
                                                "sessoes":1, 
@@ -399,8 +399,8 @@ def buscarFuncionarioPorEspecialidades(lstEspecialidades):
 
             for item in lstEspecialidades:
                 if item['id_especialidade'] == funcionario['id_especialidade']:
-                    cont += 1   # teste 
-
+                    cont += 1  
+                    
             if cont == numeroEspecialidade:
                 lstFunc.append(funcionario)
                 cont = 0
@@ -460,7 +460,7 @@ def separarEspecialidadesPorFuncionarios(states, lstFuncionariosAptos, lstEspeci
     for itemEsp in lstEspecialiadades:
         idx = 0 
         for itemFunc in lstFuncionariosAptos:                
-            profissionalApto = True if len(list(filter(lambda item: item["id_especialidade"] == itemEsp["idEspecialidade"] and item["id_funcionario"] == itemFunc["id_funcionario"], dictFuncionario))) > 0 else False  
+            profissionalApto = True if len(list(filter(lambda item: item["id_especialidade"] == itemEsp["id_especialidade"] and item["id_funcionario"] == itemFunc["id_funcionario"], dictFuncionario))) > 0 else False  
 
             if profissionalApto:
                 if idx > 0:
@@ -470,7 +470,7 @@ def separarEspecialidadesPorFuncionarios(states, lstFuncionariosAptos, lstEspeci
 
                 flagApenasUmProfissionalAptoParaCadaServico = True if len(lstEspecialiadades) > 1  else False 
 
-                if len(statesReservas) == 0 or len(list(filter(lambda item: item["idEspecialidade"] == itemEsp["idEspecialidade"], statesReservas[0]["especialidades"]))) == 0:  
+                if len(statesReservas) == 0 or len(list(filter(lambda item: item["id_especialidade"] == itemEsp["id_especialidade"], statesReservas[0]["especialidades"]))) == 0:  
 
                     if idFuncionario != itemFunc["id_funcionario"]: 
                             idFuncionario = itemFunc["id_funcionario"]
@@ -479,14 +479,14 @@ def separarEspecialidadesPorFuncionarios(states, lstFuncionariosAptos, lstEspeci
                                                     "funcionario": itemFunc["nome"], 
                                                     "data": data, 
                                                     "inicio": inicio,
-                                                    "especialidades": [{"idEspecialidade": itemEsp["idEspecialidade"] , 
+                                                    "especialidades": [{"id_especialidade": itemEsp["id_especialidade"] , 
                                                                         "especialidade": itemEsp["especialidade"], 
                                                                         "preco": itemEsp["preco"],
                                                                         "sessoes": itemEsp["sessoes"],
                                                                         "tempoNecessarioPorSessao": itemEsp["tempoNecessarioPorSessao"]}]
                                                     })
                     else:  
-                        statesReservas[0]["especialidades"].append({"idEspecialidade": itemEsp["idEspecialidade"] , 
+                        statesReservas[0]["especialidades"].append({"id_especialidade": itemEsp["id_especialidade"] , 
                                                                 "especialidade": itemEsp["especialidade"], 
                                                                 "preco": itemEsp["preco"],
                                                                 "sessoes": itemEsp["sessoes"],
@@ -510,13 +510,13 @@ def separarEspecialidadesPorFuncionarios(states, lstFuncionariosAptos, lstEspeci
         flag = False  
         for reserva in states["reservas"]: 
             for item in reserva["especialidades"]:
-                if especialidade["idEspecialidade"] == item["idEspecialidade"]:
+                if especialidade["id_especialidade"] == item["id_especialidade"]:
                     flag = True  
         if flag == False: 
             states["informacaoAoUsuario"] += especialidade["especialidade"]+","
 
     if states["reservas"][0]["data"] != "" and states["reservas"][0]["inicio"] != "":  
-        if states["reservas"][0]["id_funcionario"] != "" and states["reservas"][0]["especialidades"][0]["idEspecialidade"] != "":
+        if states["reservas"][0]["id_funcionario"] != "" and states["reservas"][0]["especialidades"][0]["id_especialidade"] != "":
             if states["informacaoAoUsuario"] != "":
                 states["informacaoAoUsuario"] = states["informacaoAoUsuario"][0:len(states["informacaoAoUsuario"])-1]     
                 states["informacaoAoUsuario"] = "Lamento,mas não foi possivel fazer reserva para %s porque não existe profissionais livres no horário e dia escolhido." % states["informacaoAoUsuario"]
@@ -582,7 +582,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,mensagemOriginal):
     msgRetorno = ""
     horariosLivres = ""
 
-    if states["reservas"][0]["data"] != "" and states["reservas"][0]["especialidades"][0]["idEspecialidade"] != "":
+    if states["reservas"][0]["data"] != "" and states["reservas"][0]["especialidades"][0]["id_especialidade"] != "":
         flagNenhumConflitoDiaSemanaHoraInicio = False
         lstFuncionariosAptos = buscarFuncionarioPorEspecialidades(states["reservas"][0]["especialidades"]) 
         diaSemana = tools.buscarDiaSemana(datetime.strptime(states["reservas"][0]["data"], "%Y-%m-%d").weekday())
@@ -704,7 +704,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     if respBaseConhecimento[1] == "discordar":  
         if "Anotei aqui que vc quer fazer" in state["ultimaMensagemAssistente"]:
             retorno = "Desculpe, acho que entendi errado. Qual serviço vc quer mesmo?"
-            state["reservas"][0]['especialidades'][0]["idEspecialidade"] = ""
+            state["reservas"][0]['especialidades'][0]["id_especialidade"] = ""
             state["reservas"][0]['especialidades'][0]["especialidade"] = ""
             state["reservas"][0]['especialidades'][0]["preco"] = ""
             state["reservas"][0]['especialidades'][0]["sessoes"] = ""
@@ -731,7 +731,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
             state["flagAdicionarServicos"] = True    
             return retorno
 
-    if state["reservas"][0]['especialidades'][0]["idEspecialidade"] == "":
+    if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
         retorno += "quais serviços vc quer? "
 
     if state["reservas"][0]["data"] == "":
@@ -746,10 +746,10 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     if retorno != "" :
         msgResposta = "É necessario saber %s " % retorno
 
-        if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["idEspecialidade"] != "":
+        if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
             msgResposta = "Me diga o dia em que vc quer vir ou o profissional se já tem um em mente."
 
-        elif state["reservas"][0]["inicio"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["idEspecialidade"] == "":
+        elif state["reservas"][0]["inicio"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
             msgResposta = "Informe detalhes tipo,os serviços que vc quer sejam feitos,dia e hora do agendamento"
      
     elif trueSeDataHoraJaPassou (state["reservas"][0]["data"], state["reservas"][0]["inicio"]): 
@@ -760,11 +760,11 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     else: 
         msgResposta = "" 
 
-    if state["reservas"][0]['especialidades'][0]["idEspecialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]["inicio"] == "":
+    if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]["inicio"] == "":
         state["flagUsuarioDesejaFazerCRUD"]  = False   
 
     if state["reservas"][0]["id_funcionario"] != "":
-        if state["reservas"][0]['especialidades'][0]["idEspecialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["inicio"] == "":
+        if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["inicio"] == "":
             state["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True    
 
     return msgResposta
@@ -847,14 +847,14 @@ def validarHorarioEscolhido(states, horario):
 
 def addEspecialidadesInState(stts, especialidades):                       
 
-    if stts["reservas"][0]["especialidades"][0]["idEspecialidade"] == "" and len(especialidades) > 0: 
+    if stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "" and len(especialidades) > 0: 
         stts["reservas"][0]["especialidades"] = []
 
     for especialidade in especialidades:
-        lst = list(filter(lambda item: (item['idEspecialidade'] == especialidade["id_especialidade"]), stts["reservas"][0]["especialidades"]))
+        lst = list(filter(lambda item: (item['id_especialidade'] == especialidade["id_especialidade"]), stts["reservas"][0]["especialidades"]))
         if len(lst) == 0:   
             stts["reservas"][0]["especialidades"].append({ 
-                "idEspecialidade":especialidade["id_especialidade"]  , 
+                "id_especialidade":especialidade["id_especialidade"]  , 
                 "especialidade" :  especialidade["nome"] ,                  
                 "preco": especialidade["preco"], 
                 "sessoes":especialidade["sessoes"], 
@@ -997,7 +997,7 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
             respBaseConhecimento[1] = "discordar"
         elif "apenas" in mensagemTraduzida:
             if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-                stts["reservas"][0]["especialidades"][0]["idEspecialidade"] = ""
+                stts["reservas"][0]["especialidades"][0]["id_especialidade"] = ""
                 stts["reservas"][0]["especialidades"][0]["especialidade"] = ""
                 stts["reservas"][0]["especialidades"][0]["preco"] = 0
                 stts["reservas"][0]["especialidades"][0]["sessoes"] = 0    
@@ -1009,7 +1009,7 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
 
     elif respBaseConhecimento[1] == "incluirReserva":
         if stts["flagUsuarioDesejaFazerCRUD"] == False and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "":  
-            if stts["reservas"][0]["id_funcionario"] == "" and stts["reservas"][0]["especialidades"][0]["idEspecialidade"] == "":
+            if stts["reservas"][0]["id_funcionario"] == "" and stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
                 funcionario = buscarFuncionario(mensagem)
                 if funcionario[1] != "": 
                     stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True
@@ -1091,7 +1091,7 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
         if "Caso vc queira agendar com" in stts["ultimaMensagemAssistente"] :        
             stts["reservas"][0]["id_funcionario"] = ""
             stts["reservas"][0]["funcionario"] = ""
-            if stts["reservas"][0]["especialidades"][0]["idEspecialidade"] == "" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "":
+            if stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "":
                 respBaseConhecimento[1] = "despedida"
                 respBaseConhecimento[0] = "Ok.Caso vc queira saber de outra funcionaria a qualquer hora é só me falar "
         elif "gostaria de agendar um horário" in stts["ultimaMensagemAssistente"] :        
@@ -1136,7 +1136,7 @@ def limparStateContatoAtivo(stts, manterDataHora):
     stts["stateIdAgenda" ] = ""
     stts["reservas"][0]["id_funcionario"] = ""
     stts["reservas"][0]["funcionario"] = ""
-    stts["reservas"][0]["especialidades"][0]["idEspecialidade"] = ""
+    stts["reservas"][0]["especialidades"][0]["id_especialidade"] = ""
     stts["reservas"][0]["especialidades"][0]["especialidade"] = ""
     if manterDataHora == False:
         stts["reservas"][0]["data"] = ""
@@ -1174,8 +1174,8 @@ def validarDiaFuncionamento(stts):
 def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento):
     msgResposta = ""
     if especialidade != []: 
-        if stts["reservas"][0]['especialidades'][0]["idEspecialidade"] == "":
-            stts["reservas"][0]['especialidades'][0]["idEspecialidade"] = especialidade[0]["id_especialidade"] 
+        if stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
+            stts["reservas"][0]['especialidades'][0]["id_especialidade"] = especialidade[0]["id_especialidade"] 
             stts["reservas"][0]['especialidades'][0]["especialidade"] = especialidade[0]["nome"] 
             stts["reservas"][0]['especialidades'][0]["preco"] = especialidade[0]["preco"] 
             stts["reservas"][0]['especialidades'][0]["sessoes"] = especialidade[0]["sessoes"] 
@@ -1218,7 +1218,7 @@ def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento)
                 msgResposta += "%s " % respValidacao.lower()
         else:
             msgResposta = "Infelizmente, não temos um profissional especializado em %s " % especialidade[0]["nome"]      
-            stts["reservas"][0]['especialidades'][0]["idEspecialidade"] = ""
+            stts["reservas"][0]['especialidades'][0]["id_especialidade"] = ""
             stts["reservas"][0]['especialidades'][0]["especialidade"] = ""
             stts["reservas"][0]['especialidades'][0]["preco"] = ""
             stts["reservas"][0]['especialidades'][0]["sessoes"] = ""
@@ -1311,11 +1311,11 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
             stts["flagUsuarioDesejaFazerCRUD"] = False 
 
     if msgResposta == "":  
-        if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["idEspecialidade"] == "":
+        if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
             if len(buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])) == 0:
                 msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
 
-        elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["idEspecialidade"] != "":
+        elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
             especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
             especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
             msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
@@ -1399,7 +1399,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
         if stts["flagAdicionarServicos"]: 
             especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
 
-        elif stts["reservas"][0]['especialidades'][0]["idEspecialidade"] == "":
+        elif stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
             especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
             stts["flagAdicionarServicos"] = len(especialidade) == 1      
         
@@ -1418,11 +1418,11 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
             stts["reservas"][0]["funcionario"] = funcionario[1] 
             stts["reservas"][0]["id_funcionario"] = funcionario[0] 
 
-            if stts["reservas"][0]['especialidades'][0]["idEspecialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
+            if stts["reservas"][0]['especialidades'][0]["id_especialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
                 msgResposta = validarFuncionarioVsEspecialidade(stts) 
 
     if msgResposta == "": 
-        if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["idEspecialidade"] == "":
+        if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
             if respBaseConhecimento == "listarFuncionarios":
                 msgResposta = buscarListaFuncionarios("",stts)
         else:
@@ -1439,11 +1439,11 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
 
     if msgResposta == "": 
         if respBaseConhecimento[1] == "incluirReserva":
-            if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == ""  and stts["reservas"][0]['especialidades'][0]["idEspecialidade"] == "" and stts["reservas"][0]["id_funcionario"] == "":
+            if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == ""  and stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and stts["reservas"][0]["id_funcionario"] == "":
                 msgResposta = buscarEspecialidadeNaoCadastrada(mensagemTraduzida)
 
     if msgResposta == "": 
-        if stts["reservas"][0]['especialidades'][0]["idEspecialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
+        if stts["reservas"][0]['especialidades'][0]["id_especialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
             msgResposta = validarFuncionarioVsEspecialidade(stts) 
 
     if msgResposta == "": 
@@ -1563,7 +1563,7 @@ class model:
         infUltimaMensagem["contatoUltimaMensagem"] = contato
 
         if msgResposta == "":
-            if states[idx]["reservas"][0]["especialidades"][0]["idEspecialidade"] == "":    
+            if states[idx]["reservas"][0]["especialidades"][0]["id_especialidade"] == "":    
                 msgResposta = "Qual serviços voce quer?" 
             elif states[1]["reservas"][0]["data"] == "":
                 msgResposta = "Quando voce quer vir?"
