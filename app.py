@@ -6,11 +6,6 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-try:
-    locale.setlocale(locale.LC_TIME, 'pt_BR.UTF-8')
-except locale.Error as e:
-    print(f"Erro ao definir a localidade: {e}")
-
 message_info = {
                 "requester": "",
                 "message" : "",
@@ -41,7 +36,6 @@ CORS(app)
 @app.route("/", methods=['GET'])
 def root():
         return f"<h1>Nelltek LLM APIs. All Rights Reserved</h1>"
-
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
