@@ -1,7 +1,6 @@
 import os
 import openai
 from neural import nucleoNeural
-import locale
 from datetime import datetime 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
