@@ -4,6 +4,7 @@ from neural import nucleoNeural
 from datetime import datetime 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+previous_user = "" 
 
 message_info = {
                 "requester": "",
@@ -19,6 +20,7 @@ rule = open(rule_file, "r")
 system_msg = rule.read()
 system_msg = system_msg.replace('\t', ' ')     
 system_msg = system_msg.replace('\n', ' ')     
+user_previous_said = ""
 
 dba_content = (
     "You are a MySQL database administrator, and your task is to create SQL statements that help answer user questions."
@@ -38,24 +40,34 @@ def root():
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
+    global previous_user 
+    global user_previous_said
     data = request.get_json()
     message_info["message"] = data.get('question') 
     message_info["requester"] = data.get('requester') 
+    requester = message_info["requester"]
 
     response = nucleoNeural(message_info) 
-    response = f"{message_info['requester']}: {response}"
+    response += f" \ [log: '{user_previous_said}']"
 
     message=[
         {"role": "system", "content": system_msg},
         {"role": "user", "content": response}
     ]
-
+    
     chat_completion = client.chat.completions.create(
        messages=message,
        model="gpt-3.5-turbo",
        temperature=0.7
     )
+
     response = chat_completion.choices[0].message.content
+
+    if previous_user == message_info["requester"]: 
+        user_previous_said =  message_info["message"]
+    else: 
+        previous_user += f"'{requester}',"    
+        user_previous_said = ""
 
     return jsonify({'answer': response})
 

@@ -29,6 +29,6 @@ def nucleoNeural(message_info):
 
     msg_model = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
 
-    reply_msg  += "(pergunta ou resposta do estabelecimento: [%s])" % msg_model
+    reply_msg  += " (Orientação da gerencia: Pergunte ou questione a usuária sobre: '[%s]')" % msg_model
 
     return reply_msg
