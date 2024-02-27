@@ -1516,7 +1516,7 @@ class model:
         tools.loadDicionariosDinamicos(pasta) 
 
     def execute(self, states, infUltimaMensagem, respBaseConhecimento, mensagemTraduzida):
-        contato = infUltimaMensagem["requester"]  
+        contato = infUltimaMensagem["user"]  
         mensagemOriginal = infUltimaMensagem["message"]
         hrMsgAssistente = infUltimaMensagem["lastMessageTime"]  
         

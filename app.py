@@ -7,7 +7,7 @@ from flask_cors import CORS
 previous_user = "" 
 
 message_info = {
-                "requester": "",
+                "user": "",
                 "message" : "",
                 "lastMessageTime": datetime.now().strftime("%H:%M"),  
                 "pasta": "https://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
@@ -17,10 +17,13 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 rule_file = "./angel_guide.txt"
 rule = open(rule_file, "r")  
-system_msg = rule.read()
-system_msg = system_msg.replace('\t', ' ')     
-system_msg = system_msg.replace('\n', ' ')     
-user_previous_said = ""
+
+agent_rule = rule.read()
+agent_rule = agent_rule.replace('\t', ' ')     
+agent_rule = agent_rule.replace('\n', ' ')     
+agent_rule += f"Data e hora atual: {datetime.now().strftime('%A, %d de %B de %Y')}."
+
+conversation_history = []
 
 dba_content = (
     "You are a MySQL database administrator, and your task is to create SQL statements that help answer user questions."
@@ -41,33 +44,39 @@ def root():
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
     global previous_user 
-    global user_previous_said
-    data = request.get_json()
-    message_info["message"] = data.get('question') 
-    message_info["requester"] = data.get('requester') 
-    requester = message_info["requester"]
 
-    response = nucleoNeural(message_info) 
-    response += f" \ [log: '{user_previous_said}']"
+    data = request.get_json()
+
+    user = data.get('user')
+    message = data.get('question') 
+
+    message_info["message"] = message
+    message_info["user"] = user
+
+    # response = nucleoNeural(message_info) 
+
+    prompt = "" 
+    if previous_user == user: 
+        conversation_history.append(message)   
+    else: 
+        previous_user = user
+        conversation_history.clear()
+
+    prompt = "Conversas Anteriores:\n\n{}\n\n{}: {}".format('\n'.join(conversation_history),user, message)
 
     message=[
-        {"role": "system", "content": system_msg},
-        {"role": "user", "content": response}
+        {"role": "system", "content": agent_rule},
+        {"role": "user", "content": prompt}
     ]
     
     chat_completion = client.chat.completions.create(
        messages=message,
        model="gpt-3.5-turbo",
-       temperature=0.7
+       temperature=0.7,
+       max_tokens=150
     )
 
     response = chat_completion.choices[0].message.content
-
-    if previous_user == message_info["requester"]: 
-        user_previous_said =  message_info["message"]
-    else: 
-        previous_user += f"'{requester}',"    
-        user_previous_said = ""
 
     return jsonify({'answer': response})
 

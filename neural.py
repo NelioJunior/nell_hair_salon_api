@@ -19,7 +19,7 @@ def processamentoDeLinguagemNatural(mensagemOriginal, contato):
 
 def nucleoNeural(message_info):
     reply_msg = message_info["message"].lower() 
-    contato = message_info["requester"]  
+    contato = message_info["user"]  
     clsModel = model.model(message_info["pasta"])
     pnl = processamentoDeLinguagemNatural(reply_msg, contato)
     mensagemTraduzida = pnl[0]
