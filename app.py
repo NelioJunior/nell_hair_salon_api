@@ -48,21 +48,21 @@ def customer_service():
     data = request.get_json()
 
     user = data.get('user')
-    message = data.get('question') 
+    msg = data.get('question') 
 
-    message_info["message"] = message
+    message_info["message"] = msg
     message_info["user"] = user
 
     # response = nucleoNeural(message_info) 
 
     prompt = "" 
     if previous_user == user: 
-        conversation_history.append(message)   
+        conversation_history.append(f"'{msg}',")   
     else: 
         previous_user = user
         conversation_history.clear()
 
-    prompt = "Conversas Anteriores:\n\n{}\n\n{}: {}".format('\n'.join(conversation_history),user, message)
+    prompt = "{'usuario': '%s', 'ultima_mensagem': '%s' , 'conversas_anteriores': '%s'}" % (user,msg,''.join(conversation_history))
 
     message=[
         {"role": "system", "content": agent_rule},
