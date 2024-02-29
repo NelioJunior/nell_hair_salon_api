@@ -53,8 +53,9 @@ def customer_service():
     message_info["message"] = msg
     message_info["user"] = user
 
-    # response = nucleoNeural(message_info) 
-
+    response = nucleoNeural(message_info) 
+   
+    '''
     prompt = "" 
     if previous_user == user: 
         conversation_history.append(f"'{msg}',")   
@@ -77,6 +78,7 @@ def customer_service():
     )
 
     response = chat_completion.choices[0].message.content
+    '''
 
     return jsonify({'answer': response})
 

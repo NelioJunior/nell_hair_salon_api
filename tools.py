@@ -207,7 +207,6 @@ def tradutorHora (msg):
 
     return retorno.strip()
 
-
 def tradutorExpressao (msg):
     retorno = removerAcentos(msg).lower()
     while "  " in retorno : retorno = retorno.replace("  ", " ")  

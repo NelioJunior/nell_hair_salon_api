@@ -1026,14 +1026,6 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
         elif tools.buscarData(mensagem) != "":
             respBaseConhecimento[1] = "listarHorariosLivres"
 
-    elif respBaseConhecimento[1] == "saudacao": 
-        if "+55" in respBaseConhecimento[0]:
-            resp = respBaseConhecimento[0]
-            pos = resp.find("+55")
-            cel = resp[pos:pos+18] 
-            resp = resp.replace(cel, contato)
-            respBaseConhecimento[0] = resp 
-
     elif respBaseConhecimento[1] == "wikipedia": 
         if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
             respBaseConhecimento[1] = "listarHorariosLivres"
@@ -1548,10 +1540,13 @@ class model:
                 respBaseConhecimento[0] = "Tudo bem, mas não deixe de nos visitar quando estiver por perto."
             return respBaseConhecimento[0] 
 
-        mensagemOriginal = tools.removerAcentos(mensagemOriginal).replace("?"," ")   
+        mensagemOriginal = tools.removerAcentos(mensagemOriginal).replace("?"," ")
 
         if verificarSeDeveFazerCRUD(states[idx],mensagemTraduzida,respBaseConhecimento): 
             msgResposta = processCrud (states[idx],contato,mensagemTraduzida,mensagemOriginal,respBaseConhecimento,self.pasta) 
+
+        if respBaseConhecimento[1] == "saudacao" and msgResposta == "": 
+            msgResposta = "Olá.Algo em que eu possa ajudar?"
 
         if contato == "":
             contato = find_contact(mensagemOriginal)
