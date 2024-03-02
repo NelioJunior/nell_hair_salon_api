@@ -1520,7 +1520,8 @@ class model:
 
         states[idx]["flagPrimeiraInteracao"] = False     
 
-        roboNaoDeveAtender = "O atendimento deste cliente só pode ser feito na recepção do estabelecimento." 
+        roboNaoDeveAtender = ("Avise o cliente você não pode atende-lo e que o atendimento para ele só pode ser feito diretamente na recepção e dispense o cliente com educação.")
+
         for item in dictCliente:                
             if item["contato"].lower() == contato.lower() and item["roboPodeAtender"] == "1":
                 states[idx]["contatoGenero"] = item["genero"]

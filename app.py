@@ -21,7 +21,7 @@ rule = open(rule_file, "r")
 agent_rule = rule.read()
 agent_rule = agent_rule.replace('\t', ' ')     
 agent_rule = agent_rule.replace('\n', ' ')     
-agent_rule += f"Data e hora atual: {datetime.now().strftime('%A, %d de %B de %Y')}."
+agent_rule += f"Anote  a data e hora atual em caso de voce precisar: {datetime.now().strftime('%A, %d de %B de %Y')}."
 
 conversation_history = []
 
@@ -53,9 +53,8 @@ def customer_service():
     message_info["message"] = msg
     message_info["user"] = user
 
-    response = nucleoNeural(message_info) 
+    msg = nucleoNeural(message_info) 
    
-    '''
     prompt = "" 
     if previous_user == user: 
         conversation_history.append(f"'{msg}',")   
@@ -78,7 +77,6 @@ def customer_service():
     )
 
     response = chat_completion.choices[0].message.content
-    '''
 
     return jsonify({'answer': response})
 
