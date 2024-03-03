@@ -14,7 +14,7 @@ message_info = {
 }
 
 # client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
-client = openai.OpenAI(api_key='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') 
+client = openai.OpenAI(api_key='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') 
 
 rule_file = "/home/nelljr/nell_hair_salon_api/angel_guide.txt"
 rule = open(rule_file, "r")  
