@@ -31,7 +31,7 @@ CORS(app)
  
 @app.route("/", methods=['GET'])
 def root():
-        return f"<h1>Nelltek LLM APIs. All Rights Reserved</h1>"
+    return f"<h1>Nelltek LLM APIs.All Rights Reserved</h1>"
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
