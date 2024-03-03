@@ -13,8 +13,7 @@ message_info = {
                 "pasta": "https://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
 
-# client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
-client = openai.OpenAI(api_key='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') 
+client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
 
 rule_file = "/home/nelljr/nell_hair_salon_api/angel_guide.txt"
 rule = open(rule_file, "r")  
