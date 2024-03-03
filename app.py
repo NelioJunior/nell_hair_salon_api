@@ -14,10 +14,10 @@ message_info = {
 }
 
 # client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
-client = openai.OpenAI(api_key=os.getenv("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")) 
+client = openai.OpenAI(api_key='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') 
 
 rule_file = "./angel_guide.txt"
-rule = open(rule_file, "r")   
+rule = open(rule_file, "r")  
 
 agent_rule = rule.read()
 agent_rule = agent_rule.replace('\t', ' ')     
