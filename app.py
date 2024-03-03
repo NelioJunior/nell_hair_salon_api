@@ -14,7 +14,7 @@ message_info = {
 }
 
 # client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY")) 
-client = openai.OpenAI(api_key='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') 
+client = openai.OpenAI(api_key='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') 
 
 rule_file = "./angel_guide.txt"
 rule = open(rule_file, "r")  
