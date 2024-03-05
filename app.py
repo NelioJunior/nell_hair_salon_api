@@ -8,10 +8,9 @@ from pathlib import Path
 from tools import obter_chave_openai
 
 
-config_path = str(Path.home() / '.bashrc')
 chave_openai = obter_chave_openai()
 
-client = openai.OpenAI(api_key=os.getenv(chave_openai))
+client = openai.OpenAI(api_key=chave_openai)
 
 previous_user = "" 
 
