@@ -769,3 +769,31 @@ dictDespresarPalavra = [
     "maravilhoso",
     "estupendo",
 ]
+
+
+def obter_chave_openai():
+    caminho_bashrc = '/home/nelljr/.bashrc'
+
+    try:
+        with open(caminho_bashrc, 'r') as arquivo:
+            linhas = arquivo.readlines()
+
+            for linha in linhas:
+                if 'export OPENAI_API_KEY=' in linha:
+                    chave = linha.split('=')[1].strip().strip('"')
+                    return chave
+
+    except FileNotFoundError:
+        print(f"O arquivo {caminho_bashrc} não foi encontrado.")
+    except Exception as e:
+        print(f"Erro ao ler o arquivo {caminho_bashrc}: {str(e)}")
+
+    return None
+
+# Exemplo de uso
+chave_openai = obter_chave_openai()
+
+if chave_openai:
+    print(f"A chave da API OpenAI é: {chave_openai}")
+else:
+    print("Chave da API OpenAI não encontrada.")

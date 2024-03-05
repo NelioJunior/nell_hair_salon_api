@@ -4,6 +4,15 @@ from neural import nucleoNeural
 from datetime import datetime 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from pathlib import Path
+from tools import obter_chave_openai
+
+
+config_path = str(Path.home() / '.bashrc')
+chave_openai = obter_chave_openai()
+
+client = openai.OpenAI(api_key=os.getenv(chave_openai))
+
 previous_user = "" 
 
 message_info = {
