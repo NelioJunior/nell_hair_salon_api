@@ -59,7 +59,7 @@ def customer_service():
         conversation_history.clear()
 
     message_number += 1 
-    conversation_history.append({"message" : user_msg,"number" : message_number})   
+    conversation_history.append({"mensagem" : user_msg,"numero de ordem" : message_number})   
 
     locale = Locale('pt_BR')
     data_hora_atual = datetime.now()
@@ -68,7 +68,7 @@ def customer_service():
 
     prompt = {"usuario": user, 
         "mensagem": company_api_message , 
-        "conversas anteriores": json.dumps(conversation_history),
+        "mensagens anteriores": json.dumps(conversation_history),
         "data hora atual": data_hora_formatada
     }
     
