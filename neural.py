@@ -27,8 +27,12 @@ def nucleoNeural(message_info):
     respBaseConhecimento.append(pnl[0])   
     respBaseConhecimento.append(pnl[1])   
 
-    msg_model = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
+    return_msg  = ("Consulte as mensagens dentro das conversas anteriores e a partir disto "
+                   "responda ao cliente de maneira contida, no máximo 100 caracteres")
 
-    reply_msg  += '/{"retorno": %s})' % msg_model
+    if respBaseConhecimento[1] != "atividadeNaoRelacionada": 
+        return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
+
+    reply_msg  = '{"retorno": "%s"}' % return_msg
 
     return reply_msg
