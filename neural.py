@@ -8,13 +8,15 @@ states = []
 def processamentoDeLinguagemNatural(mensagemOriginal, contato):
     nomeAssistente = tools.removerAcentos(model.dictInfEmpresa["nomeBot"].lower()) 
     ultimaMensagem = mensagemOriginal
+    ultimaMensagem = ultimaMensagem.replace(nomeAssistente,"")   
     ultimaMensagem = ultimaMensagem.replace("?"," ?")   
 
-    mensagemTraduzida = tools.tradutorPalavra(ultimaMensagem)          
+    mensagemTraduzida = tools.contextualizador(ultimaMensagem)          
     mensagemTraduzida = tools.tradutorHora (mensagemTraduzida)     
     mensagemTraduzida = tools.tradutorExpressao (mensagemTraduzida)     
     
-    respBaseConhecimento = tools.buscarBaseConhecimento(mensagemTraduzida,mensagemOriginal,contato,nomeAssistente)
+    respBaseConhecimento = tools.buscarBaseConhecimento(mensagemTraduzida)
+
     return [mensagemTraduzida , respBaseConhecimento[1]]
 
 def nucleoNeural(message_info):
@@ -28,6 +30,7 @@ def nucleoNeural(message_info):
     respBaseConhecimento.append(pnl[1])   
  
     return_msg  = ("responda a mensagem do cliente cujo 'numero de ordem' é a maior,"
+                   "ou seja a ultima mensagem recebida"
                    "na forma mais adequada.Utilize no máximo 100 caracteres")
 
     if respBaseConhecimento[1] != "": 

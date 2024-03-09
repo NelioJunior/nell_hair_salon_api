@@ -72,6 +72,8 @@ def customer_service():
         "data hora atual": data_hora_formatada
     }
     
+    return jsonify({'answer': prompt})
+ 
     message=[
         {"role": "system", "content": agent_rule},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}

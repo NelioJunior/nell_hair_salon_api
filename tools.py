@@ -68,120 +68,44 @@ def expressoesSemDiscordancia(msg, estimulo):
 
     return retorno     
 
-def buscarBaseConhecimento(msg,msgOriginal, contato, nomeAssistente):
-    '''
-      Retorno:
+def buscarBaseConhecimento(msg):
 
-         [0] -> Resposta do robô
-         [1] -> Categoria de conhecimento 
-         [2] -> Como o robô compreendeu a perguta do usuario
-
-    '''
-
-    roboMsg = []
-    possoAjudar = []
     retorno = ["","",""]
-    saudacao = ""
     avaliacao = 0  
 
-    if msgOriginal.replace("?","").lower().strip() == nomeAssistente:
-         retorno[1] = "contatoChamouPeloNome" 
-    else:    
+    for itemA in dicBaseConhecimento:
+        estimulo = itemA['estimuloResposta'].lower().strip()
+        estimulo = estimulo.replace("+", "")
+        estimulo = estimulo.replace("-", "")
+        estimulo = estimulo.replace("/", "")
+        estimulo = estimulo.replace("*", "")
+        estimulo = tradutorPalavra(estimulo)  
+        estimulo = tradutorExpressao(estimulo)
 
-        for itemA in dicBaseConhecimento:
-            estimulo = itemA['estimuloResposta'].lower().strip()
-            estimulo = estimulo.replace("+", "")
-            estimulo = estimulo.replace("-", "")
-            estimulo = estimulo.replace("/", "")
-            estimulo = estimulo.replace("*", "")
-            estimulo = tradutorPalavra(estimulo)  
-            estimulo = tradutorExpressao(estimulo)
+        if buscarPalavra("nao",estimulo) != 0:
+            estimulo = estimulo.replace("sim", "")
 
-            if buscarPalavra("nao",estimulo) != 0:
-                estimulo = estimulo.replace("sim", "")
+        if estimulo != "":
+            if estimulo == msg : 
+                retorno[1] = itemA["categoria"]
+                retorno[2] = estimulo
+                break 
 
-            if itemA["ator"] == "humano" and  estimulo != "":
+            lstPalavras = estimulo.split()
+            num = 0
+            for palavra in lstPalavras:
+                if buscarPalavra(palavra, msg) != 0:
+                    num += 1
 
-                if itemA["categoria"] == "saudacao":
+            if len (lstPalavras) > 1: 
+                if estimulo in msg: 
+                    num += 1
 
-                    if buscarPalavra(estimulo,msg) > 0:
+            if num > avaliacao:
+                avaliacao = num                 
+                retorno[1] = itemA["categoria"]
+                retorno[2] = estimulo
 
-                        saudacao = msgOriginal
-                    
-                        if "bom" in saudacao or "boa" in saudacao  :
-                            correnteHora = "%0.2d:%0.2d" % (datetime.now().hour, datetime.now().minute)
-                            msgx = msg.replace(saudacao, "")  
-                            if msgx != "": 
-                                msg = msgx 
-
-                            if correnteHora < "12:00":
-                                saudacao = "bom dia "                       
-                            elif correnteHora > "12:00"  and correnteHora < "18:00":
-                                saudacao = "boa tarde "
-                            else:
-                                saudacao = "boa noite "
-                        else: 
-                            saudacao = ""    
-
-                        if random.randint(0,1) : saudacao += " " + contato
-                        if random.randint(0,1) : saudacao = 'Ah, Ola!' + saudacao if random.randint(0,1) else 'Oi...' + saudacao 
-
-                        if retorno[1] == "": retorno[1] = itemA["categoria"] 
-                        if estimulo == msg : 
-                            retorno[1] = itemA["categoria"] 
-                            avaliacao = -1 
-
-                else:    
-                    if avaliacao != -1:   
-                        if estimulo == msg : 
-                            retorno[1] = itemA["categoria"]
-                            retorno[2] = estimulo
-                            break 
-
-                        lstPalavras = estimulo.split()
-                        num = 0
-                        for palavra in lstPalavras:
-                            if buscarPalavra(palavra, msg) != 0:
-                                num += 1
-
-                        if len (lstPalavras) > 1: 
-                            if estimulo in msg: 
-                                num += 1
-
-                        if num > avaliacao:
-                            if expressoesSemDiscordancia(msg,estimulo): 
-                                avaliacao = num                 
-                                retorno[1] = itemA["categoria"]
-                                retorno[2] = estimulo
-
-            elif itemA["ator"] == "robot" and itemA["categoria"] == "saudacao" : 
-                possoAjudar.append(itemA["estimuloResposta"])
-
-    if retorno[1] == "":     
-        for itemB in dicBaseConhecimento:
-            if itemB["categoria"] == "naoCompreendido" and itemB["ator"] == "robot":
-                roboMsg.append(itemB["estimuloResposta"])                     
-
-    else:     
-        for itemB in dicBaseConhecimento:
-            if itemB["categoria"] == retorno[1] and itemB["ator"] == "robot" and retorno[1] != "saudacao" :
-                roboMsg.append(itemB["estimuloResposta"])                     
-              
-    if len(roboMsg) > 0:
-        i = len(roboMsg) -1 
-        retorno[0] = roboMsg[random.randint(0,i)] + " "
-
-    if "ascii" in retorno[0]:
-        retorno[0] = retorno[0].replace("ascii9833",chr(9833))
-        retorno[0] = retorno[0].replace("ascii9834",chr(9834))
-        retorno[0] = retorno[0].replace("ascii9835",chr(9835))
-
-    if retorno[1] == "saudacao":
-        i = len(possoAjudar) -1 
-        retorno[0] += possoAjudar[random.randint(0,i)] + " "
-
-    retorno[0] = saudacao + " " + retorno[0] 
-    retorno[0] = retorno[0].strip()     
 
     return retorno
 
@@ -215,6 +139,24 @@ def tradutorExpressao (msg):
         retorno = retorno.replace(item["texto"], item["equivalente"]) 
 
     return retorno.strip()
+
+def contextualizador(msg):    
+    msg = removerAcentos(msg).lower()
+
+    for item in dictTradutor:
+
+        if item["id"] == "405":  #testes - nell junior 
+            print(item["id"])
+
+        if len(item["texto"].split()) == 1:       
+            padrao = r'\b' + re.escape(item["texto"]) + r'\b'
+            msg = re.sub(padrao, item["equivalente"], msg)
+        else:     
+            msg = msg.replace(item["texto"], item["equivalente"] ) 
+
+    return msg 
+
+
 
 def tradutorPalavra (msg):    
     msgx = removerAcentos(msg).lower()
