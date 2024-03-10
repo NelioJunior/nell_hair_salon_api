@@ -28,13 +28,8 @@ def nucleoNeural(message_info):
     respBaseConhecimento = []
     respBaseConhecimento.append(pnl[0])   
     respBaseConhecimento.append(pnl[1])   
- 
-    return_msg  = ("responda a mensagem do cliente cujo 'numero de ordem' é a maior,"
-                   "ou seja a ultima mensagem recebida"
-                   "na forma mais adequada.Utilize no máximo 100 caracteres")
 
-    if respBaseConhecimento[1] != "": 
-        return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
+    return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
 
     reply_msg  = '{"retorno": "%s"}' % return_msg
 

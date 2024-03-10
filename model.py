@@ -191,7 +191,7 @@ def findStatePosition(states,contato):
 
         if item["contato"] == contato:
             item["horaUltimaInteracao"] == "%0.4d-%0.2d-%0.2d %0.2d:%0.2d" % (datetime.now().year,datetime.now().month,datetime.now().day,datetime.now().hour,datetime.now().minute)
-            return idx 
+            return idx
 
     states.append({
         "id_cliente" : "",     
@@ -1517,6 +1517,12 @@ class model:
         idx = findStatePosition(states, contato) 
 
         clearOldInteractions(states)
+
+        if respBaseConhecimento[1] == "" and states[idx]["flagPrimeiraInteracao"]: 
+            return ("responda a mensagem do cliente cujo 'numero de ordem' é a maior,"
+                    "ou seja a ultima mensagem recebida"
+                    "na forma mais adequada.Utilize no máximo 100 caracteres")
+
 
         states[idx]["flagPrimeiraInteracao"] = False     
 
