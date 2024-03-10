@@ -650,7 +650,8 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,mensagemOriginal):
                         horariosLivres = agrupar_horarios(listarDisponibilidadeFuncionario(item,diaReserva))
                         msgRetorno += "  %s disponivel nos seguintes horários: %s " %  (item["nome"], horariosLivres) 
 
-                    msgRetorno = "Para esta atividade,neste dia,temos estes profissionais:" + msgRetorno + "  Você tem alguma preferência?"
+                    msgRetorno = (f"Para esta atividade,neste dia,temos estes profissionais: {msgRetorno}. "  
+                                  "Perguntar ao cliente se ele tem alguma preferência por algum profissional")
                     states["flagEscolherProfissional"] = True  
 
     return msgRetorno                
@@ -1297,134 +1298,139 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
             stts["ultimaMensagemAssistente"] = msgResposta           
             return msgResposta
 
-    if msgResposta == "":  
-        if respBaseConhecimento[1] == "listarEspecialidades":  
-            msgResposta = buscarListaEspecialidades(mensagemTraduzida)  
-            stts["flagUsuarioDesejaFazerCRUD"] = False 
 
-    if msgResposta == "":  
-        if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
-            if len(buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])) == 0:
-                msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
+    if stts["flagEscolherProfissional"] == False:
+        if msgResposta == "":  
+            if respBaseConhecimento[1] == "listarEspecialidades":  
+                msgResposta = buscarListaEspecialidades(mensagemTraduzida)  
+                stts["flagUsuarioDesejaFazerCRUD"] = False 
 
-        elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
-            especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
-            especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
-            msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
+        if msgResposta == "":  
+            
+            if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
+                if len(buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])) == 0:
+                    msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
 
-        elif respBaseConhecimento[1] == "listarFuncionarios" and stts['flagEscolherProfissional']:
-            if  stts["reservas"][0]["id_funcionario"] != "":
-                stts['flagEscolherProfissional'] = False  
+            elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
+                especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
+                especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
+                msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
-    if msgResposta == "":
-        if respBaseConhecimento[1] == "listarHorariosLivres":
-            especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])                     
-            msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
+            elif respBaseConhecimento[1] == "listarFuncionarios" and stts['flagEscolherProfissional']:
+                if  stts["reservas"][0]["id_funcionario"] != "":
+                    stts['flagEscolherProfissional'] = False  
 
-    if msgResposta == "":
-        if stts["reservas"][0]["data"] == "":
-            dtPesquisa = tools.buscarData(mensagemTraduzida)
-            if dtPesquisa != "":
-                stts["reservas"][0]["data"] = dtPesquisa    #Esta pegando a data corrende e nao a data escolhida - Nell Jr - 2024
-                msgResposta = validarDiaFuncionamento(stts) 
+        if msgResposta == "":
+            if respBaseConhecimento[1] == "listarHorariosLivres":
+                especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])                     
+                msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
-    if msgResposta == "":
+        if msgResposta == "":
+            if stts["reservas"][0]["data"] == "":
+                dtPesquisa = tools.buscarData(mensagemTraduzida)
+                if dtPesquisa != "":
+                    stts["reservas"][0]["data"] = dtPesquisa    #Esta pegando a data corrende e nao a data escolhida - Nell Jr - 2024
+                    msgResposta = validarDiaFuncionamento(stts) 
 
-        if stts["reservas"][0]["inicio"] == "":
-            msgOrgnl = tools.removerAcentos(tools.removerAcentos(mensagemOriginal)) 
-            periodo = " manha" if "manha" in  msgOrgnl else " tarde"  if "tarde" in msgOrgnl else " noite" if "noite" in msgOrgnl else ""
-            hrPesquisa = tools.converterHoraExtensaParaPadrao(mensagemTraduzida+periodo)
-            if hrPesquisa == "":
-                hrPesquisa = tools.converterHoraExtensaParaPadrao("%s manha" % mensagemTraduzida)
+        if msgResposta == "":
 
-        if hrPesquisa != "":
-            stts["reservas"][0]["inicio"] = hrPesquisa
-            id_funcionario = ""
-            funcionario = ""
+            if stts["reservas"][0]["inicio"] == "":
+                msgOrgnl = tools.removerAcentos(tools.removerAcentos(mensagemOriginal)) 
+                periodo = " manha" if "manha" in  msgOrgnl else " tarde"  if "tarde" in msgOrgnl else " noite" if "noite" in msgOrgnl else ""
+                hrPesquisa = tools.converterHoraExtensaParaPadrao(mensagemTraduzida+periodo)
+                if hrPesquisa == "":
+                    hrPesquisa = tools.converterHoraExtensaParaPadrao("%s manha" % mensagemTraduzida)
 
-            if not stts["flagUsuarioDemonstrouPreferenciaAoProfissional"]:
-                id_funcionario = stts['reservas'][0]['id_funcionario']
-                funcionario = stts['reservas'][0]['funcionario']
-                stts['reservas'][0]['id_funcionario'] = ""
-                stts['reservas'][0]['funcionario'] = ""
+            if hrPesquisa != "":
+                stts["reservas"][0]["inicio"] = hrPesquisa
+                id_funcionario = ""
+                funcionario = ""
 
-            msgResposta = validarHorarioEscolhido(stts, hrPesquisa)
+                if not stts["flagUsuarioDemonstrouPreferenciaAoProfissional"]:
+                    id_funcionario = stts['reservas'][0]['id_funcionario']
+                    funcionario = stts['reservas'][0]['funcionario']
+                    stts['reservas'][0]['id_funcionario'] = ""
+                    stts['reservas'][0]['funcionario'] = ""
 
-            if msgResposta == "":
-                if stts['reservas'][0]['id_funcionario'] == "" and id_funcionario != "" :
-                   stts['reservas'][0]['id_funcionario'] = id_funcionario
-                   stts['reservas'][0]['funcionario'] = funcionario  
-            else:
-                stts["reservas"][0]["inicio"] = ""
+                msgResposta = validarHorarioEscolhido(stts, hrPesquisa)
 
-    if msgResposta == "":
-        if stts["flagConfirmarAgendamento"]:           
-            if respBaseConhecimento[1] == "confirmacao" or respBaseConhecimento[1] == "incluirReserva"  : 
-                identificador = salvarReserva(stts["reservas"], stts["id_cliente"], pasta)   
-                stts["flagUsuarioDesejaFazerCRUD"] = False   
-
-                if identificador != 0:
-                    msgResposta = "reserva de número: %s confirmada" % identificador 
-                    msgResposta += " Guarde este o número, pode ser util em caso de você querer cancelar"
-                    msgResposta += " Nosso endereço é %s - %s.Estaremos lhe aguardando" % (dictInfEmpresa["nomeEmpresa"],dictInfEmpresa["endereco"])                        
-                    msgResposta += "  Obrigada"
+                if msgResposta == "":
+                    if stts['reservas'][0]['id_funcionario'] == "" and id_funcionario != "" :
+                        stts['reservas'][0]['id_funcionario'] = id_funcionario
+                        stts['reservas'][0]['funcionario'] = funcionario  
                 else:
-                    msgResposta = "Ops! Não sei o que aconteceu, mas não consegui agendar..." 
-                    msgResposta += "  Mas não se preocupe, espere alguns minutos. E vamos tentar novamente"
-                    msgResposta += "  Eu vou ficar aqui te esperando"     
-                    msgResposta += "  Obrigada"
-    
-            else:                    
-                msgResposta = "Procedimento cancelado.Sinto, mas ter que voltar do inicio..." 
-                msgResposta += "Voce pode desistir a qualquer hora, sem tem problemas."
-                msgResposta += "Então me diga, pra qual dia vc quer agendar ?"     
+                    stts["reservas"][0]["inicio"] = ""
 
-                respBaseConhecimento[1] = "incluirReserva"
+        if msgResposta == "":
+            if stts["flagConfirmarAgendamento"]:           
+                if respBaseConhecimento[1] == "confirmacao" or respBaseConhecimento[1] == "incluirReserva"  : 
+                    identificador = salvarReserva(stts["reservas"], stts["id_cliente"], pasta)   
+                    stts["flagUsuarioDesejaFazerCRUD"] = False   
 
-            limparStateContatoAtivo(stts, False)
+                    msgResposta =  " É muito importante comunicar a seguinte mensagem ao cliente: "
 
-    if msgResposta == "":
-        msgResposta = buscarEspecialidadeIndisponivel(mensagemOriginal,stts["contatoGenero"]) 
-
-    if msgResposta == "":
-        especialidade = []
-        if stts["flagAdicionarServicos"]: 
-            especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
-
-        elif stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
-            especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
-            stts["flagAdicionarServicos"] = len(especialidade) == 1      
+                    if identificador != 0:
+                        msgResposta += " reserva de número %s confirmada" % identificador 
+                        msgResposta += " Guarde este o número, pois pode ser util em caso de você querer cancelar"
+                        msgResposta += " Nosso endereço é %s - %s.Estaremos lhe aguardando" % (dictInfEmpresa["nomeEmpresa"],dictInfEmpresa["endereco"])                        
+                        msgResposta += " Obrigada"
+                    else:
+                        msgResposta += " Ops! Não sei o que aconteceu, não foi possivel consegui agendar..." 
+                        msgResposta += " Mas não se preocupe, espere alguns minutos. E vamos tentar novamente"
+                        msgResposta += " Eu vou ficar aqui te esperando"     
+                        msgResposta += " Obrigada"
         
-            if len(especialidade) != 0:
-                if len(list(filter(lambda i: especialidade[0]["id_especialidade"] == i["id_especialidade"],dictFuncionario))) == 0:
-                    msgResposta  = "Lamento muito %s,mas por enquanto, não temos especialistas para o serviço que vc procura." % contato   
-                    limparStateContatoAtivo(stts, True)
+                else:                    
+                    msgResposta = "Procedimento cancelado.Sinto, mas ter que voltar do inicio..." 
+                    msgResposta += "Voce pode desistir a qualquer hora, sem tem problemas."
+                    msgResposta += "Então me diga, pra qual dia vc quer agendar ?"     
 
-    if msgResposta == "":
-        if len(especialidade) > 0 :
-            addEspecialidadesInState(stts, especialidade)
+                    respBaseConhecimento[1] = "incluirReserva"
 
-        funcionario = buscarFuncionario(mensagemOriginal)
-        if funcionario[1] != "": 
-            stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True  
-            stts["reservas"][0]["funcionario"] = funcionario[1] 
-            stts["reservas"][0]["id_funcionario"] = funcionario[0] 
+                limparStateContatoAtivo(stts, False)
 
-            if stts["reservas"][0]['especialidades'][0]["id_especialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
-                msgResposta = validarFuncionarioVsEspecialidade(stts) 
+        if msgResposta == "":
+            msgResposta = buscarEspecialidadeIndisponivel(mensagemOriginal,stts["contatoGenero"]) 
 
-    if msgResposta == "": 
-        if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
-            if respBaseConhecimento == "listarFuncionarios":
-                msgResposta = buscarListaFuncionarios("",stts)
-        else:
-            if hrPesquisa == "" and stts["reservas"][0]["inicio"] != "":
-                hrPesquisa = stts["reservas"][0]["inicio"] 
+        if msgResposta == "":
+            especialidade = []
+            if stts["flagAdicionarServicos"]: 
+                especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
 
-            msgResposta = validarHorarioEscolhido(stts, hrPesquisa)
-            if msgResposta == "": 
-                if "sobre" in mensagemOriginal: 
+            elif stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
+                especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
+                stts["flagAdicionarServicos"] = len(especialidade) == 1      
+            
+                if len(especialidade) != 0:
+                    if len(list(filter(lambda i: especialidade[0]["id_especialidade"] == i["id_especialidade"],dictFuncionario))) == 0:
+                        msgResposta  = "Lamento muito %s,mas por enquanto, não temos especialistas para o serviço que vc procura." % contato   
+                        limparStateContatoAtivo(stts, True)
+
+        if msgResposta == "":
+            if len(especialidade) > 0 :
+                addEspecialidadesInState(stts, especialidade)
+
+            funcionario = buscarFuncionario(mensagemOriginal)
+            if funcionario[1] != "": 
+                stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True  
+                stts["reservas"][0]["funcionario"] = funcionario[1] 
+                stts["reservas"][0]["id_funcionario"] = funcionario[0] 
+
+                if stts["reservas"][0]['especialidades'][0]["id_especialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
+                    msgResposta = validarFuncionarioVsEspecialidade(stts) 
+
+        if msgResposta == "": 
+            if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
+                if respBaseConhecimento == "listarFuncionarios":
                     msgResposta = buscarListaFuncionarios("",stts)
+            else:
+                if hrPesquisa == "" and stts["reservas"][0]["inicio"] != "":
+                    hrPesquisa = stts["reservas"][0]["inicio"] 
+
+                msgResposta = validarHorarioEscolhido(stts, hrPesquisa)
+                if msgResposta == "": 
+                    if "sobre" in mensagemOriginal: 
+                        msgResposta = buscarListaFuncionarios("",stts)
 
     if msgResposta == "":
         msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento,mensagemOriginal)   
@@ -1519,9 +1525,9 @@ class model:
         clearOldInteractions(states)
 
         if respBaseConhecimento[1] == "" and states[idx]["flagPrimeiraInteracao"]: 
-            return ("responda a mensagem do cliente cujo 'numero de ordem' é a maior,"
-                    "ou seja a ultima mensagem recebida"
-                    "na forma mais adequada.Utilize no máximo 100 caracteres")
+            return ("responda a mensagem do cliente cujo 'numero de ordem' é o maior,"
+                    "ou seja a última mensagem recebida na forma mais adequada."
+                    "Utilize no máximo 100 caracteres")
 
 
         states[idx]["flagPrimeiraInteracao"] = False     

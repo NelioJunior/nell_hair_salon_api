@@ -156,8 +156,6 @@ def contextualizador(msg):
 
     return msg 
 
-
-
 def tradutorPalavra (msg):    
     msgx = removerAcentos(msg).lower()
     arrayRetorno = msgx.split()
