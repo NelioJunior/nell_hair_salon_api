@@ -51,42 +51,6 @@ def agrupar_horarios(horarios):
     
     return resultado_formatado
 
-def agrupar_horarios_old(horarios):
-    horarios = horarios.split(",")
-    horarios = sorted(horarios)  # Ordenar os horários em ordem crescente
-    grupos = []
-    grupo_atual = [horarios[0]]  # Iniciar o primeiro grupo com o primeiro horário
-
-    for i in range(1, len(horarios)):
-        diff = diferenca_horarios(horarios[i-1], horarios[i])
-        if diff <= 30:
-            grupo_atual.append(horarios[i])
-        else:
-            grupos.append(grupo_atual)
-            grupo_atual = [horarios[i]]
-
-    grupos.append(grupo_atual)  # Adicionar o último grupo à lista de grupos
-
-
-    resultado = []
-    for grupo in grupos:
-        inicio = grupo[0]
-        fim = grupo[-1]
-        if len(grupo) > 1:
-            intervalo = f"{inicio} até {fim}"
-        else:
-            intervalo = inicio
-        resultado.append(intervalo)
-    
-    resultado = ", ".join(resultado)
-
-    return resultado
-
-def diferenca_horarios(horario1, horario2):
-    h1, m1 = map(int, horario1.split(':'))
-    h2, m2 = map(int, horario2.split(':'))
-
-    return (h2 - h1) * 60 + (m2 - m1)
 
 def loadDicionariosDinamicos(pasta):
     global dictInfEmpresa
@@ -770,7 +734,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         retorno += f"verifique com a {state['contato']} se ela tem preferência, qual profissional?" 
 
     if retorno != "" :
-        msgResposta = " é necessario saber %s " % (state['contato'],retorno)
+        msgResposta = " é necessario saber %s " % retorno
 
         if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
             msgResposta = f"peça para a {state['contato']} dizer o dia em que ela quer vir ou o profissional se ela já tem um em mente."
@@ -1546,7 +1510,11 @@ class model:
         clearOldInteractions(states)
 
         if respBaseConhecimento[1] == "" and states[idx]["flagPrimeiraInteracao"]: 
-           return ""
+           return 
+
+        if respBaseConhecimento[1] == "encerrar":
+            limparStateContatoAtivo(states[idx], False)     
+            return 
 
         states[idx]["flagPrimeiraInteracao"] = False     
 

@@ -66,8 +66,9 @@ def customer_service():
     data_hora_formatada = format_datetime(data_hora_atual, format='full', locale=locale)
     data_hora_formatada = data_hora_formatada[0:len(data_hora_formatada)-29]    
 
-    prompt = {"cliente": user, 
-        "comando da chefe": company_api_message , 
+    prompt = {
+        "cliente": user, 
+        "orientacao da chefe": company_api_message , 
         "mensagem do cliente": user_msg,
         "mensagens anteriores": json.dumps(conversation_history),
         "data hora atual": data_hora_formatada
