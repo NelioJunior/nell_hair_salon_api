@@ -31,6 +31,9 @@ def nucleoNeural(message_info):
 
     return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
 
-    reply_msg  = '{"retorno": "%s"}' % return_msg
+    if return_msg:
+       reply_msg  = 'Diga a cliente com suas próprias palavras ... %s' % return_msg
+    else: 
+       reply_msg  = f"responda a mensagem do cliente {contato} da maneira mais adequada possivel."   
 
     return reply_msg
