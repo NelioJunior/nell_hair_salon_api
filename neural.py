@@ -5,7 +5,7 @@ import tools
 
 states = []   
 
-def processamentoDeLinguagemNatural(mensagemOriginal, contato):
+def processamentoDeLinguagemNatural(mensagemOriginal):
     nomeAssistente = tools.removerAcentos(model.dictInfEmpresa["nomeBot"].lower()) 
     ultimaMensagem = mensagemOriginal
     ultimaMensagem = ultimaMensagem.replace(nomeAssistente,"")   
@@ -23,7 +23,7 @@ def nucleoNeural(message_info):
     reply_msg = message_info["message"].lower() 
     contato = message_info["user"]  
     clsModel = model.model(message_info["pasta"])
-    pnl = processamentoDeLinguagemNatural(reply_msg, contato)
+    pnl = processamentoDeLinguagemNatural(reply_msg)
     mensagemTraduzida = pnl[0]
     respBaseConhecimento = []
     respBaseConhecimento.append(pnl[0])   

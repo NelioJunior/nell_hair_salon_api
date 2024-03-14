@@ -91,7 +91,7 @@ def customer_service():
     response = chat_completion.choices[0].message.content
     
     if message_number > 1:
-        response = response.replace("Olá,", "")
+        response = response.replace("Olá,", "").replace("Olá", "")
 
     return jsonify({'answer': response})
 

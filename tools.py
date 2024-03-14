@@ -82,6 +82,9 @@ def buscarBaseConhecimento(msg):
         estimulo = tradutorPalavra(estimulo)  
         estimulo = tradutorExpressao(estimulo)
 
+        if "obrigado" in estimulo:
+            print(estimulo) 
+
         if buscarPalavra("nao",estimulo) != 0:
             estimulo = estimulo.replace("sim", "")
 
@@ -141,13 +144,9 @@ def tradutorExpressao (msg):
     return retorno.strip()
 
 def contextualizador(msg):    
-    msg = removerAcentos(msg).lower()
+    msg = removerAcentos(msg).lower().strip()
 
     for item in dictTradutor:
-
-        if item["id"] == "405":  #testes - nell junior 
-            print(item["id"])
-
         if len(item["texto"].split()) == 1:       
             padrao = r'\b' + re.escape(item["texto"]) + r'\b'
             msg = re.sub(padrao, item["equivalente"], msg)
