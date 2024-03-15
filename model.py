@@ -831,7 +831,7 @@ def validarHorarioEscolhido(states, horario):
                         if not trueSeDataHoraJaPassou(states["reservas"][0]["data"],arrayHorariosLivres[len(arrayHorariosLivres)-1]):
                             msg += "Escolha um destes horários: %s" % agrupar_horarios(horariosLivres) 
                             if states["flagUsuarioDemonstrouPreferenciaAoProfissional"]:
-                                msg += "Ou mude de profissional" 
+                                msg += ".Ou mude de profissional" 
 
     return msg        
 

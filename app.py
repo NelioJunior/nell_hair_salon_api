@@ -12,7 +12,8 @@ chave_openai = obter_chave_openai()
 client = openai.OpenAI(api_key=chave_openai)
 
 previous_user = "" 
-message_number = 0
+response = ""
+answers_number = 0
 
 message_info = {
                 "user": "",
@@ -28,7 +29,7 @@ agent_rule = rule.read()
 agent_rule = agent_rule.replace('\t', ' ')     
 agent_rule = agent_rule.replace('\n', ' ')     
 
-conversation_history = []
+answers_history = []
 
 app = Flask(__name__)
 CORS(app)
@@ -40,7 +41,8 @@ def root():
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
     global previous_user
-    global message_number 
+    global answers_number 
+    global response
 
     data = request.get_json()
 
@@ -55,11 +57,8 @@ def customer_service():
     prompt = "" 
     if previous_user != user: 
         previous_user = user
-        message_number = 0
-        conversation_history.clear()
-
-    message_number += 1 
-    conversation_history.append({"mensagem" : user_msg,"numero de ordem" : message_number})   
+        answers_number = 0
+        answers_history.clear()
 
     locale = Locale('pt_BR')
     data_hora_atual = datetime.now()
@@ -69,8 +68,8 @@ def customer_service():
     prompt = {
         "cliente": user, 
         "orientacao da chefe": company_api_message , 
-        "mensagem do cliente": user_msg,
-        "mensagens anteriores": json.dumps(conversation_history),
+        "mensagem da gerente": user_msg,
+        "respostas anteriores": json.dumps(answers_history),
         "data hora atual": data_hora_formatada
     }
 
@@ -90,8 +89,11 @@ def customer_service():
 
     response = chat_completion.choices[0].message.content
     
-    if message_number > 1:
+    if answers_number > 1:
         response = response.replace("Olá,", "").replace("Olá", "")
+
+    answers_number += 1 
+    answers_history.append({"resposta" : response,"numero de ordem" : answers_number})   
 
     return jsonify({'answer': response})
 

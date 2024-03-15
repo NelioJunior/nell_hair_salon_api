@@ -144,7 +144,13 @@ def tradutorExpressao (msg):
     return retorno.strip()
 
 def contextualizador(msg):    
+    msg = msg.replace(","," ")
     msg = removerAcentos(msg).lower().strip()
+
+    confirm_or_deny = msg.split()[0] 
+
+    if confirm_or_deny == "sim" or confirm_or_deny == "nao":
+        msg = confirm_or_deny  
 
     for item in dictTradutor:
         if len(item["texto"].split()) == 1:       
