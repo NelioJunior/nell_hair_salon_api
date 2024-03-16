@@ -67,8 +67,8 @@ def customer_service():
 
     prompt = {
         "cliente": user, 
-        "orientacao da chefe": company_api_message , 
-        "mensagem da gerente": user_msg,
+        "orientacao da gerente": company_api_message , 
+        "mensagem da cliente": user_msg,
         "respostas anteriores": json.dumps(answers_history),
         "data hora atual": data_hora_formatada
     }
@@ -84,7 +84,7 @@ def customer_service():
        messages=message,
        model="gpt-3.5-turbo",
        temperature=0.7,
-       max_tokens=250
+       max_tokens=200
     )
 
     response = chat_completion.choices[0].message.content
