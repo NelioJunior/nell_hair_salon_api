@@ -1356,7 +1356,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
                 stts["flagUsuarioDesejaFazerCRUD"] = False   
 
                 if identificador != 0:
-                    msgResposta =  " reserva de número %s confirmada" % identificador 
+                    msgResposta =  " reserva confirmada! Seu de reserva número é %s" % identificador 
                     msgResposta += " Guarde este o número, pois pode ser util em caso de você querer cancelar"
                     msgResposta += " Nosso endereço é %s - %s.Estaremos lhe aguardando" % (dictInfEmpresa["nomeEmpresa"],dictInfEmpresa["endereco"])                        
                     msgResposta += " Obrigada"
