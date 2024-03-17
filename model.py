@@ -1289,24 +1289,27 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
 
 
     if msgResposta == "":  
-        if respBaseConhecimento[1] == "listarEspecialidades":  
+        if respBaseConhecimento[1] == "listarEspecialidades" and not stts["flagConfirmarAgendamento"]:  
             msgResposta = buscarListaEspecialidades(mensagemTraduzida)  
             stts["flagUsuarioDesejaFazerCRUD"] = False 
 
     if msgResposta == "":  
         
         if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
-            if len(buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])) == 0:
-                msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
+            if not stts["flagConfirmarAgendamento"]:
+                if len(buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])) == 0:
+                    msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
 
         elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
-            especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
-            especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
-            msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
+            if not stts["flagConfirmarAgendamento"]:
+                especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
+                especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
+                msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
         elif respBaseConhecimento[1] == "listarFuncionarios" and stts['flagEscolherProfissional']:
-            if  stts["reservas"][0]["id_funcionario"] != "":
-                stts['flagEscolherProfissional'] = False  
+            if not stts["flagConfirmarAgendamento"]:
+                if  stts["reservas"][0]["id_funcionario"] != "":
+                    stts['flagEscolherProfissional'] = False  
 
     if msgResposta == "":
         if respBaseConhecimento[1] == "listarHorariosLivres":
@@ -1356,7 +1359,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
                 stts["flagUsuarioDesejaFazerCRUD"] = False   
 
                 if identificador != 0:
-                    msgResposta =  " reserva confirmada! Seu de reserva número é %s" % identificador 
+                    msgResposta =  " reserva confirmada! Seu número de reserva é %s" % identificador 
                     msgResposta += " Guarde este o número, pois pode ser util em caso de você querer cancelar"
                     msgResposta += " Nosso endereço é %s - %s.Estaremos lhe aguardando" % (dictInfEmpresa["nomeEmpresa"],dictInfEmpresa["endereco"])                        
                     msgResposta += " Obrigada"
