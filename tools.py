@@ -143,7 +143,9 @@ def tradutorExpressao (msg):
 
     return retorno.strip()
 
-def contextualizador(msg):    
+def contextualizador(msg):  
+    msg = msg.replace("?"," ?") 
+    msg = msg.replace("."," ")  
     msg = msg.replace(","," ")
     msg = removerAcentos(msg).lower().strip()
 
@@ -153,11 +155,15 @@ def contextualizador(msg):
         msg = confirm_or_deny  
 
     for item in dictTradutor:
+        if  item["id"] == "260":   
+            print(msg)    
+
         if len(item["texto"].split()) == 1:       
             padrao = r'\b' + re.escape(item["texto"]) + r'\b'
             msg = re.sub(padrao, item["equivalente"], msg)
         else:     
-            msg = msg.replace(item["texto"], item["equivalente"] ) 
+            msg = msg.replace(f' {item["texto"]} ', f' {item["equivalente"]} ') 
+
 
     return msg 
 

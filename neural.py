@@ -9,7 +9,6 @@ def processamentoDeLinguagemNatural(mensagemOriginal):
    nomeAssistente = tools.removerAcentos(model.dictInfEmpresa["nomeBot"].lower()) 
    ultimaMensagem = mensagemOriginal
    ultimaMensagem = ultimaMensagem.replace(nomeAssistente,"")   
-   ultimaMensagem = ultimaMensagem.replace("?"," ?")   
 
    mensagemTraduzida = tools.contextualizador(ultimaMensagem)          
    mensagemTraduzida = tools.tradutorHora (mensagemTraduzida)     
