@@ -606,10 +606,10 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
 
         if len(lstFuncionariosAptos) == 0:  
             if horariosLivres == "": 
-                msgRetorno = "Desculpe, mas %s não há um especialista pra o quê você quer disponivel.  Por favor, escolha um outro dia da semana." % diaSemana
+                msgRetorno = "Desculpe, mas %s não há um especialista pra o quê você quer disponivel. Por favor, escolha um outro dia da semana." % diaSemana
                 states["reservas"][0]["data"] = "" 
             else:
-                msgRetorno = "Na %s neste horário,esta dificil, mas posso agendar pra você em um destes horários: %s"  % (diaSemana, horariosLivres)   
+                msgRetorno = "Na %s neste horário posso agendar pra você em um destes horários: %s"  % (diaSemana, horariosLivres)   
                 states["reservas"][0]["inicio"] = "" 
 
         elif len(lstFuncionariosAptos) == 1: 
@@ -972,7 +972,7 @@ def TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzi
 
     return False  
 
-def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgAssistente,contato):
+def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgAssistente):
     mensagem = tools.removerAcentos(mensagem)
 
     if TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzida,hrMsgAssistente):
@@ -1457,40 +1457,37 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
         dt = datetime.strptime(stts["reservas"][0]["data"], "%Y-%m-%d")
         dtReserva = "%s/%s/%s" % (dt.day, dt.month, dt.year)    
 
-        msgResposta = "" 
-
-        if stts["informacaoAoUsuario"] != "":
-            msgResposta += stts["informacaoAoUsuario"] 
-            msgResposta += " " 
-
-        msgResposta += "atenção aos detalhes de seu agendamento"   
-        msgResposta += "  cliente: %s" % contato     
-        atividades = ""
-        funcionarios = ""  
-        vlrTotal = 0 
-        for idx, item in enumerate(stts["reservas"]):
-            separador = "," if idx < len(stts["reservas"])-2 else " e "
-            funcionarios += "%s%s" % (item["funcionario"],separador) 
-
-        for itemReservas in stts["reservas"]:       
-            for idx, item in enumerate(itemReservas["especialidades"]):
+        if stts["informacaoAoUsuario"]:
+            msgResposta = stts["informacaoAoUsuario"] 
+        else:
+            msgResposta = "validar se as informações estão certas:"
+            msgResposta += "  cliente: %s" % contato     
+            atividades = ""
+            funcionarios = ""  
+            vlrTotal = 0 
+            for idx, item in enumerate(stts["reservas"]):
                 separador = "," if idx < len(stts["reservas"])-2 else " e "
-                atividades += "%s%s" % (item["especialidade"],separador) 
-                vlrTotal += float(item["preco"]) 
+                funcionarios += "%s%s" % (item["funcionario"],separador) 
 
-        funcionarios = funcionarios[0:len(funcionarios)-3]      
-        atividades = atividades[0:len(atividades)-3]     
+            for itemReservas in stts["reservas"]:       
+                for idx, item in enumerate(itemReservas["especialidades"]):
+                    separador = "," if idx < len(stts["reservas"])-2 else " e "
+                    atividades += "%s%s" % (item["especialidade"],separador) 
+                    vlrTotal += float(item["preco"]) 
 
-        msgResposta += " atividades: %s " % atividades  
-        msgResposta += " Data: %s  Início: %s " % (dtReserva,stts["reservas"][0]["inicio"]) 
-        msgResposta += " profissionais %s" % funcionarios
-        msgResposta += " O valor será de %.2f reais" % vlrTotal    
+            funcionarios = funcionarios[0:len(funcionarios)-3]      
+            atividades = atividades[0:len(atividades)-3]     
 
-        msgResposta += " Tudo certo ? Podemos confirmar esta reserva? Sim ou não?"
-        msgResposta = tools.alterar_data_extenso(msgResposta)
+            msgResposta += " atividades: %s " % atividades  
+            msgResposta += " Data: %s  Início: %s " % (dtReserva,stts["reservas"][0]["inicio"]) 
+            msgResposta += " profissionais %s" % funcionarios
+            msgResposta += " O valor será de %.2f reais" % vlrTotal    
+            msgResposta += " Tudo bem ? Podemos confirmar esta dados? Sim ou não?"
 
-        stts["ultimaMensagemAssistente"] = msgResposta   
-        stts["flagConfirmarAgendamento"] = True 
+            msgResposta = tools.alterar_data_extenso(msgResposta)
+
+            stts["ultimaMensagemAssistente"] = msgResposta   
+            stts["flagConfirmarAgendamento"] = True 
 
     return msgResposta
 
@@ -1534,7 +1531,7 @@ class model:
         if dictInfEmpresa["atenderNaoCadastrados"] == False and states[idx]["id_cliente"] == "":
             return roboNaoDeveAtender
 
-        contextualizador(states[idx],respBaseConhecimento,mensagemOriginal,mensagemTraduzida,hrMsgAssistente,contato)
+        contextualizador(states[idx],respBaseConhecimento,mensagemOriginal,mensagemTraduzida,hrMsgAssistente)
 
         if respBaseConhecimento[1] == "cancelarOperacaoEmAndamento" or respBaseConhecimento[1] == "limparCache" or respBaseConhecimento[1] == "despedida":
             del states[idx]  

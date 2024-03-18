@@ -30,12 +30,13 @@ def nucleoNeural(message_info):
 
    return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
 
-   if return_msg:
-      if 'json:' in return_msg:  
-         reply_msg  = 'Verifique na lista (json) se temos o que a/o cliente quer ... %s' % return_msg
-      else:   
-         reply_msg  = 'Diga a/o cliente com suas próprias palavras ... %s' % return_msg
-   else: 
+   if not return_msg:
       reply_msg  = f"responda a mensagem da(o) cliente {contato} da maneira mais adequada possivel."   
+   elif 'json:' in return_msg:  
+      reply_msg  = 'Verifique na lista (json) se temos o que a/o cliente quer ... %s' % return_msg
+   elif  'validar' in return_msg:
+      reply_msg  = f'Antes de efetivarmos o agendamento peça para o/a cliente {contato}, {return_msg}'
+   else:   
+      reply_msg  = 'Diga a/o cliente com suas próprias palavras ... %s' % return_msg
 
    return reply_msg

@@ -83,7 +83,7 @@ def customer_service():
     chat_completion = client.chat.completions.create(
        messages=message,
        model="gpt-3.5-turbo",
-       temperature=0.7,
+       temperature=0.3,
        max_tokens=200
     )
 
