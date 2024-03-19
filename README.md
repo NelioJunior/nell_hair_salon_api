@@ -4,7 +4,14 @@ CUIDADO, ISSO E' QUASE UMA PEGADINHA !
 
 SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' CANCELADO ESTRA KEY E O SISTEMA PARA DE FUNCIONAR  
 
+---------------------------------------------------------------------------------------------------------------------------------------
 
+Uma abordagem a ser considerada e' usar a api gpt para analizar o que o cliente quer, de posse deste conhecimento processar a resposta 
+certa, e finalmente executar a api para dar a interacao com o cliente 
+
+Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
+
+--------------------------------------------------------------------------------------------------------------------------------------
 
 
 O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI 

@@ -11,7 +11,7 @@ def processamentoDeLinguagemNatural(mensagemOriginal):
    ultimaMensagem = ultimaMensagem.replace(nomeAssistente,"")   
 
    mensagemTraduzida = tools.contextualizador(ultimaMensagem)          
-   mensagemTraduzida = tools.tradutorHora (mensagemTraduzida)     
+   mensagemTraduzida = tools.tradutorHora (mensagemTraduzida)
    mensagemTraduzida = tools.tradutorExpressao (mensagemTraduzida)     
    
    respBaseConhecimento = tools.buscarBaseConhecimento(mensagemTraduzida)

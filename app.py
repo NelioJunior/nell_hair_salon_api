@@ -18,16 +18,20 @@ answers_number = 0
 message_info = {
                 "user": "",
                 "message" : "",
+                "detected" : "",
                 "lastMessageTime": datetime.now().strftime("%H:%M"),  
                 "pasta": "https://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
+
+rule_file = "/home/nelljr/nell_hair_salon_api/desire_detection.txt"
+rule = open(rule_file, "r")  
+
+detection_rules = rule.read()                        
 
 rule_file = "/home/nelljr/nell_hair_salon_api/angel_guide.txt"
 rule = open(rule_file, "r")  
 
 agent_rule = rule.read()
-agent_rule = agent_rule.replace('\t', ' ')     
-agent_rule = agent_rule.replace('\n', ' ')     
 
 answers_history = []
 
@@ -49,6 +53,19 @@ def customer_service():
     user = data.get('user')
     user_msg = data.get('question') 
 
+    message=[
+        {"role": "system", "content": detection_rules},
+        {"role": "user", "content": user_msg}
+    ]
+    
+    chat_completion = client.chat.completions.create(
+       messages=message,
+       model="gpt-3.5-turbo",
+       temperature=0.1,
+       max_tokens=100
+    )
+
+    message_info["detected"]  = chat_completion.choices[0].message.content
     message_info["message"] = user_msg
     message_info["user"] = user
 
@@ -83,7 +100,7 @@ def customer_service():
     chat_completion = client.chat.completions.create(
        messages=message,
        model="gpt-3.5-turbo",
-       temperature=0.3,
+       temperature=0.1,
        max_tokens=200
     )
 

@@ -68,6 +68,16 @@ def expressoesSemDiscordancia(msg, estimulo):
 
     return retorno     
 
+def contar_ocorrencias(palavra, texto):
+    palavras = texto.split()  
+    contador = 0
+    
+    for palavra_texto in palavras:
+        if palavra_texto == palavra:
+            contador += 1
+    
+    return contador
+
 def buscarBaseConhecimento(msg):
 
     retorno = ["","",""]
@@ -75,6 +85,10 @@ def buscarBaseConhecimento(msg):
 
     for itemA in dicBaseConhecimento:
         estimulo = itemA['estimuloResposta'].lower().strip()
+
+        if 'engano' in estimulo:
+            print(itemA['id_categoria'])     
+
         estimulo = estimulo.replace("+", "")
         estimulo = estimulo.replace("-", "")
         estimulo = estimulo.replace("/", "")
@@ -147,6 +161,9 @@ def contextualizador(msg):
     msg = msg.replace("?"," ?") 
     msg = msg.replace("."," ")  
     msg = msg.replace(","," ")
+    msg = msg.replace("-"," ")  
+    msg = msg.replace("feira"," ")  
+
     msg = removerAcentos(msg).lower().strip()
 
     confirm_or_deny = msg.split()[0] 

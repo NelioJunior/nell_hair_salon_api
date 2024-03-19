@@ -639,7 +639,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
                         horariosLivres = agrupar_horarios(listarDisponibilidadeFuncionario(item,diaReserva))
                         msgRetorno += "  %s disponivel nos seguintes horários: %s " %  (item["nome"], horariosLivres) 
 
-                    msgRetorno = (f"Para esta atividade,neste dia,temos estes profissionais: {msgRetorno}. "  
+                    msgRetorno = (f"Para esta atividade,neste dia {diaReserva}, temos estes profissionais: {msgRetorno}. "  
                                   f"Perguntar a {states['contato']} se tem alguma preferência por algum profissional")
                     states["flagEscolherProfissional"] = True  
 
@@ -1533,6 +1533,14 @@ class model:
 
         contextualizador(states[idx],respBaseConhecimento,mensagemOriginal,mensagemTraduzida,hrMsgAssistente)
 
+        if respBaseConhecimento[1] == "reiniciarInteracao":
+            del states[idx]  
+            msgRetorno = respBaseConhecimento[0]
+            if msgRetorno == "":
+               msgRetorno = "Desculpe, é melhor começarmos para evitarmos confusão. Pode me explicar o que você deseja?"
+
+            return msgRetorno 
+
         if respBaseConhecimento[1] == "cancelarOperacaoEmAndamento" or respBaseConhecimento[1] == "limparCache" or respBaseConhecimento[1] == "despedida":
             del states[idx]  
             msgRetorno = respBaseConhecimento[0]
@@ -1561,9 +1569,9 @@ class model:
         if msgResposta == "":
             if states[idx]["reservas"][0]["especialidades"][0]["id_especialidade"] == "":    
                 msgResposta = "Qual serviços voce quer?" 
-            elif states[1]["reservas"][0]["data"] == "":
+            elif states[idx]["reservas"][0]["data"] == "":
                 msgResposta = "Quando voce quer vir?"
-            elif states[1]["reservas"][0]["inicio"] == "":    
+            elif states[idx]["reservas"][0]["inicio"] == "":    
                 msgResposta = "Qual horas?" 
     
         if respBaseConhecimento[1] == "infoEmpresa":

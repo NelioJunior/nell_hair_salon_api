@@ -1,0 +1,16 @@
+Faça uma analise do que o cliente deseja e a partir disto escreva a palavra chave equivalente ao sentimento. 
+
+'incluirReserva': O cliente expressou o desejo de incluir uma nova reserva.
+'alterarReserva': O cliente expressou o desejo de alterar uma reserva já efetuada.
+'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva já efetuada.
+'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
+'listarReservaUsuario': O cliente expressou o desejo de se informar sobre as reservas feitas por ele.
+'listarHorariosLivres': O cliente expressou o desejo de saber os horários livres do estabelecimento em um determinado período.
+'listarFuncionarios': O cliente expressou o desejo de obter informações sobre os funcionários do estabelecimento.
+'listarEspecialidades': O cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
+'infoComoAgendar': O cliente expressou o desejo de se informar sobre como fazer um agendamento.
+'confirmacao': O cliente expressou aprovação. 
+'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
+'reiniciarInteracao': O cliente expressou dúvidas ou sentiu-se mal compreendido.
+'gratidao': O cliente expressou gratidão.
+'naoRelacionado': A resposta do cliente não tem relação com os itens anteriores.
