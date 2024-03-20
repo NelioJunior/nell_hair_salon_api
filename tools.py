@@ -85,10 +85,6 @@ def buscarBaseConhecimento(msg):
 
     for itemA in dicBaseConhecimento:
         estimulo = itemA['estimuloResposta'].lower().strip()
-
-        if 'engano' in estimulo:
-            print(itemA['id_categoria'])     
-
         estimulo = estimulo.replace("+", "")
         estimulo = estimulo.replace("-", "")
         estimulo = estimulo.replace("/", "")

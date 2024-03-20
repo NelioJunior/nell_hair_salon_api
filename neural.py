@@ -26,7 +26,8 @@ def nucleoNeural(message_info):
    mensagemTraduzida = pnl[0]
    respBaseConhecimento = []
    respBaseConhecimento.append(pnl[0])   
-   respBaseConhecimento.append(pnl[1])   
+   # respBaseConhecimento.append(pnl[1])   
+   respBaseConhecimento.append(message_info["detected"])   
 
    return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
 
