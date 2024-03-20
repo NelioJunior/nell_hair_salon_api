@@ -99,9 +99,9 @@ def customer_service():
     
     chat_completion = client.chat.completions.create(
        messages=message,
-       model="gpt-3.5-turbo",
+       model="gpt-4",
        temperature=0.1,
-       max_tokens=200
+       max_tokens=180
     )
 
     response = chat_completion.choices[0].message.content

@@ -1460,7 +1460,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
         if stts["informacaoAoUsuario"]:
             msgResposta = stts["informacaoAoUsuario"] 
         else:
-            msgResposta = "validar se as informações estão certas:"
+            msgResposta = " valide se as informações estão certas:"
             msgResposta += "  cliente: %s" % contato     
             atividades = ""
             funcionarios = ""  
