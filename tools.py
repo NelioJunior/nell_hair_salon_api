@@ -280,10 +280,9 @@ def buscarAno(msg, intMes = 0):
         if len(var) > 0:  
             ano = var[0]
     
-    if len(str(ano)) == 2: ano = ano + 2000  
-    
-    if intMes < hoje.month: ano += 1
-      
+    if len(str(ano)) == 2: 
+        ano = ano + 2000  
+          
     return ano    
 
 def confirmar(msg):

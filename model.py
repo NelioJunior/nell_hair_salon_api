@@ -678,7 +678,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         state["flagAdicionarServicos"] = False 
 
     if respBaseConhecimento[1] == "confirmacao":
-        if "Anotei aqui que Você quer fazer" in state["ultimaMensagemAssistente"]:
+        if "Anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
             if "apenas" in mensagemTraduzida:
                 retorno = "Você gostaria de incluir mais serviços ao seu agendamento? Se sim, me diga qual?"
                 state["flagAdicionarServicos"] = True 
@@ -1320,7 +1320,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
         if stts["reservas"][0]["data"] == "":
             dtPesquisa = tools.buscarData(mensagemTraduzida)
             if dtPesquisa != "":
-                stts["reservas"][0]["data"] = dtPesquisa    #Esta pegando a data corrende e nao a data escolhida - Nell Jr - 2024
+                stts["reservas"][0]["data"] = dtPesquisa    #Esta pegando a data corrente e nao a data escolhida - Nell Jr - 2024
                 msgResposta = validarDiaFuncionamento(stts) 
 
     if msgResposta == "":

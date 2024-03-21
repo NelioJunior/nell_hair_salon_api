@@ -101,7 +101,7 @@ def customer_service():
        messages=message,
        model="gpt-4",
        temperature=0.1,
-       max_tokens=180
+       max_tokens=200
     )
 
     response = chat_completion.choices[0].message.content

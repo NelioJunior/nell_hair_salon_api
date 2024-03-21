@@ -1,4 +1,4 @@
-Faça uma analise do que o cliente deseja e a partir disto escreva a palavra chave equivalente ao sentimento. 
+Faça uma analise do que o cliente deseja e a partir disto escreva apenas a palavra chave equivalente ao sentimento sem acréscimos de outras palavras. 
 
 'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
 'alterarReserva': O cliente expressou o desejo de alterar uma reserva já efetuada.
