@@ -38,6 +38,6 @@ def nucleoNeural(message_info):
    elif  'valide' in return_msg:
       reply_msg  = f'Antes de efetivarmos o agendamento preciso que você {contato}  {return_msg}'
    else:   
-      reply_msg  = f'Diga a/o cliente com suas próprias palavras ... {message_info['message']}'  
+      reply_msg  = f'Diga a/o cliente com suas próprias palavras ... {message_info["message"]}'  
 
    return reply_msg
