@@ -9,8 +9,7 @@ Faça uma analise do que o cliente deseja e a partir disto escreva apenas a pala
 'listarFuncionarios': O cliente expressou o desejo de obter informações sobre os funcionários do estabelecimento.
 'listarEspecialidades': O cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
 'infoComoAgendar': O cliente expressou o desejo de se informar sobre como fazer um agendamento.
-'confirmacao': O cliente expressou SIM em aprovação a horario, servico ou profissional relacionado a uma reserva. 
+'confirmacao': O cliente expressou sinal de aprovação quanto a horario, servico ou profissional relacionado a uma reserva. 
 'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
 'reiniciarInteracao': O cliente expressou dúvidas ou sentiu-se mal compreendido.
-'gratidao': O cliente expressou gratidão.
 'naoRelacionado': A resposta do cliente não tem relação com os itens anteriores.

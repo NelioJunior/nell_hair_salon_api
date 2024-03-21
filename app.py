@@ -99,7 +99,7 @@ def customer_service():
     
     chat_completion = client.chat.completions.create(
        messages=message,
-       model="gpt-4",
+       model="gpt-3.5-turbo",
        temperature=0.1,
        max_tokens=200
     )
