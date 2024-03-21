@@ -11,7 +11,13 @@ certa, e finalmente executar a api para dar a interacao com o cliente
 
 Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
 
---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Prompt para testes 
+
+Vamos fazer uma simulacao de um chatbot que estou criando chamado Angel criado para agendamento em salao de beleza .
+Voce vai escolher aleatoriamente um destes clientes a saber : Angela, Bernadete, Emmy, Haroldo, Ju, Mel, Natasha, Nell, Pati, Renato, Ricardo, Silva, Silvio que vai interagirm simulando um agendamento no salaro de beleza  com o chatbot Angel. Entao falem com a Angel como se fosse uma recepcionista de um salao de beleza, eu vou entrar com as falas da angel , comece agora 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI 

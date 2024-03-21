@@ -23,7 +23,7 @@ message_info = {
                 "pasta": "https://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
 
-rule_file = "/home/nelljr/nell_hair_salon_api/desire_detection.txt"
+rule_file = "/home/nelljr/nell_hair_salon_api/sentiment_detection.txt"
 rule = open(rule_file, "r")  
 
 detection_rules = rule.read()                        

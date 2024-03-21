@@ -678,7 +678,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         state["flagAdicionarServicos"] = False 
 
     if respBaseConhecimento[1] == "confirmacao":
-        if "Anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
+        if "anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
             if "apenas" in mensagemTraduzida:
                 retorno = "Você gostaria de incluir mais serviços ao seu agendamento? Se sim, me diga qual?"
                 state["flagAdicionarServicos"] = True 
@@ -692,7 +692,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
                 return retorno
                     
     if respBaseConhecimento[1] == "discordar":  
-        if f"Anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
+        if f"anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
             retorno = "Desculpe, acho que entendi errado. Qual serviço você quer mesmo?"
             state["reservas"][0]['especialidades'][0]["id_especialidade"] = ""
             state["reservas"][0]['especialidades'][0]["especialidade"] = ""
@@ -717,7 +717,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         retorno = ""
 
         if "apenas" not in mensagemTraduzida:  
-            retorno += "Anotei aqui que você quer fazer %s. Você confirma isso?" % especialidaesEscolhidas  
+            retorno += "anotei aqui que você quer fazer %s. Você confirma isso?" % especialidaesEscolhidas  
             state["flagAdicionarServicos"] = True    
             return retorno
 
@@ -734,7 +734,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         retorno += "se você tem preferência, qual profissional?" 
 
     if retorno != "" :
-        msgResposta = "Vou precisar saber %s " % retorno
+        msgResposta = "Informe %s " % retorno
 
         if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
             msgResposta = "Me diga o dia em que vc quer vir ou o profissional se já tem um em mente."

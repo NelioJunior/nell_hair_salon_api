@@ -25,9 +25,12 @@ def nucleoNeural(message_info):
    pnl = processamentoDeLinguagemNatural(reply_msg)
    mensagemTraduzida = pnl[0]
    respBaseConhecimento = []
+   
    respBaseConhecimento.append(pnl[0])   
-   # respBaseConhecimento.append(pnl[1])   
-   respBaseConhecimento.append(message_info["detected"])   
+   if pnl[1] == 'confirmacao': 
+      respBaseConhecimento.append(pnl[1])   
+   else:
+      respBaseConhecimento.append(message_info["detected"])   
 
    return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
 
@@ -35,9 +38,7 @@ def nucleoNeural(message_info):
       reply_msg  = "responda a mensagem da(o) cliente da maneira mais adequada possivel."   
    elif 'json:' in return_msg:  
       reply_msg  = 'Verifique na lista (json) se temos o que a/o cliente quer ... %s' % return_msg
-   elif  'valide' in return_msg:
-      reply_msg  = f'Antes de efetivarmos o agendamento preciso que você {contato}  {return_msg}'
    else:   
-      reply_msg  = f'Diga a/o cliente um texto sinônimo de ... {return_msg}'  
+      reply_msg  = f'Diga exatamente as mesmas palavras ... {return_msg}'  
 
    return reply_msg
