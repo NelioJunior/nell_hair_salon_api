@@ -108,11 +108,9 @@ def customer_service():
     response = chat_completion.choices[0].message.content
     
     if answers_number > 1:
-        response = response.replace("Olá,", "").replace("Olá", "")
-
-        match = re.search(r'!(.*)', response)
-        if match:
-            response = match.group(1)
+        position = response.find('!')
+        if position != -1:
+            response = response[position + 1:]
 
     answers_number += 1 
     answers_history.append({"resposta" : response,"numero de ordem" : answers_number})   

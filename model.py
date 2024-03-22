@@ -1535,9 +1535,7 @@ class model:
 
         if respBaseConhecimento[1] == "reiniciarInteracao":
             del states[idx]  
-            msgRetorno = respBaseConhecimento[0]
-            if msgRetorno == "":
-               msgRetorno = "Desculpe, é melhor começarmos para evitarmos confusão. Pode me explicar o que você deseja?"
+            msgRetorno = "Desculpe, é melhor começarmos para evitarmos confusão. Pode me explicar o que você deseja?"
 
             return msgRetorno 
 
