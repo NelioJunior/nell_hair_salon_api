@@ -7,25 +7,26 @@ states = []
 
 def processamentoDeLinguagemNatural(mensagemOriginal):
    nomeAssistente = tools.removerAcentos(model.dictInfEmpresa["nomeBot"].lower()) 
-   ultimaMensagem = mensagemOriginal
-   ultimaMensagem = ultimaMensagem.replace(nomeAssistente,"")   
+   mensagemTraduzida = mensagemOriginal
+   mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
 
-   mensagemTraduzida = tools.contextualizador(ultimaMensagem)          
    mensagemTraduzida = tools.tradutorHora (mensagemTraduzida)
    mensagemTraduzida = tools.tradutorExpressao (mensagemTraduzida)     
    
-   respBaseConhecimento = tools.buscarBaseConhecimento(mensagemTraduzida)
+   respBaseConhecimento = tools.buscarBaseConhecimento(tools.contextualizador(mensagemTraduzida))
 
    return [mensagemTraduzida , respBaseConhecimento[1]]
 
 def nucleoNeural(message_info):
    reply_msg = message_info["message"].lower() 
    clsModel = model.model(message_info["pasta"])
+   
    pnl = processamentoDeLinguagemNatural(reply_msg)
    mensagemTraduzida = pnl[0]
-   respBaseConhecimento = []
    
+   respBaseConhecimento = []
    respBaseConhecimento.append(pnl[0])   
+   
    if pnl[1] == 'confirmacao': 
       respBaseConhecimento.append(pnl[1])  
    elif pnl[1] == 'encerrar': 

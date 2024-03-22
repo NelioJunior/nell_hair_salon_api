@@ -153,32 +153,30 @@ def tradutorExpressao (msg):
 
     return retorno.strip()
 
-def contextualizador(msg):  
-    msg = msg.replace("?"," ?") 
-    msg = msg.replace("."," ")  
-    msg = msg.replace(","," ")
-    msg = msg.replace("-"," ")  
-    msg = msg.replace("feira"," ")  
+import re
 
-    msg = removerAcentos(msg).lower().strip()
+def contextualizador(msg):
 
-    confirm_or_deny = msg.split()[0] 
+    msg = re.sub(r'[?!,.-]', ' ', msg)
+    msg = msg.replace("feira", " ")
+    msg = msg.strip()
+    words = msg.split()
 
-    if confirm_or_deny == "sim" or confirm_or_deny == "nao":
-        msg = confirm_or_deny  
+    if words[-1] == "adeus":
+        return "adeus"
 
-    for item in dictTradutor:
-        if  item["id"] == "260":   
-            print(msg)    
+    elif words[0] in ["sim", "nao"]:
+        return words[0]
 
-        if len(item["texto"].split()) == 1:       
-            padrao = r'\b' + re.escape(item["texto"]) + r'\b'
-            msg = re.sub(padrao, item["equivalente"], msg)
-        else:     
-            msg = msg.replace(f' {item["texto"]} ', f' {item["equivalente"]} ') 
+    else:
+        for item in dictTradutor:
+            if len(item["texto"].split()) == 1:
+                padrao = r'\b' + re.escape(item["texto"]) + r'\b'
+                msg = re.sub(padrao, item["equivalente"], msg)
+            else:
+                msg = msg.replace(f' {item["texto"]} ', f' {item["equivalente"]} ')
 
-
-    return msg 
+    return msg
 
 def tradutorPalavra (msg):    
     msgx = removerAcentos(msg).lower()

@@ -1,4 +1,5 @@
 import json
+import re 
 import openai
 from neural import nucleoNeural
 from datetime import datetime 
@@ -108,6 +109,10 @@ def customer_service():
     
     if answers_number > 1:
         response = response.replace("Olá,", "").replace("Olá", "")
+
+        match = re.search(r'!(.*)', response)
+        if match:
+            response = match.group(1)
 
     answers_number += 1 
     answers_history.append({"resposta" : response,"numero de ordem" : answers_number})   
