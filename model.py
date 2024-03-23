@@ -957,7 +957,7 @@ def TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzi
                 horaLimite = datetime.now() + timedelta(minutes = -30) 
                 horaLimite = "%0.2d:%0.2d" % (horaLimite.hour, horaLimite.minute)  
                 if hrMsgAssistente < horaLimite:
-                    respBaseConhecimento[0] = "Eu sei,a vida moderna esta uma correria!Mas o tempo que você levou para fazer o agendameno expirou.Sinto, você ira ter de começar de novo.Qual serviço você quer agendar?"
+                    respBaseConhecimento[0] = "O tempo que você levou para fazer o agendameno expirou.Sinto, você ira ter de começar de novo.Qual serviço você quer agendar?"
                     respBaseConhecimento[1] = "cancelarOperacaoEmAndamento" 
                     return True 
 
@@ -966,7 +966,7 @@ def TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzi
             horaLimite = datetime.now() + timedelta(minutes = -30) 
             horaLimite = "%0.2d:%0.2d" % (horaLimite.hour, horaLimite.minute)  
             if hrMsgAssistente < horaLimite:
-                respBaseConhecimento[0] = "O tempo expirou,não briga comigo,mas você ira ter que recomeçar.Qual serviço você quer agendar?"
+                respBaseConhecimento[0] = "Desculpe.Eu me atralhei.Qual serviço você quer agendar mesmo?"
                 respBaseConhecimento[1] = "cancelarOperacaoEmAndamento" 
                 return True 
 

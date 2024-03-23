@@ -38,6 +38,6 @@ def nucleoNeural(message_info):
       reply_msg  = "responda a mensagem da(o) cliente da maneira mais adequada possivel."   
    else:   
       return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
-      reply_msg  = f'Diga exatamente com as mesmas palavras ... {return_msg}'  
+      reply_msg  = f'Diga exatamente com as mesmas palavras: {return_msg}'  
 
    return reply_msg

@@ -24,7 +24,7 @@ message_info = {
                 "pasta": "https://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
 
-rule_file = "/home/nelljr/nell_hair_salon_api/sentiment_detection.txt"
+rule_file = "/home/nelljr/nell_hair_salon_api/intent_analysis.txt"
 rule = open(rule_file, "r")  
 
 detection_rules = rule.read()                        
@@ -75,7 +75,7 @@ def customer_service():
     prompt = "" 
     if previous_user != user: 
         previous_user = user
-        answers_number = 0
+        answers_number = 1
         answers_history.clear()
 
     locale = Locale('pt_BR')
@@ -83,12 +83,16 @@ def customer_service():
     data_hora_formatada = format_datetime(data_hora_atual, format='full', locale=locale)
     data_hora_formatada = data_hora_formatada[0:len(data_hora_formatada)-29]    
 
+    data_hora_ansi = data_hora_atual.strftime('%Y-%m-%d %H:%M:%S')
+
+
     prompt = {
         "cliente": user, 
         "orientacao da gerente": company_api_message , 
         "mensagem da cliente": user_msg,
         "respostas anteriores": json.dumps(answers_history),
-        "data hora atual": data_hora_formatada
+        "data hora da mensagem": data_hora_ansi,
+        "data hora corrente": data_hora_formatada
     }
 
     # return jsonify({'answer': json.dumps({'answer': prompt})})
