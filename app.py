@@ -113,7 +113,7 @@ def customer_service():
     
     if answers_number > 1:
         position = response.find('!')
-        if position != -1:
+        if position != -1 and position <= 30:
             response = response[position + 1:]
 
     answers_number += 1 
