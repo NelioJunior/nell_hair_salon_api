@@ -367,7 +367,6 @@ def buscarListaEspecialidades(msg):
 
     return msgResp
 
-
 def buscarFuncionarioPorEspecialidades(lstEspecialidades):
 
     retorno = []
@@ -756,6 +755,8 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     if state["reservas"][0]["id_funcionario"] != "":
         if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["inicio"] == "":
             state["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True    
+
+    msgResposta = tools.substituir_interrogacoes(msgResposta)
 
     return msgResposta
 

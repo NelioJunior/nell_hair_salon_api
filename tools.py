@@ -41,6 +41,23 @@ def alterar_data_extenso(texto):
     
     return texto
 
+def substituir_interrogacoes(texto):
+    # Encontra todas as ocorrências de ponto de interrogação
+    indices_interrogacao = [i for i, char in enumerate(texto) if char == '?']
+    
+    # Substitui a primeira ocorrência de ponto de interrogação por vírgula, se existir
+    if indices_interrogacao:
+        primeiro_indice_interrogacao = indices_interrogacao[0]
+        texto = texto[:primeiro_indice_interrogacao] + ',' + texto[primeiro_indice_interrogacao+1:]
+    
+    # Substitui a penúltima ocorrência de ponto de interrogação por "e", se houver mais de uma ocorrência
+    if len(indices_interrogacao) >= 2:
+        penultimo_indice_interrogacao = indices_interrogacao[-2]
+        texto = texto[:penultimo_indice_interrogacao] + ' e' + texto[penultimo_indice_interrogacao+1:]
+
+    texto = texto.replace("  "," ")    
+    
+    return texto
 
 def edits1(word):
     letters    = 'abcdefghijklmnopqrstuvwxyz'

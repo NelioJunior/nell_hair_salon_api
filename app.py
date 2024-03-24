@@ -1,5 +1,4 @@
 import json
-import re 
 import openai
 from neural import nucleoNeural
 from datetime import datetime 
@@ -38,6 +37,10 @@ answers_history = []
 
 app = Flask(__name__)
 CORS(app)
+
+def log_message(message):
+    with open("log.txt", "a") as log_file:
+        log_file.write(message)
  
 @app.route("/", methods=['GET'])
 def root():
@@ -70,7 +73,7 @@ def customer_service():
     message_info["message"] = user_msg
     message_info["user"] = user
 
-    company_api_message = nucleoNeural(message_info) 
+    manager_guidance = nucleoNeural(message_info) 
    
     prompt = "" 
     if previous_user != user: 
@@ -84,18 +87,15 @@ def customer_service():
     data_hora_formatada = data_hora_formatada[0:len(data_hora_formatada)-29]    
 
     data_hora_ansi = data_hora_atual.strftime('%Y-%m-%d %H:%M:%S')
-
-
+ 
     prompt = {
         "cliente": user, 
-        "orientacao da gerente": company_api_message , 
+        "orientacao da gerente": manager_guidance , 
         "mensagem da cliente": user_msg,
         "respostas anteriores": json.dumps(answers_history),
         "data hora da mensagem": data_hora_ansi,
         "data hora corrente": data_hora_formatada
     }
-
-    # return jsonify({'answer': json.dumps({'answer': prompt})})
  
     message=[
         {"role": "system", "content": agent_rule},
@@ -117,8 +117,10 @@ def customer_service():
             response = response[position + 1:]
 
     answers_number += 1 
-    answers_history.append({"resposta" : response,"numero de ordem" : answers_number})   
+    answers_history.append({"resposta" : response,"numero de ordem" : answers_number})  
 
+    log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{manager_guidance} - response:{response} \n")
+ 
     return jsonify({'answer': response})
 
 if __name__ ==  '__main__':
