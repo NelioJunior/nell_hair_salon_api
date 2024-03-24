@@ -162,13 +162,25 @@ def tradutorHora (msg):
     return retorno.strip()
 
 def tradutorExpressao (msg):
-    retorno = removerAcentos(msg).lower()
+    retorno = msg
     while "  " in retorno : retorno = retorno.replace("  ", " ")  
     
     for item in lstExpressao:
         retorno = retorno.replace(item["texto"], item["equivalente"]) 
 
-    return retorno.strip()
+    msg = retorno.strip()
+    msg = re.sub(r'[?!,.-]', ' ', msg)
+    msg = msg.replace("feira", " ")
+    msg = msg.strip()
+    words = msg.split()
+
+    if words[-1] == "adeus" or words[0] == "sim":
+        return words[-1] 
+
+    elif words[0] == "sim":
+        return words[0]
+
+    return msg
 
 import re
 
@@ -180,10 +192,10 @@ def contextualizador(msg):
     words = msg.split()
 
     if words[-1] == "adeus":
-        return "adeus"
+        return "naoRelacionado"
 
-    elif words[0] in ["sim", "nao"]:
-        return words[0]
+    elif words[0] == "sim":
+        return 'confirmacao'
 
     else:
         for item in dictTradutor:

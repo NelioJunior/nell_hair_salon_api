@@ -1,6 +1,6 @@
 import json
 import openai
-from neural import nucleoNeural
+from neural import nucleo_neural
 from datetime import datetime 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -73,7 +73,7 @@ def customer_service():
     message_info["message"] = user_msg
     message_info["user"] = user
 
-    manager_guidance = nucleoNeural(message_info) 
+    manager_guidance = nucleo_neural(message_info) 
    
     prompt = "" 
     if previous_user != user: 

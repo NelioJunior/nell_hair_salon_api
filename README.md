@@ -1,5 +1,9 @@
 # nell_hair_salon_api
 
+
+USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESULTADOS ENTRE O PLAYGROUND E O CHATGTP 
+SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
+
 TO DO ------------------------------------------------------------------------------------------------------------------------
 
 Em neural.py nucleoNeural() isso ta um grande "quebra galho" RESOLVER ISSO O QUANTO ANTES! 

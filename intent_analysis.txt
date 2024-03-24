@@ -1,9 +1,9 @@
 # Funcao e objetivos 
 Faça uma analise do que o cliente deseja e a partir disto escreva apenas a palavra chave equivalente ao sentimento sem acréscimos de outras palavras. 
+Nesta analise comprimentos e saudação devem ser ignorados buscando-se outro sentimentos na frase do cliente.  
 
 'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
 'incluirReserva': O cliente expressou a preferencia a horario, serviço ou funcionário.
-'alterarReserva': O cliente expressou o desejo de alterar uma reserva anteriormente efetuada.
 'alterarReserva': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
 'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
 'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
@@ -16,5 +16,3 @@ Faça uma analise do que o cliente deseja e a partir disto escreva apenas a pala
 'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
 'reiniciarInteracao': O cliente expressou dúvidas ou sentiu-se mal compreendido.
 'naoRelacionado': A resposta do cliente não tem relação com os itens anteriores.
-
-cliente: Eu gostaria de mudar meu horário para fazer uma tintura no cabelo
