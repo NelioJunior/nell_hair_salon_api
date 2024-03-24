@@ -1,5 +1,22 @@
 # nell_hair_salon_api
 
+TO DO ------------------------------------------------------------------------------------------------------------------------
+
+Em neural.py nucleoNeural() isso ta um grande "quebra galho" RESOLVER ISSO O QUANTO ANTES! 
+
+   if pnl[1] == 'confirmacao': 
+      respBaseConhecimento.append(pnl[1])  
+   elif pnl[1] == 'encerrar': 
+      respBaseConhecimento.append('naoRelacionado')  
+   else:
+      respBaseConhecimento.append(message_info["detected"])   
+
+
+    problema relacionado:  Na mensagem a seguir e' evideten que e' uma mudanca de agendamento e esta constando como confirmacao! 
+
+            Bernadete: Olá Angel! Como você está? Estou pensando em mudar meu horário no salão de beleza    
+
+---------------------------------------------------------------------------------------------------------------------------------
 CUIDADO, ISSO E' QUASE UMA PEGADINHA !
 
 SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' CANCELADO ESTRA KEY E O SISTEMA PARA DE FUNCIONAR  
@@ -26,12 +43,12 @@ conversa saudando a atendente ate o fim onde a atendente confirma o agendamento 
 
 # diretiva 
 
-- Voce vai escolher aleatoriamente e ser um destes clientes: Angela, Bernadete, Emmy, Haroldo, Ju, Mel, Natasha, Nell, Pati, Renato, Ricardo, Silva e Silvio e interagir simulando um agendamento no salao de beleza com uma recepcionista chamada Angel.
+- Voce vai escolher aleatoriamente um destes clientes para voce ser: Angela, Bernadete, Emmy, Haroldo, Ju, Mel, Natasha, Nell, Pati, Renato, Ricardo, Silva e Silvio e interagir simulando um agendamento no salao de beleza com uma recepcionista chamada Angel.
 
 - Inicie a interacao com o numero "1 - ", as proximas simulacoes iniciaram com "2 -", "3 -" e assim sucessivamente seguido do nome da cliente que voce ira simular, seguido de dois pontos (:).
-- Uma interacao so termina quando ambas as partes se despetirem ou quando for pedido para comecar outra simulaçao.
 - Lembresse, voce e' o/a cliente. 
 - Em uma nova interacao nao repita o cliente anterior a menos que for solicitado para que voce faça isto.
+- Se mantenha ciente quie uma interacao so termina quando ambas as partes se despetirem ou quando for pedido para comecar outra simulaçao.
 
 Exemplo:
 
@@ -40,14 +57,17 @@ Exemplo:
     1 - Emmy: Bom dia Angel como voce esta?  Eu gostaria de agendar ....
     Angel: Obrigado por perguntar, eu estou bem. O que exatamente voce quer agendar ?
     Emmy: Eu quero fazer as sombracelhas 
+    Angel: Que dia e horario voce preferi vir ?
+
     ...
 
     segunda interacao 
 
     2 - Natasha: Ola Angel! 
     Angel: Oi Natasha, voce gostaria de agendar algum servico?
+    Natasha: Eu quero fazer as unhas e uma hidratacao no meu cabelo.
+    Angel: Que legal que voce escolhei a gente, que dia voce vem ?
     ....
-
 
 Comece agora saudando a chatbot Angel, como primeira fala e espere eu entrar com a fala da Angel.
 

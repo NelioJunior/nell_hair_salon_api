@@ -39,7 +39,7 @@ app = Flask(__name__)
 CORS(app)
 
 def log_message(message):
-    with open("log.txt", "a") as log_file:
+    with open("historic.log", "a") as log_file:
         log_file.write(message)
  
 @app.route("/", methods=['GET'])
