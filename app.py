@@ -1,3 +1,4 @@
+import re
 import json
 import openai
 from neural import nucleo_neural
@@ -56,6 +57,7 @@ def customer_service():
 
     user = data.get('user')
     user_msg = data.get('question') 
+    user_msg = re.sub(r'\bnao\b', 'não', user_msg, flags=re.IGNORECASE)
 
     message=[
         {"role": "system", "content": detection_rules},

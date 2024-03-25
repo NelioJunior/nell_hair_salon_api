@@ -3,6 +3,9 @@ Nesta analise comprimentos e saudação devem ser ignorados buscando-se outro se
 'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
 'incluirReserva': O cliente expressou a preferencia a horario, serviço ou funcionário.
 'incluirReserva': O cliente expressou o desejo de precisar de um servico de um profissional.  
+'concordancia': O cliente expressou sinal de aprovação como por exemplo dizendo sim.
+'concordancia': O cliente expressou um sinônimos de sim como por exemplo 'isso mesmo', 'exatamente', 'concordo' dentro da fala.
+'discordancia': O cliente expressou discordância como por exemplo dizendo não dentro da fala.
 'alterarReserva': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
 'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
 'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
@@ -11,8 +14,6 @@ Nesta analise comprimentos e saudação devem ser ignorados buscando-se outro se
 'listarFuncionarios': O cliente expressou o desejo de obter informações sobre os funcionários do estabelecimento.
 'listarEspecialidades': O cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
 'infoComoAgendar': O cliente expressou o desejo de se informar sobre como fazer um agendamento.
-'concordancia': O cliente expressou sinal de aprovação como por exemplo dizendo sim.
-'discordancia': O cliente expressou discordancia como por exemplo dizendo não.
 'indiferente':  O cliente expressou indiferenca a escolher algo.
 'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
 'reiniciarInteracao': O cliente expressou dúvidas ou sentiu-se mal compreendido.

@@ -5,29 +5,14 @@ import tools
 
 states = []   
 
-def formalizador_de_linguagem_natural(mensagemOriginal):
-   nomeAssistente = tools.removerAcentos(model.dictInfEmpresa["nomeBot"].lower()) 
-   mensagemTraduzida = mensagemOriginal
-   mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
-   mensagemTraduzida = tools.tradutorHora (mensagemTraduzida)
-   mensagemTraduzida = tools.tradutorExpressao (mensagemTraduzida)       
-
-   return mensagemTraduzida
-
 def nucleo_neural(message_info):
-   reply_msg = message_info["message"].lower() 
    clsModel = model.model(message_info["pasta"])
-   
-   mensagemTraduzida = formalizador_de_linguagem_natural(reply_msg)
-   
-   respBaseConhecimento = []
-   respBaseConhecimento.append(mensagemTraduzida)   
-   respBaseConhecimento.append(message_info["detected"])  
-
+   respBaseConhecimento = tools.formalizador_de_linguagem_natural(message_info)
+  
    if 'semrelacao' in respBaseConhecimento[1]:
       reply_msg  = "responda a mensagem da(o) cliente da maneira mais adequada possivel."   
    else:   
-      return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
-      reply_msg  = f'educadamente ignore a mensagem do cliente e diga quase que exatamente o texto a seguir : {return_msg}'  
+      return_msg = clsModel.execute(states,message_info,respBaseConhecimento,respBaseConhecimento[0])
+      reply_msg  = f'ignore a mensagem do cliente e diga o texto a seguir com suas palavras sem perder o sentido original: {return_msg}'  
 
    return reply_msg

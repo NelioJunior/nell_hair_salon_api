@@ -22,21 +22,30 @@ def read_config_credentials():
             credentials[key] = value.strip()
     return credentials
 
+def formalizador_de_linguagem_natural(message_info):
+   mensagemTraduzida = message_info["message"].lower() 
+   mensagemTraduzida = tradutorHora (mensagemTraduzida)
+   mensagemTraduzida = tradutorExpressao (mensagemTraduzida)       
+
+   resp = []
+   resp.append(mensagemTraduzida)   
+   
+   if mensagemTraduzida == "sim": 
+        resp.append("concordancia")
+   else: 
+        resp.append(message_info["detected"])  
+   return resp
+
 def alterar_data_extenso(texto):
-     # Extrai a data da string utilizando uma expressão regular
     data = re.search(r'Data: (\d{1,2}/\d{1,2}/\d{4})', texto).group(1)
-    
-    # Converte a string de data em um objeto datetime
     data_obj = datetime.strptime(data, '%d/%m/%Y')
     
-    # Formata a data por extenso
     dia = data_obj.strftime('%d')
     mes = dictMes[data_obj.month]
     ano = data_obj.strftime('%Y')
     
     data_extenso = f"{dia} de {mes} de {ano}"
     
-    # Substitui a data original na string
     texto = re.sub(r'Data: \d{1,2}/\d{1,2}/\d{4}', 'Data: ' + data_extenso, texto)
     
     return texto
@@ -174,7 +183,7 @@ def tradutorExpressao (msg):
     msg = msg.strip()
     words = msg.split()
 
-    if words[-1] == "adeus" or words[0] == "sim":
+    if words[-1] == "adeus":
         return words[-1] 
 
     elif words[0] == "sim":
