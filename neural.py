@@ -24,10 +24,10 @@ def nucleo_neural(message_info):
    respBaseConhecimento.append(mensagemTraduzida)   
    respBaseConhecimento.append(message_info["detected"])  
 
-   if 'naoRelacionado' in respBaseConhecimento[1]:
+   if 'semrelacao' in respBaseConhecimento[1]:
       reply_msg  = "responda a mensagem da(o) cliente da maneira mais adequada possivel."   
    else:   
       return_msg = clsModel.execute(states,message_info,respBaseConhecimento,mensagemTraduzida)
-      reply_msg  = f'Diga exatamente as mesmas palavras: {return_msg}'  
+      reply_msg  = f'educadamente ignore a mensagem do cliente e diga quase que exatamente o texto a seguir : {return_msg}'  
 
    return reply_msg

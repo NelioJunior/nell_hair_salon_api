@@ -622,7 +622,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
                 states["flagEscolherProfissional"] = False 
                 msgRetorno = ""
                 
-                if respBaseConhecimento[1] != "confirmacao" and states["reservas"][0]["id_funcionario"] == "": 
+                if respBaseConhecimento[1] != "concordancia" and states["reservas"][0]["id_funcionario"] == "": 
                     rdn = int(random.random() * len(lstFuncionariosAptos))
                     states["reservas"][0]["funcionario"] = lstFuncionariosAptos[rdn]["nome"]
                     states["reservas"][0]["id_funcionario"] = lstFuncionariosAptos[rdn]["id_funcionario"]  
@@ -676,7 +676,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     if state["ultimaMensagemAssistente"][:19] == "Para esta atividade":
         state["flagAdicionarServicos"] = False 
 
-    if respBaseConhecimento[1] == "confirmacao":
+    if respBaseConhecimento[1] == "concordancia":
         if "anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
             if "apenas" in mensagemTraduzida:
                 retorno = "Você gostaria de incluir mais serviços ao seu agendamento? Se sim, me diga qual?"
@@ -856,11 +856,6 @@ def addEspecialidadesInState(stts, especialidades):
 
 def verificarSeDeveFazerCRUD (states,msg,respBaseConhecimento):
 
-    if respBaseConhecimento[1] == "agradecimento":                      # re-analisar a necessidade  deste if - Nell Jan/20
-        if len(msg.split()) < 4:                    
-            if states["flagConfirmarAgendamento"] == False :
-                return False 
-
     if states["flagUsuarioDesejaFazerCRUD"] == False:
         especialidade = buscarEspecialidade(msg,states["contatoGenero"])
     
@@ -962,7 +957,7 @@ def TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzi
                     respBaseConhecimento[1] = "cancelarOperacaoEmAndamento" 
                     return True 
 
-    elif respBaseConhecimento[1] == "confirmacao": 
+    elif respBaseConhecimento[1] == "concordancia": 
         if hrMsgAssistente != "":  
             horaLimite = datetime.now() + timedelta(minutes = -30) 
             horaLimite = "%0.2d:%0.2d" % (horaLimite.hour, horaLimite.minute)  
@@ -1065,7 +1060,7 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
             if funcionario[1] != "": 
                 respBaseConhecimento[1] = "listarHorariosLivres"
 
-    elif respBaseConhecimento[1] == "confirmacao": 
+    elif respBaseConhecimento[1] == "concordancia": 
         if stts["flagAdicionarServicos"]: 
             if "assim" in  mensagem or "ja" in mensagem: 
                 respBaseConhecimento[1] = "discordar"
@@ -1230,7 +1225,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
             return msgResposta
 
     if stts["flagCancelarAgendamento"]:
-        if respBaseConhecimento[1] == "confirmacao":                      
+        if respBaseConhecimento[1] == "concordancia":                      
             if excluirReserva(stts["stateIdAgenda"], pasta):
                 if stts["flagAlterarAgendamento"]:
                    msgResposta  = f"{stts['contato']} que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
@@ -1355,7 +1350,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
 
     if msgResposta == "":
         if stts["flagConfirmarAgendamento"]:           
-            if respBaseConhecimento[1] == "confirmacao" or respBaseConhecimento[1] == "incluirReserva"  : 
+            if respBaseConhecimento[1] == "concordancia" or respBaseConhecimento[1] == "incluirReserva"  : 
                 identificador = salvarReserva(stts["reservas"], stts["id_cliente"], pasta)   
                 stts["flagUsuarioDesejaFazerCRUD"] = False   
 
