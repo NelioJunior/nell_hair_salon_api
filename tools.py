@@ -22,8 +22,11 @@ def read_config_credentials():
             credentials[key] = value.strip()
     return credentials
 
-def formalizador_de_linguagem_natural(message_info):
+def formalizador_de_linguagem_natural(message_info, nomeAssistente):
+
    mensagemTraduzida = message_info["message"].lower() 
+   mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
+
    mensagemTraduzida = tradutorHora (mensagemTraduzida)
    mensagemTraduzida = tradutorExpressao (mensagemTraduzida)       
 

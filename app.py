@@ -14,7 +14,7 @@ client = openai.OpenAI(api_key=chave_openai)
 
 previous_user = "" 
 response = ""
-answers_number = 0
+question_number = 0
 
 message_info = {
                 "user": "",
@@ -34,7 +34,7 @@ rule = open(rule_file, "r")
 
 agent_rule = rule.read()
 
-answers_history = []
+question_history = []
 
 app = Flask(__name__)
 CORS(app)
@@ -50,7 +50,7 @@ def root():
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
     global previous_user
-    global answers_number 
+    global question_number 
     global response
 
     data = request.get_json()
@@ -80,8 +80,13 @@ def customer_service():
     prompt = "" 
     if previous_user != user: 
         previous_user = user
-        answers_number = 1
-        answers_history.clear()
+        question_number = 1
+        question_history.clear()
+
+
+    question_number += 1 
+    question_history.append({"mensagem" : user_msg,"numero de ordem" : question_number})  
+
 
     locale = Locale('pt_BR')
     data_hora_atual = datetime.now()
@@ -94,7 +99,7 @@ def customer_service():
         "cliente": user, 
         "orientacao da gerente": manager_guidance , 
         "mensagem da cliente": user_msg,
-        "respostas anteriores": json.dumps(answers_history),
+        "mensagens anteriores": json.dumps(question_history),
         "data hora da mensagem": data_hora_ansi,
         "data hora corrente": data_hora_formatada
     }
@@ -113,13 +118,10 @@ def customer_service():
 
     response = chat_completion.choices[0].message.content
     
-    if answers_number > 1:
+    if question_number > 1:
         position = response.find('!')
         if position != -1 and position <= 30:
             response = response[position + 1:]
-
-    answers_number += 1 
-    answers_history.append({"resposta" : response,"numero de ordem" : answers_number})  
 
     log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{manager_guidance} - response:{response} \n")
  
