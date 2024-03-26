@@ -7,6 +7,7 @@ states = []
 
 def nucleo_neural(message_info):
    clsModel = model.model(message_info["pasta"])
+   usarGPT = True 
    nomeAssistente = tools.removerAcentos(model.dictInfEmpresa["nomeBot"].lower()) 
 
    respBaseConhecimento = tools.formalizador_de_linguagem_natural(message_info, nomeAssistente)
@@ -15,6 +16,7 @@ def nucleo_neural(message_info):
       reply_msg  = "com base nas mensagens anteriores mas recentes responda a/o cliente da maneira mais adequada possivel."   
    else:   
       return_msg = clsModel.execute(states,message_info,respBaseConhecimento,respBaseConhecimento[0])
-      reply_msg  = f'ignore a mensagem do cliente e diga o texto a seguir com suas palavras sem perder o sentido original: {return_msg}'  
+      reply_msg  = return_msg  
+      usarGPT = False 
 
-   return reply_msg
+   return [reply_msg , usarGPT]

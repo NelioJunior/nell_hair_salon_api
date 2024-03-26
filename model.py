@@ -639,7 +639,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
                         msgRetorno += "  %s disponivel nos seguintes horários: %s " %  (item["nome"], horariosLivres) 
 
                     msgRetorno = (f"Para esta atividade,neste dia {diaReserva}, temos estes profissionais: {msgRetorno}. "  
-                                  f"Perguntar a {states['contato']} se tem alguma preferência por algum profissional")
+                                  f"Você tem alguma preferência por algum profissional?")
                     states["flagEscolherProfissional"] = True  
 
     return msgRetorno                
@@ -701,7 +701,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
 
             return retorno
 
-        elif f"{state['contato']} você gostaria de incluir mais serviços ao seu agendamento?" in state["ultimaMensagemAssistente"]:
+        elif f"{state['contato']}, você gostaria de incluir mais serviços ao seu agendamento?" in state["ultimaMensagemAssistente"]:
             state["flagAdicionarServicos"] = False   
 
     if state["flagAdicionarServicos"]:
@@ -1183,7 +1183,7 @@ def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento)
             msgResposta = msgResposta[:len(msgResposta)-2] 
             if msgResposta != "" : msgResposta += "."
 
-            if len(lstFunc) > 1 : msgResposta += f"Em caso da {stts['contato']} ter alguma preferência,entrar com o nome de umas das funcionarias." 
+            if len(lstFunc) > 1 : msgResposta += f"Em caso de você ter alguma preferência,entre com o nome da funcionária." 
 
             if len(lstFunc) == 1:
                 stts["reservas"][0]["id_funcionario"] = funcionario["id_funcionario"]
@@ -1228,7 +1228,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
         if respBaseConhecimento[1] == "concordancia":                      
             if excluirReserva(stts["stateIdAgenda"], pasta):
                 if stts["flagAlterarAgendamento"]:
-                   msgResposta  = f"{stts['contato']} que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
+                   msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
                 else:   
                     msgResposta  = "Sua reserva ja foi cancelada"
                     stts["flagCancelarAgendamento"] = False 
@@ -1252,7 +1252,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
                 if len(colecaoReserva) > 0: 
                     if stts["id_cliente"] == colecaoReserva[0]["id_cliente"]:  
                         if colecaoReserva[0]["situacao"] == "fechada":
-                            msgResposta  = f"Consta aqui que voce. {stts['contato']}  já pagou antecipadamente o agendamento."
+                            msgResposta  = f"Consta aqui que voce. {stts['contato']}, já pagou antecipadamente o agendamento."
                             del stts 
                             stts["ultimaMensagemAssistente"] = msgResposta     
                             return respBaseConhecimento[0] 
@@ -1261,7 +1261,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
                             dthora = datetime.strptime(colecaoReserva[0]["dataHoraInicio"], '%Y-%m-%d %H:%M:%S')
                             funcionario = colecaoReserva[0]["funcionario"]
                             if stts["flagAlterarAgendamento"]:
-                                msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, voce terá de cancelar a reserva anterior que seria com %s no dia %s/%s as %0.2d:%0.2d para fazer uma reserva nova.Pergunte a {stts['contato']} se ela esta de acordo com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
+                                msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, voce terá de cancelar a reserva anterior que seria com %s no dia %s/%s as %0.2d:%0.2d para fazer uma reserva nova.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
                                 stts["flagCancelarAgendamento"] = True 
                                 stts["stateIdAgenda" ] = colecaoReserva[0]["id_agenda"] 
 
@@ -1273,7 +1273,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
                     else:      
                         msgResposta  = f"{stts['contato']} algo e deu algo de errado com este número. Verifique se o numero de agendameto certo."
                 else: 
-                    if f"{stts['contato']} Entre com um número válido" in  stts["ultimaMensagemAssistente"]:
+                    if "Entre com um número válido" in  stts["ultimaMensagemAssistente"]:
                         msgResposta = "Lamento,mas não consigo encontrar o agendamento,talvez seja melhor entrar em contato com o estabelecimento"    
                     elif "me passe o número" in  stts["ultimaMensagemAssistente"]:
                         msgResposta = f"{stts['contato']} Entre com o número da reserva "    

@@ -53,6 +53,13 @@ def customer_service():
     global question_number 
     global response
 
+    locale = Locale('pt_BR')
+    data_hora_atual = datetime.now()
+    data_hora_formatada = format_datetime(data_hora_atual, format='full', locale=locale)
+    data_hora_formatada = data_hora_formatada[0:len(data_hora_formatada)-29]    
+
+    data_hora_ansi = data_hora_atual.strftime('%Y-%m-%d %H:%M:%S')
+
     data = request.get_json()
 
     user = data.get('user')
@@ -76,48 +83,43 @@ def customer_service():
     message_info["user"] = user
 
     manager_guidance = nucleo_neural(message_info) 
-   
-    prompt = "" 
-    if previous_user != user: 
-        previous_user = user
-        question_number = 1
-        question_history.clear()
 
+    if manager_guidance[1]:
+        prompt = "" 
+        if previous_user != user: 
+            previous_user = user
+            question_number = 1
+            question_history.clear()
 
-    question_number += 1 
-    question_history.append({"mensagem" : user_msg,"numero de ordem" : question_number})  
-
-
-    locale = Locale('pt_BR')
-    data_hora_atual = datetime.now()
-    data_hora_formatada = format_datetime(data_hora_atual, format='full', locale=locale)
-    data_hora_formatada = data_hora_formatada[0:len(data_hora_formatada)-29]    
-
-    data_hora_ansi = data_hora_atual.strftime('%Y-%m-%d %H:%M:%S')
- 
-    prompt = {
-        "cliente": user, 
-        "orientacao da gerente": manager_guidance , 
-        "mensagem da cliente": user_msg,
-        "mensagens anteriores": json.dumps(question_history),
-        "data hora da mensagem": data_hora_ansi,
-        "data hora corrente": data_hora_formatada
-    }
- 
-    message=[
-        {"role": "system", "content": agent_rule},
-        {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}
-    ]
+        question_number += 1 
+        question_history.append({"mensagem" : user_msg,"numero de ordem" : question_number})  
     
-    chat_completion = client.chat.completions.create(
-       messages=message,
-       model="gpt-3.5-turbo",
-       temperature=0.1,
-       max_tokens=200
-    )
-
-    response = chat_completion.choices[0].message.content
+        prompt = {
+            "cliente": user, 
+            "orientacao da gerente": manager_guidance[0] , 
+            "mensagem da cliente": user_msg,
+            "mensagens anteriores": json.dumps(question_history),
+            "data hora da mensagem": data_hora_ansi,
+            "data hora corrente": data_hora_formatada
+        }
     
+        message=[
+            {"role": "system", "content": agent_rule},
+            {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}
+        ]
+        
+        chat_completion = client.chat.completions.create(
+        messages=message,
+        model="gpt-3.5-turbo",
+        temperature=0.1,
+        max_tokens=200
+        )
+
+        response = chat_completion.choices[0].message.content
+
+    else:
+        response = manager_guidance[0]
+
     if question_number > 1:
         position = response.find('!')
         if position != -1 and position <= 30:

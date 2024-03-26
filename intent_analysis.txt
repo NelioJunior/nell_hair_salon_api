@@ -1,10 +1,10 @@
 Faça uma analise do que o cliente deseja e a partir disto escreva apenas a palavra chave equivalente ao sentimento sem acréscimos de outras palavras. 
 Nesta analise comprimentos e saudação devem ser ignorados buscando-se outro sentimentos na frase do cliente.  
+
 'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
 'incluirReserva': O cliente expressou a preferencia a horario, serviço ou funcionário.
 'incluirReserva': O cliente expressou o desejo de precisar de um servico de um profissional.  
 'concordancia': O cliente expressou sinal de aprovação como por exemplo dizendo sim.
-'concordancia': O cliente expressou um sinônimos de sim como por exemplo 'isso mesmo', 'exatamente', 'concordo' dentro da fala.
 'discordancia': O cliente expressou discordância como por exemplo dizendo não dentro da fala.
 'alterarReserva': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
 'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
