@@ -24,20 +24,22 @@ def read_config_credentials():
 
 def formalizador_de_linguagem_natural(message_info, nomeAssistente):
 
-   mensagemTraduzida = message_info["message"].lower() 
-   mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
+    mensagemTraduzida = message_info["message"].lower() 
+    mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
 
-   mensagemTraduzida = tradutorHora (mensagemTraduzida)
-   mensagemTraduzida = tradutorExpressao (mensagemTraduzida)       
+    mensagemTraduzida = tradutorHora (mensagemTraduzida)
 
-   resp = []
-   resp.append(mensagemTraduzida)   
+    resp = []
+    resp.append(mensagemTraduzida)   
+    resp.append(message_info["detected"]) 
    
-   if mensagemTraduzida == "sim": 
-        resp.append("concordancia")
-   else: 
-        resp.append(message_info["detected"])  
-   return resp
+    val = tradutorExpressao (mensagemTraduzida) 
+    if val == "sim": 
+        resp[1] = "concordancia"
+    elif val == "adeus": 
+        resp[0] = val 
+
+    return resp
 
 def alterar_data_extenso(texto):
     data = re.search(r'Data: (\d{1,2}/\d{1,2}/\d{4})', texto).group(1)
@@ -192,7 +194,7 @@ def tradutorExpressao (msg):
     elif words[0] == "sim":
         return words[0]
 
-    return msg
+    return None 
 
 import re
 
@@ -478,6 +480,9 @@ def isTimeFormat(input):
 
 def buscarHora(msg):
     retorno = ""
+    if msg == None:
+        return ""  
+
     msg = " %s " % msg.strip()
     if ":" in msg:
         msg += "/"  
