@@ -690,7 +690,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
                 retorno = "Quais são os outros serviço que você quer?"
                 return retorno
                     
-    if respBaseConhecimento[1] == "discordar":  
+    if respBaseConhecimento[1] == "discordancia":  
         if f"anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
             retorno = "Desculpe, acho que entendi errado. Qual serviço você quer mesmo?"
             state["reservas"][0]['especialidades'][0]["id_especialidade"] = ""
@@ -789,7 +789,7 @@ def validarHorarioEscolhido(states, horario):
                     if  trueSeDataHoraJaPassou (diaReserva, horario): 
                         msg = "Acho que você se enganou, esse horário já passou. Entre com outro horário."
                         if states["reservas"][0]["id_funcionario"] != "" and states["flagUsuarioDemonstrouPreferenciaAoProfissional"]:
-                            msg += "Tambem vms ter que ver que rever a disponibilidade da profissional"
+                            msg += "Tambem vamos ter que ver que rever a disponibilidade da profissional"
 
                         states["reservas"][0]["id_funcionario"] = ""
                         states["reservas"][0]["funcionario"] = ""
@@ -980,7 +980,7 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
 
     elif "anotei aqui que você quer fazer" in stts["ultimaMensagemAssistente"].lower():
         if "cancelar" in mensagemTraduzida:
-            respBaseConhecimento[1] = "discordar"
+            respBaseConhecimento[1] = "discordancia"
         elif "apenas" in mensagemTraduzida:
             if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
                 stts["reservas"][0]["especialidades"][0]["id_especialidade"] = ""
@@ -1063,9 +1063,9 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
     elif respBaseConhecimento[1] == "concordancia": 
         if stts["flagAdicionarServicos"]: 
             if "assim" in  mensagem or "ja" in mensagem: 
-                respBaseConhecimento[1] = "discordar"
+                respBaseConhecimento[1] = "discordancia"
 
-    elif respBaseConhecimento[1] == "discordar": 
+    elif respBaseConhecimento[1] == "discordancia": 
         if "Caso você queira agendar com" in stts["ultimaMensagemAssistente"] :        
             stts["reservas"][0]["id_funcionario"] = ""
             stts["reservas"][0]["funcionario"] = ""

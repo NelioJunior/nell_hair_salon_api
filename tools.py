@@ -23,7 +23,6 @@ def read_config_credentials():
     return credentials
 
 def formalizador_de_linguagem_natural(message_info, nomeAssistente):
-
     mensagemTraduzida = message_info["message"].lower() 
     mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
 
@@ -33,7 +32,7 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     resp.append(mensagemTraduzida)   
     resp.append(message_info["detected"]) 
    
-    val = tradutorExpressao (mensagemTraduzida) 
+    val = buscartradutor (mensagemTraduzida) 
     if val == "sim": 
         resp[1] = "concordancia"
     elif val == "adeus": 
@@ -153,12 +152,23 @@ def buscarBaseConhecimento(msg):
 
     return retorno
 
-def buscartradutor(palavra): 
-    palavra = removerAcentos(palavra).lower()
-    retorno = ""
+def buscartradutor(palavra):     
+    retorno = removerAcentos(palavra).lower()
     for item in dictTradutor:
         if buscarPalavra(item["texto"], retorno) > 0: 
             retorno = retorno.replace(item["texto"],item["equivalente"])
+
+    msg = retorno.strip()
+    msg = re.sub(r'[?!,.-]', ' ', msg)
+    msg = msg.replace("feira", " ")
+    msg = msg.strip()
+    words = msg.split()
+
+    if words[-1] == "adeus":
+        return words[-1] 
+
+    elif words[0] == "sim":
+        return words[0]
 
     return retorno
 
@@ -180,6 +190,9 @@ def tradutorExpressao (msg):
     while "  " in retorno : retorno = retorno.replace("  ", " ")  
     
     for item in lstExpressao:
+        if item["id"] == '482':
+            print(item["id"],item["texto"],item["equivalente"] )
+        
         retorno = retorno.replace(item["texto"], item["equivalente"]) 
 
     msg = retorno.strip()
