@@ -678,7 +678,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
 
     if respBaseConhecimento[1] == "concordancia":
         if "anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
-            if "apenas" in mensagemTraduzida:
+            if "sim" in mensagemTraduzida:
                 retorno = "Você gostaria de incluir mais serviços ao seu agendamento? Se sim, me diga qual?"
                 state["flagAdicionarServicos"] = True 
                 return retorno
@@ -974,7 +974,7 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
     if TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzida,hrMsgAssistente):
         return    
 
-    elif respBaseConhecimento[1] == "":                              # Não compreendido  - Nell - Mar/20 
+    elif respBaseConhecimento[1] == "reiniciarInteracao":            
        if verificaSeHaEspecialidadeNaMensagem(mensagem):
            respBaseConhecimento[0] = ""
 

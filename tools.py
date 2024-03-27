@@ -32,11 +32,9 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     resp.append(mensagemTraduzida)   
     resp.append(message_info["detected"]) 
    
-    val = buscartradutor (mensagemTraduzida) 
-    if val == "sim": 
+    resp[0] = buscartradutor (mensagemTraduzida) 
+    if resp[0] == "sim": 
         resp[1] = "concordancia"
-    elif val == "adeus": 
-        resp[0] = val 
 
     return resp
 
