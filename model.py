@@ -340,7 +340,7 @@ def buscarListaFuncionarios(msg, states):
 
             if funcionarioMencionado[0] != "":  
                 if funcionarioMencionado[1] == funcionario["nome"]:       
-                    msgResp += "%s - %s, presente nos dias de %s das %s ás %s %s." % (funcionario["nome"],funcionario["cargo"],dias, entrada, saida, funcionario["avatar"])
+                    msgResp += "%s - %s, presente nos dias de %s das %s ás %s." % (funcionario["nome"],funcionario["cargo"],dias, entrada, saida)
                     break 
             else:    
                 msgResp += "%s - %s, presente nos dias de %s das %s ás %s ." % (funcionario["nome"],funcionario["cargo"],dias, entrada, saida)   
@@ -703,11 +703,6 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         especialidaesEscolhidas = especialidaesEscolhidas[:len(especialidaesEscolhidas)-3]   
 
         retorno = ""
-
-        if "apenas" not in mensagemTraduzida:  
-            retorno += "anotei aqui que você quer fazer %s. Você confirma isso?" % especialidaesEscolhidas  
-            state["flagAdicionarServicos"] = True    
-            return retorno
 
     if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
         retorno += "quais serviços você quer? "
