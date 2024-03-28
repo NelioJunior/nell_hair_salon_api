@@ -689,20 +689,9 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
             if len(state["reservas"][0]['especialidades']) == 1: 
                 retorno = "Quais são os outros serviço que você quer?"
                 return retorno
-                    
     if respBaseConhecimento[1] == "discordancia":  
-        if f"anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
-            retorno = "Desculpe, acho que entendi errado. Qual serviço você quer mesmo?"
-            state["reservas"][0]['especialidades'][0]["id_especialidade"] = ""
-            state["reservas"][0]['especialidades'][0]["especialidade"] = ""
-            state["reservas"][0]['especialidades'][0]["preco"] = ""
-            state["reservas"][0]['especialidades'][0]["sessoes"] = ""
-            state["reservas"][0]['especialidades'][0]["tempoNecessarioPorSessao"] = ""
-
-            return retorno
-
-        elif f"{state['contato']}, você gostaria de incluir mais serviços ao seu agendamento?" in state["ultimaMensagemAssistente"]:
-            state["flagAdicionarServicos"] = False   
+        state["flagAdicionarServicos"] = False   
+    
 
     if state["flagAdicionarServicos"]:
         especialidaesEscolhidas = ""
