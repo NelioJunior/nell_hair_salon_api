@@ -36,6 +36,12 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     if resp[0] == "sim": 
         resp[1] = "concordancia"
 
+    if "reservar" in resp[0]:
+        resp[1] = "incluirReserva"
+
+    if "alterar" in resp[0]:
+        resp[1] = "alterarReserva"
+
     return resp
 
 def alterar_data_extenso(texto):

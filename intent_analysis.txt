@@ -1,5 +1,6 @@
 Faça uma analise do que o cliente deseja e a partir disto escreva apenas a palavra chave equivalente ao sentimento sem acréscimos de outras palavras. 
-Nesta analise comprimentos e saudação devem ser ignorados buscando-se outro sentimentos na frase do cliente.  
+Nesta analise textos de comprimentos, gentilezas e saudação devem ser ignorados.
+Nesta analise devem ser priorizadas frases de confirmação, informação e pedidos de agendamento. 
 
 'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
 'incluirReserva': O cliente expressou a preferencia a horario, serviço ou funcionário.
