@@ -15,7 +15,7 @@ def nucleo_neural(message_info):
    if 'semrelacao' in respBaseConhecimento[1]:
       reply_msg  = "com base nas mensagens anteriores mas recentes responda a/o cliente da maneira mais adequada possivel."   
    else:   
-      return_msg = clsModel.execute(states,message_info,respBaseConhecimento,respBaseConhecimento[0])
+      return_msg = clsModel.execute(states,message_info,respBaseConhecimento)
       reply_msg  = return_msg  
       usarGPT = False 
 

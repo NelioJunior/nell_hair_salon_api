@@ -1189,10 +1189,9 @@ def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento)
     return  msgResposta       
 
 
-def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
+def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhecimento,pasta):
     msgResposta = ""
     hrPesquisa = "" 
-    mensagemTraduzida = respBaseConhecimento[0]
 
     if stts["flagEscolherProfissional"]:
         funcionario = buscarFuncionario(mensagemOriginal)
@@ -1479,16 +1478,109 @@ class model:
         loadDicionariosDinamicos(pasta)
         tools.loadDicionariosDinamicos(pasta) 
 
-    def execute(self, states, infUltimaMensagem, respBaseConhecimento):
-
+    def execute(self, states, infUltimaMensagem, respBaseConhecimento, mensagemTraduzida):
         contato = infUltimaMensagem["user"]  
-        mensagemOriginal = infUltimaMensagem["message"]        
+        mensagemOriginal = infUltimaMensagem["message"]
+        hrMsgAssistente = infUltimaMensagem["lastMessageTime"]  
+        
         msgResposta = ""
         
         idx = findStatePosition(states, contato) 
 
         clearOldInteractions(states)
 
-        msgResposta = processCrud (states[idx],contato,mensagemOriginal,respBaseConhecimento,self.pasta) 
+        if respBaseConhecimento[1] == "" and states[idx]["flagPrimeiraInteracao"]: 
+           return 
+
+        if respBaseConhecimento[1] == "encerrar":
+            limparStateContatoAtivo(states[idx], False)     
+            return 
+
+        states[idx]["flagPrimeiraInteracao"] = False     
+
+        roboNaoDeveAtender = f"desculpa {contato},mas  você não pode ser atendido por mim, por favor por favor entre em contato na recepção."
+
+        for item in dictCliente:                
+            if item["contato"].lower() == contato.lower() and item["roboPodeAtender"] == "1":
+                states[idx]["contatoGenero"] = item["genero"]
+                states[idx]["id_cliente"] = item["id_cliente"]
+                break
+            elif item["contato"].lower() == contato.lower() and item["roboPodeAtender"] == "0":
+                return roboNaoDeveAtender
+
+        if dictInfEmpresa["atenderNaoCadastrados"] == False and states[idx]["id_cliente"] == "":
+            return roboNaoDeveAtender
+
+        contextualizador(states[idx],respBaseConhecimento,mensagemOriginal,mensagemTraduzida,hrMsgAssistente)
+
+        if respBaseConhecimento[1] == "reiniciarInteracao":
+            del states[idx]  
+            msgRetorno = "Desculpe, é melhor começarmos para evitarmos confusão. Pode me explicar o que você deseja?"
+
+            return msgRetorno 
+
+        if respBaseConhecimento[1] == "cancelarOperacaoEmAndamento" or respBaseConhecimento[1] == "limparCache" or respBaseConhecimento[1] == "despedida":
+            del states[idx]  
+            msgRetorno = respBaseConhecimento[0]
+            if msgRetorno == "":
+               msgRetorno = "Tudo bem, operacao cancelada"
+
+            return msgRetorno 
+
+        mensagemOriginal = tools.removerAcentos(mensagemOriginal).replace("?"," ")
+
+        if verificarSeDeveFazerCRUD(states[idx],mensagemTraduzida,respBaseConhecimento): 
+            msgResposta = processCrud (states[idx],contato,mensagemTraduzida,mensagemOriginal,respBaseConhecimento,self.pasta) 
+
+        if respBaseConhecimento[1] == "saudacao" and msgResposta == "": 
+            msgResposta = "Olá.Algo em que eu possa ajudar?"
+
+        if contato == "":
+            contato = find_contact(mensagemOriginal)
+
+        if contato == "":
+            msgResposta = "É necessário o nome de contato conforme cadastrado no estabelecimento, normalmente é o primeiro nome da pessoa"
+            return msgResposta
+
+        infUltimaMensagem["contatoUltimaMensagem"] = contato
+
+        if msgResposta == "":
+            if states[idx]["reservas"][0]["especialidades"][0]["id_especialidade"] == "":    
+                msgResposta = "Qual serviços voce quer?" 
+            elif states[idx]["reservas"][0]["data"] == "":
+                msgResposta = "Quando voce quer vir?"
+            elif states[idx]["reservas"][0]["inicio"] == "":    
+                msgResposta = "Qual horas?" 
+    
+        if respBaseConhecimento[1] == "infoEmpresa":
+            if tools.buscarPalavra("responsavel", mensagemOriginal):
+                msgResposta = "Você pode falar com %s. " % dictInfEmpresa["responsavel"] 
+            elif tools.buscarPalavra("telefone", mensagemOriginal):
+                msgResposta = "Você pode nos ligar pelo %s. " % dictInfEmpresa["telefone"] 
+            elif tools.buscarPalavra("endereco", mensagemOriginal):
+                msgResposta = "Nosso endereço é em %s.Venha nos ver!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("onde", mensagemOriginal):
+                msgResposta = "Nosso endereço é em %s.Venha tomar um cafézinho!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("local", mensagemOriginal):
+                msgResposta = "Nosso endereço é em %s.Venha nos visitar!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("hora", mensagemOriginal) or tools.buscarPalavra("horas", mensagemOriginal):
+                 msgResposta = horarioFuncionamento()  
+            elif tools.buscarPalavra("horario", mensagemOriginal):
+                 msgResposta = horarioFuncionamento()  
+            elif tools.buscarPalavra("fica", mensagemOriginal) or tools.buscarPalavra("ficam", mensagemOriginal) :
+                msgResposta = "Nosso endereço é em %s.Visite-nos!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("estabelecimento", mensagemOriginal):
+                msgResposta = dictInfEmpresa["nomeEmpresa"]
+            else: 
+                msgResposta = horarioFuncionamento()      
+				
+        if respBaseConhecimento[1] == "nomeBot":
+            msgResposta =  respBaseConhecimento[0]  % dictInfEmpresa["nomeBot"]
+
+        if msgResposta == "":
+            if respBaseConhecimento[1] == "listarFuncionarios" or respBaseConhecimento[1] == "listarHorariosLivres": 
+                msgResposta =  horarioFuncionamento()  
+
+        states[idx]["ultimaMensagemAssistente"] = msgResposta    
 
         return msgResposta
