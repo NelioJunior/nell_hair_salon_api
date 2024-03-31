@@ -32,15 +32,18 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     resp = []
     resp.append(mensagemTraduzida)   
     resp.append(message_info["detected"]) 
-   
-    if resp[0][0:3] == "sim": 
-        resp[1] = "concordancia"
-
+  
     if "reservar" in resp[0]:
         resp[1] = "incluirReserva"
 
     if "alterar" in resp[0]:
         resp[1] = "alterarReserva"
+
+    if resp[0][0:3] == "sim": 
+        resp[1] = "concordancia"
+
+    if "adeus" in resp[0]: 
+        resp[1] = "semrelacao"
 
     return resp
 

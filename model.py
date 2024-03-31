@@ -1501,4 +1501,32 @@ class model:
 
         msgResposta = processCrud (states[idx],contato,mensagemOriginal,respBaseConhecimento,self.pasta) 
 
+        if "infoEmpresa" in respBaseConhecimento[1]:
+            if tools.buscarPalavra("responsavel", respBaseConhecimento[0]):
+                msgResposta = "Você pode falar com %s. " % dictInfEmpresa["responsavel"] 
+            elif tools.buscarPalavra("telefone", respBaseConhecimento[0]):
+                msgResposta = "Você pode nos ligar pelo %s. " % dictInfEmpresa["telefone"] 
+            elif tools.buscarPalavra("endereco", respBaseConhecimento[0]):
+                msgResposta = "Nosso endereço é em %s.Venha nos ver!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("onde", respBaseConhecimento[0]):
+                msgResposta = "Nosso endereço é em %s.Venha tomar um cafézinho!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("local", respBaseConhecimento[0]):
+                msgResposta = "Nosso endereço é em %s.Venha nos visitar!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("hora", respBaseConhecimento[0]) or tools.buscarPalavra("horas", respBaseConhecimento[0]):
+                 msgResposta = horarioFuncionamento()  
+            elif tools.buscarPalavra("horario", respBaseConhecimento[0]):
+                 msgResposta = horarioFuncionamento()  
+            elif tools.buscarPalavra("fica", respBaseConhecimento[0]) or tools.buscarPalavra("ficam", respBaseConhecimento[0]) :
+                msgResposta = "Nosso endereço é em %s.Visite-nos!" % dictInfEmpresa["endereco"] 
+            elif tools.buscarPalavra("estabelecimento", respBaseConhecimento[0]):
+                msgResposta = dictInfEmpresa["nomeEmpresa"]
+            else: 
+                msgResposta = horarioFuncionamento()      
+
+        if msgResposta == "":
+            if respBaseConhecimento[1] == "listarFuncionarios" or respBaseConhecimento[1] == "listarHorariosLivres": 
+                msgResposta =  horarioFuncionamento()  
+
+        states[idx]["ultimaMensagemAssistente"] = msgResposta    
+
         return msgResposta
