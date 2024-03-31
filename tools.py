@@ -27,13 +27,13 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
 
     mensagemTraduzida = tradutorHora (mensagemTraduzida)
+    mensagemTraduzida = buscartradutor (mensagemTraduzida)
 
     resp = []
     resp.append(mensagemTraduzida)   
     resp.append(message_info["detected"]) 
    
-    resp[0] = buscartradutor (mensagemTraduzida) 
-    if resp[0] == "sim": 
+    if resp[0][0:3] == "sim": 
         resp[1] = "concordancia"
 
     if "reservar" in resp[0]:
@@ -164,15 +164,6 @@ def buscartradutor(palavra):
 
     msg = retorno.strip()
     msg = re.sub(r'[?!,.-]', ' ', msg)
-    msg = msg.replace("feira", " ")
-    msg = msg.strip()
-    words = msg.split()
-
-    if words[-1] == "adeus":
-        return words[-1] 
-
-    elif words[0] == "sim":
-        return words[0]
 
     return retorno
 

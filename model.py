@@ -1044,11 +1044,6 @@ def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgA
             if funcionario[1] != "": 
                 respBaseConhecimento[1] = "listarHorariosLivres"
 
-    elif respBaseConhecimento[1] == "concordancia": 
-        if stts["flagAdicionarServicos"]: 
-            if "assim" in  mensagem or "ja" in mensagem: 
-                respBaseConhecimento[1] = "discordancia"
-
     elif respBaseConhecimento[1] == "discordancia": 
         if "Caso você queira agendar com" in stts["ultimaMensagemAssistente"] :        
             stts["reservas"][0]["id_funcionario"] = ""
@@ -1488,6 +1483,21 @@ class model:
         idx = findStatePosition(states, contato) 
 
         clearOldInteractions(states)
+
+        states[idx]["flagPrimeiraInteracao"] = False     
+
+        if states[idx]["id_cliente"] == "":
+            roboNaoDeveAtender = f"desculpa {contato},mas  você não pode ser atendido por mim, por favor por favor entre em contato na recepção."
+            for item in dictCliente:                
+                if item["contato"].lower() == contato.lower() and item["roboPodeAtender"] == "1":
+                    states[idx]["contatoGenero"] = item["genero"]
+                    states[idx]["id_cliente"] = item["id_cliente"]
+                    break
+                elif item["contato"].lower() == contato.lower() and item["roboPodeAtender"] == "0":
+                    return roboNaoDeveAtender
+
+            if dictInfEmpresa["atenderNaoCadastrados"] == False and states[idx]["id_cliente"] == "":
+                return roboNaoDeveAtender
 
         msgResposta = processCrud (states[idx],contato,mensagemOriginal,respBaseConhecimento,self.pasta) 
 
