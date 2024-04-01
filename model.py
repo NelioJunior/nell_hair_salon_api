@@ -268,12 +268,15 @@ def buscarEspecialidadeIndisponivel(msg, genero):
 
     return resposta
 
-def buscarEspecialidade(msg, genero):
+def buscarEspecialidade(msg_original, genero):
 
     retorno_final=[]     
     retorno = []
-    msg = msg.lower() 
-    msg_b = msg 
+
+    msg_original = msg_original.lower() 
+    msg_a = msg_original
+    msg_b = msg_original
+
     item_nome = "" 
 
     while True:
@@ -283,17 +286,16 @@ def buscarEspecialidade(msg, genero):
 
         for especialidade in dictEspecialidade:
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"]).split()
-            msg = msg_b
+            msg_a = msg_b
             flag = True             
             num = 0
 
             for palavra in lstPalavrasChaves:          
-                if tools.buscarPalavra(palavra,msg) > 0:
+                if tools.buscarPalavra(palavra,msg_a) > 0:
                     if flag:   
                         flag = False   
-                        if "infantil" not in especialidade["nome"].lower()  and "infantil" not in msg:  
+                        if "infantil" not in especialidade["nome"].lower()  and "infantil" not in msg_a:  
                             num = 2
-
                         if "feminino" in especialidade["palavrasChaves"] and genero == "f":
                             num += 2
                         elif "masculino" in especialidade["palavrasChaves"] and genero == "m":
@@ -301,16 +303,19 @@ def buscarEspecialidade(msg, genero):
 
                     num += 1 
 
-
                 if num > avaliacao:                    
                     avaliacao = num  
-                    msg_b = msg_b.replace(palavra.lower(), "") 
                     if item_nome != especialidade["nome"]:
                         item_nome = especialidade["nome"]
                         retorno = especialidade
 
         if retorno != []:
             retorno_final.append(retorno)
+
+            lst = retorno["palavrasChaves"].split()
+            for item in lst:
+                msg_b = msg_b.replace(tools.removerAcentos(item).lower(),"") 
+
         else:
             break     
 
@@ -1443,6 +1448,19 @@ def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
             stts["flagConfirmarAgendamento"] = True 
 
     return msgResposta
+
+def horarioFuncionamento(): 
+    diasFuncionamento = ""
+
+    for diaDaSemana in dictInfEmpresa["semana"]:
+        if dictInfEmpresa["semana"][diaDaSemana] == True:
+            diasFuncionamento += "%s, " % diaDaSemana
+
+    msgResposta = "O estabelecimento funciona nos dias de %s  no horário das %s até %s." % (diasFuncionamento,  
+                                                                               dictInfEmpresa["horario"]["abre"], 
+                                                                               dictInfEmpresa["horario"]["fecha"])     
+    return msgResposta
+
 
 class model:
 
