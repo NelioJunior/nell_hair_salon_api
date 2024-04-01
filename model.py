@@ -269,22 +269,29 @@ def buscarEspecialidadeIndisponivel(msg, genero):
     return resposta
 
 def buscarEspecialidade(msg, genero):
+
+    retorno_final=[]     
     retorno = []
-    avaliacao = 0 
+    msg = msg.lower() 
+    msg_b = msg 
+    item_nome = "" 
 
-    retorno = list(filter(lambda item: tools.removerAcentos(item["nome"].lower()) in msg, dictEspecialidade))
+    while True:
+        retorno = []
+        avaliacao = 0 
+        num = 0
 
-    if retorno == [] :  
         for especialidade in dictEspecialidade:
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"]).split()
-            flag = True 
+            msg = msg_b
+            flag = True             
             num = 0
 
             for palavra in lstPalavrasChaves:          
                 if tools.buscarPalavra(palavra,msg) > 0:
                     if flag:   
                         flag = False   
-                        if "infantil" not in especialidade["nome"].lower()  and "infantil" not in msg.lower():  
+                        if "infantil" not in especialidade["nome"].lower()  and "infantil" not in msg:  
                             num = 2
 
                         if "feminino" in especialidade["palavrasChaves"] and genero == "f":
@@ -294,11 +301,20 @@ def buscarEspecialidade(msg, genero):
 
                     num += 1 
 
-                if num > avaliacao:
+
+                if num > avaliacao:                    
                     avaliacao = num  
-                    retorno = [especialidade]
-               
-    return retorno       
+                    msg_b = msg_b.replace(palavra.lower(), "") 
+                    if item_nome != especialidade["nome"]:
+                        item_nome = especialidade["nome"]
+                        retorno = especialidade
+
+        if retorno != []:
+            retorno_final.append(retorno)
+        else:
+            break     
+
+    return retorno_final       
 
 def buscarEspecialidadePorFuncionario(msg): 
     retorno = ""
@@ -838,45 +854,6 @@ def addEspecialidadesInState(stts, especialidades):
 
     return 
 
-def verificarSeDeveFazerCRUD (states,msg,respBaseConhecimento):
-
-    if states["flagUsuarioDesejaFazerCRUD"] == False:
-        especialidade = buscarEspecialidade(msg,states["contatoGenero"])
-    
-        if  len(especialidade) > 0 :
-            states["flagUsuarioDesejaFazerCRUD"] = True 
-
-    if (respBaseConhecimento[1] == "incluirReserva" 
-            or respBaseConhecimento[1] == "alterarReserva"    
-            or respBaseConhecimento[1] == "listarReservaUsuario" 
-            or respBaseConhecimento[1] == "cancelarReservaJaEfetuada" 
-            or respBaseConhecimento[1] == "cancelarOperacaoEmAndamento"
-            or respBaseConhecimento[1] == "listarHorariosLivres"
-            or respBaseConhecimento[1] == "listarFuncionarios"
-            or respBaseConhecimento[1] == "listarEspecialidades"): 
-        states["flagUsuarioDesejaFazerCRUD"] =  True 
-
-    if buscarFuncionario(msg)[0] != "" and  states["flagUsuarioDesejaFazerCRUD"] == False: 
-        states["flagUsuarioDesejaFazerCRUD"] =  True
-
-    if states["flagUsuarioDesejaFazerCRUD"] == False:
-        if len([int(s) for s in msg.split() if s.isdigit() and int(s) >= 100000 and  int(s) <= 999999]) > 0:
-            states["flagUsuarioDesejaFazerCRUD"] =  True
-
-    return states["flagUsuarioDesejaFazerCRUD"] 
-
-def horarioFuncionamento(): 
-    diasFuncionamento = ""
-
-    for diaDaSemana in dictInfEmpresa["semana"]:
-        if dictInfEmpresa["semana"][diaDaSemana] == True:
-            diasFuncionamento += "%s, " % diaDaSemana
-
-    msgResposta = "O estabelecimento funciona nos dias de %s  no horário das %s até %s." % (diasFuncionamento,  
-                                                                               dictInfEmpresa["horario"]["abre"], 
-                                                                               dictInfEmpresa["horario"]["fecha"])     
-    return msgResposta
-
 
 def buscarEspecialidadeNaoCadastrada(msg):
 
@@ -1296,7 +1273,7 @@ def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
         if stts["reservas"][0]["data"] == "":
             dtPesquisa = tools.buscarData(mensagemTraduzida)
             if dtPesquisa != "":
-                stts["reservas"][0]["data"] = dtPesquisa    #Esta pegando a data corrente e nao a data escolhida - Nell Jr - 2024
+                stts["reservas"][0]["data"] = dtPesquisa    #TODO Esta pegando a data corrente e nao a data escolhida - Nell Jr - 2024
                 msgResposta = validarDiaFuncionamento(stts) 
 
     if msgResposta == "":
