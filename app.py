@@ -71,16 +71,21 @@ def customer_service():
         {"role": "user", "content": user_msg}
     ]
     
-    chat_completion = client.chat.completions.create(
-       messages=message,
-       model="gpt-3.5-turbo",
-       temperature=0.1,
-       max_tokens=100
-    )
 
-    message_info["detected"]  = chat_completion.choices[0].message.content
-    message_info["message"] = user_msg
-    message_info["user"] = user
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=message,
+            model="gpt-3.5-turbo",
+            temperature=0.1,
+            max_tokens=100
+        )
+
+        message_info["detected"]  = chat_completion.choices[0].message.content
+        message_info["message"] = user_msg
+        message_info["user"] = user
+
+    except:
+        return jsonify({'answer': 'estou com problemas para acessar o sistema do estabelecimento, entre em contato mais tarde'})
 
     manager_guidance = nucleo_neural(message_info) 
 
