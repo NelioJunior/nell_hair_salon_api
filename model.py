@@ -1515,6 +1515,8 @@ class model:
                 msgResposta = "Nosso endereço é em %s.Visite-nos!" % dictInfEmpresa["endereco"] 
             elif tools.buscarPalavra("estabelecimento", respBaseConhecimento[0]):
                 msgResposta = dictInfEmpresa["nomeEmpresa"]
+            elif tools.buscarPalavra("nome", respBaseConhecimento[0]):
+                msgResposta = dictInfEmpresa["nomeEmpresa"]
             else: 
                 msgResposta = horarioFuncionamento()      
 
