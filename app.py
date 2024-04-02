@@ -87,9 +87,9 @@ def customer_service():
     except:
         return jsonify({'answer': 'estou com problemas para acessar o sistema do estabelecimento, entre em contato mais tarde'})
 
-    manager_guidance = nucleo_neural(message_info) 
+    nucleo_neural_info = nucleo_neural(message_info) 
 
-    if manager_guidance[1]:
+    if nucleo_neural_info[1]:
         prompt = "" 
         if previous_user != user: 
             previous_user = user
@@ -101,7 +101,7 @@ def customer_service():
     
         prompt = {
             "cliente": user, 
-            "orientacao da gerente": manager_guidance[0] , 
+            "orientacao da gerente": nucleo_neural_info[0] , 
             "mensagem da cliente": user_msg,
             "mensagens anteriores": json.dumps(question_history),
             "data hora da mensagem": data_hora_ansi,
@@ -123,14 +123,14 @@ def customer_service():
         response = chat_completion.choices[0].message.content
 
     else:
-        response = manager_guidance[0]
+        response = nucleo_neural_info[0]
 
     if question_number > 1:
         position = response.find('!')
         if position != -1 and position <= 30:
             response = response[position + 1:]
 
-    log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{manager_guidance} - response:{response} \n")
+    log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{nucleo_neural_info} - response:{response} \n")
  
     return jsonify({'answer': response})
 

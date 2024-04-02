@@ -1285,7 +1285,7 @@ def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
 
         if stts["reservas"][0]["inicio"] == "":
             msgOrgnl = tools.removerAcentos(tools.removerAcentos(mensagemOriginal)) 
-            periodo = " manha" if "manha" in  msgOrgnl else " tarde"  if "tarde" in msgOrgnl else " noite" if "noite" in msgOrgnl else ""
+            periodo = " manha" if " manha" in  msgOrgnl else " tarde"  if "tarde" in msgOrgnl else " noite" if "noite" in msgOrgnl else ""
             hrPesquisa = tools.converterHoraExtensaParaPadrao(mensagemTraduzida+periodo)
             if hrPesquisa == "":
                 hrPesquisa = tools.converterHoraExtensaParaPadrao("%s manha" % mensagemTraduzida)
@@ -1474,10 +1474,10 @@ class model:
         contato = infUltimaMensagem["user"]  
         mensagemOriginal = infUltimaMensagem["message"]        
         msgResposta = ""
-        
-        idx = findStatePosition(states, contato) 
 
         clearOldInteractions(states)
+
+        idx = findStatePosition(states, contato) 
 
         states[idx]["flagPrimeiraInteracao"] = False     
 
