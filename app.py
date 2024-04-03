@@ -66,12 +66,17 @@ def customer_service():
     user_msg = data.get('question') 
     user_msg = re.sub(r'\bnao\b', 'não', user_msg, flags=re.IGNORECASE)
 
+    prompt = {
+        "cliente": user, 
+        "mensagem da cliente": user_msg,
+        "data hora corrente": data_hora_formatada
+    }
+
     message=[
         {"role": "system", "content": detection_rules},
-        {"role": "user", "content": user_msg}
+        {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}
     ]
     
-
     try:
         chat_completion = client.chat.completions.create(
             messages=message,
@@ -90,21 +95,11 @@ def customer_service():
     nucleo_neural_info = nucleo_neural(message_info) 
 
     if nucleo_neural_info[1]:
-        prompt = "" 
-        if previous_user != user: 
-            previous_user = user
-            question_number = 1
-            question_history.clear()
-
-        question_number += 1 
-        question_history.append({"mensagem" : user_msg,"numero de ordem" : question_number})  
     
         prompt = {
             "cliente": user, 
             "orientacao da gerente": nucleo_neural_info[0] , 
             "mensagem da cliente": user_msg,
-            "mensagens anteriores": json.dumps(question_history),
-            "data hora da mensagem": data_hora_ansi,
             "data hora corrente": data_hora_formatada
         }
     
