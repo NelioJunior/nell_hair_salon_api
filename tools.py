@@ -42,6 +42,9 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     if resp[0][0:3] == "sim": 
         resp[1] = "concordancia"
 
+    if resp[0][0:3] == "nao": 
+        resp[1] = "discordancia"
+
     if "adeus" in resp[0]: 
         resp[1] = "semrelacao"
 

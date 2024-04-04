@@ -69,6 +69,7 @@ def loadDicionariosDinamicos(pasta):
 
     servico = "%s%s" %(pasta,"model/buscarespecialidadedoprofissional.php?id=0")
     dictEspecialidade = json.load(urllib.request.urlopen(servico))
+    dictEspecialidade = sorted(dictEspecialidade, key=lambda x: len(x['nome'].split()))
 
     servico = "%s%s" %(pasta,"model/buscarespecialidade.php?apenasAtivos=0")
     dictEspecialidadeGeral = json.load(urllib.request.urlopen(servico))
@@ -273,7 +274,6 @@ def buscarEspecialidade(detected, genero):
 
     retorno_final=[]  
     servicos = detected["servicos"]
-    item_nome = "" 
 
     for servico in servicos:
 
@@ -284,15 +284,9 @@ def buscarEspecialidade(detected, genero):
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"]).split()
             num = 0
 
-            if "Pedicure" in especialidade["nome"]:
-                print(1)  
-
             for palavra in lstPalavrasChaves:          
                 if tools.buscarPalavra(palavra,servico) > 0:
                     num += 1
-
-                    if "infantil" in especialidade["nome"].lower() and "infantil" in servico:  
-                        num += 2
 
                     if "feminino" in especialidade["nome"].lower() and genero == "f":
                         num += 2
@@ -301,9 +295,7 @@ def buscarEspecialidade(detected, genero):
 
                 if num > avaliacao:                    
                     avaliacao = num  
-                    if item_nome != especialidade["nome"]:
-                        item_nome = especialidade["nome"]
-                        retorno = especialidade
+                    retorno = especialidade
 
         retorno_final.append(retorno)
 

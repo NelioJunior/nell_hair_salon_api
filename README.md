@@ -6,19 +6,21 @@ SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
 
 TO DO ------------------------------------------------------------------------------------------------------------------------
 
-Em neural.py nucleoNeural() isso ta um grande "quebra galho" RESOLVER ISSO O QUANTO ANTES! 
+usando python, digamos que o usuario entre com um texto "Quero cortar o cabelo" , o que quer dizer , ele nao 
+quer nada espefico, como um corte pra gente loira ou afro. Como eu faria um algoritimo para determinar qual e' o 
+item certo a selecionar ?
 
-   if pnl[1] == 'confirmacao': 
-      respBaseConhecimento.append(pnl[1])  
-   elif pnl[1] == 'encerrar': 
-      respBaseConhecimento.append('naoRelacionado')  
-   else:
-      respBaseConhecimento.append(message_info["detected"])   
+[
+    {'item': 'generico', 'palavrasChaves':  ['corte', 'cabelo'] },
+    {'item': 'infantil', 'palavrasChaves':  ['corte', 'cabelo', 'infantil']}, 
+    {'item': 'ruivo', 'palavrasChaves':  ['corte', 'cabelo', 'ruivo']}, 
+    {'item': 'loiro', 'palavrasChaves':  ['corte', 'cabelo', 'loiro']}, 
+    {'item': 'afro', 'palavrasChaves':  ['corte', 'cabelo', 'afro']}, 
+]
+  
+Entendeu o problema ?  
 
 
-    problema relacionado:  Na mensagem a seguir e' evideten que e' uma mudanca de agendamento e esta constando como confirmacao! 
-
-            Bernadete: Olá Angel! Como você está? Estou pensando em mudar meu horário no salão de beleza    
 
 ---------------------------------------------------------------------------------------------------------------------------------
 CUIDADO, ISSO E' QUASE UMA PEGADINHA !

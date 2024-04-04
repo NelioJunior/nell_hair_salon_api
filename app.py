@@ -29,10 +29,7 @@ detection_rules = rule.read()
 
 rule_file = "/home/nelljr/nell_hair_salon_api/angel_guide.txt"
 rule = open(rule_file, "r")  
-
 agent_rule = rule.read()
-
-question_history = []
 
 app = Flask(__name__)
 CORS(app)
