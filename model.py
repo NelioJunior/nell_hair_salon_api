@@ -1178,7 +1178,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                     msgResposta += " Obrigada"
     
             else:                    
-                msgResposta = "Procedimento cancelado.Sinto, mas ter que voltar do inicio..." 
+                msgResposta = "Sinto que eu tenha anotado algo errado, melhor voltar do inicio,né?!" 
                 msgResposta += "Voce pode desistir a qualquer hora, sem tem problemas."
                 msgResposta += "Então me diga, pra qual dia você quer agendar ?"     
 
