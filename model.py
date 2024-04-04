@@ -268,40 +268,36 @@ def buscarEspecialidadeIndisponivel(msg, genero):
 
     return resposta
 
-def buscarEspecialidade(msg_original, genero):
 
-    retorno_final=[]     
-    retorno = []
+def buscarEspecialidade(detected, genero):
 
-    msg_original = msg_original.lower() 
-    msg_a = msg_original
-    msg_b = msg_original
-
+    retorno_final=[]  
+    servicos = detected["servicos"]
     item_nome = "" 
 
-    while True:
+    for servico in servicos:
+
         retorno = []
         avaliacao = 0 
-        num = 0
 
         for especialidade in dictEspecialidade:
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"]).split()
-            msg_a = msg_b
-            flag = True             
             num = 0
 
-            for palavra in lstPalavrasChaves:          
-                if tools.buscarPalavra(palavra,msg_a) > 0:
-                    if flag:   
-                        flag = False   
-                        if "infantil" not in especialidade["nome"].lower()  and "infantil" not in msg_a:  
-                            num = 2
-                        if "feminino" in especialidade["palavrasChaves"] and genero == "f":
-                            num += 2
-                        elif "masculino" in especialidade["palavrasChaves"] and genero == "m":
-                            num += 2
+            if "Pedicure" in especialidade["nome"]:
+                print(1)  
 
-                    num += 1 
+            for palavra in lstPalavrasChaves:          
+                if tools.buscarPalavra(palavra,servico) > 0:
+                    num += 1
+
+                    if "infantil" in especialidade["nome"].lower() and "infantil" in servico:  
+                        num += 2
+
+                    if "feminino" in especialidade["nome"].lower() and genero == "f":
+                        num += 2
+                    elif "masculino" in especialidade["nome"].lower() and genero == "m":
+                        num += 2
 
                 if num > avaliacao:                    
                     avaliacao = num  
@@ -309,15 +305,7 @@ def buscarEspecialidade(msg_original, genero):
                         item_nome = especialidade["nome"]
                         retorno = especialidade
 
-        if retorno != []:
-            retorno_final.append(retorno)
-
-            lst = retorno["palavrasChaves"].split()
-            for item in lst:
-                msg_b = msg_b.replace(tools.removerAcentos(item).lower(),"") 
-
-        else:
-            break     
+        retorno_final.append(retorno)
 
     return retorno_final       
 
@@ -934,136 +922,6 @@ def TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzi
 
     return False  
 
-def contextualizador(stts,respBaseConhecimento,mensagem,mensagemTraduzida,hrMsgAssistente):
-    mensagem = tools.removerAcentos(mensagem)
-
-    if TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzida,hrMsgAssistente):
-        return    
-
-    elif respBaseConhecimento[1] == "reiniciarInteracao":            
-       if verificaSeHaEspecialidadeNaMensagem(mensagem):
-           respBaseConhecimento[0] = ""
-
-    elif "anotei aqui que você quer fazer" in stts["ultimaMensagemAssistente"].lower():
-        if "cancelar" in mensagemTraduzida:
-            respBaseConhecimento[1] = "discordancia"
-        elif "apenas" in mensagemTraduzida:
-            if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-                stts["reservas"][0]["especialidades"][0]["id_especialidade"] = ""
-                stts["reservas"][0]["especialidades"][0]["especialidade"] = ""
-                stts["reservas"][0]["especialidades"][0]["preco"] = 0
-                stts["reservas"][0]["especialidades"][0]["sessoes"] = 0    
-                stts["reservas"][0]["especialidades"][0]["tempoNecessarioPorSessao"] = 30      
-
-        elif "tambem" in mensagemTraduzida:
-            if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-                respBaseConhecimento[1] = "incluirReserva"
-
-    elif respBaseConhecimento[1] == "incluirReserva":
-        if stts["flagUsuarioDesejaFazerCRUD"] == False and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "":  
-            if stts["reservas"][0]["id_funcionario"] == "" and stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
-                funcionario = buscarFuncionario(mensagem)
-                if funcionario[1] != "": 
-                    stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True
-                    respBaseConhecimento[1] = "listarFuncionarios"
-            if "fazer o cabelo" in mensagem.lower():
-                respBaseConhecimento[0] = "Para ser mais claro,você quer escovar,pintar ou hidratar o cabelo?"  
-                respBaseConhecimento[1] = "cancelarOperacaoEmAndamento"
-
-    elif respBaseConhecimento[1] == "listarEspecialidades":
-        if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarHora(mensagemTraduzida) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarData(mensagem) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-
-    elif respBaseConhecimento[1] == "wikipedia": 
-        if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarHora(mensagemTraduzida) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarData(mensagem) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        else:    
-            funcionario = buscarFuncionario(mensagem)
-            if funcionario[1] != "": 
-                respBaseConhecimento[1] = "listarHorariosLivres"
-
-    elif respBaseConhecimento[1] == "situacaoBot": 
-        if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarHora(mensagemTraduzida) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarData(mensagem) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        else:    
-            funcionario = buscarFuncionario(mensagem)
-            if funcionario[1] != "": 
-                respBaseConhecimento[1] = "listarHorariosLivres"
-
-    elif respBaseConhecimento[1] == "infoComoAgendar":
-        if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarHora(mensagemTraduzida) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarData(mensagem) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        else:    
-            funcionario = buscarFuncionario(mensagem)
-            if funcionario[1] != "": 
-                respBaseConhecimento[1] = "listarHorariosLivres"
-
-    elif respBaseConhecimento[1] == "infoEmpresa":    
-        if len(buscarEspecialidade(mensagem,stts["contatoGenero"])) > 0: 
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarHora(mensagemTraduzida) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        elif tools.buscarData(mensagem) != "":
-            respBaseConhecimento[1] = "listarHorariosLivres"
-        else:    
-            funcionario = buscarFuncionario(mensagem)
-            if funcionario[1] != "": 
-                respBaseConhecimento[1] = "listarHorariosLivres"
-
-    elif respBaseConhecimento[1] == "discordancia": 
-        if "Caso você queira agendar com" in stts["ultimaMensagemAssistente"] :        
-            stts["reservas"][0]["id_funcionario"] = ""
-            stts["reservas"][0]["funcionario"] = ""
-            if stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "":
-                respBaseConhecimento[1] = "despedida"
-                respBaseConhecimento[0] = "Ok.Caso você queira saber de outra funcionaria a qualquer hora é só me falar "
-        elif "gostaria de agendar um horário" in stts["ultimaMensagemAssistente"] :        
-            respBaseConhecimento[0] = "Tudo bem.Fique a vontade" 
-            stts["flagUsuarioDesejaFazerCRUD"] = False 
-
-        elif "Quer marcar algum destes serviços?" in stts["ultimaMensagemAssistente"] :                
-            respBaseConhecimento[0] = "Ta bom.Qualquer coisa, estarei aqui" 
-            stts["flagUsuarioDesejaFazerCRUD"] = False 
-
-    elif respBaseConhecimento[1] == "cancelarOperacaoEmAndamento":
-        if stts["flagUsuarioDesejaFazerCRUD"] == False and  "deixa para la" not in tools.removerAcentos(mensagem):
-            respBaseConhecimento[1] = "cancelarReservaJaEfetuada"
-
-    elif respBaseConhecimento[1] == "":
-        if tools.buscarData(mensagemTraduzida) != "":
-            stts["flagUsuarioDesejaFazerCRUD"] = True  
-        elif tools.buscarHora(mensagemTraduzida) != "":
-            stts["flagUsuarioDesejaFazerCRUD"] = True  
-        elif "qual é o seu ?" in  stts["ultimaMensagemAssistente"]:
-            respBaseConhecimento[0]  = "Muito prazer,%s,se bem que já sabia seu nome,só quis ser educada" % stts["contato"]
-
-    if "não esta disponivel" in stts["ultimaMensagemAssistente"]: 
-        funcionario = buscarFuncionario(mensagem)
-        if funcionario[1] != "": 
-            stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = ""
-            stts["reservas"][0]["id_funcionario"] = ""
-            stts["reservas"][0]["funcionario"] = ""
-        elif tools.buscarHora(mensagem) != "":
-            stts["reservas"][0]["inicio"] = ""
-        
-    return 
-
 def limparStateContatoAtivo(stts, manterDataHora): 
     stts["flagConfirmarAgendamento"] = False 
     stts["flagEscolherProfissional"] = True   
@@ -1166,7 +1024,7 @@ def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento)
     return  msgResposta       
 
 
-def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
+def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pasta):
     msgResposta = ""
     hrPesquisa = "" 
     mensagemTraduzida = respBaseConhecimento[0]
@@ -1255,7 +1113,7 @@ def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
         
         if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
             if not stts["flagConfirmarAgendamento"]:
-                if len(buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])) == 0:
+                if len(buscarEspecialidade(detected,stts["contatoGenero"])) == 0:
                     msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
 
         elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
@@ -1271,7 +1129,7 @@ def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
 
     if msgResposta == "":
         if respBaseConhecimento[1] == "listarHorariosLivres":
-            especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])                     
+            especialidade = buscarEspecialidade(detected,stts["contatoGenero"])                     
             msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
     if msgResposta == "":
@@ -1342,10 +1200,10 @@ def processCrud (stts,contato,mensagemOriginal,respBaseConhecimento,pasta):
     if msgResposta == "":
         especialidade = []
         if stts["flagAdicionarServicos"]: 
-            especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
+            especialidade = buscarEspecialidade(detected,stts["contatoGenero"])
 
         elif stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
-            especialidade = buscarEspecialidade(mensagemTraduzida,stts["contatoGenero"])
+            especialidade = buscarEspecialidade(detected,stts["contatoGenero"])
             stts["flagAdicionarServicos"] = len(especialidade) == 1      
         
             if len(especialidade) != 0:
@@ -1474,6 +1332,7 @@ class model:
         contato = infUltimaMensagem["user"]  
         mensagemOriginal = infUltimaMensagem["message"]        
         msgResposta = ""
+        detected = json.loads(infUltimaMensagem["detected"]) 
 
         clearOldInteractions(states)
 
@@ -1494,7 +1353,7 @@ class model:
             if dictInfEmpresa["atenderNaoCadastrados"] == False and states[idx]["id_cliente"] == "":
                 return roboNaoDeveAtender
 
-        msgResposta = processCrud (states[idx],contato,mensagemOriginal,respBaseConhecimento,self.pasta) 
+        msgResposta = processCrud (states[idx],contato,mensagemOriginal,detected,respBaseConhecimento,self.pasta) 
 
         if "infoEmpresa" in respBaseConhecimento[1]:
             if tools.buscarPalavra("responsavel", respBaseConhecimento[0]):

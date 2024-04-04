@@ -8,13 +8,11 @@ from flask_cors import CORS
 from tools import obter_chave_openai
 from babel.dates import format_datetime, Locale
 
+locale = Locale('pt_BR')
+
 chave_openai = obter_chave_openai()
 
 client = openai.OpenAI(api_key=chave_openai)
-
-previous_user = "" 
-response = ""
-question_number = 0
 
 message_info = {
                 "user": "",
@@ -49,11 +47,6 @@ def root():
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
-    global previous_user
-    global question_number 
-    global response
-
-    locale = Locale('pt_BR')
     data_hora_atual = datetime.now()
     data_hora_formatada = format_datetime(data_hora_atual, format='full', locale=locale)
     data_hora_formatada = data_hora_formatada[0:len(data_hora_formatada)-29]    
@@ -68,8 +61,7 @@ def customer_service():
 
     prompt = {
         "cliente": user, 
-        "mensagem da cliente": user_msg,
-        "data hora corrente": data_hora_formatada
+        "mensagem da cliente": user_msg
     }
 
     message=[
@@ -81,7 +73,7 @@ def customer_service():
         chat_completion = client.chat.completions.create(
             messages=message,
             model="gpt-3.5-turbo",
-            temperature=0.1,
+            temperature=0.0,
             max_tokens=100
         )
 
@@ -119,11 +111,6 @@ def customer_service():
 
     else:
         response = nucleo_neural_info[0]
-
-    if question_number > 1:
-        position = response.find('!')
-        if position != -1 and position <= 30:
-            response = response[position + 1:]
 
     log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{nucleo_neural_info} - response:{response} \n")
  

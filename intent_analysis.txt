@@ -1,14 +1,8 @@
-Nesta interação um cliente quer realizar um agendamento de um servico dentro de um estabelecimento. 
-Nesta interação você é Angel a recepcionista do estabelecimento.
-
+Nesta interação um cliente realiza uma operação de agendamento dentro de um estabelecimento. 
 Preencha um json a partir das intenções demostradas pelo cliente a partir do que é dito dentro da frase.
 A estrutura do json devera ter o formato descrito a seguir:
 
-chave 'dia', formato de data ISO 8601 'YYYY-MM-DD', é o dia em que deve acontecer o agendamento.
-chave 'hora', formato hora no padrão de 24 horas, é o horário em que o cliente quer que seja o agendamento. 
 chave 'servicos',  preenchido com um array de serviços que o cliente demonstrou desejar.
-chabe 'profissional', em caso do cliente demonstrar o desejo do servico ser realizado por um profissional em especial.  
-
 chave 'intencao' : Preenchido seguindo a regra a seguir:
     'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
     'incluirReserva': O cliente expressou a preferencia a horario, serviço ou funcionário.
