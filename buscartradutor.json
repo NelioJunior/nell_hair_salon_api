@@ -1,0 +1,2997 @@
+[
+    {
+        "id": "1",
+        "texto": "para uma",
+        "equivalente": "para"
+    },
+    {
+        "id": "2",
+        "texto": "para um",
+        "equivalente": "para"
+    },
+    {
+        "id": "3",
+        "texto": "um corte",
+        "equivalente": "corte"
+    },
+    {
+        "id": "4",
+        "texto": "uma barba",
+        "equivalente": "barba"
+    },
+    {
+        "id": "5",
+        "texto": "uma manicure",
+        "equivalente": "manicure"
+    },
+    {
+        "id": "6",
+        "texto": "uma pedicure",
+        "equivalente": "pedicure"
+    },
+    {
+        "id": "7",
+        "texto": "uma lavagem",
+        "equivalente": "lavagem"
+    },
+    {
+        "id": "8",
+        "texto": "uma coloracao",
+        "equivalente": "coloracao"
+    },
+    {
+        "id": "9",
+        "texto": "um tingimento",
+        "equivalente": "tingimento"
+    },
+    {
+        "id": "10",
+        "texto": "um design",
+        "equivalente": "design"
+    },
+    {
+        "id": "11",
+        "texto": "um penteado",
+        "equivalente": "penteado"
+    },
+    {
+        "id": "12",
+        "texto": "um alisamento",
+        "equivalente": "alisamento"
+    },
+    {
+        "id": "13",
+        "texto": "um permanente",
+        "equivalente": "permanente"
+    },
+    {
+        "id": "14",
+        "texto": "uma depilacao",
+        "equivalente": "depilacao"
+    },
+    {
+        "id": "15",
+        "texto": "uma maquiagem",
+        "equivalente": "maquiagem"
+    },
+    {
+        "id": "16",
+        "texto": "uma massagem",
+        "equivalente": "massagem "
+    },
+    {
+        "id": "17",
+        "texto": "um extensao",
+        "equivalente": "extensao"
+    },
+    {
+        "id": "18",
+        "texto": "uma progressiva",
+        "equivalente": "progressiva"
+    },
+    {
+        "id": "19",
+        "texto": "uma escova",
+        "equivalente": "escova"
+    },
+    {
+        "id": "20",
+        "texto": "um tratamento",
+        "equivalente": "tratamento"
+    },
+    {
+        "id": "21",
+        "texto": "uma esfoliacao",
+        "equivalente": "esfoliacao"
+    },
+    {
+        "id": "22",
+        "texto": "uma limpeza",
+        "equivalente": "limpeza"
+    },
+    {
+        "id": "23",
+        "texto": "um banho",
+        "equivalente": "banho"
+    },
+    {
+        "id": "24",
+        "texto": "uma franja",
+        "equivalente": "franja"
+    },
+    {
+        "id": "25",
+        "texto": "um bronzeamento",
+        "equivalente": "bronzeamento"
+    },
+    {
+        "id": "26",
+        "texto": "um servico",
+        "equivalente": "servico"
+    },
+    {
+        "id": "27",
+        "texto": "uma aplicacao",
+        "equivalente": "aplicacao"
+    },
+    {
+        "id": "28",
+        "texto": "isto",
+        "equivalente": "isso"
+    },
+    {
+        "id": "29",
+        "texto": "horarios",
+        "equivalente": "horario"
+    },
+    {
+        "id": "30",
+        "texto": "bom dia",
+        "equivalente": "saudacao"
+    },
+    {
+        "id": "31",
+        "texto": "boa tarde",
+        "equivalente": "saudacao"
+    },
+    {
+        "id": "32",
+        "texto": "boa noite",
+        "equivalente": "saudacao"
+    },
+    {
+        "id": "33",
+        "texto": "estou bem",
+        "equivalente": "saudacao"
+    },
+    {
+        "id": "34",
+        "texto": "servicos",
+        "equivalente": "servico"
+    },
+    {
+        "id": "35",
+        "texto": "repita",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "36",
+        "texto": "pode repetir",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "37",
+        "texto": "entendeu errado",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "38",
+        "texto": "esclarecer isso",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "39",
+        "texto": "explicar melhor",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "40",
+        "texto": "explicando melhor",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "41",
+        "texto": "n\u00e3o me expressei",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "42",
+        "texto": "reformular",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "43",
+        "texto": "endenda mal",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "44",
+        "texto": "explicar de outra forma",
+        "equivalente": "incompreendido"
+    },
+    {
+        "id": "45",
+        "texto": "pode informar",
+        "equivalente": "dizer"
+    },
+    {
+        "id": "46",
+        "texto": "pode dizer",
+        "equivalente": "dizer"
+    },
+    {
+        "id": "47",
+        "texto": "pode contar",
+        "equivalente": "dizer"
+    },
+    {
+        "id": "48",
+        "texto": "pode esclarecer",
+        "equivalente": "dizer"
+    },
+    {
+        "id": "49",
+        "texto": "pode me",
+        "equivalente": "ajudar"
+    },
+    {
+        "id": "50",
+        "texto": "fica",
+        "equivalente": "ficar"
+    },
+    {
+        "id": "51",
+        "texto": "oferecido",
+        "equivalente": "prestado"
+    },
+    {
+        "id": "52",
+        "texto": "so",
+        "equivalente": "apenas"
+    },
+    {
+        "id": "53",
+        "texto": "somente",
+        "equivalente": "apenas"
+    },
+    {
+        "id": "54",
+        "texto": "meramente",
+        "equivalente": "apenas"
+    },
+    {
+        "id": "55",
+        "texto": "unico",
+        "equivalente": "apenas"
+    },
+    {
+        "id": "56",
+        "texto": "unica",
+        "equivalente": "apenas"
+    },
+    {
+        "id": "57",
+        "texto": "suficiente",
+        "equivalente": "apenas"
+    },
+    {
+        "id": "58",
+        "texto": "gostaria",
+        "equivalente": "querer"
+    },
+    {
+        "id": "59",
+        "texto": "desejo",
+        "equivalente": "querer"
+    },
+    {
+        "id": "60",
+        "texto": "queria",
+        "equivalente": "querer"
+    },
+    {
+        "id": "61",
+        "texto": "estou fim",
+        "equivalente": "querer"
+    },
+    {
+        "id": "62",
+        "texto": "posso",
+        "equivalente": "quero"
+    },
+    {
+        "id": "63",
+        "texto": "algo",
+        "equivalente": "coisa"
+    },
+    {
+        "id": "64",
+        "texto": "chega",
+        "equivalente": "nao"
+    },
+    {
+        "id": "65",
+        "texto": "n\u00e3o",
+        "equivalente": "nao"
+    },
+    {
+        "id": "66",
+        "texto": "basta",
+        "equivalente": "nao"
+    },
+    {
+        "id": "67",
+        "texto": "meia",
+        "equivalente": "30"
+    },
+    {
+        "id": "68",
+        "texto": "meio",
+        "equivalente": "30"
+    },
+    {
+        "id": "69",
+        "texto": "dez",
+        "equivalente": "10"
+    },
+    {
+        "id": "70",
+        "texto": "trinta",
+        "equivalente": "30"
+    },
+    {
+        "id": "71",
+        "texto": "quatorze",
+        "equivalente": "14"
+    },
+    {
+        "id": "72",
+        "texto": "catorze",
+        "equivalente": "14"
+    },
+    {
+        "id": "73",
+        "texto": "quinze",
+        "equivalente": "15"
+    },
+    {
+        "id": "74",
+        "texto": "dezesseis",
+        "equivalente": "16"
+    },
+    {
+        "id": "75",
+        "texto": "dezessete",
+        "equivalente": "17"
+    },
+    {
+        "id": "76",
+        "texto": "dezoito",
+        "equivalente": "18"
+    },
+    {
+        "id": "77",
+        "texto": "dezenove",
+        "equivalente": "19"
+    },
+    {
+        "id": "78",
+        "texto": "onze",
+        "equivalente": "11"
+    },
+    {
+        "id": "79",
+        "texto": "doze",
+        "equivalente": "12"
+    },
+    {
+        "id": "80",
+        "texto": "treze",
+        "equivalente": "13"
+    },
+    {
+        "id": "81",
+        "texto": "vinte",
+        "equivalente": "20"
+    },
+    {
+        "id": "82",
+        "texto": "sessenta",
+        "equivalente": "60"
+    },
+    {
+        "id": "83",
+        "texto": "dois",
+        "equivalente": "2"
+    },
+    {
+        "id": "84",
+        "texto": "uma",
+        "equivalente": "1"
+    },
+    {
+        "id": "85",
+        "texto": "duas",
+        "equivalente": "2"
+    },
+    {
+        "id": "86",
+        "texto": "tres",
+        "equivalente": "3"
+    },
+    {
+        "id": "87",
+        "texto": "quatro",
+        "equivalente": "4"
+    },
+    {
+        "id": "88",
+        "texto": "cinco",
+        "equivalente": "5"
+    },
+    {
+        "id": "89",
+        "texto": "seis",
+        "equivalente": "6"
+    },
+    {
+        "id": "90",
+        "texto": "sete",
+        "equivalente": "7"
+    },
+    {
+        "id": "91",
+        "texto": "oito",
+        "equivalente": "8"
+    },
+    {
+        "id": "92",
+        "texto": "nove",
+        "equivalente": "9"
+    },
+    {
+        "id": "93",
+        "texto": "estarei la",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "94",
+        "texto": "muito obrigado",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "95",
+        "texto": "muito obrigada",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "96",
+        "texto": "tanto faz",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "97",
+        "texto": "qualquer um",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "98",
+        "texto": "pode ser qualquer",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "99",
+        "texto": "qualquer um",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "100",
+        "texto": "nao me importo",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "101",
+        "texto": "nao tenho preferencia",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "102",
+        "texto": "nao tenho uma preferencia",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "103",
+        "texto": "nao tenho opcao",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "104",
+        "texto": "nenhuma preferencia",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "105",
+        "texto": "o que achar melhor",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "106",
+        "texto": "pode decidir",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "107",
+        "texto": "indiferente",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "108",
+        "texto": "seja como for",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "109",
+        "texto": "aberto a sugestoes",
+        "equivalente": "indiferente"
+    },
+    {
+        "id": "110",
+        "texto": "tratamento",
+        "equivalente": "interessado"
+    },
+    {
+        "id": "111",
+        "texto": "especifico",
+        "equivalente": "interessado"
+    },
+    {
+        "id": "112",
+        "texto": "voces tem",
+        "equivalente": "interessado"
+    },
+    {
+        "id": "113",
+        "texto": "voces trabalham com",
+        "equivalente": "interessado"
+    },
+    {
+        "id": "114",
+        "texto": "existe",
+        "equivalente": "interessado"
+    },
+    {
+        "id": "115",
+        "texto": "nao obrigado",
+        "equivalente": "nao"
+    },
+    {
+        "id": "116",
+        "texto": "nao obrigada",
+        "equivalente": "nao"
+    },
+    {
+        "id": "117",
+        "texto": "eu que agradeco",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "118",
+        "texto": "obrigado pela confirmacao",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "119",
+        "texto": "obrigadecido",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "120",
+        "texto": "obrigadecida",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "121",
+        "texto": "grato",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "122",
+        "texto": "grata",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "123",
+        "texto": "valeu",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "124",
+        "texto": "obrigada",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "125",
+        "texto": "obrigado",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "126",
+        "texto": "obrigadinha",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "127",
+        "texto": "obrigadinho",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "128",
+        "texto": "agradeco",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "129",
+        "texto": "tks",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "130",
+        "texto": "bye",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "131",
+        "texto": "Au revoir",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "132",
+        "texto": "goodbye",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "133",
+        "texto": "see you",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "134",
+        "texto": "sayonara",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "135",
+        "texto": "ate logo",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "136",
+        "texto": "ate ja",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "137",
+        "texto": "ate a proxima",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "138",
+        "texto": "adeus",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "139",
+        "texto": "ate logo",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "140",
+        "texto": "ate la",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "141",
+        "texto": "ate breve",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "142",
+        "texto": "tchau",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "143",
+        "texto": "ate mais tarde",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "144",
+        "texto": "fique bem",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "145",
+        "texto": "ate amanha",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "146",
+        "texto": "tenha um bom dia/noite",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "147",
+        "texto": "nos vemos depois",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "148",
+        "texto": "cuide-se",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "149",
+        "texto": "ate ja",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "150",
+        "texto": "adeusinho",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "151",
+        "texto": "ate a proxima",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "152",
+        "texto": "despeco-me",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "153",
+        "texto": "vou embora",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "154",
+        "texto": "passar bem",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "155",
+        "texto": "ate mais",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "156",
+        "texto": "ate logo",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "157",
+        "texto": "ate breve",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "158",
+        "texto": "ate ja",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "159",
+        "texto": "ate mais ver",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "160",
+        "texto": "ate mais tarde",
+        "equivalente": "adeus"
+    },
+    {
+        "id": "161",
+        "texto": "corrigir",
+        "equivalente": "engano"
+    },
+    {
+        "id": "162",
+        "texto": "confusao",
+        "equivalente": "engano"
+    },
+    {
+        "id": "163",
+        "texto": "mal entendido",
+        "equivalente": "engano"
+    },
+    {
+        "id": "164",
+        "texto": "incompreendido",
+        "equivalente": "engano"
+    },
+    {
+        "id": "165",
+        "texto": "lapso",
+        "equivalente": "engano"
+    },
+    {
+        "id": "166",
+        "texto": "equivoco",
+        "equivalente": "engano"
+    },
+    {
+        "id": "167",
+        "texto": "foi mal",
+        "equivalente": "engano"
+    },
+    {
+        "id": "168",
+        "texto": "nao e isso",
+        "equivalente": "engano"
+    },
+    {
+        "id": "169",
+        "texto": "entendeu mal",
+        "equivalente": "engano"
+    },
+    {
+        "id": "170",
+        "texto": "deslize",
+        "equivalente": "engano"
+    },
+    {
+        "id": "171",
+        "texto": "quis dizer",
+        "equivalente": "engano"
+    },
+    {
+        "id": "172",
+        "texto": "erro",
+        "equivalente": "engano"
+    },
+    {
+        "id": "173",
+        "texto": "errado",
+        "equivalente": "engano"
+    },
+    {
+        "id": "174",
+        "texto": "na verdade",
+        "equivalente": "engano"
+    },
+    {
+        "id": "175",
+        "texto": "mal interpretacao",
+        "equivalente": "engano"
+    },
+    {
+        "id": "176",
+        "texto": "fone",
+        "equivalente": "telefone"
+    },
+    {
+        "id": "177",
+        "texto": "celular",
+        "equivalente": "telefone"
+    },
+    {
+        "id": "178",
+        "texto": "agendar",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "179",
+        "texto": "agendamentos",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "180",
+        "texto": "agendamento",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "181",
+        "texto": "compromisso",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "182",
+        "texto": "reserva",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "183",
+        "texto": "marcar",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "184",
+        "texto": "empresa",
+        "equivalente": "estabelecimento"
+    },
+    {
+        "id": "185",
+        "texto": "consultorio",
+        "equivalente": "estabelecimento"
+    },
+    {
+        "id": "186",
+        "texto": "salao",
+        "equivalente": "estabelecimento"
+    },
+    {
+        "id": "187",
+        "texto": "escritorio",
+        "equivalente": "estabelecimento"
+    },
+    {
+        "id": "188",
+        "texto": "loja",
+        "equivalente": "estabelecimento"
+    },
+    {
+        "id": "189",
+        "texto": "gerente",
+        "equivalente": "responsavel"
+    },
+    {
+        "id": "190",
+        "texto": "chefe",
+        "equivalente": "responsavel"
+    },
+    {
+        "id": "191",
+        "texto": "gestor",
+        "equivalente": "responsavel"
+    },
+    {
+        "id": "192",
+        "texto": "bairro",
+        "equivalente": "endereco"
+    },
+    {
+        "id": "193",
+        "texto": "regiao",
+        "equivalente": "endereco"
+    },
+    {
+        "id": "194",
+        "texto": "cidade",
+        "equivalente": "endereco"
+    },
+    {
+        "id": "195",
+        "texto": "local",
+        "equivalente": "endereco"
+    },
+    {
+        "id": "196",
+        "texto": "onde",
+        "equivalente": "endereco"
+    },
+    {
+        "id": "197",
+        "texto": "uma reserva",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "198",
+        "texto": "reservas",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "199",
+        "texto": "agendamento",
+        "equivalente": "reservar"
+    },
+    {
+        "id": "200",
+        "texto": "responda",
+        "equivalente": "falar"
+    },
+    {
+        "id": "201",
+        "texto": "digue",
+        "equivalente": "falar"
+    },
+    {
+        "id": "202",
+        "texto": "diga",
+        "equivalente": "falar"
+    },
+    {
+        "id": "203",
+        "texto": "fale",
+        "equivalente": "falar"
+    },
+    {
+        "id": "204",
+        "texto": "ver",
+        "equivalente": "listar"
+    },
+    {
+        "id": "205",
+        "texto": "lista",
+        "equivalente": "listar"
+    },
+    {
+        "id": "206",
+        "texto": "liste",
+        "equivalente": "listar"
+    },
+    {
+        "id": "207",
+        "texto": "mostre",
+        "equivalente": "listar"
+    },
+    {
+        "id": "208",
+        "texto": "exibir",
+        "equivalente": "listar"
+    },
+    {
+        "id": "209",
+        "texto": "exiba",
+        "equivalente": "listar"
+    },
+    {
+        "id": "210",
+        "texto": "livres",
+        "equivalente": "livre"
+    },
+    {
+        "id": "211",
+        "texto": "diga",
+        "equivalente": "listar"
+    },
+    {
+        "id": "212",
+        "texto": "digue",
+        "equivalente": "listar"
+    },
+    {
+        "id": "213",
+        "texto": "consultar",
+        "equivalente": "listar"
+    },
+    {
+        "id": "214",
+        "texto": "disponibilidade",
+        "equivalente": "livre"
+    },
+    {
+        "id": "215",
+        "texto": "disponivel",
+        "equivalente": "livre"
+    },
+    {
+        "id": "216",
+        "texto": "disponiveis",
+        "equivalente": "livre"
+    },
+    {
+        "id": "217",
+        "texto": "achando",
+        "equivalente": "pensar"
+    },
+    {
+        "id": "218",
+        "texto": "achar",
+        "equivalente": "pensar"
+    },
+    {
+        "id": "219",
+        "texto": "pensando",
+        "equivalente": "pensar"
+    },
+    {
+        "id": "220",
+        "texto": "acreditar",
+        "equivalente": "pensar"
+    },
+    {
+        "id": "221",
+        "texto": "estava",
+        "equivalente": "estar"
+    },
+    {
+        "id": "222",
+        "texto": "estarei",
+        "equivalente": "estar"
+    },
+    {
+        "id": "223",
+        "texto": "sinto",
+        "equivalente": "estar"
+    },
+    {
+        "id": "224",
+        "texto": "vontade",
+        "equivalente": "sim"
+    },
+    {
+        "id": "225",
+        "texto": "exatamente",
+        "equivalente": "sim"
+    },
+    {
+        "id": "226",
+        "texto": "gostaria de",
+        "equivalente": "querer"
+    },
+    {
+        "id": "227",
+        "texto": "desejo",
+        "equivalente": "sim"
+    },
+    {
+        "id": "228",
+        "texto": "queria",
+        "equivalente": "sim"
+    },
+    {
+        "id": "229",
+        "texto": "queria",
+        "equivalente": "sim"
+    },
+    {
+        "id": "230",
+        "texto": "quero",
+        "equivalente": "sim"
+    },
+    {
+        "id": "231",
+        "texto": "fechou",
+        "equivalente": "sim"
+    },
+    {
+        "id": "232",
+        "texto": "fecho",
+        "equivalente": "sim"
+    },
+    {
+        "id": "233",
+        "texto": "hj",
+        "equivalente": "hoje"
+    },
+    {
+        "id": "234",
+        "texto": "vc",
+        "equivalente": "voce"
+    },
+    {
+        "id": "235",
+        "texto": "de jeito nenhum",
+        "equivalente": "nao"
+    },
+    {
+        "id": "236",
+        "texto": "de maneira nenhuma",
+        "equivalente": "nao"
+    },
+    {
+        "id": "237",
+        "texto": "nao tenho",
+        "equivalente": "nao"
+    },
+    {
+        "id": "238",
+        "texto": "discordo",
+        "equivalente": "nao"
+    },
+    {
+        "id": "239",
+        "texto": "dia primeiro",
+        "equivalente": "dia 1"
+    },
+    {
+        "id": "240",
+        "texto": "custa",
+        "equivalente": "preco"
+    },
+    {
+        "id": "241",
+        "texto": "valor",
+        "equivalente": "preco"
+    },
+    {
+        "id": "242",
+        "texto": "oi",
+        "equivalente": "ola"
+    },
+    {
+        "id": "243",
+        "texto": "oie",
+        "equivalente": "ola"
+    },
+    {
+        "id": "244",
+        "texto": "e ai ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "245",
+        "texto": "como voce vai ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "246",
+        "texto": "como vai voce ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "247",
+        "texto": "tudo bem com voce ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "248",
+        "texto": "tudo certo ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "249",
+        "texto": "tem alguem ai ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "250",
+        "texto": "tem passado ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "251",
+        "texto": "tem estado ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "252",
+        "texto": "as coisas ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "253",
+        "texto": "novidade ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "254",
+        "texto": "contigo ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "255",
+        "texto": "beleza ?",
+        "equivalente": "ola"
+    },
+    {
+        "id": "256",
+        "texto": "isso",
+        "equivalente": "sim"
+    },
+    {
+        "id": "257",
+        "texto": "seria bom",
+        "equivalente": "sim"
+    },
+    {
+        "id": "258",
+        "texto": "seria otimo",
+        "equivalente": "sim"
+    },
+    {
+        "id": "259",
+        "texto": "seria perfeito",
+        "equivalente": "sim"
+    },
+    {
+        "id": "260",
+        "texto": "agendar para esse",
+        "equivalente": "sim"
+    },
+    {
+        "id": "261",
+        "texto": "combinado",
+        "equivalente": "sim"
+    },
+    {
+        "id": "262",
+        "texto": "sem problemas",
+        "equivalente": "sim"
+    },
+    {
+        "id": "263",
+        "texto": "certo",
+        "equivalente": "sim"
+    },
+    {
+        "id": "264",
+        "texto": "blz",
+        "equivalente": "sim"
+    },
+    {
+        "id": "265",
+        "texto": "claro",
+        "equivalente": "sim"
+    },
+    {
+        "id": "266",
+        "texto": "ok",
+        "equivalente": "sim"
+    },
+    {
+        "id": "267",
+        "texto": "okay",
+        "equivalente": "sim"
+    },
+    {
+        "id": "268",
+        "texto": "pode",
+        "equivalente": "sim"
+    },
+    {
+        "id": "269",
+        "texto": "confirmo",
+        "equivalente": "sim"
+    },
+    {
+        "id": "270",
+        "texto": "confirmar",
+        "equivalente": "sim"
+    },
+    {
+        "id": "271",
+        "texto": "perfeito",
+        "equivalente": "sim"
+    },
+    {
+        "id": "272",
+        "texto": "flw",
+        "equivalente": "sim"
+    },
+    {
+        "id": "273",
+        "texto": "falou",
+        "equivalente": "sim"
+    },
+    {
+        "id": "274",
+        "texto": "esta bom",
+        "equivalente": "sim"
+    },
+    {
+        "id": "275",
+        "texto": "tudo bem",
+        "equivalente": "sim"
+    },
+    {
+        "id": "276",
+        "texto": "aceito",
+        "equivalente": "sim"
+    },
+    {
+        "id": "277",
+        "texto": "podemos",
+        "equivalente": "sim"
+    },
+    {
+        "id": "278",
+        "texto": "com certeza",
+        "equivalente": "sim"
+    },
+    {
+        "id": "279",
+        "texto": "sem duvidas",
+        "equivalente": "sim"
+    },
+    {
+        "id": "280",
+        "texto": "demoro",
+        "equivalente": "sim"
+    },
+    {
+        "id": "281",
+        "texto": "acrecentar",
+        "equivalente": "tambem"
+    },
+    {
+        "id": "282",
+        "texto": "incluir",
+        "equivalente": "tambem"
+    },
+    {
+        "id": "283",
+        "texto": "adicionar",
+        "equivalente": "tambem"
+    },
+    {
+        "id": "284",
+        "texto": "e fazer",
+        "equivalente": "tambem"
+    },
+    {
+        "id": "285",
+        "texto": "alem disso",
+        "equivalente": "tambem"
+    },
+    {
+        "id": "286",
+        "texto": "mostrar",
+        "equivalente": "listar"
+    },
+    {
+        "id": "287",
+        "texto": "mudanca",
+        "equivalente": "alterar"
+    },
+    {
+        "id": "288",
+        "texto": "trocar",
+        "equivalente": "alterar"
+    },
+    {
+        "id": "289",
+        "texto": "mudar",
+        "equivalente": "alterar"
+    },
+    {
+        "id": "290",
+        "texto": "gosta",
+        "equivalente": "opiniao"
+    },
+    {
+        "id": "291",
+        "texto": "pensa",
+        "equivalente": "opiniao"
+    },
+    {
+        "id": "292",
+        "texto": "colaborador",
+        "equivalente": "profissional"
+    },
+    {
+        "id": "293",
+        "texto": "especialista",
+        "equivalente": "profissional"
+    },
+    {
+        "id": "294",
+        "texto": "especialistas",
+        "equivalente": "profissional"
+    },
+    {
+        "id": "295",
+        "texto": "funcionarias",
+        "equivalente": "profissional"
+    },
+    {
+        "id": "296",
+        "texto": "profissionais",
+        "equivalente": "profissional"
+    },
+    {
+        "id": "297",
+        "texto": "limpe",
+        "equivalente": "limpar"
+    },
+    {
+        "id": "298",
+        "texto": "nenhum",
+        "equivalente": "obrigado"
+    },
+    {
+        "id": "299",
+        "texto": "cancela",
+        "equivalente": "cancelar"
+    },
+    {
+        "id": "300",
+        "texto": "cancele",
+        "equivalente": "cancelar"
+    },
+    {
+        "id": "301",
+        "texto": "n\u00e3o poderei comparecer ",
+        "equivalente": "cancelar"
+    },
+    {
+        "id": "302",
+        "texto": "N\u00e3o consigo mais comparecer",
+        "equivalente": "cancelar"
+    },
+    {
+        "id": "303",
+        "texto": "N\u00e3o consigo comparecer",
+        "equivalente": "cancelar"
+    },
+    {
+        "id": "304",
+        "texto": "desistir",
+        "equivalente": "cancelar"
+    },
+    {
+        "id": "305",
+        "texto": "pra",
+        "equivalente": "para"
+    },
+    {
+        "id": "306",
+        "texto": "pras",
+        "equivalente": "para as"
+    },
+    {
+        "id": "307",
+        "texto": "p/",
+        "equivalente": "para"
+    },
+    {
+        "id": "308",
+        "texto": "hr",
+        "equivalente": "hora"
+    },
+    {
+        "id": "309",
+        "texto": "hora",
+        "equivalente": "horas"
+    },
+    {
+        "id": "310",
+        "texto": "horas da manha",
+        "equivalente": "da manha"
+    },
+    {
+        "id": "311",
+        "texto": "horas da noite",
+        "equivalente": "da noite"
+    },
+    {
+        "id": "312",
+        "texto": "fazer",
+        "equivalente": ""
+    },
+    {
+        "id": "313",
+        "texto": "Deixe-me verificar",
+        "equivalente": ""
+    },
+    {
+        "id": "314",
+        "texto": "informacoes",
+        "equivalente": "informar"
+    },
+    {
+        "id": "315",
+        "texto": "informacao",
+        "equivalente": "informar"
+    },
+    {
+        "id": "316",
+        "texto": "meio dia meio",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "317",
+        "texto": "meio dia meia",
+        "equivalente": "12:00"
+    },
+    {
+        "id": "318",
+        "texto": "zero horas",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "319",
+        "texto": "zero hora",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "320",
+        "texto": "meia noite",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "321",
+        "texto": "30 noite",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "322",
+        "texto": "uma meia",
+        "equivalente": "01:30"
+    },
+    {
+        "id": "323",
+        "texto": "duas meia",
+        "equivalente": "02:30"
+    },
+    {
+        "id": "324",
+        "texto": "tres meia",
+        "equivalente": "03:30"
+    },
+    {
+        "id": "325",
+        "texto": "quatro meia",
+        "equivalente": "04:30"
+    },
+    {
+        "id": "326",
+        "texto": "cinco meia",
+        "equivalente": "05:30"
+    },
+    {
+        "id": "327",
+        "texto": "seis meia",
+        "equivalente": "06:30"
+    },
+    {
+        "id": "328",
+        "texto": "sete meia",
+        "equivalente": "07:30"
+    },
+    {
+        "id": "329",
+        "texto": "oito meia",
+        "equivalente": "08:30"
+    },
+    {
+        "id": "330",
+        "texto": "nove meia",
+        "equivalente": "09:30"
+    },
+    {
+        "id": "331",
+        "texto": "dez meia",
+        "equivalente": "10:30"
+    },
+    {
+        "id": "332",
+        "texto": "onze meia",
+        "equivalente": "11:30"
+    },
+    {
+        "id": "333",
+        "texto": "doze meia",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "334",
+        "texto": "30 dia trinta",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "335",
+        "texto": "meio dia trinta",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "336",
+        "texto": "treze trinta",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "337",
+        "texto": "treze 30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "338",
+        "texto": "catorze trinta",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "339",
+        "texto": "quatorze trinta",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "340",
+        "texto": "quinze trinta",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "341",
+        "texto": "dezesseis trinta",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "342",
+        "texto": "dezessete trinta",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "343",
+        "texto": "dezoito  trinta",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "344",
+        "texto": "dezenove trinta",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "345",
+        "texto": "vinte trinta",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "346",
+        "texto": "vinte um trinta",
+        "equivalente": "21:30"
+    },
+    {
+        "id": "347",
+        "texto": "vinte dois trinta",
+        "equivalente": "22:30"
+    },
+    {
+        "id": "348",
+        "texto": "vinte duas trinta",
+        "equivalente": "22:30"
+    },
+    {
+        "id": "349",
+        "texto": "vinte tres trinta",
+        "equivalente": "23:30"
+    },
+    {
+        "id": "350",
+        "texto": "zero horas trinta",
+        "equivalente": "00:30"
+    },
+    {
+        "id": "351",
+        "texto": "quatorze trinta",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "352",
+        "texto": "10 hrs",
+        "equivalente": "10:00"
+    },
+    {
+        "id": "353",
+        "texto": "11 hrs",
+        "equivalente": "11:00"
+    },
+    {
+        "id": "354",
+        "texto": "12 hrs",
+        "equivalente": "12:00"
+    },
+    {
+        "id": "355",
+        "texto": "13 hrs",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "356",
+        "texto": "14 hrs",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "357",
+        "texto": "15 hrs",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "358",
+        "texto": "16 hrs",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "359",
+        "texto": "17 hrs",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "360",
+        "texto": "18 hrs",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "361",
+        "texto": "19 hrs",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "362",
+        "texto": "20 hrs",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "363",
+        "texto": "21 hrs",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "364",
+        "texto": "22 hrs",
+        "equivalente": "22:00"
+    },
+    {
+        "id": "365",
+        "texto": "23 hrs",
+        "equivalente": "23:00"
+    },
+    {
+        "id": "366",
+        "texto": "24 hrs",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "367",
+        "texto": "2 hrs",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "368",
+        "texto": "3 hrs",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "369",
+        "texto": "4 hrs",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "370",
+        "texto": "5 hrs",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "371",
+        "texto": "6 hrs",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "372",
+        "texto": "7 hrs",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "373",
+        "texto": "7 hrs30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "374",
+        "texto": "8 hrs",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "375",
+        "texto": "9 hrs",
+        "equivalente": "09:00"
+    },
+    {
+        "id": "376",
+        "texto": "1hr30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "377",
+        "texto": "10hrs",
+        "equivalente": "10:00"
+    },
+    {
+        "id": "378",
+        "texto": "11hrs",
+        "equivalente": "11:00"
+    },
+    {
+        "id": "379",
+        "texto": "12hrs",
+        "equivalente": "12:00"
+    },
+    {
+        "id": "380",
+        "texto": "13hrs",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "381",
+        "texto": "14hrs",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "382",
+        "texto": "15hrs",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "383",
+        "texto": "16hrs",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "384",
+        "texto": "17hrs",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "385",
+        "texto": "18hrs",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "386",
+        "texto": "19hrs",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "387",
+        "texto": "20hrs",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "388",
+        "texto": "21hrs",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "389",
+        "texto": "22hrs",
+        "equivalente": "22:00"
+    },
+    {
+        "id": "390",
+        "texto": "23hrs",
+        "equivalente": "23:00"
+    },
+    {
+        "id": "391",
+        "texto": "24hrs",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "392",
+        "texto": "1hr",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "393",
+        "texto": "1hr30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "394",
+        "texto": "2hrs",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "395",
+        "texto": "3hrs",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "396",
+        "texto": "4hrs",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "397",
+        "texto": "5hrs",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "398",
+        "texto": "6hrs",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "399",
+        "texto": "7hrs",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "400",
+        "texto": "7hrs30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "401",
+        "texto": "8hrs",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "402",
+        "texto": "9hrs",
+        "equivalente": "09:00"
+    },
+    {
+        "id": "403",
+        "texto": "10h",
+        "equivalente": "10:00"
+    },
+    {
+        "id": "404",
+        "texto": "10h30",
+        "equivalente": "10:30"
+    },
+    {
+        "id": "405",
+        "texto": "11h",
+        "equivalente": "11:00"
+    },
+    {
+        "id": "406",
+        "texto": "11h30",
+        "equivalente": "11:30"
+    },
+    {
+        "id": "407",
+        "texto": "12h",
+        "equivalente": "12:00"
+    },
+    {
+        "id": "408",
+        "texto": "12h30",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "409",
+        "texto": "13h",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "410",
+        "texto": "13h30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "411",
+        "texto": "14h",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "412",
+        "texto": "14h30",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "413",
+        "texto": "15h",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "414",
+        "texto": "15h30",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "415",
+        "texto": "16h",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "416",
+        "texto": "16h30",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "417",
+        "texto": "17h",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "418",
+        "texto": "17h30",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "419",
+        "texto": "18h",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "420",
+        "texto": "18h30",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "421",
+        "texto": "19h",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "422",
+        "texto": "19h30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "423",
+        "texto": "20h",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "424",
+        "texto": "20h30",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "425",
+        "texto": "21h",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "426",
+        "texto": "21h30",
+        "equivalente": "21:30"
+    },
+    {
+        "id": "427",
+        "texto": "22h",
+        "equivalente": "22:00"
+    },
+    {
+        "id": "428",
+        "texto": "22h30",
+        "equivalente": "22:30"
+    },
+    {
+        "id": "429",
+        "texto": "23h",
+        "equivalente": "23:00"
+    },
+    {
+        "id": "430",
+        "texto": "23h30",
+        "equivalente": "23:30"
+    },
+    {
+        "id": "431",
+        "texto": "24h",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "432",
+        "texto": "24h30",
+        "equivalente": "00:30"
+    },
+    {
+        "id": "433",
+        "texto": "1h",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "434",
+        "texto": "1h30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "435",
+        "texto": "2h",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "436",
+        "texto": "2h30",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "437",
+        "texto": "3h",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "438",
+        "texto": "3h30",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "439",
+        "texto": "4h",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "440",
+        "texto": "4h30",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "441",
+        "texto": "5h",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "442",
+        "texto": "5h30",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "443",
+        "texto": "6h",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "444",
+        "texto": "6h30",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "445",
+        "texto": "7h",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "446",
+        "texto": "7h30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "447",
+        "texto": "8h",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "448",
+        "texto": "8h30",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "449",
+        "texto": "9h",
+        "equivalente": "09:00"
+    },
+    {
+        "id": "450",
+        "texto": "9h30",
+        "equivalente": "09:30"
+    },
+    {
+        "id": "451",
+        "texto": "10 horas",
+        "equivalente": "10:00"
+    },
+    {
+        "id": "452",
+        "texto": "11 horas",
+        "equivalente": "11:00"
+    },
+    {
+        "id": "453",
+        "texto": "12 horas",
+        "equivalente": "12:00"
+    },
+    {
+        "id": "454",
+        "texto": "13 horas",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "455",
+        "texto": "14 horas",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "456",
+        "texto": "15 horas",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "457",
+        "texto": "16 horas",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "458",
+        "texto": "17 horas",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "459",
+        "texto": "18 horas",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "460",
+        "texto": "19 horas",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "461",
+        "texto": "20 horas",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "462",
+        "texto": "21 horas",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "463",
+        "texto": "22 horas",
+        "equivalente": "22:00"
+    },
+    {
+        "id": "464",
+        "texto": "23 horas",
+        "equivalente": "23:00"
+    },
+    {
+        "id": "465",
+        "texto": "24 horas",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "466",
+        "texto": "24 horas",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "467",
+        "texto": "10 30",
+        "equivalente": "10:30"
+    },
+    {
+        "id": "468",
+        "texto": "11 30",
+        "equivalente": "11:30"
+    },
+    {
+        "id": "469",
+        "texto": "12 30",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "470",
+        "texto": "13 30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "471",
+        "texto": "14 30",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "472",
+        "texto": "15 30",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "473",
+        "texto": "16 30",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "474",
+        "texto": "17 30",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "475",
+        "texto": "18 30",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "476",
+        "texto": "19 30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "477",
+        "texto": "20 30",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "478",
+        "texto": "21 30",
+        "equivalente": "21:30"
+    },
+    {
+        "id": "479",
+        "texto": "22 30",
+        "equivalente": "22:30"
+    },
+    {
+        "id": "480",
+        "texto": "23 30",
+        "equivalente": "23:30"
+    },
+    {
+        "id": "481",
+        "texto": "24 30",
+        "equivalente": "00:30"
+    },
+    {
+        "id": "482",
+        "texto": "1 30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "483",
+        "texto": "2 30",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "484",
+        "texto": "3 30",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "485",
+        "texto": "4 30",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "486",
+        "texto": "5 30",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "487",
+        "texto": "6 30",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "488",
+        "texto": "7 30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "489",
+        "texto": "8 30",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "490",
+        "texto": "9 30",
+        "equivalente": "09:30"
+    },
+    {
+        "id": "491",
+        "texto": "0 30",
+        "equivalente": "00:30"
+    },
+    {
+        "id": "492",
+        "texto": "10 manha",
+        "equivalente": "10:00"
+    },
+    {
+        "id": "493",
+        "texto": "11 manha",
+        "equivalente": "11:00"
+    },
+    {
+        "id": "494",
+        "texto": "1 manha",
+        "equivalente": "01:00"
+    },
+    {
+        "id": "495",
+        "texto": "2 manha",
+        "equivalente": "02:00"
+    },
+    {
+        "id": "496",
+        "texto": "3 manha",
+        "equivalente": "03:00"
+    },
+    {
+        "id": "497",
+        "texto": "4 manha",
+        "equivalente": "04:00"
+    },
+    {
+        "id": "498",
+        "texto": "5 manha",
+        "equivalente": "05:00"
+    },
+    {
+        "id": "499",
+        "texto": "6 manha",
+        "equivalente": "06:00"
+    },
+    {
+        "id": "500",
+        "texto": "7 manha",
+        "equivalente": "07:00"
+    },
+    {
+        "id": "501",
+        "texto": "8 manha",
+        "equivalente": "08:00"
+    },
+    {
+        "id": "502",
+        "texto": "9 manha",
+        "equivalente": "09:00"
+    },
+    {
+        "id": "503",
+        "texto": "1 tarde",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "504",
+        "texto": "2 tarde",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "505",
+        "texto": "3 tarde",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "506",
+        "texto": "4 tarde",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "507",
+        "texto": "5 tarde",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "508",
+        "texto": "6 tarde",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "509",
+        "texto": "10 noite",
+        "equivalente": "22:00"
+    },
+    {
+        "id": "510",
+        "texto": "11 noite",
+        "equivalente": "23:00"
+    },
+    {
+        "id": "511",
+        "texto": "6 noite",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "512",
+        "texto": "7 noite",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "513",
+        "texto": "8 noite",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "514",
+        "texto": "9 noite",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "515",
+        "texto": "1 tarde",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "516",
+        "texto": "2 tarde",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "517",
+        "texto": "3 tarde",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "518",
+        "texto": "4 tarde",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "519",
+        "texto": "5 tarde",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "520",
+        "texto": "6 noite",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "521",
+        "texto": "7 noite",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "522",
+        "texto": "8 noite",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "523",
+        "texto": "9 noite",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "524",
+        "texto": "1 horas manha",
+        "equivalente": "01:00"
+    },
+    {
+        "id": "525",
+        "texto": "1 hora manha",
+        "equivalente": "01:00"
+    },
+    {
+        "id": "526",
+        "texto": "1 horas",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "527",
+        "texto": "1 hora",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "528",
+        "texto": "2 horas manha",
+        "equivalente": "02:00"
+    },
+    {
+        "id": "529",
+        "texto": "2 horas",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "530",
+        "texto": "3 horas manha",
+        "equivalente": "03:00"
+    },
+    {
+        "id": "531",
+        "texto": "3 horas",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "532",
+        "texto": "4 horas manha",
+        "equivalente": "04:00"
+    },
+    {
+        "id": "533",
+        "texto": "4 horas",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "534",
+        "texto": "5 horas da manha",
+        "equivalente": "05:00"
+    },
+    {
+        "id": "535",
+        "texto": "5 horas",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "536",
+        "texto": "6 horas manha",
+        "equivalente": "06:00"
+    },
+    {
+        "id": "537",
+        "texto": "6 horas",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "538",
+        "texto": "7 horas manha",
+        "equivalente": "07:00"
+    },
+    {
+        "id": "539",
+        "texto": "7 horas",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "540",
+        "texto": "8 horas noite",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "541",
+        "texto": "8 horas",
+        "equivalente": "08:00"
+    },
+    {
+        "id": "542",
+        "texto": "9 horas noite",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "543",
+        "texto": "9 horas",
+        "equivalente": "09:00"
+    },
+    {
+        "id": "544",
+        "texto": "as 10 30",
+        "equivalente": "10:30"
+    },
+    {
+        "id": "545",
+        "texto": "as 11 30",
+        "equivalente": "11:30"
+    },
+    {
+        "id": "546",
+        "texto": "as 12 30",
+        "equivalente": "12:30"
+    },
+    {
+        "id": "547",
+        "texto": "as 13 30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "548",
+        "texto": "as 14 30",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "549",
+        "texto": "as 15 30",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "550",
+        "texto": "as 16 30",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "551",
+        "texto": "as 17 30",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "552",
+        "texto": "as 18 30",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "553",
+        "texto": "as 19 30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "554",
+        "texto": "as 20 30",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "555",
+        "texto": "as 21 30",
+        "equivalente": "21:30"
+    },
+    {
+        "id": "556",
+        "texto": "as 22 30",
+        "equivalente": "22:30"
+    },
+    {
+        "id": "557",
+        "texto": "as 23 30",
+        "equivalente": "23:30"
+    },
+    {
+        "id": "558",
+        "texto": "as 24 30",
+        "equivalente": "00:30"
+    },
+    {
+        "id": "559",
+        "texto": "as 1 30",
+        "equivalente": "13:30"
+    },
+    {
+        "id": "560",
+        "texto": "as 2 30",
+        "equivalente": "14:30"
+    },
+    {
+        "id": "561",
+        "texto": "as 3 30",
+        "equivalente": "15:30"
+    },
+    {
+        "id": "562",
+        "texto": "as 4 30",
+        "equivalente": "16:30"
+    },
+    {
+        "id": "563",
+        "texto": "as 5 30",
+        "equivalente": "17:30"
+    },
+    {
+        "id": "564",
+        "texto": "as 6 30",
+        "equivalente": "18:30"
+    },
+    {
+        "id": "565",
+        "texto": "as 7 30",
+        "equivalente": "19:30"
+    },
+    {
+        "id": "566",
+        "texto": "as 8 30",
+        "equivalente": "20:30"
+    },
+    {
+        "id": "567",
+        "texto": "as 9 30",
+        "equivalente": "09:30"
+    },
+    {
+        "id": "568",
+        "texto": "as 0 30",
+        "equivalente": "00:30"
+    },
+    {
+        "id": "569",
+        "texto": "as 10",
+        "equivalente": "10:00"
+    },
+    {
+        "id": "570",
+        "texto": "as 11",
+        "equivalente": "11:00"
+    },
+    {
+        "id": "571",
+        "texto": "as 12",
+        "equivalente": "12:00"
+    },
+    {
+        "id": "572",
+        "texto": "as 13",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "573",
+        "texto": "as 14",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "574",
+        "texto": "as 15",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "575",
+        "texto": "as 16",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "576",
+        "texto": "as 17",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "577",
+        "texto": "as 18",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "578",
+        "texto": "as 19",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "579",
+        "texto": "as 20",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "580",
+        "texto": "as 21",
+        "equivalente": "21:00"
+    },
+    {
+        "id": "581",
+        "texto": "as 22",
+        "equivalente": "22:00"
+    },
+    {
+        "id": "582",
+        "texto": "as 23",
+        "equivalente": "23:00"
+    },
+    {
+        "id": "583",
+        "texto": "as 24",
+        "equivalente": "00:00"
+    },
+    {
+        "id": "584",
+        "texto": "as 1",
+        "equivalente": "13:00"
+    },
+    {
+        "id": "585",
+        "texto": "as 2",
+        "equivalente": "14:00"
+    },
+    {
+        "id": "586",
+        "texto": "as 3",
+        "equivalente": "15:00"
+    },
+    {
+        "id": "587",
+        "texto": "as 4",
+        "equivalente": "16:00"
+    },
+    {
+        "id": "588",
+        "texto": "as 5",
+        "equivalente": "17:00"
+    },
+    {
+        "id": "589",
+        "texto": "as 6",
+        "equivalente": "18:00"
+    },
+    {
+        "id": "590",
+        "texto": "as 7",
+        "equivalente": "19:00"
+    },
+    {
+        "id": "591",
+        "texto": "as 8",
+        "equivalente": "20:00"
+    },
+    {
+        "id": "592",
+        "texto": "as 9",
+        "equivalente": "09:00"
+    },
+    {
+        "id": "593",
+        "texto": "dom",
+        "equivalente": "domingo"
+    },
+    {
+        "id": "594",
+        "texto": "seg",
+        "equivalente": "segunda"
+    },
+    {
+        "id": "595",
+        "texto": "ter",
+        "equivalente": "terca"
+    },
+    {
+        "id": "596",
+        "texto": "qua",
+        "equivalente": "quarta"
+    },
+    {
+        "id": "597",
+        "texto": "qui",
+        "equivalente": "quinta"
+    },
+    {
+        "id": "598",
+        "texto": "sex",
+        "equivalente": "sexta"
+    },
+    {
+        "id": "599",
+        "texto": "sab",
+        "equivalente": "sabado"
+    }
+]

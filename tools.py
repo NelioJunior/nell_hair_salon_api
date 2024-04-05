@@ -4,7 +4,6 @@
 import re
 import random
 import json
-import urllib.request
 import datetime
 import time
 import traceback
@@ -65,15 +64,12 @@ def alterar_data_extenso(texto):
     return texto
 
 def substituir_interrogacoes(texto):
-    # Encontra todas as ocorrências de ponto de interrogação
     indices_interrogacao = [i for i, char in enumerate(texto) if char == '?']
     
-    # Substitui a primeira ocorrência de ponto de interrogação por vírgula, se existir
     if indices_interrogacao:
         primeiro_indice_interrogacao = indices_interrogacao[0]
         texto = texto[:primeiro_indice_interrogacao] + ',' + texto[primeiro_indice_interrogacao+1:]
     
-    # Substitui a penúltima ocorrência de ponto de interrogação por "e", se houver mais de uma ocorrência
     if len(indices_interrogacao) >= 2:
         penultimo_indice_interrogacao = indices_interrogacao[-2]
         texto = texto[:penultimo_indice_interrogacao] + ' e' + texto[penultimo_indice_interrogacao+1:]
@@ -117,50 +113,6 @@ def contar_ocorrencias(palavra, texto):
             contador += 1
     
     return contador
-
-def buscarBaseConhecimento(msg):
-
-    retorno = ["","",""]
-    avaliacao = 0  
-
-    for itemA in dicBaseConhecimento:
-        estimulo = itemA['estimuloResposta'].lower().strip()
-        estimulo = estimulo.replace("+", "")
-        estimulo = estimulo.replace("-", "")
-        estimulo = estimulo.replace("/", "")
-        estimulo = estimulo.replace("*", "")
-        estimulo = tradutorPalavra(estimulo)  
-        estimulo = tradutorExpressao(estimulo)
-
-        if "obrigado" in estimulo:
-            print(estimulo) 
-
-        if buscarPalavra("nao",estimulo) != 0:
-            estimulo = estimulo.replace("sim", "")
-
-        if estimulo != "":
-            if estimulo == msg : 
-                retorno[1] = itemA["categoria"]
-                retorno[2] = estimulo
-                break 
-
-            lstPalavras = estimulo.split()
-            num = 0
-            for palavra in lstPalavras:
-                if buscarPalavra(palavra, msg) != 0:
-                    num += 1
-
-            if len (lstPalavras) > 1: 
-                if estimulo in msg: 
-                    num += 1
-
-            if num > avaliacao:
-                avaliacao = num                 
-                retorno[1] = itemA["categoria"]
-                retorno[2] = estimulo
-
-
-    return retorno
 
 def buscartradutor(palavra):     
     retorno = removerAcentos(palavra).lower()
@@ -355,10 +307,12 @@ def buscarNumero(msg):
     return [int(s) for s in msg.split() if s.isdigit()]
     
 def buscarPalavra(palavra,msg):
+    palavra = removerAcentos(palavra).lower()
     palavra = palavra.replace("(", "")
     palavra = palavra.replace(")", "")
     palavra = palavra.replace("?", "QUESTION")     
 
+    msg = removerAcentos(msg).lower()   
     msg = msg.replace("?", "QUESTION")      
     msg = " " + msg 
     retorno = 0
@@ -708,22 +662,11 @@ def loadDicionariosDinamicos(urlServidor):
     global lstExpressao
     global lstPalavra
 
-    urlServidor = urlServidor.replace("gestorPai_SalaoConsultorioMVC", "artificialIntelligenceChatBot")
-
-    servico =  "%s%s" %(urlServidor,"buscartradutor.php")  
-    dictTradutor = json.load(urllib.request.urlopen(servico)) 
+    dictTradutor = json.load(open("./buscartradutor.json", "r"))
 
     lstHora = list(filter(lambda x: ":" in x["equivalente"],dictTradutor))
     lstExpressao = list(filter(lambda x: len(x["texto"].split()) > 1 and ":" not in x["equivalente"] ,dictTradutor))
     lstPalavra = list(filter(lambda x: len(x["texto"].split()) == 1 and ":" not in x["equivalente"],dictTradutor))
-
-    servico =  "%s%s" %(urlServidor,"buscarbaseconhecimento.php")  
-    dicBaseConhecimento = json.load(urllib.request.urlopen(servico))
-
-    dictResponderNaoCompreendido = []
-    for item in dicBaseConhecimento:
-        if item['categoria'] == 'naoCompreendido':
-           dictResponderNaoCompreendido.append(item['estimuloResposta'])
 
 def anotarErro(cnt):
     erro = traceback.format_exc()

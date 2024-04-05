@@ -284,7 +284,8 @@ def buscarEspecialidade(detected, genero):
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"]).split()
             num = 0
 
-            for palavra in lstPalavrasChaves:          
+            for palavra in lstPalavrasChaves:    
+
                 if tools.buscarPalavra(palavra,servico) > 0:
                     num += 1
 
