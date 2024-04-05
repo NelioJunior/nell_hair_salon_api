@@ -298,7 +298,8 @@ def buscarEspecialidade(detected, genero):
                     avaliacao = num  
                     retorno = especialidade
 
-        retorno_final.append(retorno)
+        if len(retorno): 
+            retorno_final.append(retorno)
 
     return retorno_final       
 
@@ -1199,10 +1200,17 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             especialidade = buscarEspecialidade(detected,stts["contatoGenero"])
             stts["flagAdicionarServicos"] = len(especialidade) == 1      
         
+            flagServivoInexistente  = False 
             if len(especialidade) != 0:
                 if len(list(filter(lambda i: especialidade[0]["id_especialidade"] == i["id_especialidade"],dictFuncionario))) == 0:
-                    msgResposta  = "Lamento muito %s,mas por enquanto, não temos especialistas para o serviço que você procura." % contato   
-                    limparStateContatoAtivo(stts, True)
+                    flagServivoInexistente = True 
+
+            elif len(especialidade) == 0 and len(detected): 
+                flagServivoInexistente = True 
+
+            if flagServivoInexistente:
+                msgResposta  = "Lamento muito %s,mas por enquanto, não temos especialistas para o serviço que você procura." % contato   
+                limparStateContatoAtivo(stts, True)
 
     if msgResposta == "":
         if len(especialidade) > 0 :
