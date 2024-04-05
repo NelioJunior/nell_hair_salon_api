@@ -143,9 +143,6 @@ def tradutorExpressao (msg):
     while "  " in retorno : retorno = retorno.replace("  ", " ")  
     
     for item in lstExpressao:
-        if item["id"] == '482':
-            print(item["id"],item["texto"],item["equivalente"] )
-        
         retorno = retorno.replace(item["texto"], item["equivalente"]) 
 
     msg = retorno.strip()

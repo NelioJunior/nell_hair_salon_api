@@ -780,6 +780,7 @@ def validarHorarioEscolhido(states, horario):
 
                         states["reservas"][0]["id_funcionario"] = ""
                         states["reservas"][0]["funcionario"] = ""
+                        states["reservas"][0]["data"] = ""
                         states["reservas"][0]["inicio"] = ""
                         return msg 
 
@@ -952,8 +953,8 @@ def validarDiaFuncionamento(stts):
             retorno = msgResposta
 
         if trueSeDataHoraJaPassou (stts["reservas"][0]["data"], dictInfEmpresa["horario"]["fecha"]): 
-            msgResposta  = "Eu sinto muito, mas o estabelecimento já fechou!"
-            msgResposta += "escolha um outro dia..."
+            msgResposta  = "Hoje o estabelecimento já fechou."
+            msgResposta += "Para qual dia você quer agendar?"
             retorno = msgResposta
 
         if  retorno !=  "" :  
@@ -1130,7 +1131,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
         if stts["reservas"][0]["data"] == "":
             dtPesquisa = tools.buscarData(mensagemTraduzida)
             if dtPesquisa != "":
-                stts["reservas"][0]["data"] = dtPesquisa    #TODO Esta pegando a data corrente e nao a data escolhida - Nell Jr - 2024
+                stts["reservas"][0]["data"] = dtPesquisa   
                 msgResposta = validarDiaFuncionamento(stts) 
 
     if msgResposta == "":
