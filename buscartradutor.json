@@ -20,6 +20,14 @@
         "equivalente": "cortar"
     },
     {
+        "texto": "cabelereira",
+        "equivalente": "cortar"
+    },
+    {
+        "texto": "cabelereiro",
+        "equivalente": "cortar"
+    },
+    {
         "texto": "uma barba",
         "equivalente": "barba"
     },
@@ -632,6 +640,26 @@
         "equivalente": "adeus"
     },
     {
+        "texto": "crianca",
+        "equivalente": "infantil"
+    },
+    {
+        "texto": "filho",
+        "equivalente": "infantil"
+    },
+    {
+        "texto": "filha",
+        "equivalente": "infantil"
+    },
+    {
+        "texto": "neta",
+        "equivalente": "infantil"
+    },
+    {
+        "texto": "neto",
+        "equivalente": "infantil"
+    },
+    {
         "texto": "ate mais",
         "equivalente": "adeus"
     },
@@ -1217,6 +1245,10 @@
     },
     {
         "texto": "fazer",
+        "equivalente": ""
+    },
+    {
+        "texto": "de",
         "equivalente": ""
     },
     {

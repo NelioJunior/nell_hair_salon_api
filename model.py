@@ -67,11 +67,11 @@ def loadDicionariosDinamicos(pasta):
     servico = "%s%s" %(pasta,"model/buscarcliente.php?apenasAtivos=1")
     dictCliente = json.load(urllib.request.urlopen(servico))
 
-    servico = "%s%s" %(pasta,"model/buscarespecialidadedoprofissional.php?id=0")
+    servico = "%s%s" %(pasta,"model/buscarespecialidadedoprofissional.php?id=1")
     dictEspecialidade = json.load(urllib.request.urlopen(servico))
     dictEspecialidade = sorted(dictEspecialidade, key=lambda x: len(x['nome'].split()))
 
-    servico = "%s%s" %(pasta,"model/buscarespecialidade.php?apenasAtivos=0")
+    servico = "%s%s" %(pasta,"model/buscarespecialidade.php?apenasAtivos=1")
     dictEspecialidadeGeral = json.load(urllib.request.urlopen(servico))
 
     servico = "%s%s" %(pasta,"model/buscarferiado.php?apenasAtivos=1")
@@ -275,7 +275,7 @@ def buscarEspecialidade(detected, genero):
     servicos = detected["servicos"]
 
     for servico in servicos:
-
+        servico_traduzido = tools.tradutorPalavra(servico)
         retorno = []
         avaliacao = 0 
 
@@ -285,12 +285,17 @@ def buscarEspecialidade(detected, genero):
             lstPalavrasChaves = lstPalavrasChaves.split()
 
             num = 0
+            if "corte" in especialidade["nome"].lower() or "alisamento" in  especialidade["nome"].lower():
+                print(especialidade["nome"])
 
             for palavra in lstPalavrasChaves:    
 
-                if tools.buscarPalavra(palavra,servico) > 0:
+                if tools.buscarPalavra(palavra,servico_traduzido) > 0:
                     num += 1
 
+                    if "infantil" in especialidade["nome"].lower():
+                        if "infantil" not in servico_traduzido.lower():  
+                            num -= 1                    
                     if genero == "m":
                         if "feminino" in especialidade["nome"].lower():
                             num -= 1
@@ -727,13 +732,13 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
         msgResposta = "Informe %s " % retorno
 
         if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
-            msgResposta = "Me diga o dia em que vc quer vir ou o profissional se já tem um em mente."
+            msgResposta = "Me diga o dia em que você quer vir ou o profissional se já tem um em mente."
 
         elif state["reservas"][0]["inicio"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
-            msgResposta = "Entendi.Então me informe detalhes tipo,os serviços que vc quer sejam feitos,dia e hora do agendamento"
+            msgResposta = "Entendi.Então me informe detalhes tipo,os serviços que você quer sejam feitos,dia e hora do agendamento"
      
     elif trueSeDataHoraJaPassou (state["reservas"][0]["data"], state["reservas"][0]["inicio"]): 
-        msgResposta = "Olha, só tem um pequeno problema,mas nada que seja grave\nO horário que vc escolheu já passou...Escolha outro horário e dia, por favor"
+        msgResposta = "Olha, só tem um pequeno problema,mas nada que seja grave\nO horário que você escolheu já passou...Escolha outro horário e dia, por favor"
         state["reservas"][0]["data"] = ""
         state["reservas"][0]["inicio"] = ""
 
@@ -1052,7 +1057,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                     msgResposta  = "Sua reserva ja foi cancelada"
                     stts["flagCancelarAgendamento"] = False 
             else:
-                msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que vc achar melhor.Até mais" 
+                msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
         else: 
             msgResposta = "Ta bom,sua reserva esta mantida. Esperamos você em breve!"
 
@@ -1210,7 +1215,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                 if len(list(filter(lambda i: especialidade[0]["id_especialidade"] == i["id_especialidade"],dictFuncionario))) == 0:
                     flagServivoInexistente = True 
 
-            elif len(especialidade) == 0 and len(detected): 
+            elif len(especialidade) == 0 and len(detected["servicos"]) : 
                 flagServivoInexistente = True 
 
             if flagServivoInexistente:
