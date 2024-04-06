@@ -21,6 +21,11 @@ def read_config_credentials():
             credentials[key] = value.strip()
     return credentials
 
+def eliminar_duplicatas(palavras_chave):
+    palavras_lista = palavras_chave.split()
+    palavras_sem_duplicatas = set(palavras_lista)
+    return ' '.join(palavras_sem_duplicatas)
+
 def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     mensagemTraduzida = message_info["message"].lower() 
     mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
@@ -116,12 +121,12 @@ def contar_ocorrencias(palavra, texto):
 
 def buscartradutor(palavra):     
     retorno = removerAcentos(palavra).lower()
+    retorno = retorno.strip()
+    retorno = re.sub(r'[?!,.-]', ' ', retorno)
+
     for item in dictTradutor:
         if buscarPalavra(item["texto"], retorno) > 0: 
             retorno = retorno.replace(item["texto"],item["equivalente"])
-
-    msg = retorno.strip()
-    msg = re.sub(r'[?!,.-]', ' ', msg)
 
     return retorno
 

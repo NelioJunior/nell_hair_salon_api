@@ -1,11 +1,11 @@
 [
     {
-        "texto": "voce hoje",
-        "equivalente": "voce"
-    },
-    {
         "texto": "para uma",
         "equivalente": "para"
+    },
+    {
+        "texto": "cabelos",
+        "equivalente": "cabelo"
     },
     {
         "texto": "para um",
@@ -13,7 +13,11 @@
     },
     {
         "texto": "um corte",
-        "equivalente": "corte"
+        "equivalente": "cortar"
+    },   
+    {
+        "texto": "corte",
+        "equivalente": "cortar"
     },
     {
         "texto": "uma barba",
@@ -114,6 +118,22 @@
     {
         "texto": "horarios",
         "equivalente": "horario"
+    },
+    {
+        "texto": "voces",
+        "equivalente": "voce"
+    },
+    {
+        "texto": "voce hoje",
+        "equivalente": "saudacao"
+    },
+    {
+        "texto": "esteja bem hoje",
+        "equivalente": "saudacao"
+    },
+    {
+        "texto": "voce esta hoje",
+        "equivalente": "saudacao"
     },
     {
         "texto": "bom dia",

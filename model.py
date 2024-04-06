@@ -269,7 +269,6 @@ def buscarEspecialidadeIndisponivel(msg, genero):
 
     return resposta
 
-
 def buscarEspecialidade(detected, genero):
 
     retorno_final=[]  
@@ -281,7 +280,10 @@ def buscarEspecialidade(detected, genero):
         avaliacao = 0 
 
         for especialidade in dictEspecialidade:
-            lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"]).split()
+            lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"])
+            lstPalavrasChaves = tools.eliminar_duplicatas(lstPalavrasChaves)
+            lstPalavrasChaves = lstPalavrasChaves.split()
+
             num = 0
 
             for palavra in lstPalavrasChaves:    
@@ -289,10 +291,12 @@ def buscarEspecialidade(detected, genero):
                 if tools.buscarPalavra(palavra,servico) > 0:
                     num += 1
 
-                    if "feminino" in especialidade["nome"].lower() and genero == "f":
-                        num += 2
-                    elif "masculino" in especialidade["nome"].lower() and genero == "m":
-                        num += 2
+                    if genero == "m":
+                        if "feminino" in especialidade["nome"].lower():
+                            num -= 1
+                    elif genero == "f":  
+                        if "masculino" in especialidade["nome"].lower():
+                            num -= 1
 
                 if num > avaliacao:                    
                     avaliacao = num  
