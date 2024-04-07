@@ -620,7 +620,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
 
         if len(lstFuncionariosAptos) == 0:  
             if horariosLivres == "": 
-                msgRetorno = "Desculpe, mas %s não há um especialista pra o quê você quer disponivel. Por favor, escolha um outro dia da semana." % diaSemana
+                msgRetorno = "Desculpe, mas %s não há um especialista disponivel pra o quê você quer. Por favor, escolha um outro dia da semana." % diaSemana
                 states["reservas"][0]["data"] = "" 
             else:
                 msgRetorno = "Na %s neste horário posso agendar pra você em um destes horários: %s"  % (diaSemana, horariosLivres)   
