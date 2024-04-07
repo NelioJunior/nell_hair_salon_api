@@ -128,8 +128,9 @@ def buscartradutor(palavra):
     retorno = re.sub(r'[?!,.-]', ' ', retorno)
 
     for item in dictTradutor:
-        if buscarPalavra(item["texto"], retorno) > 0: 
-            retorno = retorno.replace(item["texto"],item["equivalente"])
+        itm = item["texto"]
+        if buscarPalavra(itm, retorno) > 0: 
+            retorno =  re.sub(rf'\b{itm}\b', item["equivalente"], retorno)
 
     return retorno
 
