@@ -275,6 +275,9 @@ def buscarEspecialidade(detected, genero):
     servicos = detected["servicos"]
 
     for servico in servicos:
+        if type(servico) != str:
+            break 
+
         servico_traduzido = tools.tradutorPalavra(servico)
         retorno = []
         avaliacao = 0 
