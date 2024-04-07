@@ -16,6 +16,7 @@ chave 'intencao' : Preenchido seguindo a regra a seguir:
     'listarHorariosLivres': O cliente expressou o desejo de saber os horários livres do estabelecimento em um determinado período.
     'listarFuncionarios': O cliente expressou o desejo de obter informações sobre os funcionários do estabelecimento.
     'listarEspecialidades': O cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
+    'infoEmpresa': O cliente expressou o desejo de saber sobre disponibilidade do estabelecimento.
     'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
     'semrelacao': Resposta do cliente sem tem relação com os itens anteriores.
     'semrelacao': O cliente expressou comprimentos ou saudação. 

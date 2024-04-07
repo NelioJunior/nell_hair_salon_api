@@ -958,7 +958,7 @@ def validarDiaFuncionamento(stts):
 
         if dictInfEmpresa["semana"][diaSemana] == False:
             msgResposta  = "neste dia da semana, %s o %s esta fechado " % (diaSemana,dictInfEmpresa["nomeEmpresa"])   
-            msgResposta += " e que ea vai ter que escolher um outro dia..."
+            msgResposta += " você tem que escolher um outro dia..."
             retorno = msgResposta
 
         if trueSeDataHoraJaPassou (stts["reservas"][0]["data"], dictInfEmpresa["horario"]["fecha"]): 
