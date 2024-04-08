@@ -67,7 +67,7 @@ def loadDicionariosDinamicos(pasta):
     servico = "%s%s" %(pasta,"model/buscarcliente.php?apenasAtivos=1")
     dictCliente = json.load(urllib.request.urlopen(servico))
 
-    servico = "%s%s" %(pasta,"model/buscarespecialidadedoprofissional.php?id=1")
+    servico = "%s%s" %(pasta,"model/buscarespecialidadedoprofissional.php?id=0")
     dictEspecialidade = json.load(urllib.request.urlopen(servico))
     dictEspecialidade = sorted(dictEspecialidade, key=lambda x: len(x['nome'].split()))
 
@@ -372,13 +372,11 @@ def buscarListaFuncionarios(msg, states):
     return msgResp    
 
 def buscarListaEspecialidades(msg): 
-    msgResp = "json:["
+    msgResp = ""
     
     if buscarEspecialidadePorFuncionario(msg) == "":
         for especialidade in dictEspecialidade: 
-            msgResp += "{'servico': '%s' , 'preco': 'R$ %s,00'},"  % (especialidade["nome"],especialidade["preco"])  
-        
-        msgResp = msgResp[0:len(msgResp)-1] + "]" 
+            msgResp += f"• {especialidade['nome']} - R$ {especialidade['preco']},00 \n" 
 
     return msgResp
 
@@ -1036,6 +1034,8 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
     hrPesquisa = "" 
     mensagemTraduzida = respBaseConhecimento[0]
 
+    intencao = json.loads(respBaseConhecimento[1])["intencao"] 
+
     if stts["flagEscolherProfissional"]:
         funcionario = buscarFuncionario(mensagemOriginal)
         if funcionario[1] != "": 
@@ -1043,7 +1043,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
         else: 
             stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = False     
 
-    if respBaseConhecimento[1] == "alterarReserva":
+    if intencao == "alterarReserva":
         stts["flagAlterarAgendamento"] = True 
         possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
         if len(possivelArrayIdReserva) == 0:   
@@ -1052,7 +1052,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             return msgResposta
 
     if stts["flagCancelarAgendamento"]:
-        if respBaseConhecimento[1] == "concordancia":                      
+        if intencao == "concordancia":                      
             if excluirReserva(stts["stateIdAgenda"], pasta):
                 if stts["flagAlterarAgendamento"]:
                    msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
@@ -1070,7 +1070,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
     if msgResposta == "":     
         possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
 
-        if respBaseConhecimento[1] == "cancelarReservaJaEfetuada" or len(possivelArrayIdReserva) > 0: 
+        if intencao == "cancelarReservaJaEfetuada" or len(possivelArrayIdReserva) > 0: 
             if stts["reservas"][0]["data"] == "" and  stts["reservas"][0]["inicio"] == "" and stts["reservas"][0]["id_funcionario"] == "":  
                 colecaoReserva = []
                 if len(possivelArrayIdReserva) > 0:   
@@ -1112,30 +1112,30 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
 
 
     if msgResposta == "":  
-        if respBaseConhecimento[1] == "listarEspecialidades" and not stts["flagConfirmarAgendamento"]:  
+        if intencao == "listarEspecialidades" and not stts["flagConfirmarAgendamento"]:  
             msgResposta = buscarListaEspecialidades(mensagemTraduzida)  
             stts["flagUsuarioDesejaFazerCRUD"] = False 
 
     if msgResposta == "":  
         
-        if respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
+        if intencao == "listarFuncionarios" and stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
             if not stts["flagConfirmarAgendamento"]:
                 if len(buscarEspecialidade(detected,stts["contatoGenero"])) == 0:
                     msgResposta  = buscarListaFuncionarios(mensagemOriginal, stts)
 
-        elif respBaseConhecimento[1] == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
+        elif intencao == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
             if not stts["flagConfirmarAgendamento"]:
                 especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
                 especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
                 msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
-        elif respBaseConhecimento[1] == "listarFuncionarios" and stts['flagEscolherProfissional']:
+        elif intencao == "listarFuncionarios" and stts['flagEscolherProfissional']:
             if not stts["flagConfirmarAgendamento"]:
                 if  stts["reservas"][0]["id_funcionario"] != "":
                     stts['flagEscolherProfissional'] = False  
 
     if msgResposta == "":
-        if respBaseConhecimento[1] == "listarHorariosLivres":
+        if intencao == "listarHorariosLivres":
             especialidade = buscarEspecialidade(detected,stts["contatoGenero"])                     
             msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
@@ -1177,7 +1177,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
 
     if msgResposta == "":
         if stts["flagConfirmarAgendamento"]:           
-            if respBaseConhecimento[1] == "concordancia" or respBaseConhecimento[1] == "incluirReserva"  : 
+            if intencao == "concordancia" or intencao == "incluirReserva"  : 
                 identificador = salvarReserva(stts["reservas"], stts["id_cliente"], pasta)   
                 stts["flagUsuarioDesejaFazerCRUD"] = False   
 
@@ -1197,7 +1197,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                 msgResposta += "Voce pode desistir a qualquer hora, sem tem problemas."
                 msgResposta += "Então me diga, pra qual dia você quer agendar ?"     
 
-                respBaseConhecimento[1] = "incluirReserva"
+                intencao = "incluirReserva"
 
             limparStateContatoAtivo(stts, False)
 
@@ -1240,7 +1240,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
 
     if msgResposta == "": 
         if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and  stts["reservas"][0]["especialidades"][0]["id_especialidade"] == "":
-            if respBaseConhecimento == "listarFuncionarios":
+            if intencao == "listarFuncionarios":
                 msgResposta = buscarListaFuncionarios("",stts)
         else:
             if hrPesquisa == "" and stts["reservas"][0]["inicio"] != "":
@@ -1254,7 +1254,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
     msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)   
 
     if msgResposta == "": 
-        if respBaseConhecimento[1] == "incluirReserva":
+        if intencao == "incluirReserva":
             if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == ""  and stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and stts["reservas"][0]["id_funcionario"] == "":
                 msgResposta = buscarEspecialidadeNaoCadastrada(mensagemTraduzida)
 
@@ -1283,7 +1283,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
         msgResposta = verificaItensFaltantes(stts, respBaseConhecimento, mensagemTraduzida)    
 
     if msgResposta == "":   
-        respBaseConhecimento[1] = "incluirReserva"
+        intencao = "incluirReserva"
         dt = datetime.strptime(stts["reservas"][0]["data"], "%Y-%m-%d")
         dtReserva = "%s/%s/%s" % (dt.day, dt.month, dt.year)    
 
@@ -1347,6 +1347,7 @@ class model:
         mensagemOriginal = infUltimaMensagem["message"]        
         msgResposta = ""
         detected = json.loads(infUltimaMensagem["detected"]) 
+        intencao = json.loads(respBaseConhecimento[1])["intencao"] 
 
         clearOldInteractions(states)
 
@@ -1369,7 +1370,7 @@ class model:
 
         msgResposta = processCrud (states[idx],contato,mensagemOriginal,detected,respBaseConhecimento,self.pasta) 
 
-        if "infoEmpresa" in respBaseConhecimento[1]:
+        if intencao == "infoEmpresa":
             if tools.buscarPalavra("responsavel", respBaseConhecimento[0]):
                 msgResposta = "Você pode falar com %s. " % dictInfEmpresa["responsavel"] 
             elif tools.buscarPalavra("telefone", respBaseConhecimento[0]):
@@ -1394,7 +1395,7 @@ class model:
                 msgResposta = horarioFuncionamento()      
 
         if msgResposta == "":
-            if respBaseConhecimento[1] == "listarFuncionarios" or respBaseConhecimento[1] == "listarHorariosLivres": 
+            if intencao == "listarFuncionarios" or intencao == "listarHorariosLivres": 
                 msgResposta =  horarioFuncionamento()  
 
         states[idx]["ultimaMensagemAssistente"] = msgResposta    

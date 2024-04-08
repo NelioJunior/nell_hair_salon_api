@@ -40,11 +40,12 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     resp.append(message_info["detected"]) 
   
     if intencao != "infoEmpresa":
-        if "reservar" in resp[0]:
-            resp[1] = "incluirReserva"
+        if "listar" not in intencao:
+            if "reservar" in resp[0]:
+                resp[1] = "incluirReserva"
 
-        if "alterar" in resp[0]:
-            resp[1] = "alterarReserva"
+            if "alterar" in resp[0]:
+                resp[1] = "alterarReserva"
 
     if resp[0][0:3] == "sim": 
         resp[1] = "concordancia"

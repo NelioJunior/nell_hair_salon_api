@@ -14,7 +14,9 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
     'listarReservaUsuario': O cliente expressou o desejo de se informar sobre as reservas feitas por ele.
     'listarHorariosLivres': O cliente expressou o desejo de saber os horários livres do estabelecimento em um determinado período.
-    'listarFuncionarios': O cliente expressou o desejo de obter informações sobre os funcionários do estabelecimento.
+    'listarFuncionarios': O cliente expressou o desejo de agendar com algum funcionário específico do estabelecimento.
+    'listarFuncionarios': O cliente expressou o desejo de saber quando algum funcionário esta disponivel no estabelecimento.
+    'listarFuncionarios': O cliente expressou o desejo de saber qual funcionário é especialista em algum tipo de serviço do estabelecimento.
     'listarEspecialidades': O cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
     'infoEmpresa': O cliente expressou o desejo de saber sobre disponibilidade do estabelecimento.
     'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
