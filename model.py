@@ -288,9 +288,6 @@ def buscarEspecialidade(detected, genero):
             lstPalavrasChaves = lstPalavrasChaves.split()
 
             num = 0
-            if "corte" in especialidade["nome"].lower() or "alisamento" in  especialidade["nome"].lower():
-                print(especialidade["nome"])
-
             for palavra in lstPalavrasChaves:    
 
                 if tools.buscarPalavra(palavra,servico_traduzido) > 0:
@@ -1125,8 +1122,9 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
 
         elif intencao == "listarFuncionarios" and stts["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
             if not stts["flagConfirmarAgendamento"]:
-                especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"]                     
-                especialidade = buscarEspecialidade(especialidade,stts["contatoGenero"])                     
+                especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"] 
+                detected["servicos"] = especialidade                    
+                especialidade = buscarEspecialidade(detected,stts["contatoGenero"])                     
                 msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
         elif intencao == "listarFuncionarios" and stts['flagEscolherProfissional']:

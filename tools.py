@@ -33,28 +33,28 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     mensagemTraduzida = tradutorHora (mensagemTraduzida)
     mensagemTraduzida = buscartradutor (mensagemTraduzida)
 
-    intencao =  json.loads(message_info["detected"])["intencao"]
+    detected = json.loads(message_info["detected"]) 
+  
+    if detected["intencao"] != "infoEmpresa":
+        if "listar" not in detected["intencao"]:
+            if "reservar" in mensagemTraduzida:
+                detected["intencao"] = "incluirReserva"
+
+            if "alterar" in mensagemTraduzida:
+                detected["intencao"] = "alterarReserva"
+
+    if mensagemTraduzida[0:3] == "sim": 
+        detected["intencao"] = "concordancia"
+
+    if mensagemTraduzida[0:3] == "nao": 
+        detected["intencao"]= "discordancia"
+
+    if "adeus" in mensagemTraduzida: 
+        detected["intencao"] = "semrelacao"
 
     resp = []
     resp.append(mensagemTraduzida)   
-    resp.append(message_info["detected"]) 
-  
-    if intencao != "infoEmpresa":
-        if "listar" not in intencao:
-            if "reservar" in resp[0]:
-                resp[1] = "incluirReserva"
-
-            if "alterar" in resp[0]:
-                resp[1] = "alterarReserva"
-
-    if resp[0][0:3] == "sim": 
-        resp[1] = "concordancia"
-
-    if resp[0][0:3] == "nao": 
-        resp[1] = "discordancia"
-
-    if "adeus" in resp[0]: 
-        resp[1] = "semrelacao"
+    resp.append(json.dumps(detected))     
 
     return resp
 
