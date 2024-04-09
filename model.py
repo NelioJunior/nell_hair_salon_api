@@ -1382,6 +1382,11 @@ class model:
             if dictInfEmpresa["atenderNaoCadastrados"] == False and states[idx]["id_cliente"] == "":
                 return roboNaoDeveAtender
 
+        if intencao == "discordancia":
+            if "Ainda não trabalhamos" in states[idx]["ultimaMensagemAssistente"]:                
+                limparStateContatoAtivo(states[idx], False)
+                return "Compreendo,sem problemas. Entre em contato se precisar de algo da gente."
+
         msgResposta = processCrud (states[idx],contato,mensagemOriginal,detected,respBaseConhecimento,self.pasta) 
 
         if intencao == "infoEmpresa":
