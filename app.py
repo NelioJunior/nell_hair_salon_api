@@ -6,6 +6,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from tools import obter_chave_openai
+from tools import log_message
 from babel.dates import format_datetime, Locale
 
 locale = Locale('pt_BR')
@@ -33,10 +34,6 @@ agent_rule = rule.read()
 
 app = Flask(__name__)
 CORS(app)
-
-def log_message(message):
-    with open("historic.log", "a") as log_file:
-        log_file.write(message)
  
 @app.route("/", methods=['GET'])
 def root():

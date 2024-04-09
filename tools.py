@@ -26,6 +26,10 @@ def eliminar_duplicatas(palavras_chave):
     palavras_sem_duplicatas = set(palavras_lista)
     return ' '.join(palavras_sem_duplicatas)
 
+def log_message(message):
+    with open("historic.log", "a") as log_file:
+        log_file.write(message)
+
 def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     mensagemTraduzida = message_info["message"].lower() 
     mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
@@ -270,7 +274,7 @@ def buscarMes(msg):
     retorno = []
     for idx in range(len(dictMes)):
         if dictMes[idx] in msg: 
-           retorno = [idx+1,dictMes[idx]] 
+           retorno = [idx,dictMes[idx]] 
               
     return retorno  
 

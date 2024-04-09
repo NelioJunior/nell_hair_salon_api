@@ -26,6 +26,10 @@
     {
         "texto": "cabelereiro",
         "equivalente": "cortar"
+    },    
+    {
+        "texto": "uma hidratacao",
+        "equivalente": "hidratacao"
     },
     {
         "texto": "uma barba",
@@ -68,12 +72,36 @@
         "equivalente": "permanente"
     },
     {
+        "texto": "depilador",
+        "equivalente": "depilacao"
+    },
+    {
+        "texto": "depiladora",
+        "equivalente": "depilacao"
+    },
+    {
         "texto": "uma depilacao",
         "equivalente": "depilacao"
     },
     {
         "texto": "uma maquiagem",
         "equivalente": "maquiagem"
+    },
+    {
+        "texto": "maquiadora",
+        "equivalente": "maquiagem"
+    },
+    {
+        "texto": "maquiador",
+        "equivalente": "maquiagem"
+    },
+    {
+        "texto": "uma maquiagem",
+        "equivalente": "maquiagem"
+    },
+    {
+        "texto": "massagista",
+        "equivalente": "massagem"
     },
     {
         "texto": "uma massagem",

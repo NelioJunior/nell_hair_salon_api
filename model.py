@@ -23,8 +23,7 @@ def find_contact(string):
                break
 
     return result           
-
-
+                       
 def agrupar_horarios(horarios):
     horarios = sorted(set(map(lambda x: x.strip(), horarios.split(','))))
     resultado = []
@@ -269,7 +268,7 @@ def buscarEspecialidadeIndisponivel(msg, genero):
 
     return resposta
 
-def buscarEspecialidade(detected, genero):
+def buscarEspecialidade(detected, genero, inexistente=[]):
 
     retorno_final=[]  
     servicos = detected["servicos"]
@@ -281,6 +280,7 @@ def buscarEspecialidade(detected, genero):
         servico_traduzido = tools.tradutorPalavra(servico)
         retorno = []
         avaliacao = 0 
+        flag_inexistente = True  
 
         for especialidade in dictEspecialidade:
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"])
@@ -291,6 +291,7 @@ def buscarEspecialidade(detected, genero):
             for palavra in lstPalavrasChaves:    
 
                 if tools.buscarPalavra(palavra,servico_traduzido) > 0:
+                    flag_inexistente = False  
                     num += 1
 
                     if "infantil" in especialidade["nome"].lower():
@@ -306,6 +307,9 @@ def buscarEspecialidade(detected, genero):
                 if num > avaliacao:                    
                     avaliacao = num  
                     retorno = especialidade
+
+        if flag_inexistente == True:
+            inexistente.append(servico)
 
         if len(retorno): 
             retorno_final.append(retorno)
@@ -1208,20 +1212,32 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             especialidade = buscarEspecialidade(detected,stts["contatoGenero"])
 
         elif stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
-            especialidade = buscarEspecialidade(detected,stts["contatoGenero"])
+            inexistente = []
+            especialidade = buscarEspecialidade(detected,stts["contatoGenero"],inexistente)
             stts["flagAdicionarServicos"] = len(especialidade) == 1      
         
-            flagServivoInexistente  = False 
+            flagServicoInexistente  = False 
             if len(especialidade) != 0:
                 if len(list(filter(lambda i: especialidade[0]["id_especialidade"] == i["id_especialidade"],dictFuncionario))) == 0:
-                    flagServivoInexistente = True 
+                    flagServicoInexistente = True 
+                if len(inexistente) != 0:
+                    flagServicoInexistente = True 
 
             elif len(especialidade) == 0 and len(detected["servicos"]) : 
-                flagServivoInexistente = True 
+                flagServicoInexistente = True 
 
-            if flagServivoInexistente:
-                msgResposta  = "Lamento muito %s,mas por enquanto, não temos especialistas para o serviço que você procura." % contato   
-                limparStateContatoAtivo(stts, True)
+            if flagServicoInexistente:
+                if "procurando" in stts["ultimaMensagemAssistente"]:
+                    msgResposta  = f"Lamento muito {contato},mas por enquanto, não temos especialistas para o serviço que você procura."   
+                    limparStateContatoAtivo(stts, True)
+                elif len(inexistente) != 0:
+                    msgResposta = f"Ainda não trabalhamos com {', '.join(inexistente)} mas podemos agendar os outros itens.Tudo bem?"
+                    if len(especialidade) > 0 :
+                        addEspecialidadesInState(stts, especialidade)
+
+                else:    
+                    msgResposta = "Qual serviço você esta procurando mesmo?"   
+                    stts["ultimaMensagemAssistente"] = msgResposta
 
     if msgResposta == "":
         if len(especialidade) > 0 :
