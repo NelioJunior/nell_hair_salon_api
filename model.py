@@ -68,7 +68,7 @@ def loadDicionariosDinamicos(pasta):
 
     servico = "%s%s" %(pasta,"model/buscarespecialidadedoprofissional.php?id=0")
     dictEspecialidade = json.load(urllib.request.urlopen(servico))
-    dictEspecialidade = sorted(dictEspecialidade, key=lambda x: len(x['nome'].split()))
+    # dictEspecialidade = sorted(dictEspecialidade, key=lambda x: len(x['nome'].split()))
 
     servico = "%s%s" %(pasta,"model/buscarespecialidade.php?apenasAtivos=1")
     dictEspecialidadeGeral = json.load(urllib.request.urlopen(servico))
