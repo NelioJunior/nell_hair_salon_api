@@ -762,6 +762,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
             state["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True    
 
     msgResposta = tools.substituir_interrogacoes(msgResposta)
+    msgResposta = msgResposta.rstrip(',')
 
     return msgResposta
 
