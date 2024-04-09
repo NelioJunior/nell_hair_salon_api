@@ -152,6 +152,22 @@
         "equivalente": "aplicacao"
     },
     {
+        "texto": "uma consulta",
+        "equivalente": "listar"
+    },
+    {
+        "texto": "consulta",
+        "equivalente": "listar"
+    },     
+    {
+        "texto": "tenho um",
+        "equivalente": "tenho"
+    },
+    {
+        "texto": "tenho uma",
+        "equivalente": "tenho"
+    },
+    {
         "texto": "horarios",
         "equivalente": "horario"
     },
@@ -424,8 +440,60 @@
         "equivalente": "adeus"
     },
     {
-        "texto": "muito obrigado",
-        "equivalente": "adeus"
+        "texto": "obrigado",
+        "equivalente": "obrigada"
+    },
+    {
+        "texto": "grata",
+        "equivalente": "obrigada"
+    },
+    {
+        "texto": "grato",
+        "equivalente": "obrigada"
+    },
+    {
+        "texto": "agradecida",
+        "equivalente": "obrigada"
+    },
+    {
+        "texto": "agradecido",
+        "equivalente": "obrigada"
+    },    
+    {
+        "texto": "obrigada pela dica",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pelo aviso",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela informacao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela sugestao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela ideia",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela conselho",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela ponto",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela feedback",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela recomendacao",
+        "equivalente": ""
     },
     {
         "texto": "muito obrigada",
@@ -508,23 +576,11 @@
         "equivalente": "interessado"
     },
     {
-        "texto": "nao obrigado",
-        "equivalente": "nao"
-    },
-    {
         "texto": "nao obrigada",
         "equivalente": "nao"
     },
     {
         "texto": "eu que agradeco",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigado pela confirmacao",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigado",
         "equivalente": "adeus"
     },
     {
@@ -541,14 +597,6 @@
     },
     {
         "texto": "valeu",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigada",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigado",
         "equivalente": "adeus"
     },
     {
@@ -1221,7 +1269,7 @@
     },
     {
         "texto": "nenhum",
-        "equivalente": "obrigado"
+        "equivalente": "obrigada"
     },
     {
         "texto": "cancela",
@@ -1271,6 +1319,15 @@
         "texto": "horas da noite",
         "equivalente": "da noite"
     },
+    {
+        "texto": "obrigada pela sugestao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela sugestao",
+        "equivalente": ""
+    },
+
     {
         "texto": "fazer",
         "equivalente": ""

@@ -1,14 +1,14 @@
-Nesta interação um cliente realiza uma operação de agendamento dentro de um estabelecimento. 
+Nesta interação um cliente realiza uma operação de agendamento dentro de um estabelecimento de beleza. 
 Preencha um json a partir das intenções demostradas pelo cliente a partir do que é dito dentro da frase.
 A estrutura do json devera ter o formato descrito a seguir:
 
 chave 'servicos', preenchido com um array de serviços que o cliente demonstrou desejar, isso não inclui profissionais do estabelecimento.
 chave 'intencao', Preenchido seguindo a regra a seguir:
-    'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de agendamento.
-    'incluirReserva': O cliente expressou a preferencia a horario, serviço ou funcionário.
-    'incluirReserva': O cliente expressou o desejo de precisar de um servico de um profissional.  
-    'concordancia': O cliente expressou sinal de aprovação como por exemplo dizendo sim.
-    'discordancia': O cliente expressou discordância, por exemplo dizendo não dentro da fala.
+    'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de serviço de beleza.
+    'incluirReserva': O cliente expressou a preferencia a horario, serviço de beleza ou funcionário especialista em beleza.
+    'incluirReserva': O cliente expressou o desejo de precisar de um servico de um profissional especialista em beleza. 
+    'concordancia': O cliente expressou sinal de aprovação, por exemplo dizendo sim.
+    'discordancia': O cliente expressou discordância, por exemplo dizendo não.
     'alterarReserva': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
     'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
     'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
