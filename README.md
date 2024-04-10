@@ -9,7 +9,7 @@
       -  Evitar espaco em branco no inicio e no final , por exemplo ' centopeia ' 
       -  Frases com mais de uma palavrava devem prevalecer sobre frases de apenas uma palavra, e por ultimo por ordem alfabetica 
                                                                                                (ex: apenas prevalece sobre somente) 
-                                                
+                                                - sexo masculino
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -24,7 +24,7 @@ SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' C
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-Uma abordagem a ser considerada e' usar a api gpt para analizar o que o cliente quer, de posse deste conhecimento processar a resposta 
+Uma abordagem a ser considerada é usar a api gpt para analizar o que o cliente quer, de posse deste conhecimento processar a resposta 
 certa, e finalmente executar a api para dar a interacao com o cliente 
 
 Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
@@ -32,13 +32,26 @@ Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 Siga o passo-a-passo:
 
-- Escoha um destes nomes de clintes: Angela, Bernadete, Emmy, Haroldo, Mel, Natasha,Pati, Renato, Ricardo, Silva ou Silvio.
-- Crie uma personalidade para o nome de cliente que voce escolheu e seja esta pessoa.
-- Simule uma conversa entra voce e uma recepcionista de salao de beleza chamada Angel. O objetivo da conversa e' voce marcar um agendamento no salao.
-- Nesta conversa voce entrara com uma fala e esperara pela fala da atendente Angel.
-- No incio de cada fala voce ira colocar o nome da pessoa seguido por dois pontos (:)
+- Escoha um destes nomes de clientes: 
+            Angela - sexo feminino   
+            Bernadete - sexo feminino 
+            Emmy - sexo feminino 
+            Haroldo - sexo masculino 
+            Mel - sexo feminino 
+            Natasha - sexo feminino
+            Pati - sexo feminino 
+            Renato - sexo masculino 
+            Ricardo - sexo masculino 
+            Silva - sexo masculino
+            Silvio - sexo masculino
+
+- Crie uma personalidade para o nome de cliente que você escolheu e seja esta pessoa.
+- Simule uma conversa entra você e uma recepcionista de salao de beleza chamada Angel. 
+  O objetivo da conversa é você marcar um agendamento no salao.
+- Nesta conversa você entrara com uma fala e esperara pela fala da atendente Angel.
+- No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 - Comece saudando a recepcionista Angel e aguarde a fala da Angel.
--------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------
 
 
 O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI 
@@ -82,7 +95,7 @@ Estudar
     https://python.langchain.com/docs/use_cases/sql/
     https://python.langchain.com/docs/use_cases/sql/quickstart
 
-    Neste abaixo a parte do Leonard de Caprio e' desnecessario, mas vale muito a pena estudar  
+    Neste abaixo a parte do Leonard de Caprio é desnecessario, mas vale muito a pena estudar  
     Verificar se rola com o banco de dados mencionado
 
     https://blog.futuresmart.ai/langchain-sql-agents-openai-llms-query-database-using-natural-language    

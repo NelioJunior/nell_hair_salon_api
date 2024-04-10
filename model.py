@@ -624,13 +624,14 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
             if horariosLivres == "": 
                 if len(states["reservas"][0]["especialidades"]) > 1:
                     msgRetorno = "Infelizmente %s não há profissionais para os serviços quê você quer." % diaSemana
-                    msgRetorno += "Pode ser uma boa ideia voce separar estes serviços em outros dias."
-                    msgRetorno += "Para que isso nao seja confuso para mim, vamos por partes ...."
-                    msgRetorno += "Ao confirmar um agendadamentom,você começa outro.Vamos lá!"
+                    msgRetorno += "Pode ser uma boa ideia voce separar estes serviços em outros dias.\n"
+                    msgRetorno += "Para que isso nao seja confuso, vamos aos poucos."
+                    msgRetorno += "Entre com um serviço por vez.Ok?"
+                    msgRetorno += "Ao confirmar o agendadamento de um dia,você começa outro.Vamos lá!"
                 else:
                     msgRetorno = "Desculpe, mas %s não há um especialista disponivel pra o quê você quer. Por favor, escolha um outro dia da semana." % diaSemana
 
-                states["reservas"][0]["data"] = "" 
+                limparStateContatoAtivo(states, False)
             else:
                 msgRetorno = "Na %s neste horário posso agendar pra você em um destes horários: %s"  % (diaSemana, horariosLivres)   
                 states["reservas"][0]["inicio"] = "" 
@@ -939,7 +940,18 @@ def TrueParaInteracaoExpirada(respBaseConhecimento,mensagem,stts,mensagemTraduzi
 
     return False  
 
+
 def limparStateContatoAtivo(stts, manterDataHora): 
+
+    for i in range(0, len(stts["reservas"])):
+        stts["reservas"][i]["id_funcionario"] = ""
+        stts["reservas"][i]["funcionario"] = ""
+        stts["reservas"][i]["especialidades"] = []
+
+        if manterDataHora == False:
+            stts["reservas"][i]["data"] = ""
+            stts["reservas"][i]["inicio"] = ""    
+
     stts["flagConfirmarAgendamento"] = False 
     stts["flagEscolherProfissional"] = True   
     stts["flagAdicionarServicos"] = False   
@@ -948,13 +960,19 @@ def limparStateContatoAtivo(stts, manterDataHora):
     stts["informacaoAoUsuario"] = ""
     stts["ultimaMensagemAssistente"] = ""
     stts["stateIdAgenda" ] = ""
-    stts["reservas"][0]["id_funcionario"] = ""
-    stts["reservas"][0]["funcionario"] = ""
-    stts["reservas"][0]["especialidades"][0]["id_especialidade"] = ""
-    stts["reservas"][0]["especialidades"][0]["especialidade"] = ""
-    if manterDataHora == False:
-        stts["reservas"][0]["data"] = ""
-        stts["reservas"][0]["inicio"] = ""    
+    stts["reservas"] = [{ 
+                        "id_funcionario":"",
+                        "funcionario" : "",  
+                        "data": "", 
+                        "inicio": "", 
+                        "especialidades" :  [{
+                                               "id_especialidade":"" , 
+                                               "especialidade" : "" , 
+                                               "preco": 0,
+                                               "sessoes":1, 
+                                               "tempoNecessarioPorSessao":30 
+                                            }]
+                     }]
 
 def validarDiaFuncionamento(stts):
     retorno = ""
@@ -974,7 +992,7 @@ def validarDiaFuncionamento(stts):
             msgResposta += " você tem que escolher um outro dia..."
             retorno = msgResposta
 
-        if trueSeDataHoraJaPassou (stts["reservas"][0]["data"], dictInfEmpresa["horario"]["fecha"]): 
+        elif trueSeDataHoraJaPassou (stts["reservas"][0]["data"], dictInfEmpresa["horario"]["fecha"]): 
             msgResposta  = "Hoje o estabelecimento já fechou."
             msgResposta += "Para qual dia você quer agendar?"
             retorno = msgResposta

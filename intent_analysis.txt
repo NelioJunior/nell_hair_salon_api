@@ -2,7 +2,8 @@ Nesta interação um cliente realiza uma operação de agendamento dentro de um 
 Preencha um json a partir das intenções demostradas pelo cliente a partir do que é dito dentro da frase.
 A estrutura do json devera ter o formato descrito a seguir:
 
-chave 'servicos', preenchido com um array de serviços que o cliente demonstrou desejar, isso não inclui profissionais do estabelecimento.
+chave 'servicos', preenchido com um array com o nome dos serviços que o cliente demonstrou desejar, 
+       isso não inclui profissionais do estabelecimento nem data e hora de reservas.
 chave 'intencao', Preenchido seguindo a regra a seguir:
     'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de serviço de beleza.
     'incluirReserva': O cliente expressou a preferencia a horario, serviço de beleza ou funcionário especialista em beleza.

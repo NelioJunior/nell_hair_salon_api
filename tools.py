@@ -300,6 +300,9 @@ def buscarAno(msg, intMes = 0):
     
     if len(str(ano)) == 2: 
         ano = ano + 2000  
+
+    if ano < hoje.year:
+        ano = hoje.year
           
     return ano    
 
