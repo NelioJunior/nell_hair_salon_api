@@ -1,5 +1,81 @@
 [
     {
+        "texto": "a",
+        "equivalente": ""
+    },
+    {
+        "texto": "de",
+        "equivalente": ""
+    },
+    {
+        "texto": "um",
+        "equivalente": ""
+    },
+    {
+        "texto": "servico",
+        "equivalente": ""
+    },
+    {
+        "texto": "servicos",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela dica",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pelo aviso",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela informacao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela sugestao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela ideia",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela conselho",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela ponto",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela feedback",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela recomendacao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela sugestao",
+        "equivalente": ""
+    },
+    {
+        "texto": "obrigada pela sugestao",
+        "equivalente": ""
+    },
+    {
+        "texto": "fazer",
+        "equivalente": ""
+    },
+    {
+        "texto": "de",
+        "equivalente": ""
+    },
+    {
+        "texto": "Deixe-me verificar",
+        "equivalente": ""
+    },
+    {
         "texto": "masculino",
         "equivalente": "masculina"
     },
@@ -24,14 +100,6 @@
         "equivalente": "cabelo"
     },
     {
-        "texto": "para um",
-        "equivalente": "para"
-    },
-    {
-        "texto": "um corte",
-        "equivalente": "cortar"
-    },   
-    {
         "texto": "corte",
         "equivalente": "cortar"
     },
@@ -42,7 +110,15 @@
     {
         "texto": "cabelereiro",
         "equivalente": "cortar"
-    },    
+    },   
+    {
+        "texto": "cortar unha",
+        "equivalente": "unha"
+    },       
+    {
+        "texto": "cortar unhas",
+        "equivalente": "unha"
+    },           
     {
         "texto": "uma hidratacao",
         "equivalente": "hidratacao"
@@ -66,26 +142,6 @@
     {
         "texto": "uma coloracao",
         "equivalente": "coloracao"
-    },
-    {
-        "texto": "um tingimento",
-        "equivalente": "tingimento"
-    },
-    {
-        "texto": "um design",
-        "equivalente": "design"
-    },
-    {
-        "texto": "um penteado",
-        "equivalente": "penteado"
-    },
-    {
-        "texto": "um alisamento",
-        "equivalente": "alisamento"
-    },
-    {
-        "texto": "um permanente",
-        "equivalente": "permanente"
     },
     {
         "texto": "depilador",
@@ -148,22 +204,6 @@
         "equivalente": "limpeza"
     },
     {
-        "texto": "um banho",
-        "equivalente": "banho"
-    },
-    {
-        "texto": "uma franja",
-        "equivalente": "franja"
-    },
-    {
-        "texto": "um bronzeamento",
-        "equivalente": "bronzeamento"
-    },
-    {
-        "texto": "um servico",
-        "equivalente": "servico"
-    },
-    {
         "texto": "uma aplicacao",
         "equivalente": "aplicacao"
     },
@@ -175,10 +215,6 @@
         "texto": "consulta",
         "equivalente": "listar"
     },     
-    {
-        "texto": "tenho um",
-        "equivalente": "tenho"
-    },
     {
         "texto": "tenho uma",
         "equivalente": "tenho"
@@ -218,10 +254,6 @@
     {
         "texto": "estou bem",
         "equivalente": "saudacao"
-    },
-    {
-        "texto": "servicos",
-        "equivalente": "servico"
     },
     {
         "texto": "repita",
@@ -476,42 +508,6 @@
         "equivalente": "obrigada"
     },    
     {
-        "texto": "obrigada pela dica",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pelo aviso",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela informacao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela sugestao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela ideia",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela conselho",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela ponto",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela feedback",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela recomendacao",
-        "equivalente": ""
-    },
-    {
         "texto": "muito obrigada",
         "equivalente": "adeus"
     },
@@ -520,15 +516,11 @@
         "equivalente": "indiferente"
     },
     {
-        "texto": "qualquer um",
-        "equivalente": "indiferente"
-    },
-    {
         "texto": "pode ser qualquer",
         "equivalente": "indiferente"
     },
     {
-        "texto": "qualquer um",
+        "texto": "qualquer",
         "equivalente": "indiferente"
     },
     {
@@ -1334,27 +1326,6 @@
     {
         "texto": "horas da noite",
         "equivalente": "da noite"
-    },
-    {
-        "texto": "obrigada pela sugestao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela sugestao",
-        "equivalente": ""
-    },
-
-    {
-        "texto": "fazer",
-        "equivalente": ""
-    },
-    {
-        "texto": "de",
-        "equivalente": ""
-    },
-    {
-        "texto": "Deixe-me verificar",
-        "equivalente": ""
     },
     {
         "texto": "informacoes",

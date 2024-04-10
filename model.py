@@ -1279,9 +1279,10 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
     msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)   
 
     if msgResposta == "": 
-        if intencao == "incluirReserva":
-            if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == ""  and stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and stts["reservas"][0]["id_funcionario"] == "":
-                msgResposta = buscarEspecialidadeNaoCadastrada(mensagemTraduzida)
+        if intencao == "incluirReserva" and len(detected["servicos"]) > 0:
+            if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "":
+                if stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and stts["reservas"][0]["id_funcionario"] == "":
+                    msgResposta = buscarEspecialidadeNaoCadastrada(mensagemTraduzida)
 
     if msgResposta == "": 
         if stts["reservas"][0]['especialidades'][0]["id_especialidade"] != ""  and  stts["reservas"][0]["id_funcionario"] != "":
