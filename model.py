@@ -50,7 +50,6 @@ def agrupar_horarios(horarios):
     
     return resultado_formatado
 
-
 def loadDicionariosDinamicos(pasta):
     global dictInfEmpresa
     global dictCliente 
@@ -287,6 +286,10 @@ def buscarEspecialidade(detected, genero, inexistente=[]):
             lstPalavrasChaves = tools.eliminar_duplicatas(lstPalavrasChaves)
             lstPalavrasChaves = lstPalavrasChaves.split()
 
+            if "feminina" in lstPalavrasChaves and "masculina" in lstPalavrasChaves:
+                lstPalavrasChaves = lstPalavrasChaves.replace("feminina", "")
+                lstPalavrasChaves = lstPalavrasChaves.replace("masculina", "")
+                
             num = 0
             for palavra in lstPalavrasChaves:    
 
@@ -762,7 +765,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
             state["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True    
 
     msgResposta = tools.substituir_interrogacoes(msgResposta)
-    msgResposta = msgResposta.rstrip(',')
+    msgResposta = msgResposta.strip().rstrip(',')
 
     return msgResposta
 

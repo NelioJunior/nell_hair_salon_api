@@ -1,5 +1,21 @@
 [
     {
+        "texto": "masculino",
+        "equivalente": "masculina"
+    },
+    {
+        "texto": "homem",
+        "equivalente": "masculina"
+    },
+    {
+        "texto": "feminino",
+        "equivalente": "feminina"
+    },
+    {
+        "texto": "mulher",
+        "equivalente": "feminina"
+    },
+    {
         "texto": "para uma",
         "equivalente": "para"
     },

@@ -1,28 +1,23 @@
 # nell_hair_salon_api
 
+## buscartratutor.json -  Regras  : ---------------------------------------------------------------------------------------------------
+
+      -  Considerar a ordernação pela ordem de insert (id) 
+      -  Usar gramatica "tarzan" todos verbos devem estar no infinitivo.
+      -  Preferencia a palavra no femino, Exemplos: Obrigado se torna obrigada, masculino se torna masculina  
+      -  todas as palavras no singular com excecao das horas 
+      -  Evitar espaco em branco no inicio e no final , por exemplo ' centopeia ' 
+      -  Frases com mais de uma palavrava devem prevalecer sobre frases de apenas uma palavra, e por ultimo por ordem alfabetica 
+                                                                                               (ex: apenas prevalece sobre somente) 
+                                                
+----------------------------------------------------------------------------------------------------------------------------------------
+
 
 USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESULTADOS ENTRE O PLAYGROUND E O CHATGTP 
 SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
 
 TO DO ------------------------------------------------------------------------------------------------------------------------
 
-usando python, digamos que o usuario entre com um texto "Quero cortar o cabelo" , o que quer dizer , ele nao 
-quer nada espefico, como um corte pra gente loira ou afro. Como eu faria um algoritimo para determinar qual e' o 
-item certo a selecionar ?
-
-[
-    {'item': 'generico', 'palavrasChaves':  ['corte', 'cabelo'] },
-    {'item': 'infantil', 'palavrasChaves':  ['corte', 'cabelo', 'infantil']}, 
-    {'item': 'ruivo', 'palavrasChaves':  ['corte', 'cabelo', 'ruivo']}, 
-    {'item': 'loiro', 'palavrasChaves':  ['corte', 'cabelo', 'loiro']}, 
-    {'item': 'afro', 'palavrasChaves':  ['corte', 'cabelo', 'afro']}, 
-]
-  
-Entendeu o problema ?  
-
-
-
----------------------------------------------------------------------------------------------------------------------------------
 CUIDADO, ISSO E' QUASE UMA PEGADINHA !
 
 SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' CANCELADO ESTRA KEY E O SISTEMA PARA DE FUNCIONAR  
