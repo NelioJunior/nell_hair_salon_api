@@ -8,8 +8,16 @@
         "equivalente": ""
     },
     {
+        "texto": "do",
+        "equivalente": ""
+    },
+    {
         "texto": "um",
         "equivalente": ""
+    },
+    {
+        "texto": "saber",
+        "equivalente": "como"
     },
     {
         "texto": "servico",
@@ -17,50 +25,6 @@
     },
     {
         "texto": "servicos",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela dica",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pelo aviso",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela informacao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela sugestao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela ideia",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela conselho",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela ponto",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela feedback",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela recomendacao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela sugestao",
-        "equivalente": ""
-    },
-    {
-        "texto": "obrigada pela sugestao",
         "equivalente": ""
     },
     {
@@ -508,10 +472,6 @@
         "equivalente": "obrigada"
     },    
     {
-        "texto": "muito obrigada",
-        "equivalente": "adeus"
-    },
-    {
         "texto": "tanto faz",
         "equivalente": "indiferente"
     },
@@ -582,42 +542,6 @@
     {
         "texto": "existe",
         "equivalente": "interessado"
-    },
-    {
-        "texto": "nao obrigada",
-        "equivalente": "nao"
-    },
-    {
-        "texto": "eu que agradeco",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigada",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "grato",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "grata",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "valeu",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigadinha",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "obrigadinho",
-        "equivalente": "adeus"
-    },
-    {
-        "texto": "agradeco",
-        "equivalente": "adeus"
     },
     {
         "texto": "tks",
@@ -1278,10 +1202,6 @@
     {
         "texto": "limpe",
         "equivalente": "limpar"
-    },
-    {
-        "texto": "nenhum",
-        "equivalente": "obrigada"
     },
     {
         "texto": "cancela",

@@ -583,7 +583,6 @@ def listarDisponibilidadeFuncionario(funcionario,diaReserva):
 
     return horariosLivres[:len(horariosLivres)-2] 
 
-
 def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
     horariosLivres = ""
 
@@ -1440,10 +1439,11 @@ class model:
                  msgResposta = horarioFuncionamento()  
             elif tools.buscarPalavra("fica", respBaseConhecimento[0]) or tools.buscarPalavra("ficam", respBaseConhecimento[0]) :
                 msgResposta = "Nosso endereço é em %s.Visite-nos!" % dictInfEmpresa["endereco"] 
-            elif tools.buscarPalavra("estabelecimento", respBaseConhecimento[0]):
-                msgResposta = dictInfEmpresa["nomeEmpresa"]
-            elif tools.buscarPalavra("nome", respBaseConhecimento[0]):
-                msgResposta = dictInfEmpresa["nomeEmpresa"]
+            elif tools.buscarPalavra("nome estabelecimento", respBaseConhecimento[0]):
+                msgResposta = dictInfEmpresa["nomeEmpresa"]  
+            elif tools.buscarPalavra("como", respBaseConhecimento[0]) and tools.buscarPalavra("reservar", respBaseConhecimento[0]):
+                msgResposta  = ("Entre com os serviços que deseja que sejam realizados,o horário " 
+                                "e o nome do profissional em caso de você ter alguma preferência.")
             else: 
                 msgResposta = horarioFuncionamento()      
 
