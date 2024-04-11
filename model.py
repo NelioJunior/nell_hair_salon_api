@@ -658,12 +658,14 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
 
                 if len(states["reservas"]) < len(lstFuncionariosAptos): 
                     diaReserva = states["reservas"][0]["data"]
+                    ano, mes, dia = diaReserva.split('-')
+                    data_dia_mes_ano = f"{dia}/{mes}/{ano}"
 
                     for item in lstFuncionariosAptos: 
                         horariosLivres = agrupar_horarios(listarDisponibilidadeFuncionario(item,diaReserva))
                         msgRetorno += "  %s disponivel nos seguintes horários: %s " %  (item["nome"], horariosLivres) 
 
-                    msgRetorno = (f"Para esta atividade,neste dia {diaReserva}, temos estes profissionais: {msgRetorno}. "  
+                    msgRetorno = (f"Para esta atividade,neste dia {data_dia_mes_ano}, temos estes profissionais: {msgRetorno}. "  
                                   f"Você tem alguma preferência por algum profissional?")
                     states["flagEscolherProfissional"] = True  
 
@@ -833,11 +835,13 @@ def validarHorarioEscolhido(states, horario):
 
                     if states["flagUsuarioDemonstrouPreferenciaAoProfissional"]:
                         msg = "Sinto, mas as %s, neste dia %s %s não esta disponivel." % (states["reservas"][0]["inicio"], prefixo, states["reservas"][0]["funcionario"]) 
+
                     elif states["reservas"][0]["data"] == "":
                         msg = "{person frow} Hummm,aparentemente nesta hora não tem ninguem livre pra te atender... Me diga que dia quer vir,para me ajudar a achar um horário pra você."
                     else:  
                         msg = "Ops! Neste horário nenhuma especialista no que você quer esta disponivel. "
-                        states["reservas"][0]["inicio"] = ""
+                       
+                    states["reservas"][0]["inicio"] = ""
                 
                     if horariosLivres != "":
                         if not trueSeDataHoraJaPassou(states["reservas"][0]["data"],arrayHorariosLivres[len(arrayHorariosLivres)-1]):
