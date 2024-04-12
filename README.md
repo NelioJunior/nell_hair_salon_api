@@ -57,7 +57,7 @@ Siga o passo-a-passo:
 - Nesta conversa você entrara com uma fala e esperara pela fala da atendente Angel.
 - No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 
-- Comece saudando a recepcionista Angel e aguarde a fala da Angel.
+- Comece saudando a recepcionista Angel e aguarde a fala dela.
 --------------------------------------------------------------------------------------------------------------------------------------
 
 

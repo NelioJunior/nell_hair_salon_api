@@ -1076,38 +1076,39 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
         else: 
             stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = False     
 
-    if intencao == "alterarReserva":
-        stts["flagAlterarAgendamento"] = True 
-        possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
-        if len(possivelArrayIdReserva) == 0:   
-            msgResposta = "é necessário o código de identificação da reserva para que a alteração seja feita."
-            stts["ultimaMensagemAssistente"] = msgResposta                                       
-            return msgResposta
+    if stts["flagConfirmarAgendamento"] == False:
+        if intencao == "alterarReserva": 
+            stts["flagAlterarAgendamento"] = True 
+            possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
+            if len(possivelArrayIdReserva) == 0:   
+                msgResposta = "é necessário o código de identificação da reserva para que a alteração seja feita."
+                stts["ultimaMensagemAssistente"] = msgResposta                                       
+                return msgResposta
 
-    if stts["flagCancelarAgendamento"]:
-        match = re.search(r'\b\d{6}\b', mensagemTraduzida)
+        if stts["flagCancelarAgendamento"]:
+            match = re.search(r'\b\d{6}\b', mensagemTraduzida)
 
-        if match:
-            intencao == "cancelarReservaJaEfetuada"
-            msgResposta = ""
+            if match:
+                intencao == "cancelarReservaJaEfetuada"
+                msgResposta = ""
 
-        elif intencao == "concordancia":                      
-            if excluirReserva(stts["stateIdAgenda"], pasta):
-                if stts["flagAlterarAgendamento"]:
-                    msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
-                else:   
-                    msgResposta  = "Sua reserva ja foi cancelada"
-                    stts["flagCancelarAgendamento"] = False 
-            else:
-                msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
+            elif intencao == "concordancia":                      
+                if excluirReserva(stts["stateIdAgenda"], pasta):
+                    if stts["flagAlterarAgendamento"]:
+                        msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
+                    else:   
+                        msgResposta  = "Sua reserva ja foi cancelada"
+                        stts["flagCancelarAgendamento"] = False 
+                else:
+                    msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
+                    del stts 
+
+            elif intencao == "discordancia":                      
                 del stts 
+                msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
 
-        elif intencao == "discordancia":                      
-            del stts 
-            msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
-
-        else:
-            msgResposta = "Desculpe.Eu nao entendi bem.Você quer cancelar agendamento marcado?"
+            else:
+                msgResposta = "Desculpe.Eu nao entendi bem.Você quer cancelar agendamento marcado?"
 
     if msgResposta == "":     
         possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
@@ -1275,7 +1276,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                     msgResposta  = f"Lamento muito {contato},mas por enquanto, não temos especialistas para o serviço que você procura."   
                     limparStateContatoAtivo(stts, True)
                 elif len(inexistente) != 0:
-                    msgResposta = f"Ainda não trabalhamos com {', '.join(inexistente)} mas podemos agendar os outros itens.Tudo bem?"
+                    msgResposta = f"Ainda não trabalhamos com {', '.join(inexistente)} mas podemos agendar outros itens.Tudo bem?"
                     if len(especialidade) > 0 :
                         addEspecialidadesInState(stts, especialidade)
 
