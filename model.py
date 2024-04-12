@@ -1276,10 +1276,9 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                     msgResposta  = f"Lamento muito {contato},mas por enquanto, não temos especialistas para o serviço que você procura."   
                     limparStateContatoAtivo(stts, True)
                 elif len(inexistente) != 0:
-                    msgResposta = f"Ainda não trabalhamos com {', '.join(inexistente)} mas podemos agendar outros itens.Tudo bem?"
+                    msgResposta = f"Ainda não trabalhamos com {', '.join(inexistente)},mas podemos continuar agendando outros itens.Tudo bem?"
                     if len(especialidade) > 0 :
                         addEspecialidadesInState(stts, especialidade)
-
                 else:    
                     msgResposta = "Qual serviço você esta procurando mesmo?"   
                     stts["ultimaMensagemAssistente"] = msgResposta
