@@ -1085,20 +1085,28 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             return msgResposta
 
     if stts["flagCancelarAgendamento"]:
-        if intencao == "concordancia":                      
+        match = re.search(r'\b\d{6}\b', mensagemTraduzida)
+
+        if match:
+            intencao == "cancelarReservaJaEfetuada"
+            msgResposta = ""
+
+        elif intencao == "concordancia":                      
             if excluirReserva(stts["stateIdAgenda"], pasta):
                 if stts["flagAlterarAgendamento"]:
-                   msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
+                    msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
                 else:   
                     msgResposta  = "Sua reserva ja foi cancelada"
                     stts["flagCancelarAgendamento"] = False 
             else:
                 msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
+                del stts 
+                return msgResposta    
+
         else: 
             msgResposta = "Ta bom,sua reserva esta mantida. Esperamos você em breve!"
-
-        del stts 
-        return msgResposta    
+            del stts 
+            return msgResposta    
 
     if msgResposta == "":     
         possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
@@ -1131,14 +1139,17 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                                 stts["stateIdAgenda" ] = colecaoReserva[0]["id_agenda"] 
 
                     else:      
-                        msgResposta  = f"{stts['contato']} algo e deu algo de errado com este número. Verifique se o numero de agendameto certo."
+                        msgResposta  = f"{stts['contato']} algo deu algo de errado com este número. Verifique se o numero de agendameto certo."
                 else: 
-                    if "Entre com um número válido" in  stts["ultimaMensagemAssistente"]:
-                        msgResposta = "Lamento,mas não consigo encontrar o agendamento,talvez seja melhor entrar em contato com o estabelecimento"    
+                    if "Entre com o número da reserva" in stts["ultimaMensagemAssistente"]:
+                        msgResposta = "Lamento,mas não consigo encontrar o agendamento,talvez seja melhor entrar em contato com o estabelecimento"  
+                        stts["flagCancelarAgendamento"] = False   
                     elif "me passe o número" in  stts["ultimaMensagemAssistente"]:
                         msgResposta = f"{stts['contato']} Entre com o número da reserva "    
+                        stts["flagCancelarAgendamento"] = True  
                     else:            
                         msgResposta  = f"{stts['contato']} Por favor, me passa o número de identificação da reserva para que eu possa prosseguir com o cancelamento.Deve ter ficado gravado no whats quando efetivou a reserva"  
+                        stts["flagCancelarAgendamento"] = True 
 
             stts["ultimaMensagemAssistente"] = msgResposta           
             return msgResposta

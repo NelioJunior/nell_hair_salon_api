@@ -84,7 +84,6 @@ def customer_service():
     
         prompt = {
             "cliente": user, 
-            "orientacao da gerente": nucleo_neural_info[0] , 
             "mensagem da cliente": user_msg,
             "data hora corrente": data_hora_formatada
         }

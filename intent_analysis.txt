@@ -21,5 +21,6 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'listarEspecialidades': O cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
     'infoEmpresa': O cliente expressou o desejo de saber sobre disponibilidade do estabelecimento.
     'infoEmpresa': O cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
+    'semrelacao': O cliente expressou gratidão. 
     'semrelacao': Resposta do cliente sem tem relação com os itens anteriores.
     'semrelacao': O cliente expressou comprimentos ou saudação. 

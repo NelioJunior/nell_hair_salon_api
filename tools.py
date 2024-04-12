@@ -39,13 +39,19 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
 
     detected = json.loads(message_info["detected"]) 
   
-    if detected["intencao"] != "infoEmpresa":
+    if detected["intencao"] == "semrelacao":
+
         if "listar" not in detected["intencao"]:
             if "reservar" in mensagemTraduzida:
                 detected["intencao"] = "incluirReserva"
 
-            if "alterar" in mensagemTraduzida:
+            elif "alterar" in mensagemTraduzida:
                 detected["intencao"] = "alterarReserva"
+
+            else:        
+                match = re.search(r'\b\d{6}\b', mensagemTraduzida)
+                if match:
+                    detected["intencao"] = "cancelarReservaJaEfetuada"   
 
     if mensagemTraduzida[0:3] == "sim": 
         detected["intencao"] = "concordancia"
