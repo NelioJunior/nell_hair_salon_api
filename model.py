@@ -1101,12 +1101,13 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             else:
                 msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
                 del stts 
-                return msgResposta    
 
-        else: 
-            msgResposta = "Ta bom,sua reserva esta mantida. Esperamos você em breve!"
+        elif intencao == "discordancia":                      
             del stts 
-            return msgResposta    
+            msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
+
+        else:
+            msgResposta = "Desculpe.Eu nao entendi bem.Você quer cancelar agendamento marcado?"
 
     if msgResposta == "":     
         possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
@@ -1308,7 +1309,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                 if "sobre" in mensagemOriginal: 
                     msgResposta = buscarListaFuncionarios("",stts)
 
-    msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)   
+        msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)   
 
     if msgResposta == "": 
         if intencao == "incluirReserva" and len(detected["servicos"]) > 0:
