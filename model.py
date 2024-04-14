@@ -623,7 +623,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
             if horariosLivres == "": 
                 if len(states["reservas"][0]["especialidades"]) > 1:
                     msgRetorno = "Infelizmente %s não há profissionais para os serviços quê você quer." % diaSemana
-                    msgRetorno += "Pode ser uma boa ideia voce separar estes serviços em outros dias.\n"
+                    msgRetorno += "Pode ser uma boa ideia você separar estes serviços em outros dias.\n"
                     msgRetorno += "Para que isso nao seja confuso, vamos aos poucos."
                     msgRetorno += "Entre com um serviço por vez.Ok?"
                     msgRetorno += "Ao confirmar o agendadamento de um dia,você começa outro.Vamos lá!"
@@ -1076,86 +1076,72 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
         else: 
             stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = False     
 
-    if stts["flagConfirmarAgendamento"] == False:
-        if intencao == "alterarReserva": 
-            stts["flagAlterarAgendamento"] = True 
+    if msgResposta == "":  
+        
+        trecho_chave = "cancelar o seu agendamento"
+
+        if stts["flagConfirmarAgendamento"] == False:
+
             possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
-            if len(possivelArrayIdReserva) == 0:   
-                msgResposta = "é necessário o código de identificação da reserva para que a alteração seja feita."
-                stts["ultimaMensagemAssistente"] = msgResposta                                       
-                return msgResposta
 
-        if stts["flagCancelarAgendamento"]:
-            match = re.search(r'\b\d{6}\b', mensagemTraduzida)
-
-            if match:
-                intencao == "cancelarReservaJaEfetuada"
-                msgResposta = ""
-
-            elif intencao == "concordancia":                      
-                if excluirReserva(stts["stateIdAgenda"], pasta):
-                    if stts["flagAlterarAgendamento"]:
-                        msgResposta  = f"{stts['contato']}, que serviços voce quer e tambem qual o novo dia e horário de agendamento" 
-                    else:   
-                        msgResposta  = "Sua reserva ja foi cancelada"
-                        stts["flagCancelarAgendamento"] = False 
-                else:
-                    msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
-                    del stts 
-
-            elif intencao == "discordancia":                      
-                del stts 
-                msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
-
-            else:
-                msgResposta = "Desculpe.Eu nao entendi bem.Você quer cancelar agendamento marcado?"
-
-    if msgResposta == "":     
-        possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
-
-        if intencao == "cancelarReservaJaEfetuada" or len(possivelArrayIdReserva) > 0: 
-            if stts["reservas"][0]["data"] == "" and  stts["reservas"][0]["inicio"] == "" and stts["reservas"][0]["id_funcionario"] == "":  
-                colecaoReserva = []
-                if len(possivelArrayIdReserva) > 0:   
-                    colecaoReserva = buscaReserva(possivelArrayIdReserva[0],pasta)
-
-                if len(colecaoReserva) > 0: 
-                    if stts["id_cliente"] == colecaoReserva[0]["id_cliente"]:  
-                        if colecaoReserva[0]["situacao"] == "fechada":
-                            msgResposta  = f"Consta aqui que voce. {stts['contato']}, já pagou antecipadamente o agendamento."
-                            del stts 
-                            stts["ultimaMensagemAssistente"] = msgResposta     
-                            return respBaseConhecimento[0] 
-
-                        else: 
-                            dthora = datetime.strptime(colecaoReserva[0]["dataHoraInicio"], '%Y-%m-%d %H:%M:%S')
-                            funcionario = colecaoReserva[0]["funcionario"]
+            if stts["flagCancelarAgendamento"]:
+                if intencao == "concordancia":
+                    
+                    if trecho_chave in stts["ultimaMensagemAssistente"]:
+                        if excluirReserva(stts["stateIdAgenda"], pasta):
                             if stts["flagAlterarAgendamento"]:
-                                msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, voce terá de cancelar a reserva anterior que seria com %s no dia %s/%s as %0.2d:%0.2d para fazer uma reserva nova.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
-                                stts["flagCancelarAgendamento"] = True 
-                                stts["stateIdAgenda" ] = colecaoReserva[0]["id_agenda"] 
+                                msgResposta  = f"{stts['contato']}, que serviços você quer e também qual o novo dia e horário de agendamento" 
+                            else:   
+                                msgResposta  = "Sua reserva já foi cancelada"
+                                stts["flagCancelarAgendamento"] = False 
+                        else:
+                            msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
+                            del stts                    
 
-                            else:
-                                msgResposta = f"{stts['contato']}, voce quer mesmo cancelar o seu agendamento com %s que seria dia %s/%s as %0.2d:%0.2d?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
-                                stts["flagCancelarAgendamento"] = True 
-                                stts["stateIdAgenda" ] = colecaoReserva[0]["id_agenda"] 
+                elif intencao == "discordancia":                      
+                    del stts 
+                    msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
 
-                    else:      
-                        msgResposta  = f"{stts['contato']} algo deu algo de errado com este número. Verifique se o numero de agendameto certo."
-                else: 
-                    if "Entre com o número da reserva" in stts["ultimaMensagemAssistente"]:
-                        msgResposta = "Lamento,mas não consigo encontrar o agendamento,talvez seja melhor entrar em contato com o estabelecimento"  
-                        stts["flagCancelarAgendamento"] = False   
-                    elif "me passe o número" in  stts["ultimaMensagemAssistente"]:
-                        msgResposta = f"{stts['contato']} Entre com o número da reserva "    
-                        stts["flagCancelarAgendamento"] = True  
-                    else:            
-                        msgResposta  = f"{stts['contato']} Por favor, me passa o número de identificação da reserva para que eu possa prosseguir com o cancelamento.Deve ter ficado gravado no whats quando efetivou a reserva"  
-                        stts["flagCancelarAgendamento"] = True 
+                elif intencao == "cancelarReservaJaEfetuada" or len(possivelArrayIdReserva) > 0: 
+                    if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and stts["reservas"][0]["id_funcionario"] == "":  
+                        colecaoReserva = []
+                        if len(possivelArrayIdReserva) > 0:   
+                            colecaoReserva = buscaReserva(possivelArrayIdReserva[0],pasta)
+
+                        if len(colecaoReserva) > 0:
+                            if stts["id_cliente"] == colecaoReserva[0]["id_cliente"]:  
+                                if colecaoReserva[0]["situacao"] == "fechada":
+                                    msgResposta  = f"Consta aqui que você. {stts['contato']}, já pagou antecipadamente o agendamento."
+                                    del stts 
+                                    stts["ultimaMensagemAssistente"] = msgResposta     
+                                    return respBaseConhecimento[0] 
+
+                                else: 
+                                    dthora = datetime.strptime(colecaoReserva[0]["dataHoraInicio"], '%Y-%m-%d %H:%M:%S')
+                                    funcionario = colecaoReserva[0]["funcionario"]
+                                    if stts["flagAlterarAgendamento"]:
+                                        msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, você terá de cancelar a reserva anterior que seria com %s no dia %s/%s as %0.2d:%0.2d para fazer uma reserva nova.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
+
+                                    else:
+                                        msgResposta = f"{stts['contato']},você quer mesmo {trecho_chave} com %s que seria dia %s/%s as %0.2d:%0.2d?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
+
+                                    stts["stateIdAgenda" ] = colecaoReserva[0]["id_agenda"] 
+                                    stts["flagCancelarAgendamento"] = True 
+                                    stts["flagAlterarAgendamento"] = False 
+                            else:      
+                                msgResposta  = (f"{stts['contato']} Não identifiquei você como cliente desta reserva."
+                                                "Verifique se o número esta certo."
+                                                "Pode ser tambem que o horário de agendamento já tenha passado.")
+                        else:      
+                            msgResposta  = (f"{stts['contato']} desculpa.Eu não entendi bem,Você quer apagar um agendamento?"
+                                            "Se for isso,me passe o número de agendameto.")
+            else: 
+                msgResposta = (f"{stts['contato']} Por favor,me passe o número de identificação da reserva para que eu possa prosseguir "
+                                "com o cancelamento.Deve ter ficado gravado no whats quando efetivou a reserva")
+                    
+                stts["flagCancelarAgendamento"] = True 
 
             stts["ultimaMensagemAssistente"] = msgResposta           
-            return msgResposta
-
 
     if msgResposta == "":  
         if intencao == "listarEspecialidades" and not stts["flagConfirmarAgendamento"]:  

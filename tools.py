@@ -682,7 +682,7 @@ def loadDicionariosDinamicos(urlServidor):
     global lstExpressao
     global lstPalavra
 
-    dictTradutor = json.load(open("./buscartradutor.json", "r"))
+    dictTradutor = json.load(open("./tradutor.json", "r"))
 
     lstHora = list(filter(lambda x: ":" in x["equivalente"],dictTradutor))
     lstExpressao = list(filter(lambda x: len(x["texto"].split()) > 1 and ":" not in x["equivalente"] ,dictTradutor))

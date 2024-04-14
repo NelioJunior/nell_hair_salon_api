@@ -17,6 +17,10 @@ USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESUL
 SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
 
 TO DO ------------------------------------------------------------------------------------------------------------------------
+  Em 13/Abril/24 
+      Preciso fazer uma bateria de testes de alteracao e cancelamento de reservas!!!
+
+  Em 12/Abril/24  removi da  linha 1157 de model.py a linha return msgResposta
 
   Em 11/Abr/24 Na linha 1312 do model.py eu avancei um tab na linha abaixo, atencao nos testes para que isso nao tenha 
   resultado em problemas ...    
