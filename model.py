@@ -1077,14 +1077,13 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = False     
 
     if msgResposta == "":  
-        
-        trecho_chave = "cancelar o seu agendamento"
 
         if stts["flagConfirmarAgendamento"] == False:
 
-            possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
-
             if stts["flagCancelarAgendamento"]:
+                trecho_chave = "cancelar o seu agendamento"
+                possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
+
                 if intencao == "concordancia":
                     
                     if trecho_chave in stts["ultimaMensagemAssistente"]:
@@ -1135,13 +1134,10 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                         else:      
                             msgResposta  = (f"{stts['contato']} desculpa.Eu não entendi bem,Você quer apagar um agendamento?"
                                             "Se for isso,me passe o número de agendameto.")
-            else: 
-                msgResposta = (f"{stts['contato']} Por favor,me passe o número de identificação da reserva para que eu possa prosseguir "
-                                "com o cancelamento.Deve ter ficado gravado no whats quando efetivou a reserva")
                     
-                stts["flagCancelarAgendamento"] = True 
+                    stts["flagCancelarAgendamento"] = True 
 
-            stts["ultimaMensagemAssistente"] = msgResposta           
+                stts["ultimaMensagemAssistente"] = msgResposta           
 
     if msgResposta == "":  
         if intencao == "listarEspecialidades" and not stts["flagConfirmarAgendamento"]:  
@@ -1159,7 +1155,8 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
             if not stts["flagConfirmarAgendamento"]:
                 especialidade = stts["reservas"][0]['especialidades'][0]["especialidade"] 
                 detected["servicos"] = especialidade                    
-                especialidade = buscarEspecialidade(detected,stts["contatoGenero"])                     
+                inexistente = []
+                especialidade = buscarEspecialidade(detected,stts["contatoGenero"],inexistente)
                 msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
         elif intencao == "listarFuncionarios" and stts['flagEscolherProfissional']:
@@ -1169,8 +1166,10 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
 
     if msgResposta == "":
         if intencao == "listarHorariosLivres":
-            especialidade = buscarEspecialidade(detected,stts["contatoGenero"])                     
-            msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
+            inexistente = []
+            especialidade = buscarEspecialidade(detected,stts["contatoGenero"],inexistente)
+            if len(inexistente) == 0:
+                msgResposta = listarFunionariosPorEspecialidade(especialidade,stts,respBaseConhecimento) 
 
     if msgResposta == "":
         if stts["reservas"][0]["data"] == "":
@@ -1240,14 +1239,15 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
     if msgResposta == "":
         especialidade = []
         if stts["flagAdicionarServicos"]: 
-            especialidade = buscarEspecialidade(detected,stts["contatoGenero"])
+            inexistente = []
+            especialidade = buscarEspecialidade(detected,stts["contatoGenero"],inexistente)
 
         elif stts["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
             inexistente = []
             especialidade = buscarEspecialidade(detected,stts["contatoGenero"],inexistente)
             stts["flagAdicionarServicos"] = len(especialidade) == 1      
         
-            flagServicoInexistente  = False 
+            flagServicoInexistente = False 
             if len(especialidade) != 0:
                 if len(list(filter(lambda i: especialidade[0]["id_especialidade"] == i["id_especialidade"],dictFuncionario))) == 0:
                     flagServicoInexistente = True 
