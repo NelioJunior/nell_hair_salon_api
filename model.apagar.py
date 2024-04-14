@@ -847,7 +847,7 @@ def verificarSeDeveFazerCRUD (states,msg,respBaseConhecimento):
             states["flagUsuarioDesejaFazerCRUD"] = True 
 
     if (respBaseConhecimento[1] == "incluirReserva" 
-            or respBaseConhecimento[1] == "alterarReserva"    
+            or respBaseConhecimento[1] == "alterarReservaJaEfetuada"    
             or respBaseConhecimento[1] == "listarReservaUsuario" 
             or respBaseConhecimento[1] == "cancelarReservaJaEfetuada" 
             or respBaseConhecimento[1] == "cancelarOperacaoEmAndamento"
@@ -1200,7 +1200,7 @@ def processCrud (stts,contato, mensagemTraduzida,mensagemOriginal,respBaseConhec
         else: 
             stts["flagUsuarioDemonstrouPreferenciaAoProfissional"] = False     
 
-    if respBaseConhecimento[1] == "alterarReserva":
+    if respBaseConhecimento[1] == "alterarReservaJaEfetuada":
         stts["flagAlterarAgendamento"] = True 
         possivelArrayIdReserva = [int(s) for s in mensagemTraduzida.split() if s.isdigit() and int(s) >= 100000 and int(s) <= 999999]
         if len(possivelArrayIdReserva) == 0:   

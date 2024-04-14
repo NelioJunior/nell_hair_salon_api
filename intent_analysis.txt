@@ -8,9 +8,10 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'incluirReserva': O cliente expressou o desejo de fazer uma nova reserva de serviço de beleza.
     'incluirReserva': O cliente expressou a preferencia a horario, serviço de beleza ou funcionário especialista em beleza.
     'incluirReserva': O cliente expressou o desejo de precisar de um servico de um profissional especialista em beleza. 
+    'incluirReserva': O cliente expressou o desejo de agendar, tendo este entrado com data ou hora. 
     'concordancia': O cliente expressou sinal de aprovação, por exemplo dizendo sim.
     'discordancia': O cliente expressou discordância, por exemplo dizendo não.
-    'alterarReserva': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
+    'alterarReservaJaEfetuada': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
     'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
     'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
     'listarReservaUsuario': O cliente expressou o desejo de se informar sobre as reservas feitas por ele.

@@ -17,8 +17,11 @@ USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESUL
 SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
 
 TO DO ------------------------------------------------------------------------------------------------------------------------
+  Em 14/Abril/24 
+    Se o cliente entra com a data numerica, por exemplo "dia 17" a funcao buscarData() nao localiza.   
+
   Em 13/Abril/24 
-      Preciso fazer uma bateria de testes de alteracao e cancelamento de reservas!!!
+    Preciso fazer uma bateria de testes de alteracao e cancelamento de reservas!!!
 
   Em 12/Abril/24  removi da  linha 1157 de model.py a linha return msgResposta
 
@@ -39,7 +42,7 @@ certa, e finalmente executar a api para dar a interacao com o cliente
 
 Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
 
----------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------
 Siga o passo-a-passo:
 
 - Escoha um destes nomes de clientes: 
@@ -62,8 +65,16 @@ Siga o passo-a-passo:
 - No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 
 - Comece saudando a recepcionista Angel e aguarde a fala dela.
---------------------------------------------------------------------------------------------------------------------------------------
 
+Prompts auxilires ------------------------------------------------------------------------------------------------------------------
+
+crie uma nova intercao escolhendo um cliente qualquer que voce escolher da lista. Inicie ja.
+
+crie uma nova intercao para excluir algum dos agendamentos criados anteriormente. Inicie ja.
+
+crie uma nova intercao para alterar algum dos agendamentos criados anteriormente. Inicie ja.
+
+-------------------------------------------------------------------------------------------------------------------------------------
 
 O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI 
 

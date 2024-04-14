@@ -1040,14 +1040,6 @@
         "equivalente": "ola"
     },
     {
-        "texto": "tudo bem com voce ?",
-        "equivalente": "ola"
-    },
-    {
-        "texto": "tudo certo ?",
-        "equivalente": "ola"
-    },
-    {
         "texto": "tem alguem ai ?",
         "equivalente": "ola"
     },
@@ -1144,7 +1136,7 @@
         "equivalente": "sim"
     },
     {
-        "texto": "tudo bem",
+        "texto": "tudo",
         "equivalente": "sim"
     },
     {

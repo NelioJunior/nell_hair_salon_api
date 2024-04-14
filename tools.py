@@ -46,7 +46,7 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
                 detected["intencao"] = "incluirReserva"
 
             elif "alterar" in mensagemTraduzida:
-                detected["intencao"] = "alterarReserva"
+                detected["intencao"] = "alterarReservaJaEfetuada"
 
             else:        
                 match = re.search(r'\b\d{6}\b', mensagemTraduzida)
@@ -522,8 +522,29 @@ def buscarDataDiaMesAno(msg):
        
     return retorno 
 
-def buscarData(msg):    
 
+def buscarDiaMes(msg):
+    match = re.search(r'dia\s*(\d{1,2})\b', msg)
+    if match:
+        dia = int(match.group(1))
+    else:
+        return ""
+
+    data_atual = datetime.now()
+
+    try:
+        if dia < data_atual.day:
+            proximo_mes = data_atual.replace(day=dia) + timedelta(days=30)
+        else:
+            proximo_mes = data_atual.replace(day=dia)
+
+        data_formatada = proximo_mes.strftime('%Y-%m-%d')
+        return data_formatada
+    except ValueError:
+        return ""
+
+
+def buscarData(msg):    
     if "depois amanha" in msg:
         depoisDeamanha = adicionarDias(2)
         retorno = depoisDeamanha
@@ -537,7 +558,9 @@ def buscarData(msg):
         if retorno != "":
            dt = datetime.strptime(retorno, '%d/%m/%Y')
            retorno =  "%0.2d-%0.2d-%0.2d" % (dt.year, dt.month, dt.day)
-       
+    if retorno == "":
+        retorno = buscarDiaMes(msg)
+
     return retorno     
 
 def converterHoraExtensaParaPadrao(msg):  
