@@ -1097,9 +1097,14 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                             msgResposta = "Algo deu errado! Você pode esperar alguns minutos e tente novamente ou entre em contato diretor com a gente.O que você achar melhor.Até mais" 
                             del stts                    
 
-                elif intencao == "discordancia":                      
-                    del stts 
-                    msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
+                elif intencao == "discordancia":     
+                    if stts["flagAlterarAgendamento"]:                 
+                        del stts 
+                        msgResposta = "Sinto que houve um problema de compreensão.Me diga exatamente o que você quer ou se quer alterar ou cancelar uma reserva."
+                    else:   
+                        del stts 
+                        msgResposta = "Tudo bem,sua reserva esta mantida. Esperamos você em breve!"
+
 
                 elif intencao == "cancelarReservaJaEfetuada" or len(possivelArrayIdReserva) > 0: 
                     if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and stts["reservas"][0]["id_funcionario"] == "":  
@@ -1119,7 +1124,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                                     dthora = datetime.strptime(colecaoReserva[0]["dataHoraInicio"], '%Y-%m-%d %H:%M:%S')
                                     funcionario = colecaoReserva[0]["funcionario"]
                                     if stts["flagAlterarAgendamento"]:
-                                        msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, você terá de cancelar a reserva anterior que seria com %s no dia %s/%s as %0.2d:%0.2d para fazer uma reserva nova.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
+                                        msgResposta = f"Para prosseguir com uma alteração,{stts['contato']}, você terá de cancelar a reserva anterior que seria com %s no dia %s/%s as %0.2d:%0.2d para fazer uma reserva nova.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
 
                                     else:
                                         msgResposta = f"{stts['contato']},você quer mesmo {trecho_chave} com %s que seria dia %s/%s as %0.2d:%0.2d?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
@@ -1132,8 +1137,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                                                 "Verifique se o número esta certo."
                                                 "Pode ser tambem que o horário de agendamento já tenha passado.")
                         else:      
-                            msgResposta  = (f"{stts['contato']} desculpa.Eu não entendi bem,Você quer apagar um agendamento?"
-                                            "Se for isso,me passe o número de agendameto.")
+                            msgResposta  = f"{stts['contato']},para cancelar seu agendamento me passe o número de identificação do agendamento."
                     
                     stts["flagCancelarAgendamento"] = True 
 
@@ -1417,6 +1421,11 @@ class model:
             if "Ainda não trabalhamos" in states[idx]["ultimaMensagemAssistente"]:                
                 limparStateContatoAtivo(states[idx], False)
                 return "Compreendo,sem problemas. Entre em contato se precisar de algo da gente."
+            elif states[idx]["flagConfirmarAgendamento"] == False:
+                states[idx]["flagAlterarAgendamento"] = True   
+                states[idx]["flagCancelarAgendamento"] = True
+        if intencao == "cancelarReservaJaEfetuada":    
+            states[idx]["flagCancelarAgendamento"] = True                     
 
         msgResposta = processCrud (states[idx],contato,mensagemOriginal,detected,respBaseConhecimento,self.pasta) 
 

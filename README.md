@@ -42,7 +42,14 @@ certa, e finalmente executar a api para dar a interacao com o cliente
 
 Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
 
------------------------------------------------------------------------------------------------------------------------------------------
+Testes ---------------------------------------------------------------------------------------------------------------------------------------
+
+  Fazer 4 testes de inclusao de agendamento 
+  Fazer 2 testes de exclusao de agendamento 
+  Fazer 2 testes de alteracao de agendamento 
+  Fazer 2 testes de lista de servicos
+  Fazer 2 testes sem ser sinteticos, ou seja sem a ajuda do GPT.
+
 Siga o passo-a-passo:
 
 - Escoha um destes nomes de clientes: 
@@ -74,7 +81,11 @@ crie uma nova intercao para excluir algum dos agendamentos criados anteriormente
 
 crie uma nova intercao para alterar algum dos agendamentos criados anteriormente. Inicie ja.
 
--------------------------------------------------------------------------------------------------------------------------------------
+SQL auxiliar -------------------------------------------------------------------------------------------------------------------------
+
+  select c.nome, a.* from agenda a inner JOIN cliente c on a.id_cliente = c.id_cliente where a.dataHoraInicio > '2024-04-13'
+
+--------------------------------------------------------------------------------------------------------------------------------------
 
 O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI 
 

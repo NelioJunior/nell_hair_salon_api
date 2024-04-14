@@ -11,6 +11,7 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'incluirReserva': O cliente expressou o desejo de agendar, tendo este entrado com data ou hora. 
     'concordancia': O cliente expressou sinal de aprovação, por exemplo dizendo sim.
     'discordancia': O cliente expressou discordância, por exemplo dizendo não.
+    'discordancia': O cliente expreessou que acredita que ocorreu algum erro.  
     'alterarReservaJaEfetuada': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
     'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
     'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.

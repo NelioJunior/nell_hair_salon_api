@@ -54,7 +54,11 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
                     detected["intencao"] = "cancelarReservaJaEfetuada"   
 
     if mensagemTraduzida[0:3] == "sim": 
-        detected["intencao"] = "concordancia"
+        match = re.search(r'\b\d{6}\b', mensagemTraduzida)
+        if match:
+            detected["intencao"] = "cancelarReservaJaEfetuada"   
+        else: 
+            detected["intencao"] = "concordancia"
 
     if mensagemTraduzida[0:3] == "nao": 
         detected["intencao"]= "discordancia"

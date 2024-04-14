@@ -16,6 +16,10 @@
         "equivalente": ""
     },
     {
+        "texto": "ta",
+        "equivalente": "esta"
+    },
+    {
         "texto": "saber",
         "equivalente": "como"
     },
@@ -1096,11 +1100,15 @@
         "equivalente": "sim"
     },
     {
+        "texto": "okay",
+        "equivalente": "ok"
+    },
+    {
         "texto": "ok",
         "equivalente": "sim"
     },
     {
-        "texto": "okay",
+        "texto": "esta sim",
         "equivalente": "sim"
     },
     {
