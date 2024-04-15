@@ -83,7 +83,7 @@ crie uma nova intercao para alterar algum dos agendamentos criados anteriormente
 
 SQL auxiliar -------------------------------------------------------------------------------------------------------------------------
 
-  select c.nome, a.* from agenda a inner JOIN cliente c on a.id_cliente = c.id_cliente where a.dataHoraInicio > '2024-04-13'
+  select c.nome, a.* from agenda a inner JOIN cliente c on a.id_cliente = c.id_cliente where a.dataHoraInicio > '2024-04-13';
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
