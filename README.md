@@ -1,4 +1,4 @@
-# nell_hair_salon_api
+# nell_hair_salon_api   (teste de conceito)
 
 ## buscartratutor.json -  Regras  : ---------------------------------------------------------------------------------------------------
 
@@ -11,10 +11,7 @@
                                                                                                (ex: apenas prevalece sobre somente) 
                                                 - sexo masculino
 ----------------------------------------------------------------------------------------------------------------------------------------
-
-
-USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESULTADOS ENTRE O PLAYGROUND E O CHATGTP 
-SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
+17/ABR/24 - lIBERAR VERSAO PARA TESTES. 
 
 TO DO ------------------------------------------------------------------------------------------------------------------------
   Em 14/Abril/24 
@@ -30,10 +27,14 @@ TO DO --------------------------------------------------------------------------
       
       msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)
 
----------------------------------------------------------------------------------------------------------------------------
+SUGESTOES --------------------------------------------------------------------------------------------------------------------
+USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESULTADOS ENTRE O PLAYGROUND E O CHATGTP 
+SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
+
 CUIDADO, ISSO E' QUASE UMA PEGADINHA !
 
-SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' CANCELADO ESTRA KEY E O SISTEMA PARA DE FUNCIONAR  
+  SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' 
+  CANCELADO ESTRA KEY E O SISTEMA PARA DE FUNCIONAR  
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
@@ -67,7 +68,8 @@ Siga o passo-a-passo:
 
 - Crie uma personalidade para o cliente que você escolheu o nome e seja esta pessoa.
 - Simule uma conversa entra você e uma recepcionista de salao de beleza chamada Angel. 
-  O objetivo da conversa é você marcar um agendamento no salao.
+- O objetivo da conversa é você marcar um agendamento no salao.
+- Tente agendar mais ou menos os 20 os serviços mais básico de um salao de beleza.
 - Nesta conversa você entrara com uma fala e esperara pela fala da atendente Angel.
 - No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 
@@ -75,7 +77,8 @@ Siga o passo-a-passo:
 
 Prompts auxilires ------------------------------------------------------------------------------------------------------------------
 
-crie uma nova intercao escolhendo um cliente qualquer que voce escolher da lista. Inicie ja.
+crie uma nova intercao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior. 
+Inicie ja.
 
 crie uma nova intercao para excluir algum dos agendamentos criados anteriormente. Inicie ja.
 

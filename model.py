@@ -282,6 +282,7 @@ def buscarEspecialidade(detected, genero, inexistente=[]):
         flag_inexistente = True  
 
         for especialidade in dictEspecialidade:
+
             lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"])
             lstPalavrasChaves = tools.eliminar_duplicatas(lstPalavrasChaves)
             lstPalavrasChaves = lstPalavrasChaves.split()
@@ -291,6 +292,7 @@ def buscarEspecialidade(detected, genero, inexistente=[]):
                 lstPalavrasChaves = lstPalavrasChaves.replace("masculina", "")
                 
             num = 0
+            
             for palavra in lstPalavrasChaves:    
 
                 if tools.buscarPalavra(palavra,servico_traduzido) > 0:
@@ -632,7 +634,7 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
 
                 limparStateContatoAtivo(states, False)
             else:
-                msgRetorno = "Na %s neste horário posso agendar pra você em um destes horários: %s"  % (diaSemana, horariosLivres)   
+                msgRetorno = "Na %s neste horário posso agendar pra você exatamente em um destes horários: %s"  % (diaSemana, horariosLivres)   
                 states["reservas"][0]["inicio"] = "" 
 
         elif len(lstFuncionariosAptos) == 1: 
@@ -1122,7 +1124,7 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                                 else: 
                                     dthora = datetime.strptime(colecaoReserva[0]["dataHoraInicio"], '%Y-%m-%d %H:%M:%S')
                                     funcionario = colecaoReserva[0]["funcionario"]
-                                    if stts["flagAlterarAgendamento"]:
+                                    if stts["flagAlterarAgendamento"]:                                        
                                         msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, você tem que {trecho_chave} que seria com %s no dia %s/%s as %0.2d:%0.2d.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
                                         stts["flagAlterarAgendamento"] = True
                                     else:
@@ -1139,8 +1141,13 @@ def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pas
                             if intencao == "cancelarReservaJaEfetuada":
                                 msgResposta  = f"{stts['contato']},para cancelar seu agendamento me passe o número de identificação do agendamento."
                             if intencao == "alterarReservaJaEfetuada":  
-                                msgResposta = (f"Para prosseguir com uma alteração,{stts['contato']}, você terá de cancelar a reserva para fazer outra nova."   
-                                               "Me passe o número de identificação do agendamento") 
+                                if stts["reservas"][0]["data"] == "" and stts["reservas"][0]["inicio"] == "" and stts["reservas"][0]["id_funcionario"] == "":
+                                    msgResposta = (f"Para prosseguir com uma alteração,{stts['contato']}, você terá de cancelar a reserva para fazer outra nova."   
+                                                "Me passe o número de identificação do agendamento") 
+                                else:
+                                    limparStateContatoAtivo(stts, False)
+                                    msgResposta = f"Okay,vamos corrigir isto.Que ou quais serviços você quer mesmo?"  
+
                             if len(possivelArrayIdReserva) > 0:
                                 msgResposta = (f"Nao localizei o número de reserva {possivelArrayIdReserva[0]},"
                                                "verifique se o número esta correto, ou talvez a data já passou.")      
