@@ -26,3 +26,4 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'gratidao': O cliente expressou gratidão. 
     'semrelacao': Resposta do cliente sem tem relação com os itens anteriores.
     'semrelacao': O cliente expressou comprimentos ou saudação. 
+    'semrelacao': O cliente expressou satisfação por ter conseguido agendar.
