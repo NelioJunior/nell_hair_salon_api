@@ -36,6 +36,7 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
 
     mensagemTraduzida = tradutorHora (mensagemTraduzida)
     mensagemTraduzida = buscartradutor (mensagemTraduzida)
+    mensagemTraduzida = mensagemTraduzida.strip()
 
     detected = json.loads(message_info["detected"]) 
   
