@@ -105,7 +105,7 @@ def customer_service():
     else:
         response = nucleo_neural_info[0]
 
-    # log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{nucleo_neural_info} - response:{response} \n")
+    log_message(f"{data_hora_ansi} user:{user} - user's message:{user_msg} - manager:{nucleo_neural_info} - response:{response} \n")
  
     return jsonify({'answer': response})
 
