@@ -69,7 +69,6 @@ Siga o passo-a-passo:
 - Crie uma personalidade para o cliente que você escolheu o nome e seja esta pessoa.
 - Simule uma conversa entra você e uma recepcionista de salao de beleza chamada Angel. 
 - O objetivo da conversa é você marcar um agendamento no salao.
-- Tente agendar mais ou menos os 20 os serviços mais básico de um salao de beleza.
 - Nesta conversa você entrara com uma fala e esperara pela fala da atendente Angel.
 - No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 
