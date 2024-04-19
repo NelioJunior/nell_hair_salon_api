@@ -20,8 +20,10 @@ body{
 
 .chatbox {
     position: absolute;
-    max-height: 60%;
-    width:98%;
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 40%;
+    width:90%;
     overflow-y: auto; 
     z-index: 7;
 }
@@ -79,6 +81,7 @@ body{
     margin-bottom: 15%;
     margin-left: 9%;
     max-width:82%;
+    max-height: 30%;
     z-index:8;
 }     
 
