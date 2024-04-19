@@ -10,24 +10,43 @@
       -  Frases com mais de uma palavrava devem prevalecer sobre frases de apenas uma palavra, e por ultimo por ordem alfabetica 
                                                                                                (ex: apenas prevalece sobre somente) 
                                                 - sexo masculino
-----------------------------------------------------------------------------------------------------------------------------------------
-17/ABR/24 - lIBERAR VERSAO PARA TESTES. 
 
-TO DO ------------------------------------------------------------------------------------------------------------------------
-  Em 14/Abril/24 
-    Se o cliente entra com a data numerica, por exemplo "dia 17" a funcao buscarData() nao localiza.   
+## TO DO ------------------------------------------------------------------------------------------------------------------------
 
-  Em 13/Abril/24 
-    Preciso fazer uma bateria de testes de alteracao e cancelamento de reservas!!!
+  17/Abril/24
 
-  Em 12/Abril/24  removi da  linha 1157 de model.py a linha return msgResposta
+    Fazer uma copia do celular virtual como uma rota do nell_hair_salon_api para testes.
+    Quando a Angela escreveu "quero cancelar"  nao foi comprendido corretamente.
+    Testar, quando 2 ou mais usuarios interagem com a Angel.
 
-  Em 11/Abr/24 Na linha 1312 do model.py eu avancei um tab na linha abaixo, atencao nos testes para que isso nao tenha 
+  16/Abril/24
+
+    Houve um caso em que foi solicitados alguns servicos, sendo que alguns destes nao eram feitos pelo mesmo funcionario, 
+    a Angel pediu para separar o agendamentos em mais de um. Apos concordado e o cliente feito o primeiro, ela simplesmente
+    encerrou sendo que seria melhor ela perguntar sobre outros servicos. apos o cliente aprovar o primero agendamento.
+
+    Pode ser uma boa ideia você separar estes serviços em outros dias  (seria mais adequado outras sessoes?)
+
+    Sera que da pra dar uma unica solucao ara estas duas questoes ?
+
+      Tratar localizar datas para quando o usuario escreve "depois (e Ns depois) de amanha" 
+      Tratar para para especificar melhor "agendar para depois do almoco, depois da academina, depois da novela" 
+
+
+  14/Abril/24 
+    Se o cliente entra com a data numerica, por exemplo "dia 17" a funcao buscarData() nao localiza.  √ 
+
+  13/Abril/24 
+    Preciso fazer uma bateria de testes de alteracao e cancelamento de reservas!!! √
+
+  Em 12/Abril/24  removi da  linha 1157 de model.py a linha return msgResposta √
+
+  Em 11/Abr/24 Na linha 1312 do model.py eu avancei um tab na linha abaixo, atencao nos testes para que isso nao tenha √
   resultado em problemas ...    
       
       msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)
 
-SUGESTOES --------------------------------------------------------------------------------------------------------------------
+## SUGESTOES --------------------------------------------------------------------------------------------------------------------
 USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESULTADOS ENTRE O PLAYGROUND E O CHATGTP 
 SENDO O PLAYGROUND MAIS DE ACORDO COM AS RESPOSTAS DA API
 
@@ -35,6 +54,25 @@ CUIDADO, ISSO E' QUASE UMA PEGADINHA !
 
   SE FOR COLOCADO A OPENAI KEY DIRETAMENTE "HARDCODE" E COMITADO, SIMPLEMENTE E' 
   CANCELADO ESTRA KEY E O SISTEMA PARA DE FUNCIONAR  
+
+## Testes do modelo ------------------------------------------------------------------------------------------------------------------
+Exemplo de teste utilizando terminal linux:
+
+  curl -X POST -H "Content-Type: application/json" -d '{"question": "Quero marcar para a proxima terca ", "user":"Nell"}' localhost:8000/customer_service
+
+### Execucao no ambiente de testes  
+
+  E' necessario executar no terminal linux para execucao junto com o flask:
+
+    ngrok http http://localhost:8080
+
+    Apos executar o grok copiar e colar no local adequando em chat.js 
+
+  Acesso ao ambiente de testes:
+
+  #####
+
+    https://nelltek.ddns.net/desenvolvimento/view/listaagenda.php      
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 

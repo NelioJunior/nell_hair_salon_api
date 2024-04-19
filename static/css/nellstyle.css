@@ -1,0 +1,495 @@
+#precoAgenda {
+	font-size: 32px;
+}
+
+#modalBuscarEspecialidade {
+   margin-top:150px	
+}
+
+.dd-option-image {
+	max-width: 40px !important;
+}
+
+small {
+	opacity: 0;
+}
+
+.dd-option-text{
+	opacity: 0;	
+}
+
+.dd-selected-text {
+	opacity: 0;		
+}
+
+.btn.btn-primary[disabled] {
+    background-color:#a6a6a6;
+}
+
+#avatarSelection{	
+  margin-top:-70px;
+  color:white;
+  zoom:.8;
+}	
+
+#imgQRCode{
+  height:260px;
+  width: 310px; 
+  margin-top:-42px; 
+  background-color:white
+}
+
+#SelEspecialidade div img {
+	margin-top: 20px;
+	width:96%;
+	height:150%;
+}
+
+.bg-dark {
+    background-color: #100702!important;    
+}
+
+#navbarResponsive span {
+	color: white
+}
+
+#navbarResponsive .fa {
+	color: white
+}
+
+.modal-header {
+    background: url('../img/header.jpg') no-repeat ;
+    background-size: 950px auto; 
+}
+
+.modal-footer {
+	background-color: #1E5057;	
+}
+
+.modal-content {
+	background:#eff3f5
+}
+
+label {
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 20px;
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.content-wrapper{
+	display:none;
+}
+
+.sticky-footer{
+	display:none;
+}
+
+#frmModal .row {
+	margin-top: 5px;            
+}
+
+.input-filtro-busca input[type="text"] , .dropdown-menu input[type="text"] {
+	display: inline-block;
+	height: 20px;
+	padding: 4px 6px;
+	margin-bottom: 10px;
+	font-size: 12px;
+	line-height: 20px;
+	color: #555;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	vertical-align: middle
+}
+
+input {
+	margin-left: 0
+}
+
+.dropdown-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 1000;
+	display: none;
+	float: left;
+	min-width: 100%;
+	padding: 5px 0;
+	margin: 2px 0 0;
+	list-style: none;
+	background-color: #fff;
+	border: 0px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.profissionais-agenda .dropdown-menu {
+	display: block;
+	overflow-y: scroll; 
+	height:220%; 
+	margin: 0; 
+	border-top: none; 
+	-webkit-border-radius: 0 0 6px 6px; 
+	-moz-border-radius: 0 0 6px 6px; 
+	border-radius: 0 0 6px 6px;
+}
+
+@media (min-width: 980px) {}
+
+.input-filtro-busca {
+	position: relative;
+	float: left;
+	width: 100%;
+}
+
+#menuAgenda {
+	position: absolute;
+	z-index: 8;
+	width: 92%;
+	background-color: #fff;
+	border: 0
+}
+
+#listaBoxProfScroll {
+	background-color: #fff;
+	float: left;
+	height: auto;
+	border-bottom: 0px;
+	width: 100%;
+	padding-right: 16px;
+	outline: none;
+	overflow: hidden;
+}
+
+#listaBoxProfScroll #profCheckAll {
+	float: left;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 0 4px 18px;
+	margin: 0
+}
+
+#listaBoxProfScroll .nav-header {
+	padding: 10px 15px 10px 10px;
+	font-size: 13px;
+	text-transform: none;
+	font-weight: 700;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 5px;
+	color: #333;
+	width: 100%;
+	box-sizing: border-box
+}
+
+#listaBoxProfScroll .selecionarTodos {
+	cursor: pointer;
+	font-size: 10px;
+	color: #000;
+	float: right;
+	padding: 0 7px
+}
+
+#listaBoxProfScroll #auto-checkboxes {
+	float: left;
+	width: 100%
+}
+
+#listaBoxProfScroll ol#auto-checkboxes li.categoria-arvore input[type=checkbox] {
+	margin: 0 3px 0 0
+}
+
+#listaBoxProfScroll ol#auto-checkboxes li.categoria-arvore ol li {
+	float: left;
+	height: 42px;
+	width: 100%;
+	border: 1px solid #fff;
+	color: #fff;
+	box-sizing: border-box;
+	padding: 10px 4px 0 8px;
+	position: relative
+}
+
+#listaBoxProfScroll ol#auto-checkboxes li.categoria-arvore ol li input {
+	float: left
+}
+
+#listaBoxProfScroll ol#auto-checkboxes li.categoria-arvore ol li label {
+	float: left;
+	padding: 0 0 0 10px
+}
+
+#listaBoxProfScroll ol#auto-checkboxes li.categoria-arvore ol li img {
+	float: right;
+	width: 30px;
+	height: 30px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	position: absolute;
+	top: 6px;
+	right: 6px
+}
+
+.en-scroll-caixa-y {
+	overflow: auto;
+	height: 360px;
+	border: 0px;
+}
+
+#pesquisarProf {
+	margin: 10px;
+	width: 98%;
+}
+
+body {
+	overflow: hidden;
+	height:20px;
+}
+
+#tbAgendaHead {
+  width:60vw;
+}
+
+#tbAgenda {
+  width:60vw;
+}
+
+#tbAgendaHead thead {
+	background: #cdcdcd;
+}
+
+#tbAgendaHead td {            
+	border:1px solid #EEEEEE;
+	min-width: 123px;	
+	max-width: 123px;
+}
+
+#tbAgenda tbody {
+	background:#f2f2f2;	
+}
+
+#tbAgenda tr {            
+	height:77px;
+}
+
+#tbAgenda td {
+	border:1px solid #EEEEEE;
+	min-width: 123px;	
+	max-width: 123px;
+	width: 123px;
+}
+
+
+#tbAgendaHead td:nth-child(1) { 
+	min-width: 60px;	
+	max-width: 60px;	
+	width: 60px;	
+}
+
+#tbAgenda td:nth-child(1) { 
+    padding-top:25px; 
+	min-width: 60px;	
+	max-width: 60px;
+	width: 60px;	
+	background-color:#cdcdcd;
+}
+
+.avatar {
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+}
+
+.table-responsive {
+	background: white;
+}
+
+.content-wrapper {
+	background:#EEEEEE;
+}        
+
+#ColEspecialidade {
+    padding: 3px;
+	overflow-y: scroll;   
+	overflow-x: hidden;
+	float:right;
+	border: 1px #b3b3b3 solid; 
+	left:163px; 
+	width:250px; 
+	height:200px;
+}
+
+.SelecaoEspecialidade {	
+    background-color: #ffffff;
+    padding: 3px;
+	overflow-y: scroll;   
+	overflow-x: hidden;
+	float:left;
+	border: 1px #b3b3b3 solid; 
+	left:1px; 
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;	
+	width:300px; 
+	height:200px;	
+}
+
+.SelecaoEspecialidade div {	
+	height:115px;
+	margin-left:10%;
+	float:left;
+}
+
+#cargo {
+	margin-top:8px;
+}
+
+#especializacoes , #disponibilidade , #horarios {	
+	margin-bottom:20px;
+	padding:5px;
+	border: 1px #cccccc solid; 
+	border-radius: 8px;	
+	width:269px;
+	height:200px;	
+	vertical-align:middle;
+}
+
+.avatarLoad {
+	z-index:1000;
+	position:absolute;
+	margin-top:-10px;
+	margin-left:15px;
+	padding:3px;
+	border:1px solid #d9d9d9;
+	border-radius:50%;
+	width:130px;
+	height:125px
+}
+
+.pChkBox{
+	margin:2px ;     
+	margin-top:5px;
+}
+
+.pChkBox input[type=checkbox] {
+  -ms-transform: scale(1.4); 
+  -moz-transform: scale(1.4); 
+  -webkit-transform: scale(1.4); 
+  -o-transform: scale(1.4); 
+}
+
+input[type=color] {
+	height:40px;
+}
+
+#horarios label {
+	float:left; 
+	margin-left:18px;
+	font-size:13px;	
+	width:95px;
+}
+
+
+#horarios input[type=time] {
+	float:left; 
+	margin-left:18px;
+	margin-bottom:5px;
+	font-size:13px;		
+ 	width: 36%;
+ 	height: 30px;
+} 
+
+
+.SpanLeft{
+	display:inline-block;
+	vertical-align:top;
+	width:80px;
+	margin-top:-3px;
+}
+
+.check_box {
+	font-size:40px
+}
+
+#ColServicoProfissional {
+    padding: 3px;
+	overflow-y: scroll;   
+	overflow-x: hidden;
+	float:right;
+	border: 1px #b3b3b3 solid; 
+	left:263px; 
+	width:100px; 
+	height:185px;
+}
+
+.SelecaoServicoProfissional {
+    padding: 3px;
+	overflow-y: scroll;   
+	overflow-x: hidden;
+	float:left;
+	border: 1px #b3b3b3 solid; 
+	left:1px; 
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;	
+	width:150px; 
+	height:185px;	
+}
+
+.SelecaoServicoProfissional div {
+	margin-top:12px;
+	height:200px;
+}
+
+input[type=number] {
+	text-align: right;
+}
+
+.mirror{
+	display: inline-block; 
+	-webkit-transform: matrix(-1, 0, 0, 1, 0, 0);
+	-moz-transform: matrix(-1, 0, 0, 1, 0, 0);
+	-o-transform: matrix(-1, 0, 0, 1, 0, 0);
+	transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 40%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 3.5s;
+  animation: fadein 0.5s, fadeout 0.5s 3.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

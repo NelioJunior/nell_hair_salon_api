@@ -1,0 +1,347 @@
+.overFlowHidden {	
+	width: 100%;
+	height: 100%;
+	overflow: hidden;		
+}
+
+.relative {
+	position: relative
+}
+
+.relative--fill {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0
+}
+
+.bg-img-icons-showcase {
+	width: 6000px;
+	animation: 60s bgIconsShowcaseSlide infinite linear;
+	animation-fill-mode: both;
+	backface-visibility: hidden;
+	perspective: 1000
+}
+
+@keyframes bgIconsShowcaseSlide {
+	0% {
+		transform: translateZ(0)
+	}
+	to {
+		transform: translate3d(-1200px, 0, 0)
+	}
+}
+
+.linear {
+	animation-timing-function: linear
+}
+
+.bg-img-icons-showcase:after {
+	background-image: url("../img/tech.png");
+	background-repeat: repeat-x; 
+	background-size: auto 100vh;
+	height: 100vh;		
+}
+
+.bg-img:after {
+	content: "";
+	display: block;
+	position: relative;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-position: top;
+	border-radius: inherit
+}
+
+.bg-img>* {
+	position: relative;
+	z-index: 2
+}
+
+.bg-img-invert:after {
+	filter: brightness(0) invert(100%)
+}
+
+.bg-img-o-100:after {
+	opacity: 1
+}
+
+.bg-img-o-90:after {
+	opacity: .9
+}
+
+.bg-img-o-80:after {
+	opacity: .8
+}
+
+.bg-img-o-70:after {
+	opacity: .7
+}
+
+.bg-img-o-60:after {
+	opacity: .6
+}
+
+.bg-img-o-50:after {
+	opacity: .5
+}
+
+.bg-img-o-40:after {
+	opacity: .4
+}
+
+.bg-img-o-30:after {
+	opacity: .3
+}
+
+.bg-img-o-20:after {
+	opacity: .2
+}
+
+.bg-img-o-15:after {
+	opacity: .15
+}
+
+.bg-img-o-10:after {
+	opacity: .1
+}
+
+.bg-img-o-005:after {
+	opacity: .05
+}
+
+.bg-img-o-0025:after {
+	opacity: .025
+}
+
+.bg-img-o-0:after {
+	opacity: 0
+}
+
+.Publicity {
+	left: 5%;
+	width:46%;
+	position: absolute; 
+	text-align: justify;
+	text-justify: inter-word;
+	font-weight: bold;
+	color: #337CBB; 
+	font-family: "Times New Roman", Times, serif;
+	text-shadow: 4px 4px 4px #aaa;
+}	
+
+.txtIncio{
+	font-size: 2em;
+}
+
+.modal-header, close {
+	background-color: #337CBB;
+	color:white !important;
+	text-align: center;
+	font-size: 30px;
+	border-radius: 5px 5px 0px 0px;
+}			
+		
+.modal-header > h4 {
+	color:white !important;
+}
+		
+#cnvs {
+	display: block;
+	margin: 0 auto;	
+	margin-left: -60vh;
+	width: 170vh;
+	height:85vh;				
+	z-index:1000;
+}
+
+#vd {
+	position:absolute;
+	opacity:0; 
+	top: 0px;
+	left: 0px;
+	width:80%;        // Pelo tamanho de video é possivel controlar a velocidade e qualidade do video;
+	height:80%;
+}
+	
+#containerCnvs{
+	position:relative;
+	top: 18vh;
+	width: 50vh;
+	height:85vh;
+	overflow:hidden;
+}
+	
+@-webkit-keyframes fadingCnvs {
+	0% {
+		opacity: 0
+	}				
+	20% {
+		opacity: 0
+	}								
+	40% {
+		opacity: 1
+	}				
+	60% {
+		opacity: 1
+	}
+	80% {
+		opacity: 0
+	}
+	100% {
+		opacity: 0
+	}				
+}
+
+@keyframes fadingCnvs {
+	0% {
+		opacity: 0
+	}				
+	20% {
+		opacity: 0
+	}								
+	40% {
+		opacity: 1
+	}				
+	60% {
+		opacity: 1
+	}
+	80% {
+		opacity: 0
+	}
+	100% {
+		opacity: 0
+	}				
+}
+
+.w3-animate-fading {
+	-webkit-animation: fading 10s infinite;
+	animation: fading 10s infinite
+}
+
+h4{
+	color:#337CBB;
+}
+
+@-webkit-keyframes fading {
+	0% {
+		opacity: 0
+	}				
+	20% {
+		opacity: 1
+	}								
+	40% {
+		opacity: 1
+	}				
+	60% {
+		opacity: 1
+	}
+	80% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}				
+}
+
+@keyframes fading {
+	0% {
+		opacity: 0
+	}				
+	20% {
+		opacity: 1
+	}								
+	40% {
+		opacity: 1
+	}				
+	60% {
+		opacity: 1
+	}
+	80% {
+		opacity: 1
+	}
+	100% {
+		opacity: 0
+	}				
+}
+
+.w3-animate-opacity {
+	-webkit-animation: opac 1.5s;
+	animation: opac 1.5s
+}
+
+.navbar {
+	background-color: #337CBB ;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #F1F1F1!important;
+}
+
+#miniLogo {
+	margin:5px;
+	width:30px;
+	height:30px;
+}  
+															
+.fontePadrao{
+	color: #337CBB;
+}
+
+.BtnTopo{
+	font-size:10px;
+	background-size: 45px 30px;
+	background-position: center;					
+	margin:1px;
+	width:45px;
+	height:30px;
+}
+									
+#Ingles{
+	display:none;
+	background-image: url("../img/UnitedKingdom.png");
+}
+
+#Portugues{
+	display:none;
+	background-image: url("../img/Brazil.png");
+}
+
+#produtos{
+	padding-top: 140px;
+	top: 100px;
+	left: 10px;
+}
+
+#QuemSomos{			
+	padding-top: 140px;
+	top: 100px;
+	left: 10px;
+}
+
+#Contato{
+	padding-top: 140px;
+	top: 100px;
+	left: 10px;
+} 
+
+#rodape{
+	position: relative;
+	left: 1px;
+} 
+								
+#ramo:invalid { 
+	color: gray; 
+}	
+
+#slides{
+	display:none;
+	position:absolute; 
+	width:100%; 
+	height:100%; 
+	z-index:1; 
+	top:117px; 
+	left:0;			
+}			

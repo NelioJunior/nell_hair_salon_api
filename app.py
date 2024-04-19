@@ -3,7 +3,7 @@ import json
 import openai
 from neural import nucleo_neural
 from datetime import datetime 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from tools import obter_chave_openai
 from tools import log_message
@@ -38,6 +38,11 @@ CORS(app)
 @app.route("/", methods=['GET'])
 def root():
     return f"<h1>Nelltek LLM APIs.All Rights Reserved</h1>"
+
+@app.route("/smartphone", methods=['GET'])
+def smartphone():
+     return render_template('index.html')
+
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():

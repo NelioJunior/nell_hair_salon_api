@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ url_for('static', filename='css/css2rounded.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='vendor/js/css/chat.css') }}" rel="stylesheet"> 
+</head>
+
+<body>
+
+	<div class="chatbot">
+		<img src="{{ url_for('static', filename='img/smartphone.png') }}" alt="Smartphone" class="smartphone">
+		<header>
+			<div class="row">
+				<div class="col-md-2">
+					<h5 class="close-btn"><img src="{{ url_for('static', filename='img/brunetteHair.png') }}" class="chat-avatar"></h5> 
+				</div>		
+				<div class="col-md-7 text-left">
+					<h5 class="close-btn">&nbsp;&nbsp;&nbsp;Simulador UX</h5> 
+				</div>		
+				<div class="col-md-3">
+					<i  class="fa fa-phone icon-custom-size"></i>
+					<i  class="fa fa-wifi icon-custom-size"></i>
+				</div>		
+			</div>	
+		</header>
+		
+		<div id="divCliente">
+			<select id="selChatCustomer">
+				<option value="11">Angela</option>
+				<option value="6">Bernadete</option>
+				<option value="8">Emmy</option>
+				<option value="5">Haroldo</option>
+				<option value="10">ju</option>
+				<option value="7">Mel</option>
+				<option value="12">natasha</option>
+				<option value="9">Nell</option>
+				<option value="3">Pati</option>
+				<option value="1">Renato</option>
+				<option value="13">Ricardo</option>
+				<option value="4">Silva</option>
+				<option value="2">Silvio</option>
+			</select>		
+		</div>
+
+		<ul class="chatbox">
+		</ul>
+		
+		<div class="chat-input">
+			<textarea placeholder="Digite uma mensagem..." spellcheck="false" required></textarea>
+			<span id="send-btn" class="material-symbols-rounded">send</span>
+		</div>
+	</div>
+
+</body>
+<script src="{{ url_for('static', filename='vendor/js/chat.js') }}"></script>
+</html>
