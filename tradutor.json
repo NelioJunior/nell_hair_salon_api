@@ -16,6 +16,10 @@
         "equivalente": ""
     },
     {
+        "texto": "em",
+        "equivalente": ""
+    },
+    {
         "texto": "ta",
         "equivalente": "esta"
     },
@@ -360,6 +364,22 @@
         "equivalente": "nao"
     },
     {
+        "texto": "meio dia trinta",
+        "equivalente": "12:30"
+    },
+    {
+        "texto": "meio dia meio",
+        "equivalente": "12:30"
+    },
+    {
+        "texto": "meio dia meia",
+        "equivalente": "12:00"
+    },
+    {
+        "texto": "meio dia",
+        "equivalente": "12:00"
+    },
+    {
         "texto": "meia",
         "equivalente": "30"
     },
@@ -540,24 +560,32 @@
         "equivalente": "indiferente"
     },
     {
+        "texto": "interessado cancelar",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "interessado",
+        "equivalente": "interessada"
+    },
+    {
         "texto": "tratamento",
-        "equivalente": "interessado"
+        "equivalente": "interessada"
     },
     {
         "texto": "especifico",
-        "equivalente": "interessado"
+        "equivalente": "interessada"
     },
     {
         "texto": "voces tem",
-        "equivalente": "interessado"
+        "equivalente": "interessada"
     },
     {
         "texto": "voces trabalham com",
-        "equivalente": "interessado"
+        "equivalente": "interessada"
     },
     {
         "texto": "existe",
-        "equivalente": "interessado"
+        "equivalente": "interessada"
     },
     {
         "texto": "tks",
@@ -984,6 +1012,14 @@
         "equivalente": "sim"
     },
     {
+        "texto": "quero cancelar",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao quero",
+        "equivalente": "nao"
+    },
+    {
         "texto": "quero",
         "equivalente": "sim"
     },
@@ -1272,14 +1308,6 @@
         "equivalente": "informar"
     },
     {
-        "texto": "meio dia meio",
-        "equivalente": "12:30"
-    },
-    {
-        "texto": "meio dia meia",
-        "equivalente": "12:00"
-    },
-    {
         "texto": "zero horas",
         "equivalente": "00:00"
     },
@@ -1345,10 +1373,6 @@
     },
     {
         "texto": "30 dia trinta",
-        "equivalente": "12:30"
-    },
-    {
-        "texto": "meio dia trinta",
         "equivalente": "12:30"
     },
     {

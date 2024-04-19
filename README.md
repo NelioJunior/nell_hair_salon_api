@@ -1,5 +1,9 @@
 # nell_hair_salon_api   (teste de conceito)
 
+# Marketing -------------------------------------------------------------------------------------------------------------------------
+
+  Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
+
 ## buscartratutor.json -  Regras  : ---------------------------------------------------------------------------------------------------
 
       -  Considerar a ordernação pela ordem de insert (id) 
@@ -15,9 +19,11 @@
 
   17/Abril/24
 
-    Fazer uma copia do celular virtual como uma rota do nell_hair_salon_api para testes.
-    Quando a Angela escreveu "quero cancelar"  nao foi comprendido corretamente.
-    Testar, quando 2 ou mais usuarios interagem com a Angel.
+    Imprementar consistencia para quando o usuario entrar com "Depois (depois) de amanha"  
+
+    Fazer uma copia do celular virtual como uma rota do nell_hair_salon_api para testes.  √
+    Quando a Angela escreveu "quero cancelar"  nao foi comprendido corretamente. √
+    Testar, quando 2 ou mais usuarios interagem com a Angel.  √  (E' Bom fazer mais testes)  
 
   16/Abril/24
 

@@ -109,7 +109,6 @@ body{
 
 .chat.outgoing p {			
     color: black;
-    max-width: 250px;
     background-color: #E1FFC7;
     z-index: 3;
     margin-right: 10px;			
@@ -122,7 +121,6 @@ body{
 
 .chat.incoming p {			
     color: black;
-    max-width: 250px;					
     background-color: #fff;
     z-index: 3;
     margin-left: 10px;
@@ -141,9 +139,8 @@ body{
 .chat-input textarea {
     margin: 10px;
     width: 85%;
-    height: 90%; /* Definindo a altura do textarea como 100% do chat-input */
-    border: none; /* Removendo a borda */
-    resize: none; /* Impedindo o redimensionamento */
-    padding: 10px; /* Adicionando algum preenchimento interno */
-    box-sizing: border-box; /* Mantendo o tamanho total do elemento */
+    height: 90%; 
+    padding: 10px;
+    box-sizing: border-box; 
+    border-radius: 10px;
 }
