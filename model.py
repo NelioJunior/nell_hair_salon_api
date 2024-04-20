@@ -701,75 +701,77 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     retorno = ""
     msgResposta = ""
 
-    if state["ultimaMensagemAssistente"][:19] == "Para esta atividade":
-        state["flagAdicionarServicos"] = False 
+    if state["flagCancelarAgendamento"] != False:
 
-    if respBaseConhecimento[1] == "concordancia":
-        if "anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
-            if "sim" in mensagemTraduzida:
-                retorno = "Você gostaria de incluir mais serviços ao seu agendamento? Se sim, me diga qual?"
-                state["flagAdicionarServicos"] = True 
-                return retorno
-            else:
-                state["flagAdicionarServicos"] = False 
+        if state["ultimaMensagemAssistente"][:19] == "Para esta atividade":
+            state["flagAdicionarServicos"] = False 
 
-        elif "Você gostaria de incluir mais serviços ao seu agendamento" in state["ultimaMensagemAssistente"]:
-            if len(state["reservas"][0]['especialidades']) == 1: 
-                retorno = "Quais são os outros serviço que você quer?"
-                return retorno
-    if respBaseConhecimento[1] == "discordancia":  
-        state["flagAdicionarServicos"] = False   
-    
+        if respBaseConhecimento[1] == "concordancia":
+            if "anotei aqui que você quer fazer" in state["ultimaMensagemAssistente"]:
+                if "sim" in mensagemTraduzida:
+                    retorno = "Você gostaria de incluir mais serviços ao seu agendamento? Se sim, me diga qual?"
+                    state["flagAdicionarServicos"] = True 
+                    return retorno
+                else:
+                    state["flagAdicionarServicos"] = False 
 
-    if state["flagAdicionarServicos"]:
-        especialidaesEscolhidas = ""
+            elif "Você gostaria de incluir mais serviços ao seu agendamento" in state["ultimaMensagemAssistente"]:
+                if len(state["reservas"][0]['especialidades']) == 1: 
+                    retorno = "Quais são os outros serviço que você quer?"
+                    return retorno
+        if respBaseConhecimento[1] == "discordancia":  
+            state["flagAdicionarServicos"] = False   
         
-        for idx,item in enumerate(state["reservas"][0]["especialidades"]): 
-            separador = "," if idx < len(state["reservas"][0]["especialidades"])-2 else " e "
-            especialidaesEscolhidas = especialidaesEscolhidas + item["especialidade"].lower() + separador
 
-        especialidaesEscolhidas = especialidaesEscolhidas[:len(especialidaesEscolhidas)-3]   
+        if state["flagAdicionarServicos"]:
+            especialidaesEscolhidas = ""
+            
+            for idx,item in enumerate(state["reservas"][0]["especialidades"]): 
+                separador = "," if idx < len(state["reservas"][0]["especialidades"])-2 else " e "
+                especialidaesEscolhidas = especialidaesEscolhidas + item["especialidade"].lower() + separador
 
-        retorno = ""
+            especialidaesEscolhidas = especialidaesEscolhidas[:len(especialidaesEscolhidas)-3]   
 
-    if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
-        retorno += "quais serviços você quer? "
+            retorno = ""
 
-    if state["reservas"][0]["data"] == "":
-        retorno += "qual é a data que você quer marcar?"
+        if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
+            retorno += "quais serviços você quer? "
 
-    elif state["reservas"][0]["inicio"] == "":
-        retorno += "qual hora você quer vir?" 
+        if state["reservas"][0]["data"] == "":
+            retorno += "qual é a data que você quer marcar?"
 
-    elif state["reservas"][0]["id_funcionario"] == "": 
-        retorno += "se você tem preferência, qual profissional?" 
+        elif state["reservas"][0]["inicio"] == "":
+            retorno += "qual hora você quer vir?" 
 
-    if retorno != "" :
-        msgResposta = "Informe %s " % retorno
+        elif state["reservas"][0]["id_funcionario"] == "": 
+            retorno += "se você tem preferência, qual profissional?" 
 
-        if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
-            msgResposta = "Me diga o dia em que você quer vir ou o profissional se já tem um em mente."
+        if retorno != "" :
+            msgResposta = "Informe %s " % retorno
 
-        elif state["reservas"][0]["inicio"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
-            msgResposta = "Entendi.Então me informe detalhes tipo,os serviços que você quer sejam feitos,dia e hora do agendamento"
-     
-    elif trueSeDataHoraJaPassou (state["reservas"][0]["data"], state["reservas"][0]["inicio"]): 
-        msgResposta = "Olha, só tem um pequeno problema,mas nada que seja grave\nO horário que você escolheu já passou...Escolha outro horário e dia, por favor"
-        state["reservas"][0]["data"] = ""
-        state["reservas"][0]["inicio"] = ""
+            if state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] != "":
+                msgResposta = "Me diga o dia em que você quer vir ou o profissional se já tem um em mente."
 
-    else: 
-        msgResposta = "" 
+            elif state["reservas"][0]["inicio"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]['especialidades'][0]["id_especialidade"] == "":
+                msgResposta = "Entendi.Então me informe detalhes tipo,os serviços que você quer sejam feitos,dia e hora do agendamento"
+        
+        elif trueSeDataHoraJaPassou (state["reservas"][0]["data"], state["reservas"][0]["inicio"]): 
+            msgResposta = "Olha, só tem um pequeno problema,mas nada que seja grave\nO horário que você escolheu já passou...Escolha outro horário e dia, por favor"
+            state["reservas"][0]["data"] = ""
+            state["reservas"][0]["inicio"] = ""
 
-    if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]["inicio"] == "":
-        state["flagUsuarioDesejaFazerCRUD"]  = False   
+        else: 
+            msgResposta = "" 
 
-    if state["reservas"][0]["id_funcionario"] != "":
-        if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["inicio"] == "":
-            state["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True    
+        if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["id_funcionario"] == "" and state["reservas"][0]["inicio"] == "":
+            state["flagUsuarioDesejaFazerCRUD"]  = False   
 
-    msgResposta = tools.substituir_interrogacoes(msgResposta)
-    msgResposta = msgResposta.strip().rstrip(',')
+        if state["reservas"][0]["id_funcionario"] != "":
+            if state["reservas"][0]['especialidades'][0]["id_especialidade"] == "" and state["reservas"][0]["data"] == "" and state["reservas"][0]["inicio"] == "":
+                state["flagUsuarioDemonstrouPreferenciaAoProfissional"] = True    
+
+        msgResposta = tools.substituir_interrogacoes(msgResposta)
+        msgResposta = msgResposta.strip().rstrip(',')
 
     return msgResposta
 
@@ -1064,12 +1066,11 @@ def listarFunionariosPorEspecialidade(especialidade, stts, respBaseConhecimento)
     return  msgResposta       
 
 
-def processCrud (stts,contato,mensagemOriginal,detected,respBaseConhecimento,pasta):
+def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pasta):
     msgResposta = ""
     hrPesquisa = "" 
     mensagemTraduzida = respBaseConhecimento[0]
-
-    intencao = json.loads(respBaseConhecimento[1])["intencao"] 
+    detected = respBaseConhecimento
 
     if stts["flagEscolherProfissional"]:
         funcionario = buscarFuncionario(mensagemOriginal)
@@ -1408,7 +1409,6 @@ class model:
         contato = infUltimaMensagem["user"]  
         mensagemOriginal = infUltimaMensagem["message"]        
         msgResposta = ""
-        detected = json.loads(infUltimaMensagem["detected"]) 
         intencao = json.loads(respBaseConhecimento[1])["intencao"] 
 
         clearOldInteractions(states)
@@ -1438,14 +1438,18 @@ class model:
                 states[idx]["flagAlterarAgendamento"] = True   
                 states[idx]["flagCancelarAgendamento"] = True
 
-        if intencao == "cancelarReservaJaEfetuada":    
-            states[idx]["flagCancelarAgendamento"] = True     
+        if intencao == "cancelarOperacaoEmAndamento":
+            states[idx]["flagCancelarAgendamento"] = True  
+            intencao = "cancelarReservaJaEfetuada"            
 
+        if intencao == "cancelarReservaJaEfetuada":    
+            states[idx]["flagCancelarAgendamento"] = True  
+  
         if intencao == "alterarReservaJaEfetuada": 
             states[idx]["flagAlterarAgendamento"] = True 
             states[idx]["flagCancelarAgendamento"] = True      
                               
-        msgResposta = processCrud (states[idx],contato,mensagemOriginal,detected,respBaseConhecimento,self.pasta) 
+        msgResposta = processCrud (states[idx],contato,mensagemOriginal,intencao,respBaseConhecimento,self.pasta) 
 
         if intencao == "infoEmpresa":
             if tools.buscarPalavra("responsavel", respBaseConhecimento[0]):
