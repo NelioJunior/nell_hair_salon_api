@@ -9,6 +9,7 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'incluirReserva': O cliente expressou a preferencia a horario, serviço de beleza ou funcionário especialista em beleza.
     'incluirReserva': O cliente expressou o desejo de precisar de um servico de um profissional especialista em beleza. 
     'incluirReserva': O cliente expressou o desejo de agendar, tendo este entrado com data ou hora. 
+    'incluirReserva': O cliente citou um nome de uma pessoa que nao seja ela mesmo,sinal que provalmente quer agendar um serviço com a pessoa citada.
     'concordancia': O cliente expressou sinal de aprovação, por exemplo dizendo sim.
     'discordancia': O cliente expressou discordância, por exemplo dizendo não.
     'discordancia': O cliente expreessou que acredita que ocorreu algum erro.  

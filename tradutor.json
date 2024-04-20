@@ -4,6 +4,10 @@
         "equivalente": ""
     },
     {
+        "texto": "da",
+        "equivalente": ""
+    },
+    {
         "texto": "de",
         "equivalente": ""
     },
@@ -26,6 +30,26 @@
     {
         "texto": "saber",
         "equivalente": "como"
+    },
+    {
+        "texto": "apos",
+        "equivalente": "depois"
+    },
+    {
+        "texto": "minha",
+        "equivalente": ""
+    },
+    {
+        "texto": "minhas",
+        "equivalente": ""
+    },
+    {
+        "texto": "meu",
+        "equivalente": ""
+    },
+    {
+        "texto": "meus",
+        "equivalente": ""
     },
     {
         "texto": "mechas",
@@ -117,7 +141,19 @@
     },
     {
         "texto": "uma lavagem",
-        "equivalente": "lavagem"
+        "equivalente": "lavar"
+    },
+    {
+        "texto": "lavagem",
+        "equivalente": "lavar"
+    },
+    {
+        "texto": "enxaguar",
+        "equivalente": "lavar"
+    },
+    {
+        "texto": "limpar",
+        "equivalente": "lavar"
     },
     {
         "texto": "uma coloracao",
@@ -1216,15 +1252,23 @@
         "equivalente": "listar"
     },
     {
+        "texto": "mudar",
+        "equivalente": "alterar"
+    },
+    {
         "texto": "mudanca",
         "equivalente": "alterar"
     },
     {
-        "texto": "trocar",
-        "equivalente": "alterar"
+        "texto": "alterar cor unha",
+        "equivalente": "unha"
     },
     {
-        "texto": "mudar",
+        "texto": "alterar cor cabelo",
+        "equivalente": "cor cabelo"
+    },
+    {
+        "texto": "trocar",
         "equivalente": "alterar"
     },
     {

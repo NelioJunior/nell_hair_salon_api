@@ -17,6 +17,9 @@
 
 ## TO DO ------------------------------------------------------------------------------------------------------------------------
 
+  19/Abril/24 
+    Verificar erro de resposta na mensagem do usuario "Eu quero mudar a cor do meu cabelo"
+
   17/Abril/24
 
     Imprementar consistencia para quando o usuario entrar com "Depois (depois) de amanha"  

@@ -21,6 +21,24 @@ def read_config_credentials():
             credentials[key] = value.strip()
     return credentials
 
+def calcular_amanha_ou_depois(msg):
+    data_formatada = ""
+    msg = removerAcentos(msg).lower()
+    palavras = re.findall(r'\b\w+\b', msg)
+    
+    contador_depois = 0
+    
+    for i, palavra in enumerate(palavras):
+        if palavra == "depois" and "amanha" in palavras[i+1:]:
+            contador_depois += 1
+
+    if contador_depois != 0:
+        data_atual = datetime.now()
+        data_resultante = data_atual + timedelta(days=contador_depois + 1)
+        data_formatada = data_resultante.strftime('%Y-%m-%d')
+
+    return data_formatada
+
 def eliminar_duplicatas(palavras_chave):
     palavras_lista = palavras_chave.split()
     palavras_sem_duplicatas = set(palavras_lista)
@@ -546,22 +564,21 @@ def buscarDiaMes(msg):
         return ""
 
 
-def buscarData(msg):    
-    if "depois amanha" in msg:
-        depoisDeamanha = adicionarDias(2)
-        retorno = depoisDeamanha
-    else:     
-        retorno = convertDataExtensaParaPadrao(msg)
-    
-    if retorno == "nao localizado": 
-        retorno = convertDataExtensaParaPadrao(convertDiaSemanaParaExtensa(msg))
-    if retorno == "nao localizado":
-        retorno = buscarDataDiaMesAno(msg)
-        if retorno != "":
-           dt = datetime.strptime(retorno, '%d/%m/%Y')
-           retorno =  "%0.2d-%0.2d-%0.2d" % (dt.year, dt.month, dt.day)
+def buscarData(msg):   
+
+    retorno = calcular_amanha_ou_depois(msg)
+
     if retorno == "":
-        retorno = buscarDiaMes(msg)
+        retorno = convertDataExtensaParaPadrao(msg)
+        
+        if retorno == "nao localizado": 
+            retorno = convertDataExtensaParaPadrao(convertDiaSemanaParaExtensa(msg))
+        if retorno == "nao localizado":
+            retorno = buscarDataDiaMesAno(msg)
+            if retorno != "":
+                retorno = datetime.strptime(retorno, '%d/%m/%Y')
+        if retorno == "":
+            retorno = buscarDiaMes(msg)
 
     return retorno     
 
