@@ -17,6 +17,8 @@
 
 ## TO DO ------------------------------------------------------------------------------------------------------------------------
 
+  20/Abril/24 E' preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar.
+
   19/Abril/24 
     Verificar erro de resposta na mensagem do usuario "Eu quero mudar a cor do meu cabelo"
 
@@ -123,12 +125,12 @@ Siga o passo-a-passo:
 
 Prompts auxilires ------------------------------------------------------------------------------------------------------------------
 
-crie uma nova intercao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior. 
+crie uma nova interacao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior. 
 Inicie ja.
 
-crie uma nova intercao para excluir algum dos agendamentos criados anteriormente. Inicie ja.
+crie uma nova interacao para excluir algum dos agendamentos criados anteriormente. Inicie ja.
 
-crie uma nova intercao para alterar algum dos agendamentos criados anteriormente. Inicie ja.
+crie uma nova interacao para alterar algum dos agendamentos criados anteriormente. Inicie ja.
 
 SQL auxiliar -------------------------------------------------------------------------------------------------------------------------
 

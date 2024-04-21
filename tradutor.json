@@ -24,8 +24,36 @@
         "equivalente": ""
     },
     {
+        "texto": "na",
+        "equivalente": ""
+    },
+    {
+        "texto": "no",
+        "equivalente": ""
+    },
+    {
+        "texto": "renovar",
+        "equivalente": ""
+    },
+    {
         "texto": "ta",
         "equivalente": "esta"
+    },
+    {
+        "texto": "visual",
+        "equivalente": "estilo"
+    },
+    {
+        "texto": "look",
+        "equivalente": "estilo"
+    },
+    {
+        "texto": "aparencia",
+        "equivalente": "estilo"
+    },
+    {
+        "texto": "imagem",
+        "equivalente": "estilo"
     },
     {
         "texto": "saber",
@@ -1252,12 +1280,28 @@
         "equivalente": "listar"
     },
     {
+        "texto": "mude",
+        "equivalente": "alterar"
+    },
+    {
         "texto": "mudar",
+        "equivalente": "alterar"
+    },
+    {
+        "texto": "substitua",
+        "equivalente": "alterar"
+    },
+    {
+        "texto": "substituir",
         "equivalente": "alterar"
     },
     {
         "texto": "mudanca",
         "equivalente": "alterar"
+    },
+    {
+        "texto": "alterar estilo",
+        "equivalente": ""
     },
     {
         "texto": "alterar cor unha",
@@ -1270,6 +1314,10 @@
     {
         "texto": "trocar",
         "equivalente": "alterar"
+    },
+    {
+        "texto": "alterar estilo",
+        "equivalente": ""
     },
     {
         "texto": "colaborador",

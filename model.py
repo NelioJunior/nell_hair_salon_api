@@ -701,7 +701,7 @@ def verificaItensFaltantes(state, respBaseConhecimento, mensagemTraduzida):
     retorno = ""
     msgResposta = ""
 
-    if state["flagCancelarAgendamento"] != False:
+    if state["flagCancelarAgendamento"] == False:
 
         if state["ultimaMensagemAssistente"][:19] == "Para esta atividade":
             state["flagAdicionarServicos"] = False 
@@ -1070,7 +1070,7 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
     msgResposta = ""
     hrPesquisa = "" 
     mensagemTraduzida = respBaseConhecimento[0]
-    detected = respBaseConhecimento
+    detected = json.loads(respBaseConhecimento[1]) 
 
     if stts["flagEscolherProfissional"]:
         funcionario = buscarFuncionario(mensagemOriginal)
@@ -1347,8 +1347,11 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
 
     if msgResposta == "":   
         intencao = "incluirReserva"
-        dt = datetime.strptime(stts["reservas"][0]["data"], "%Y-%m-%d")
-        dtReserva = "%s/%s/%s" % (dt.day, dt.month, dt.year)    
+        dtReserva = ""
+
+        if stts["reservas"][0]["data"] != "":  
+            dt = datetime.strptime(stts["reservas"][0]["data"], "%Y-%m-%d")
+            dtReserva = "%s/%s/%s" % (dt.day, dt.month, dt.year)    
 
         if stts["informacaoAoUsuario"]:
             msgResposta = stts["informacaoAoUsuario"] 
@@ -1371,16 +1374,19 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
             funcionarios = funcionarios[0:len(funcionarios)-3]      
             atividades = atividades[0:len(atividades)-3]     
 
-            msgResposta += " atividades: %s " % atividades  
-            msgResposta += " Data: %s  Início: %s " % (dtReserva,stts["reservas"][0]["inicio"]) 
-            msgResposta += " profissionais %s" % funcionarios
-            msgResposta += " O valor será de %.2f reais" % vlrTotal    
-            msgResposta += " Tudo bem ? Podemos confirmar esta dados? Sim ou não?"
+            if funcionarios != "" and stts["reservas"][0]["inicio"] != "" and atividades != "":
+                msgResposta += " atividades: %s " % atividades  
+                msgResposta += " Data: %s  Início: %s " % (dtReserva,stts["reservas"][0]["inicio"]) 
+                msgResposta += " profissionais %s" % funcionarios
+                msgResposta += " O valor será de %.2f reais" % vlrTotal    
+                msgResposta += " Tudo bem ? Podemos confirmar esta dados? Sim ou não?"
 
-            msgResposta = tools.alterar_data_extenso(msgResposta)
+                msgResposta = tools.alterar_data_extenso(msgResposta)
 
-            stts["ultimaMensagemAssistente"] = msgResposta   
-            stts["flagConfirmarAgendamento"] = True 
+                stts["ultimaMensagemAssistente"] = msgResposta   
+                stts["flagConfirmarAgendamento"] = True 
+            else:
+                msgResposta = "Me de mais detalhes para que eu possa te ajudar."    
 
     return msgResposta
 
