@@ -1127,7 +1127,6 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
                                     funcionario = colecaoReserva[0]["funcionario"]
                                     if stts["flagAlterarAgendamento"]:                                        
                                         msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, você tem que {trecho_chave} que seria com %s no dia %s/%s as %0.2d:%0.2d.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
-                                        stts["flagAlterarAgendamento"] = True
                                     else:
                                         msgResposta = f"{stts['contato']},você quer mesmo {trecho_chave} com %s que seria dia %s/%s as %0.2d:%0.2d?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
                                         stts["flagCancelarAgendamento"] = True 
@@ -1441,8 +1440,10 @@ class model:
                 limparStateContatoAtivo(states[idx], False)
                 return "Compreendo,sem problemas. Entre em contato se precisar de algo da gente."
             elif states[idx]["flagConfirmarAgendamento"] == False:
-                states[idx]["flagAlterarAgendamento"] = True   
-                states[idx]["flagCancelarAgendamento"] = True
+                if states[idx]["flagCancelarAgendamento"]:
+                    states[idx]["flagAlterarAgendamento"] = False 
+                if states[idx]["flagAlterarAgendamento"]:    
+                    states[idx]["flagCancelarAgendamento"] = False 
 
         if intencao == "cancelarOperacaoEmAndamento":
             states[idx]["flagCancelarAgendamento"] = True  
