@@ -1342,7 +1342,8 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
             msgResposta = validarHorarioEscolhido(stts, stts["reservas"][0]["inicio"]) 
 
     if msgResposta == "": 
-        msgResposta = verificaItensFaltantes(stts, respBaseConhecimento, mensagemTraduzida)    
+        if intencao == "incluirReserva":
+            msgResposta = verificaItensFaltantes(stts, respBaseConhecimento, mensagemTraduzida)    
 
     if msgResposta == "":   
         intencao = "incluirReserva"

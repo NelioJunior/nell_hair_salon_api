@@ -32,6 +32,34 @@
         "equivalente": ""
     },
     {
+        "texto": "nao vou poder ir",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao vou poder vir",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao vou poder estar",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao vou poder comparecer",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao vai dar para vir",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao vai dar para ir",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao estarei",
+        "equivalente": "cancelar"
+    },
+    {
         "texto": "renovar",
         "equivalente": ""
     },
@@ -102,6 +130,10 @@
     {
         "texto": "Deixe-me verificar",
         "equivalente": ""
+    },
+    {
+        "texto": "conseguirei",
+        "equivalente": "conseguir"
     },
     {
         "texto": "masculino",
@@ -622,6 +654,14 @@
     {
         "texto": "aberto a sugestoes",
         "equivalente": "indiferente"
+    },
+    {
+        "texto": "impossibilitado",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "nao conseguir",
+        "equivalente": "cancelar"
     },
     {
         "texto": "interessado cancelar",
@@ -1376,7 +1416,11 @@
         "equivalente": "cancelar"
     },
     {
-        "texto": "nao poderei comparecer ",
+        "texto": "poderei",
+        "equivalente": "poder"
+    },
+    {
+        "texto": "nao poder",
         "equivalente": "cancelar"
     },
     {

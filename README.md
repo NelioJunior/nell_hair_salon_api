@@ -117,7 +117,7 @@ Siga o passo-a-passo:
 
 - Crie uma personalidade para o cliente que você escolheu o nome e seja esta pessoa.
 - Simule uma conversa entra você e uma recepcionista de salao de beleza chamada Angel. 
-- O objetivo da conversa é você marcar um agendamento no salao.
+- O objetivo da conversa é você marcar, alterar ou cancelar um agendamento no salao .
 - Nesta conversa você entrara com uma fala e esperara pela fala da atendente Angel.
 - No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 
@@ -183,8 +183,6 @@ Estudar
     Verificar se rola com o banco de dados mencionado
 
     https://blog.futuresmart.ai/langchain-sql-agents-openai-llms-query-database-using-natural-language    
-
-
 
 ## Exemplo de uso do comando curtl para testes local com endpoint customer_service
 

@@ -15,6 +15,7 @@ chave 'intencao', Preenchido seguindo a regra a seguir:
     'discordancia': O cliente expreessou que acredita que ocorreu algum erro.  
     'alterarReservaJaEfetuada': O cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
     'cancelarReservaJaEfetuada': O cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
+    'cancelarReservaJaEfetuada': O cliente comunicou que nao vai poder vir ou ir ao estabelecimento.
     'cancelarOperacaoEmAndamento': O cliente expressou o desejo de desistir da operação que está realizando.
     'listarReservaUsuario': O cliente expressou o desejo de se informar sobre as reservas feitas por ele.
     'listarHorariosLivres': O cliente expressou o desejo de saber os horários livres do estabelecimento em um determinado período.
