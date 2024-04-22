@@ -51,7 +51,6 @@ def log_message(message):
 def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     mensagemTraduzida = message_info["message"].lower() 
     mensagemTraduzida = mensagemTraduzida.replace(nomeAssistente,"")   
-
     mensagemTraduzida = tradutorHora (mensagemTraduzida)
     mensagemTraduzida = buscartradutor (mensagemTraduzida)
     mensagemTraduzida = mensagemTraduzida.strip()
@@ -161,7 +160,8 @@ def buscartradutor(palavra):
     for item in dictTradutor:
         itm = item["texto"]
         if buscarPalavra(itm, retorno) > 0: 
-            retorno =  re.sub(rf'\b{itm}\b', item["equivalente"], retorno)
+            retorno = re.sub(rf'\b{itm}\b', item["equivalente"], retorno)
+            retorno = re.sub(r'\s+', ' ', retorno)
 
     return retorno
 

@@ -409,7 +409,7 @@
     },
     {
         "texto": "posso",
-        "equivalente": "quero"
+        "equivalente": "querer"
     },
     {
         "texto": "algo",
@@ -1072,8 +1072,32 @@
         "equivalente": "sim"
     },
     {
-        "texto": "queria",
+        "texto": "querer desmarcar",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "querer",
         "equivalente": "sim"
+    },
+    {
+        "texto": "desejo cancelar",
+        "equivalente": "cancelar"
+    },     
+    {
+        "texto": "desfazer",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "Gostaria de desmarcar",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "desmarcar",
+        "equivalente": "cancelar"
+    },
+    {
+        "texto": "sim cancelar",
+        "equivalente": "cancelar"
     },
     {
         "texto": "quero cancelar",

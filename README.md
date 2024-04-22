@@ -17,7 +17,7 @@
 
 ## TO DO ------------------------------------------------------------------------------------------------------------------------
 
-  20/Abril/24 E' preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar.
+  20/Abril/24 E' preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar √.
 
   19/Abril/24 
     Verificar erro de resposta na mensagem do usuario "Eu quero mudar a cor do meu cabelo"
