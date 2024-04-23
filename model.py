@@ -276,14 +276,14 @@ def buscarEspecialidade(detected, genero, inexistente=[]):
         if type(servico) != str:
             break 
 
-        servico_traduzido = tools.tradutorPalavra(servico)
+        servico_traduzido = tools.buscartradutor(servico)   
         retorno = []
         avaliacao = 0 
         flag_inexistente = True  
 
         for especialidade in dictEspecialidade:
 
-            lstPalavrasChaves = tools.tradutorPalavra(especialidade["palavrasChaves"])
+            lstPalavrasChaves = tools.buscartradutor(especialidade["palavrasChaves"])
             lstPalavrasChaves = tools.eliminar_duplicatas(lstPalavrasChaves)
             lstPalavrasChaves = lstPalavrasChaves.split()
 
@@ -1126,7 +1126,7 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
                                     dthora = datetime.strptime(colecaoReserva[0]["dataHoraInicio"], '%Y-%m-%d %H:%M:%S')
                                     funcionario = colecaoReserva[0]["funcionario"]
                                     if stts["flagAlterarAgendamento"]:                                        
-                                        msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, você tem que {trecho_chave} que seria com %s no dia %s/%s as %0.2d:%0.2d.Você acorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
+                                        msgResposta = f"Para prosseguir com a alteração,{stts['contato']}, você tem que {trecho_chave} que seria com %s no dia %s/%s as %0.2d:%0.2d.Você concorda com isso?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
                                     else:
                                         msgResposta = f"{stts['contato']},você quer mesmo {trecho_chave} com %s que seria dia %s/%s as %0.2d:%0.2d?" % (funcionario, dthora.day , dthora.month, dthora.hour,dthora.minute) 
                                         stts["flagCancelarAgendamento"] = True 

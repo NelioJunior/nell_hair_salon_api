@@ -68,18 +68,15 @@ def formalizador_de_linguagem_natural(message_info, nomeAssistente):
         if match:
             detected["intencao"] = "cancelarReservaJaEfetuada"   
 
-    if mensagemTraduzida[0:3] == "sim": 
-        match = re.search(r'\b\d{6}\b', mensagemTraduzida)
-        if match:
-            detected["intencao"] = "cancelarReservaJaEfetuada"   
-        else: 
-            detected["intencao"] = "concordancia"
+        if mensagemTraduzida[0:3] == "sim": 
+            match = re.search(r'\b\d{6}\b', mensagemTraduzida)
+            if match:
+                detected["intencao"] = "cancelarReservaJaEfetuada"   
+            else: 
+                detected["intencao"] = "concordancia"
 
-    if mensagemTraduzida[0:3] == "nao": 
-        detected["intencao"]= "discordancia"
-
-    if "adeus" in mensagemTraduzida: 
-        detected["intencao"] = "semrelacao"
+        if mensagemTraduzida[0:3] == "nao": 
+            detected["intencao"]= "discordancia"
 
     resp = []
     resp.append(mensagemTraduzida)   
@@ -224,22 +221,6 @@ def contextualizador(msg):
 
     return msg
 
-def tradutorPalavra (msg):    
-    msgx = removerAcentos(msg).lower()
-    arrayRetorno = msgx.split()
-    retorno = ""
-
-    for itemA in lstPalavra:
-        for i, itemB in enumerate(arrayRetorno):
-            if itemB == itemA["texto"].lower(): 
-                arrayRetorno[i] = itemA["equivalente"].lower()
-
-    retorno = ' '.join(arrayRetorno)  
-    while "  " in retorno : retorno = retorno.replace("  ", " ")   
-    retorno = retorno.replace(" :", ":")   
-    return retorno.strip()
-
-
 def tradutor (msg):    
     msg = removerAcentos(msg).lower().split(" ")
     retorno = ""
@@ -270,10 +251,6 @@ def buscarDiaSemanaExtenso(msg):
         if buscarPalavra(dia,msg):
            return dia 
     return ""       
-
-def buscarMensagemNaoCompreendido():
-    i = len(dictResponderNaoCompreendido) -1     
-    return dictResponderNaoCompreendido[random.randint(0,i)]
 
 def buscarCalculosMatematicos(msg):
     msg = msg.lower()
@@ -345,30 +322,35 @@ def confirmar(msg):
 
 def buscarNumero(msg): 
     return [int(s) for s in msg.split() if s.isdigit()]
-    
-def buscarPalavra(palavra,msg):
-    palavra = removerAcentos(palavra).lower()
-    palavra = palavra.replace("(", "")
-    palavra = palavra.replace(")", "")
-    palavra = palavra.replace("?", "QUESTION")     
 
-    msg = removerAcentos(msg).lower()   
-    msg = msg.replace("?", "QUESTION")      
-    msg = " " + msg 
+def buscarPalavra(palavra, msg):
+    # Remover acentos e converter para minúsculas
+    palavra = removerAcentos(palavra).lower()
+    msg = removerAcentos(msg).lower()
+
+    # Remover caracteres especiais
+    special_chars = r'[!@#$%^&*()_+={}\[\]:;\"\'<>,.?/\\|]'
+    palavra = re.sub(special_chars, '', palavra)
+    msg = re.sub(special_chars, '', msg)
+
+    # Adicionar um espaço no início da msg
+    msg = " " + msg
+
     retorno = 0
-    
+
     try:
         x1 = findWholeWord(palavra)(msg)
-        if x1 is not None: 
+        if x1 is not None:
             retorno = x1.span()[0]
-    except:  
-        retorno = 0      
-        
-    return retorno 
+    except Exception as e:
+        print(f"Erro: {e}")
+        retorno = 0
+
+    return retorno
 
 def findWholeWord(w):
-    return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search    
-    
+    return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+   
 def convertDataExtensaParaPadrao(msg):   
     hoje = date.today()   
     dia = hoje.day
@@ -718,17 +700,13 @@ def adicionarMes(strData):
 
 def loadDicionariosDinamicos(urlServidor):
     global dictTradutor
-    global dicBaseConhecimento
-    global dictResponderNaoCompreendido
     global lstHora 
     global lstExpressao
-    global lstPalavra
 
     dictTradutor = json.load(open("/home/nelljr/nell_hair_salon_api/tradutor.json", "r"))
 
     lstHora = list(filter(lambda x: ":" in x["equivalente"],dictTradutor))
     lstExpressao = list(filter(lambda x: len(x["texto"].split()) > 1 and ":" not in x["equivalente"] ,dictTradutor))
-    lstPalavra = list(filter(lambda x: len(x["texto"].split()) == 1 and ":" not in x["equivalente"],dictTradutor))
 
 def anotarErro(cnt):
     erro = traceback.format_exc()

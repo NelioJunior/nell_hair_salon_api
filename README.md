@@ -94,12 +94,10 @@ Claro que nesta caso, o rol do system tera obviamente conteudos diferentes...
 
 Testes ---------------------------------------------------------------------------------------------------------------------------------------
 
-  Fazer 4 testes de inclusao de agendamento 
-  Fazer 2 testes de exclusao de agendamento 
-  Fazer 2 testes de alteracao de agendamento 
-  Fazer 2 testes de lista de servicos
-  Fazer 2 testes sem ser sinteticos, ou seja sem a ajuda do GPT.
-
+  Fazer 3 testes de inclusao de agendamento 
+  Fazer 1 testes de exclusao de agendamento 
+  Fazer 1 testes de alteracao de agendamento 
+  
 Siga o passo-a-passo:
 
 - Escoha um destes nomes de clientes: 
@@ -117,7 +115,7 @@ Siga o passo-a-passo:
 
 - Crie uma personalidade para o cliente que você escolheu o nome e seja esta pessoa.
 - Simule uma conversa entra você e uma recepcionista de salao de beleza chamada Angel. 
-- O objetivo da conversa é você marcar, alterar ou cancelar um agendamento no salao .
+- O objetivo é você fazer uma operacao de agendamento no salao.
 - Nesta conversa você entrara com uma fala e esperara pela fala da atendente Angel.
 - No incio de cada fala você ira colocar o nome da pessoa seguido por dois pontos (:)
 
@@ -128,9 +126,15 @@ Prompts auxilires --------------------------------------------------------------
 crie uma nova interacao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior. 
 Inicie ja.
 
-crie uma nova interacao para excluir algum dos agendamentos criados anteriormente. Inicie ja.
+crie uma nova interacao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior, 
+Para fazer uma inclusao de agendamento. Inicie ja.
 
-crie uma nova interacao para alterar algum dos agendamentos criados anteriormente. Inicie ja.
+crie uma nova interacao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior, 
+Para fazer uma alteracao de agendamento. Inicie ja.
+
+crie uma nova interacao escolhendo um cliente qualquer que voce escolher da lista e crie uma personalidade diferente da anterior, 
+Para fazer uma exclusao de agendamento. Inicie ja.
+
 
 SQL auxiliar -------------------------------------------------------------------------------------------------------------------------
 

@@ -1,10 +1,66 @@
 [
+    {                  
+        "texto": "uma hidratacao",
+        "equivalente": "hidratacao"
+    },
+    {
+        "texto": "hidratacao facial",
+        "equivalente": "facial"
+    },
+    {
+        "texto": "hidratacao corporal",
+        "equivalente": "corporal"
+    },
+    {
+        "texto": "hidratacao labial",
+        "equivalente": "labial"
+    },
     {
         "texto": "a",
         "equivalente": ""
     },
     {
         "texto": "da",
+        "equivalente": ""
+    },    
+    {
+        "texto": "nao importa qual",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "qualquer um",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "qualquer uma das duas",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "qualquer uma das tres",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "qualquer uma das quatro",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "qualquer uma",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "uma ou outra",
+        "equivalente": "qualquer"
+    },
+    {
+        "texto": "das",
+        "equivalente": ""
+    },
+    {
+        "texto": "dos",
+        "equivalente": ""
+    },
+    {
+        "texto": "gostaria de",
         "equivalente": ""
     },
     {
@@ -182,11 +238,7 @@
     {
         "texto": "cortar unhas",
         "equivalente": "unha"
-    },           
-    {
-        "texto": "uma hidratacao",
-        "equivalente": "hidratacao"
-    },
+    },                
     {
         "texto": "uma barba",
         "equivalente": "barba"
@@ -1108,6 +1160,10 @@
         "equivalente": "sim"
     },
     {
+        "texto": "queria reservar",
+        "equivalente": "reservar"
+    },
+    {
         "texto": "queria",
         "equivalente": "sim"
     },
@@ -1264,20 +1320,8 @@
         "equivalente": "sim"
     },
     {
-        "texto": "blz",
-        "equivalente": "sim"
-    },
-    {
-        "texto": "claro",
-        "equivalente": "sim"
-    },
-    {
         "texto": "okay",
         "equivalente": "ok"
-    },
-    {
-        "texto": "ok",
-        "equivalente": "sim"
     },
     {
         "texto": "esta sim",
