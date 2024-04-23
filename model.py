@@ -282,8 +282,8 @@ def buscarEspecialidade(detected, genero, inexistente=[]):
         flag_inexistente = True  
 
         for especialidade in dictEspecialidade:
-
-            lstPalavrasChaves = tools.buscartradutor(especialidade["palavrasChaves"])
+            # lstPalavrasChaves = tools.buscartradutor(especialidade["palavrasChaves"])
+            lstPalavrasChaves = especialidade["palavrasChaves"]
             lstPalavrasChaves = tools.eliminar_duplicatas(lstPalavrasChaves)
             lstPalavrasChaves = lstPalavrasChaves.split()
 
@@ -653,6 +653,8 @@ def listarFuncionariosDisponiveis(states,respBaseConhecimento,msgRetorno):
                     states["reservas"][0]["funcionario"] = lstFuncionariosAptos[rdn]["nome"]
                     states["reservas"][0]["id_funcionario"] = lstFuncionariosAptos[rdn]["id_funcionario"]  
                     lstFuncionariosAptos = [] 
+
+                    msgRetorno = verificaItensFaltantes(states, respBaseConhecimento, "")
             else:
 
                 lstFuncionariosAptos = separarEspecialidadesPorFuncionarios(states, lstFuncionariosAptos, states["reservas"][0]["especialidades"]) 
