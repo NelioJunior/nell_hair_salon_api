@@ -991,7 +991,7 @@ def validarDiaFuncionamento(stts):
 
         if len(feriado) > 0:
             msgResposta = "neste o dia de %s, então o estabelecimento não estará aberto" % feriado[0]["nome"]
-            msgResposta += " Peça para ela escolher outro dia"
+            msgResposta += " Melhor escolher outro dia."
             retorno = msgResposta  
 
         diaSemana = tools.buscarDiaSemana(datetime.strptime(stts["reservas"][0]["data"], "%Y-%m-%d").weekday()) 
