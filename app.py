@@ -52,8 +52,11 @@ def root():
 
 @app.route("/smartphone", methods=['GET'])
 def smartphone():
-     return render_template('index.html')
+     return render_template('smartphone.html')
 
+@app.route("/bi_chat", methods=['GET'])
+def bi_chat():
+     return render_template('bi_chat.html')
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():
@@ -132,7 +135,7 @@ def business_inteligence():
     data = request.get_json()
     user_content = data.get('question') 
 
-    sql_statement = sql_ai.ask_the_database(user_content)
+    sql_statement = sql_ai.ask_to_the_database(user_content)
     print('\033[91m' + sql_statement + '\033[0m')
 
     conn = mysql.connector.connect(**db_config)

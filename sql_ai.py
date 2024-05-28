@@ -17,9 +17,7 @@ db = SQLDatabase.from_uri(f"mysql+pymysql://{db_user}:{db_password}@{db_host}/{d
 llm = ChatOpenAI(api_key=chave_openai,  model="gpt-3.5-turbo", temperature=0)
 chain = create_sql_query_chain(llm, db)
 
-def ask_the_database(query):
-
+def ask_to_the_database(query):
     answer = chain.invoke({"question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')})"})
-
     return answer
     

@@ -6,7 +6,7 @@ const sendChatBtn = document.querySelector("#send-btn");
 const inputInitHeight = chatInput.scrollHeight;
 const entity = window.location.pathname.split('/').pop().replace("lista", "").replace(".php", "") ;
 const warning = "Me desculpa,nao entendi...";
-let title = "" 
+const pageTitle = document.querySelectorAll('title')[document.querySelectorAll('title').length  - 1];
 let avatar = "brunetteHair"
 
 const createChatLi = (message, className) => {
@@ -58,6 +58,34 @@ selChatCustomer.addEventListener('change', function() {
     chatbox.innerHTML = ""
 });
 
+function callBiApi (chatbox) {
+    const urlApi = "http://localhost:8000/business_inteligence";
+    const outgoing_lst = chatbox.querySelectorAll(".outgoing");
+    const last_user_msg = outgoing_lst[outgoing_lst.length-1].innerText;
+
+    fetch(urlApi, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            question: last_user_msg,
+            entity: entity
+        }),
+    })
+    .then(response => response.json())
+    .then(result => {
+        incoming_lst = chatbox.querySelectorAll(".chat.incoming");
+        last_bot_message = incoming_lst[incoming_lst.length-1].querySelector('p');
+        last_bot_message.innerText = result['answer']
+    })
+    .catch(error => {
+        incoming_lst = chatbox.querySelectorAll(".chat.incoming");
+        last_bot_message = incoming_lst[incoming_lst.length-1].querySelector('p');
+        last_bot_message.innerText = warning
+    });
+}
+
 const handleChat = () => {
     userMessage = chatInput.value.trim();
     if (!userMessage) return;
@@ -73,8 +101,12 @@ const handleChat = () => {
         chatbox.appendChild(incomingChatLi);
         chatbox.scrollTo(0, chatbox.scrollHeight);
 
-        callCustomerServiceApi(chatbox);
-        
+        if (pageTitle.innerText == "Agendamento") {
+            callCustomerServiceApi(chatbox);  
+        } else {
+            callBiApi (chatbox)  
+        }
+
     }, 600);
 }
 
