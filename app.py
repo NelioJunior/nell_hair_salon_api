@@ -1,10 +1,8 @@
+import ast 
 import re
 import json
 import openai
-
-import mysql.connector
-import sql_ai 
-
+import sql_ai_execute 
 from neural import nucleo_neural
 from datetime import datetime 
 from flask import Flask, request, jsonify, render_template
@@ -13,17 +11,8 @@ from tools import obter_chave_openai
 from tools import log_message
 from babel.dates import format_datetime, Locale
 
-db_config = {
-    'host': '177.143.21.214',
-    'user': 'root',
-    'password': '2246',
-    'database': 'SalaoConsultorio'
-}
-
 locale = Locale('pt_BR')
-
 chave_openai = obter_chave_openai()
-
 client = openai.OpenAI(api_key=chave_openai)
 
 message_info = {
@@ -135,22 +124,20 @@ def business_inteligence():
     data = request.get_json()
     user_content = data.get('question') 
 
-    sql_statement = sql_ai.ask_to_the_database(user_content)
-    print('\033[91m' + sql_statement + '\033[0m')
+    results = sql_ai_execute.ask_to_the_database(user_content)
 
-    conn = mysql.connector.connect(**db_config)
-    cursor = conn.cursor()
-    try:
-        cursor.execute(sql_statement)
-        results = cursor.fetchall()   
-        answer = [dict(zip(cursor.column_names, row)) for row in results]
-        reply = json.dumps(answer)
-        parameter = f"{user_content} / resposta: {reply}" 
-    except:
-        parameter = 'Peça para o usuario reformular a pergunta usando outras palavras.'
-    
-    cursor.close()
-    conn.close()
+    print(results)
+
+    results_list = ast.literal_eval(results)
+    items = [item[0] for item in results_list]
+    answer_string = ', '.join(items)
+
+
+    return jsonify({'answer': answer_string})
+
+
+
+    sql_statement = sql_ai.ask_to_the_database(user_content)
 
     receptionist_content = (
         "Você é uma recepcionista chamada Angel de um salão de beleza."

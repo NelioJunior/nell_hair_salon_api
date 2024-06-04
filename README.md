@@ -146,6 +146,7 @@ O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI
 
 Questoes testes ✓
 
+Me de uma lista completa com o apelido dos funcionarios
 Qual é o serviço mais demandado pelos clientes?    
 Quais são os 5 produtos mais vendidos no salão?   
 Qual é a taxa de ocupação média dos funcionários ao longo da semana?  

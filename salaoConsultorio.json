@@ -1,0 +1,143 @@
+{
+    "empresa": {
+        "descricao": "Tabela contendo informações da tabela empresa",
+        "colunas": [
+            "id_empresa",
+            "nomeEmpresa",
+            "telefone",
+            "responsavel",
+            "adesao",
+            "nomeUsuario",
+            "endereco",
+            "cep",
+            "email",
+            "cnpj",
+            "instagram",
+            "nomeBot",
+            "avatar",
+            "horario",
+            "atenderNaoCadastrados",
+            "modalidade",
+            "diaRemuneracao1",
+            "percentagemRemuneracao1",
+            "diaRemuneracao2",
+            "percentagemRemuneracao2",
+            "percentagemRemuneracaoGeral",
+            "semana",
+            "ativo"
+        ]
+    },
+    "campanha": {
+        "descricao": "Tabela contendo informações da tabela campanha",
+        "colunas": [
+            "id_campanha",
+            "imagem",
+            "imagemPropriedade",
+            "nome",
+            "nomeArquivoTransmitido",
+            "dataHoraUltimoDisparo",
+            "texto",
+            "ativo"
+        ]
+    },
+    "feriado": {
+        "descricao": "Tabela contendo informações da tabela feriado",
+        "colunas": [
+            "id_feriado",
+            "dataFeriado",
+            "nome",
+            "ativo"
+        ]
+    },
+    "fornecedor": {
+        "descricao": "Tabela contendo informações da tabela fornecedor",
+        "colunas": [
+            "id_fornecedor",
+            "nome",
+            "razaoSocial",
+            "cnpjcpf",
+            "responsabel",
+            "email",
+            "telefone",
+            "celular",
+            "site",
+            "cep",
+            "endereco",
+            "bairro",
+            "cidade",
+            "estado",
+            "observacao",
+            "avatar",
+            "ativo"
+        ]
+    },
+    "produto": {
+        "descricao": "Tabela contendo informações da tabela produto",
+        "colunas": [
+            "id_produto",
+            "nome",
+            "codigobarras",
+            "marca",
+            "linha",
+            "categoria",
+            "descricao",
+            "precoCompra",
+            "precoVenda",
+            "id_fornecedor",
+            "prazoentrega",
+            "tipovenda",
+            "tipoconsumo",
+            "evitarsaidanegativa",
+            "estoqueatual",
+            "estoqueminimo",
+            "medida",
+            "observacao",
+            "avatar",
+            "ativo"
+        ]
+    },
+    "grupoCliente": {
+        "descricao": "Tabela contendo informações da tabela grupocliente",
+        "colunas": [
+            "id_grupo",
+            "id_cliente"
+        ]
+    },
+    "grupo": {
+        "descricao": "Tabela contendo informações da tabela grupo",
+        "colunas": [
+            "id_grupo",
+            "nome",
+            "ativo"
+        ]
+    },
+    "cargo": {
+        "descricao": "Tabela contendo informações da tabela cargo",
+        "colunas": [
+            "id_cargo",
+            "nome",
+            "ativo"
+        ]
+    },
+    "funcionarioEspecialidade": {
+        "descricao": "Tabela contendo informações da tabela funcionarioespecialidade",
+        "colunas": [
+            "id_especialidade",
+            "id_funcionario"
+        ]
+    },
+    "fluxoCaixaItem": {
+        "descricao": "Tabela contendo informações da tabela fluxocaixaitem",
+        "colunas": [
+            "id_fluxoCaixaItem",
+            "id_fluxoCaixa",
+            "id_agenda",
+            "id_cliente",
+            "id_funcionario",
+            "descricao",
+            "id_produto",
+            "quantidade",
+            "valor"
+        ]
+    }
+}
