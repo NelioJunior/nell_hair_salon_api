@@ -23,10 +23,13 @@ def get_sql_statement(query):
 
 def ask_to_the_database(query):
 
-    execute_query = QuerySQLDataBaseTool(db=db)
-    write_query = create_sql_query_chain(llm, db)
-    chain = write_query | execute_query
-    answer = chain.invoke({"question":  f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}"})
+    try: 
+        execute_query = QuerySQLDataBaseTool(db=db)
+        write_query = create_sql_query_chain(llm, db)
+        chain = write_query | execute_query
+        answer = chain.invoke({"question":  f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}"})
+    except: 
+        answer = "Responda da melhor maneira possivel" 
 
     return answer
 

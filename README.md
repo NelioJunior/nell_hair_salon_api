@@ -158,8 +158,6 @@ Quais são os itens de estoque com maior saída?
 Quais são os custos operacionais mais significativos? 
 Como está a satisfação dos clientes em relação aos serviços prestados? 
 
-02/Marco/24  Nao sei porque perdi a api key da openai , tive que gerar outra 
-
 Glossário 
 
 LangChain e LlamaIndex são duas bibliotecas valiosas para o desenvolvimento de aplicativos alimentados por modelos de linguagem. Vou explicar as principais diferenças entre elas:

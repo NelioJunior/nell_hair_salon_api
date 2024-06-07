@@ -125,23 +125,27 @@ def customer_service():
 def business_inteligence():
 
     data = request.get_json()
-    user_content = data.get('question') 
+    question = data.get('question') 
 
-    results = sql_ai_execute.ask_to_the_database(user_content)
-    print(results)
+    results = sql_ai_execute.ask_to_the_database(question)
 
-    results_list = ast.literal_eval(results)
-    items = [item[0] for item in results_list]
-    answer_string = ', '.join(items)
+    # results_list = ast.literal_eval(results)
+    # items = [item[0] for item in results_list]
+    # answer = ', '.join(items)
+
+    answer = results 
+
+    question_and_answer = f"Pergunta:{question} / Resposta {answer}"
 
     receptionist_content = (
-        "Você é uma recepcionista chamada Angel de um SPA"
-        "Sua função é atender os funcionarios e os clientes do estabelecimento."
+        "Você é uma assistente de administração chamada Angel de um SPA."
+        "Sua função é responder em portugues sem restrições, de forma gentil "
+        "as questões dadas com as respostas fornecidas."
     )
 
     message=[
         {"role": "system", "content": receptionist_content},
-        {"role": "user", "content": answer_string}
+        {"role": "user", "content": question_and_answer}
     ]
 
     response = client_together.chat.completions.create(
