@@ -1,19 +1,22 @@
-import ast 
 import re
+import ast 
 import json
 import openai
 import sql_ai_execute 
+from together import Together
 from neural import nucleo_neural
 from datetime import datetime 
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from tools import obter_chave_openai
+from tools import obter_chave_openai, obter_chave_together
 from tools import log_message
 from babel.dates import format_datetime, Locale
 
 locale = Locale('pt_BR')
 chave_openai = obter_chave_openai()
-client = openai.OpenAI(api_key=chave_openai)
+client_openai = openai.OpenAI(api_key=chave_openai)
+
+client_together = Together(api_key= obter_chave_together())
 
 message_info = {
                 "user": "",
@@ -72,7 +75,7 @@ def customer_service():
     ]
     
     try:
-        chat_completion = client.chat.completions.create(
+        chat_completion = client_openai.chat.completions.create(
             messages=message,
             model="gpt-3.5-turbo",
             temperature=0.0,
@@ -101,7 +104,7 @@ def customer_service():
             {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)}
         ]
         
-        chat_completion = client.chat.completions.create(
+        chat_completion = client_openai.chat.completions.create(
             messages=message,
             model="gpt-3.5-turbo",
             temperature=0.1,
@@ -125,42 +128,28 @@ def business_inteligence():
     user_content = data.get('question') 
 
     results = sql_ai_execute.ask_to_the_database(user_content)
-
     print(results)
 
     results_list = ast.literal_eval(results)
     items = [item[0] for item in results_list]
     answer_string = ', '.join(items)
 
-
-    return jsonify({'answer': answer_string})
-
-
-
-    sql_statement = sql_ai.ask_to_the_database(user_content)
-
     receptionist_content = (
-        "Você é uma recepcionista chamada Angel de um salão de beleza."
+        "Você é uma recepcionista chamada Angel de um SPA"
         "Sua função é atender os funcionarios e os clientes do estabelecimento."
-        "Você irá encontrar a resposta para as perguntas do usuário em formato JSON,"
-        "localizado logo após a pergunta do usuário."
-        "Sua resposta devera ser em formato de linguagem natural."
     )
 
-    user_content = parameter
+    message=[
+        {"role": "system", "content": receptionist_content},
+        {"role": "user", "content": answer_string}
+    ]
 
-    chat_completion = client.chat.completions.create(
-        messages=[
-            {"role": "system", "content": receptionist_content}, 
-            {"role": "user", "content": user_content}, 
-        ],
-        model="gpt-3.5-turbo",
-        temperature=0.3
+    response = client_together.chat.completions.create(
+        model="meta-llama/Llama-3-70b-chat-hf",
+        messages=message
     )
 
-    response = chat_completion.choices[0].message.content
-
-    return jsonify({'answer': response})
+    return jsonify({'answer': response.choices[0].message.content})
 
 
 if __name__ ==  '__main__':

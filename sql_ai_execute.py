@@ -32,10 +32,7 @@ def ask_to_the_database(query):
 
 if __name__ ==  '__main__':
 
-    # Eu acho que o database_guide.txt esta muito grande - Nell Jr 28/Maio.
-    # Sera que e' possivel quebra-lo em setores   (Se e' que esta servindo pra alguma coisa)
-
-    query = "Qual é o serviço mais demandado pelos clientes?"   
+    query = "Qual hora a Sandra Florestan sai para almocar?"   
 
     results = get_sql_statement(query)
 
