@@ -1,5 +1,6 @@
 from tools import obter_chave_openai
 from datetime import datetime 
+
 from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
 from langchain_community.utilities import SQLDatabase
 from langchain.chains import create_sql_query_chain

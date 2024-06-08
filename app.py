@@ -2,7 +2,7 @@ import re
 import ast 
 import json
 import openai
-import sql_ai_execute 
+import sql_ai_openai 
 from together import Together
 from neural import nucleo_neural
 from datetime import datetime 
@@ -127,7 +127,7 @@ def business_inteligence():
     data = request.get_json()
     question = data.get('question') 
 
-    results = sql_ai_execute.ask_to_the_database(question)
+    results = sql_ai_openai.ask_to_the_database(question)
 
     # results_list = ast.literal_eval(results)
     # items = [item[0] for item in results_list]
