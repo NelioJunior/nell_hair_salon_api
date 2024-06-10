@@ -12,7 +12,7 @@ db_user = "root"
 db_password = "2246"
 db_host = "192.168.0.131"
 db_name = "BusinessInteligence"
-db = SQLDatabase.from_uri(f"mariadb+pymysql://{db_user}:{db_password}@{db_host}/{db_name}")
+db = SQLDatabase.from_uri(f"mariadb+pymysql://{db_user}:{db_password}@{db_host}/{db_name}",view_support = True)                          
 
 llm = ChatTogether(api_key=chave_together,  model="meta-llama/Llama-3-70b-chat-hf", temperature=0)
 
@@ -36,7 +36,7 @@ def ask_to_the_database(query):
 
 if __name__ ==  '__main__':
 
-    query = "Qual hora a Sandra Florestan sai para almocar?"   
+    query = "Liste os profissionais que nao tabalham a tarde e nem a noite"  
 
     results = get_sql_statement(query)
 

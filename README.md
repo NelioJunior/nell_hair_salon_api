@@ -7,7 +7,19 @@
 
   Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
 
-## buscartratutor.json -  Regras  : ---------------------------------------------------------------------------------------------------
+
+# Dica langchain (SQL) -----------------------------------------------------------------------------------------------------------
+
+  Exemplo mais completo da string de conexao, quando incluido o parametro include_tables, so' as tabelas indicada seram pesquisadas
+
+  db = SQLDatabase.from_uri(
+      database_uri,
+      schema="schema name", #if required
+      include_tables=['table1','table2'],
+      view_support=True
+  )
+
+## buscartratutor.json -  Regras  : -----------------------------------------------------------------------------------------------
 
       -  Considerar a ordernação pela ordem de insert (id) 
       -  Usar gramatica "tarzan" todos verbos devem estar no infinitivo.
