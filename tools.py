@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*
 
 import re
-import random
 import json
 import datetime
 import time
@@ -775,6 +774,7 @@ dictDespresarPalavra = [
 ]
 
 def obter_chave_openai():
+
     caminho_bashrc = '/home/nelljr/.bashrc'
 
     try:
@@ -811,4 +811,3 @@ def obter_chave_together():
         print(f"Erro ao ler o arquivo {caminho_bashrc}: {str(e)}")
 
     return None
-

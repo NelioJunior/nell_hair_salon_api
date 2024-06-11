@@ -32,7 +32,12 @@
 
 ## TO DO ------------------------------------------------------------------------------------------------------------------------
 
-  20/Abril/24 E' preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar √.
+  10/Maio/2024 - Criar Views baseada nas perguntas mais apropriadas a Business Inteligence  - B.I.
+
+
+
+
+  20/Abril/24 E'preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar √.
 
   19/Abril/24 
     Verificar erro de resposta na mensagem do usuario "Eu quero mudar a cor do meu cabelo"

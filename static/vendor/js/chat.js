@@ -26,7 +26,7 @@ const createChatLi = (message, className) => {
 }
 
 function callCustomerServiceApi (chatbox) {
-    const urlApi = "http://192.168.0.59:8000/customer_service"
+    const urlApi = "http://localhost:8000/customer_service"
     const outgoing_lst = chatbox.querySelectorAll(".outgoing");
     const msg = outgoing_lst[outgoing_lst.length-1].innerText;
     const user = selChatCustomer.options[selChatCustomer.selectedIndex].text

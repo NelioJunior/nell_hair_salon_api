@@ -1,3 +1,4 @@
+import mysql.connector
 from tools import obter_chave_openai
 from datetime import datetime 
 
@@ -17,19 +18,35 @@ db = SQLDatabase.from_uri(
                           ,view_support = True
                           )
 
+db_config = {'host': db_host,'user': db_user,'password': db_password,'database': db_name}
+conn = mysql.connector.connect(host=db_host,user=db_user,password=db_password,database="BusinessInteligence")
+
 llm = ChatOpenAI(api_key=chave_openai,  model="gpt-3.5-turbo", temperature=0)
 
-def get_sql_statement(query):
-    dba_content = ("Nas consultas, usar like para os campos 'nome', 'nome_cliente' , 'nome_funcionario' "
-                   "e com coringa(%) no FINAL da string a ser buscada."
-                   "tambem usar a funcao lower a a string a ser pesquisada com letras minusculas."
-                   "Exemplo: Select * from aluno where lower(nome_aluno) like 'johnny%'"
-                )     
+dba_content = ("Nas consultas, usar like para os campos 'nome', 'nome_cliente' , 'nome_funcionario' "
+                "e com coringa(%) no FINAL da string a ser buscada."
+                "Exemplo: Select * from aluno where nome_aluno like 'johnny%'"
+            )     
 
+def get_sql_statement(query):
     chain = create_sql_query_chain(llm, db)
-    answer = chain.invoke({
+    query  = chain.invoke({
         "question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}) -({dba_content})",
     })
+
+    print(query)
+
+    cursor = conn.cursor()
+    cursor.execute(query , multi=True)
+
+    answer = []
+    resultados = cursor.fetchall()
+
+    for linha in resultados:
+        answer.append(linha)
+
+    cursor.close()
+    conn.close()      
 
     return answer
 
@@ -39,7 +56,10 @@ def ask_to_the_database(query):
         execute_query = QuerySQLDataBaseTool(db=db)
         write_query = create_sql_query_chain(llm, db)
         chain = write_query | execute_query
-        answer = chain.invoke({"question":  f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}"})
+        answer = chain.invoke({
+            "question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}) -({dba_content})",
+        })
+
     except: 
         answer = "Responda da melhor maneira possivel" 
 
@@ -47,9 +67,7 @@ def ask_to_the_database(query):
 
 if __name__ ==  '__main__':
 
-    query = "Com quais funcionarias a cliente Bernadete possui compromisso neste mes corrente?"  
-
+    query = "Liste todos os profissionais do estabelecimento"  
     results = get_sql_statement(query)
-
 
     print (results)

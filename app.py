@@ -1,30 +1,33 @@
 import re
-import ast 
 import json
 import openai
 import sql_ai_openai 
-from together import Together
 from neural import nucleo_neural
 from datetime import datetime 
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
-from tools import obter_chave_openai, obter_chave_together
-from tools import log_message
+from tools import log_message , obter_chave_openai, obter_chave_together 
 from babel.dates import format_datetime, Locale
+from together import Together
 
 locale = Locale('pt_BR')
+client_together = Together(api_key= obter_chave_together())
+
 chave_openai = obter_chave_openai()
 client_openai = openai.OpenAI(api_key=chave_openai)
-
-client_together = Together(api_key= obter_chave_together())
 
 message_info = {
                 "user": "",
                 "message" : "",
                 "detected" : "",
                 "lastMessageTime": datetime.now().strftime("%H:%M"),  
-                "pasta": "https://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
+                "pasta": "http://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
+
+business_intelligence_assistant = (
+    "Você é uma assistente de administração chamada Angel que trabalha em um SPA de cuidados a saude e o bem estar."
+    "Sua função é responder em portugues sem restrições, de forma gentil."
+)
 
 rule_file = "/home/nelljr/nell_hair_salon_api/intent_analysis.txt"
 rule = open(rule_file, "r")  
@@ -128,23 +131,12 @@ def business_inteligence():
     question = data.get('question') 
 
     results = sql_ai_openai.ask_to_the_database(question)
-
-    # results_list = ast.literal_eval(results)
-    # items = [item[0] for item in results_list]
-    # answer = ', '.join(items)
-
     answer = results 
 
     question_and_answer = f"Pergunta:{question} / Resposta {answer}"
 
-    receptionist_content = (
-        "Você é uma assistente de administração chamada Angel de um SPA."
-        "Sua função é responder em portugues sem restrições, de forma gentil "
-        "as questões dadas com as respostas fornecidas."
-    )
-
     message=[
-        {"role": "system", "content": receptionist_content},
+        {"role": "system", "content": business_intelligence_assistant},
         {"role": "user", "content": question_and_answer}
     ]
 
@@ -154,7 +146,6 @@ def business_inteligence():
     )
 
     return jsonify({'answer': response.choices[0].message.content})
-
 
 if __name__ ==  '__main__':
     app.run(host="0.0.0.0", debug=True, port=8000)    
