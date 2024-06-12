@@ -24,11 +24,6 @@ message_info = {
                 "pasta": "http://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
 
-business_intelligence_assistant = (
-    "Você é uma assistente de administração chamada Angel que trabalha em um SPA de cuidados a saude e o bem estar."
-    "Sua função é responder em portugues sem restrições, de forma gentil."
-)
-
 rule_file = "/home/nelljr/nell_hair_salon_api/intent_analysis.txt"
 rule = open(rule_file, "r")  
 
@@ -37,6 +32,11 @@ detection_rules = rule.read()
 rule_file = "/home/nelljr/nell_hair_salon_api/angel_guide.txt"
 rule = open(rule_file, "r")  
 agent_rule = rule.read()
+
+rule_file = "/home/nelljr/nell_hair_salon_api/angel_bi_guide.txt"
+rule = open(rule_file, "r")  
+agent_bi_rule = rule.read()
+
 
 app = Flask(__name__)
 CORS(app)
@@ -130,13 +130,13 @@ def business_inteligence():
     data = request.get_json()
     question = data.get('question') 
 
-    results = sql_ai_openai.ask_to_the_database(question)
+    results = sql_ai_openai.get_sql_statement(question)
     answer = results 
 
     question_and_answer = f"Pergunta:{question} / Resposta {answer}"
 
     message=[
-        {"role": "system", "content": business_intelligence_assistant},
+        {"role": "system", "content": agent_bi_rule},
         {"role": "user", "content": question_and_answer}
     ]
 

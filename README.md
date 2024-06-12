@@ -1,4 +1,4 @@
-# nell_hair_salon_api   (teste de conceito)
+# nell_hair_salon_api   (prova de conceito)
 
   Pode ser mais interessante na reducao da quandidade de tokens usados, montar o SQL com o langchain 
   com openai ou together e para dar a resposta final usar o together 
@@ -6,6 +6,13 @@
 # Marketing -------------------------------------------------------------------------------------------------------------------------
 
   Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
+
+# Cronograma para apresentacao --------------------------------------------------------------------------------------------------
+
+    12 - Concluir To Do 
+
+
+
 
 
 # Dica langchain (SQL) -----------------------------------------------------------------------------------------------------------
@@ -32,19 +39,27 @@
 
 ## TO DO ------------------------------------------------------------------------------------------------------------------------
 
-  10/Maio/2024 - Criar Views baseada nas perguntas mais apropriadas a Business Inteligence  - B.I.
+  Sprint Semana de 09/Jun a 15 
+    Entre 13-14 Fazendo uso de IA fazer um modulo de analise de sentimento 
+                Criar a view de analise de sentimento.
+
+    Entre 12-15/Jun/2024  Preparar proximo material de divulgacao 
+
+    12/Jun/2024 - Criar Views baseada nas perguntas mais apropriadas a Business Inteligence  - B.I.
+                  Com excessao do de analise de sentimento. 
+
+    11/Jun/24 resolver a questao do acesso ao htts. 
 
 
-
-
+  Strint concluida ---------------------------------------------------------------------------------------------- 
   20/Abril/24 E'preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar √.
 
   19/Abril/24 
-    Verificar erro de resposta na mensagem do usuario "Eu quero mudar a cor do meu cabelo"
+    Verificar erro de resposta na mensagem do usuario "Eu quero mudar a cor do meu cabelo" (Verificar se ja foi feito)
 
   17/Abril/24
 
-    Imprementar consistencia para quando o usuario entrar com "Depois (depois) de amanha"  
+    Imprementar consistencia para quando o usuario entrar com "Depois (depois) de amanha"  √
 
     Fazer uma copia do celular virtual como uma rota do nell_hair_salon_api para testes.  √
     Quando a Angela escreveu "quero cancelar"  nao foi comprendido corretamente. √

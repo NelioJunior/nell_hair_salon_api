@@ -23,30 +23,36 @@ conn = mysql.connector.connect(host=db_host,user=db_user,password=db_password,da
 
 llm = ChatOpenAI(api_key=chave_openai,  model="gpt-3.5-turbo", temperature=0)
 
-dba_content = ("Nas consultas, usar like para os campos 'nome', 'nome_cliente' , 'nome_funcionario' "
-                "e com coringa(%) no FINAL da string a ser buscada."
-                "Exemplo: Select * from aluno where nome_aluno like 'johnny%'"
-            )     
+rule_file = "/home/nelljr/nell_hair_salon_api/database_guide.txt"
+rule = open(rule_file, "r")  
+dba_rule = rule.read()
 
 def get_sql_statement(query):
-    chain = create_sql_query_chain(llm, db)
-    query  = chain.invoke({
-        "question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}) -({dba_content})",
-    })
-
-    print(query)
 
     cursor = conn.cursor()
-    cursor.execute(query , multi=True)
+    try: 
+        chain = create_sql_query_chain(llm, db)
 
-    answer = []
-    resultados = cursor.fetchall()
+        query  = chain.invoke({
+            "question": f"{query} / data atual {datetime.now().strftime('%A, %d de %B de %Y')}) / regras: {dba_rule}"
+        })
 
-    for linha in resultados:
-        answer.append(linha)
+        query = query.replace("LIMIT 5;", "")    # palhativo  -- Nell 12 Jun 24
+
+        print(query)
+
+        cursor.execute(query)
+
+        answer = []
+        resultados = cursor.fetchall()
+
+        for linha in resultados:
+            answer.append(linha)
+
+    except: 
+        answer = "Responda da melhor maneira possivel" 
 
     cursor.close()
-    conn.close()      
 
     return answer
 
@@ -57,7 +63,7 @@ def ask_to_the_database(query):
         write_query = create_sql_query_chain(llm, db)
         chain = write_query | execute_query
         answer = chain.invoke({
-            "question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}) -({dba_content})",
+            "question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}) -({dba_rule})",
         })
 
     except: 
@@ -67,7 +73,7 @@ def ask_to_the_database(query):
 
 if __name__ ==  '__main__':
 
-    query = "Liste todos os profissionais do estabelecimento"  
+    query = "Quais sao os clientes que possuem agendamento marcados para o dia 14 deste mes?" 
     results = get_sql_statement(query)
 
     print (results)

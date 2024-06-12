@@ -1,18 +1,14 @@
-	CARACTERISTICAS GERAL:
-
-		O banco de dados foi projetado para gerenciar informações de um salao de beleza 
-		e apresenta uma estrutura organizada para armazenar dados relacionados a clientes,
-		funcionários, produtos, agendas e transações financeiras.
-
-		Este banco de dados é utilizado pelo aplicativo MINI-ERP PARA SALOES DE BELEZA . 
-
 	Criterios para criação de Instrucoes SQL 
+
+        - So utilizar data atual como filtro de consulta em caso disto ser explicitado isso dentro da questao.
+
+		- Os dados pesquisados nao devem ter limites de registros retornados.
 
 		- Em pesquisa que envolve nomes, deverao ser feitas pelo campo nome e apelido, nos caso que estes campos 
 		    existem na tabela em questao e utilizado a cláusula Like 'campo%'
 
 				Exemplo SQL: 
-					#user_request_or_question: "Por favor, eu preciso do telefone da profissional Nat"
+					#user question: "Por favor, eu preciso do telefone da profissional Nat"
 
 					#SQL:  SELECT telefone  
 							FROM funcionario 
@@ -20,18 +16,17 @@
 								OR funcionario.apelido LIKE 'Nat%'  
 								AND ativo = 1;
 
-
 		- Em pesquisas que envolvem busca atraves de campos tipo varchar como clausa desta busca (com exceção do campo nome),
-		devera ser utilizado a cláusula Like '%campo%' 
+		    devera ser utilizado a cláusula Like '%campo%' 
 
 			Exemplo SQL: 
-				#user_request_or_question:	"Por favor, eu preciso do telefone da cliente Natasha"
+				# user question: 	"Por favor, eu preciso do telefone da cliente Natasha"
 
 				#SQL: SELECT telefone  FROM cliente  WHERE nome LIKE 'Natasha%' AND ativo = 1;  ;  
 
 		- Em pesquisas que envolvem busca atraves de nome de produto dever  utilizado a cláusula Like '%campo%' 
 			Exemplo SQL: 
-				#user_request_or_question: "Qual é o fornecedor que distribui e vende o produto shampoo?"			
+				# user question:  "Qual é o fornecedor que distribui e vende o produto shampoo?"			
 				#SQL: SELECT fornecedor.nome  FROM fornecedor 
 							JOIN produto 
 							ON fornecedor.id_fornecedor = produto.id_fornecedor  
@@ -39,114 +34,39 @@
 							AND fornecedor.ativo = 1
 							AND produto.ativo = 1;
 
+        - Em pesquisas que envolvem a profissao dos funcionarios devera ser feito o relacionamento das tabelas profissional e cargo
+		  e o nome da profissao devera ser feita buscando o nome da profissao no genero masculino.
 
-	Tabelas:
+			Exemplo SQL:
+				#user_request_or_question:	"Qual profissionais trabalham com depilação?" 
+				#SQL: SELECT f.nome AS NomeFuncionario
+						FROM funcionario f JOIN cargo c ON f.id_cargo = c.id_cargo
+						WHERE c.nome = 'depilador'
+						AND f.ativo = 1;
 
-		Padrões de Nomenclatura:
+		- Em pesquisas que envolvem a Remuneração do Funcionario 
 
-			A maioria das tabelas utilizam nomes no singular, como campanha, cliente, produto.
-			Os nomes seguem o padrão CamelCase para campos regulares, como nome, telefone, e padrão Snake Case para identificadores,
-			como id_fornecedor, id_produto.
+			A remuneração do funcionario pode ser uma salario fixo mensal ou uma porcentagem sobre os servicos prestados. 
+			Para saber o salario mensal de um funcionario, verificar entro da tabela funcionario se remuneracaoFixa = 0 retornar 
+			campo percentagemRemuneracaoGeral + '% sobre o servico'   
+			caso contrario se deve retornar o campo remuneracaoFixa, 
+			isso claro com a filtragem campo nome ou apelido = "nome ou apelido".
 
-
-		Regras para Instrucoes SQL nas Tabelas principais do sistema:
-
-			especialidade:
-
-				A tabela especialidade é destinada ao gerenciamento de informações de serviços prestados pelo salão de beleza, 
-				nesta tabela contem informacoes como descrição, precos, tempo necessario, sessoes necessarias para serem feitos os serviço. 
-				A coluna ativo controla  exclusao logida do registro, ou seja a ativação ou desativação do registro. 
-
-
-		PRINCIPAIS TABELAS DO SISTEMA			
-		
-			agenda: 
-
-				A tabela agenda destina-se a gerenciar compromissos, destacando a associação entre funcionários, clientes e detalhes das sessões. 
-				O campo id_agenda atua como identificador único, enquanto id_agenda_original identifica modificações vinculadas ao registro original. 
-				As chaves estrangeiras id_funcionario e id_cliente conectam-se às tabelas correspondentes, indicando os participantes do compromisso. 
-				As colunas dataHoraInicio e dataHoraFim definem o intervalo temporal do compromisso, enquanto sessaoNumero e totalSessoes detalham a 
-				sequência e o número total de sessões. O campo totalPreco registra o custo total do compromisso, com a opção de parcelamento por 
-				sessão indicada por parcelarPrecoPorSessao. 
-				A coluna enviado informa se o compromisso foi comunicado, possivelmente relacionado a notificações. 
-				O status de ativação ou desativação do registro é refletido em ativo.
-				Restrições de chave estrangeira garantem a integridade referencial com as tabelas cliente e funcionario. 
-				Em suma, essa estrutura fornece uma base sólida para o agendamento, 
-				permitindo a personalização de compromissos com diversos detalhes específicos.
-				Quando o usuario pede para se fazer um agendamento para um cliente,
-				isso significa a inserção na tabela agenda e tambem na tabela agendaEspecialidade para indicar quais servicos o cliente 
-				esta solicitando.   
-				A coluna ativo controla  exclusao logida do registro, ou seja a ativação ou desativação do registro.
-
-			fluxoCaixa 
-
-				A tabela fluxoCaixa é destinada a documentar eventos financeiros, 
-				concentrando-se em registros ocorridos durante as aberturas e fechamentos de caixa,
-				bem como transações individuais. 
-				A coluna ativo controla  exclusao logida do registro, ou seja a ativação ou desativação do registro.
-
-
-			produto:
-
-				A tabela produto é destinada ao gerenciamento de produtos, abrangendo informações como nome, 
-				código de barras, marca, linha, categoria e descrição. 
-				As colunas precoCompra e precoVenda registram os valores de compra e venda, respectivamente. 
-				A chave estrangeira id_fornecedor conecta-se à tabela fornecedor, 
-				estabelecendo a relação entre produtos e seus fornecedores. 
-				A coluna prazoentrega indica o prazo de entrega associado ao produto. 
-				Os campos tipovenda e tipoconsumo oferecem flexibilidade para diferentes modalidades de venda e consumo. 
-				Evitarsaidanegativa é um indicador para evitar saídas negativas do estoque. 
-				As colunas estoqueatual e estoqueminimo monitoram os níveis de estoque. 
-				Medida especifica a unidade de medida do produto. Observação permite notas adicionais. 
-				A coluna avatar pode armazenar informações sobre a imagem associada ao produto. 
-				Ativo controla a ativação ou desativação do registro. 
-				Restrições de chave estrangeira garantem a integridade referencial com a tabela fornecedor. 
-				Essa estrutura oferece uma abordagem abrangente para o gerenciamento de informações de produtos, 
-				desde detalhes comerciais até características específicas de estoque e fornecimento.	
-				A coluna ativo controla  exclusao logida do registro, ou seja a ativação ou desativação do registro.
-
-				Para se localizar o fornecedor que distribui um determinado produto basta realizar 
-				um join da tabela produto com  a tabela fornecedor.
-
-						Exemplo SQL:
-							#user_request_or_question: "Qual é o fornecedor que fornece, distribui , vende o produto shampoo?"
-							#SQL: select fornecedor.nome  
-										from produto inner join fornecedor
-											on produto.id_fornecedor = fornecedor.id_fornecedor
-										where produto.nome like 'shampoo%'
-											AND fornecedor.ativo = 1
-											AND produto.ativo = 1 ;   
-			funcionario 
-		
-				Dentro deste sistema empregado, profissional, especialista, sao todos denominacao de funcionário
-
-				Quando um usuário fizer uma pergunta sobre funcionário, e não especificar exatamente o campo que ele quer se informar, 
-				informe o campo nome do funcionário.
-
-
-				Remuneração do Funcionario 
-
-					A remuneração do funcionario pode ser uma salario fixo mensal ou uma porcentagem sobre os servicos prestados. 
-					Para saber o salario mensal de um funcionario, verificar entro da tabela funcionario se remuneracaoFixa = 0 retornar 
-					campo percentagemRemuneracaoGeral + '% sobre o servico'   
-					caso contrario se deve retornar o campo remuneracaoFixa, 
-					isso claro com a filtragem campo nome ou apelido = "nome ou apelido".
-
-					Exemplo SQL:
-						#user_request_or_question:	"Qual é o salario do funcionario John Doe" ? 
-						#SQL: SELECT nome, 
-									apelido,
-									CASE 
-									WHEN remuneracaoFixa = 0 THEN 
-										CONCAT(percentagemRemuneracaoGeral, '% sobre o serviço')
-									ELSE CAST(remuneracaoFixa AS CHAR) 
-									END AS remuneracao
-								FROM 
-									funcionario
-								WHERE 
-									nome LIKE 'John Doe%'
-									OR apelido LIKE 'John Doe%'
-									AND funcionario.ativo = 1;
+			Exemplo SQL:
+				#user_request_or_question:	"Qual é o salario do funcionario John Doe?" 
+				#SQL: SELECT nome, 
+							apelido,
+							CASE 
+							WHEN remuneracao_fixa = 0 THEN 
+								CONCAT(percentagem_remuneracao_geral, '% sobre o serviço')
+							ELSE CAST(remuneracao_fixa AS CHAR) 
+							END AS remuneracao
+						FROM 
+							funcionario
+						WHERE 
+							nome LIKE 'John Doe%'
+							OR apelido LIKE 'John Doe%'
+							AND funcionario.ativo = 1;
 
 				Nota  
 
@@ -156,29 +76,11 @@
 					na verdade se esta perguntando se o funcionario possui algum agendamento para ele prestar servico. 
 
 
-			consultas de funcionarios comprometidos com agendamentos 
-
-				Em casos de dúvidas relacionadas ao funcionário que estará trabalhando em um agendamento, é recomendável realizar consultas 
-				baseadas na relação entre a tabela "agenda" e a tabela "funcionario". Para filtrar com base em períodos de datas e horas, 
-				considere o campo da tabela "agenda" denominado "dataHoraInicio".
-
-				Exemplo SQL: 
-
-					#user_request_or_question:  "Quais sao os profissionais que possuem agendamento para o dia 24 deste mes?"
-					#SQL: SELECT f.nome funcionario 
-								FROM funcionario f 
-								JOIN agenda a ON f.id_funcionario = a.id_funcionario  
-								WHERE DATE(a.dataHoraInicio) = '2024-01-24'
-								AND f.ativo = 1;
-
-
-
-
 	CONSULTAS DE AGENDAMENTO DE CLIENTES
 
 		Em casos de questões relacionadas ao agendamento de clientes, recomenda-se realizar consultas baseadas no relacionamento 
 		entre as tabelas "agenda" e "cliente". Para parâmetros baseados em períodos de datas e horas, considere o campo da tabela 
-		"agenda" denominado "dataHoraInicio".
+		"agenda" denominado "data_hora_inicio".
 
 		Exemplo SQL: 
 		
@@ -186,7 +88,7 @@
 				#SQL: SELECT c.nome  
 						FROM cliente c 
 							JOIN agenda a ON c.id_cliente = a.id_cliente 
-						WHERE DATE(a.dataHoraInicio) = '2024-01-17'
+						WHERE DATE(a.data_hora_inicio) = '2024-01-17'
 							AND c.ativo = 1;			
 
 	CONSULTA DE FORNECEDORES DE PRODUTOS EM ESTOQUE 
@@ -208,88 +110,88 @@
 	CONSULTA DE PRODUTOS EM ESTOQUE
 
 		Caso seja necessario saber a relacao de produtos mais vendidos, 
-		isso e obtido com o relacionamento das tabela produto e fluxoCaixaItem.
+		isso e obtido com o relacionamento das tabela produto e fluxo_caixaItem.
 
 			Exemplo SQL 1 
 				Quais são os 5 produtos mais vendidos no salão?  
 				
 				#SQL:  SELECT 
 							p.nome AS NomeProduto,
-							COUNT(fc.id_fluxoCaixaItem) AS QuantidadeVendida
+							COUNT(fc.id_fluxo_caixa_item) AS quantidade_vendida
 						FROM 
 							produto p
 						JOIN 
-							fluxoCaixaItem fc ON p.id_produto = fc.id_produto
+							fluxo_caixa_item fc ON p.id_produto = fc.id_produto
 						WHERE 
 							p.ativo = 1 	
 						GROUP BY 
 							p.nome
 						ORDER BY 
-							QuantidadeVendida DESC
+							quantidade_vendida DESC
 						LIMIT 5;
 
 			Exemplo SQL 2 
 				Qual é a margem de lucro média dos produtos de beleza?			
-				#SQL: SELECT AVG((precoVenda - precoCompra) / precoCompra) * 100 AS MargemLucroMedia
+				#SQL: SELECT AVG((preco_venda - preco_compra) / preco_compra) * 100 AS margem_lucro_media
 								FROM produto
 								WHERE ativo = 1;
 
 
-			Em consultas sobre saida de produtos em estoque, deve ser feito o relacionamento entre as tabelas fluxoCaixa, 
-			fluxoCaixaItem e produto 
-			e nestes casos é importante que o campo tipo da tabela fluxoCaixa seja igual a 'é,
+			Em consultas sobre saida de produtos em estoque, deve ser feito o relacionamento entre as tabelas fluxo_caixa, 
+			fluxo_caixaItem e produto 
+			e nestes casos é importante que o campo tipo da tabela fluxo_caixa seja igual a 'é,
 			pois indica entrada de valor, logo houve uma venda de produto.
 
 				Exemplo SQL 3 
 					Quais são os itens de estoque com maior saída?	
 					#SQL:  SELECT 
-								p.nome AS NomeProduto,
-								SUM(fc.quantidade) AS TotalSaida
+								p.nome AS nome_produto,
+								SUM(fc.quantidade) AS total_saida
 							FROM 
-								fluxoCaixaItem fc
+								fluxo_caixa_item fc
 							JOIN 
 								produto p ON fc.id_produto = p.id_produto
 							JOIN 
-								fluxoCaixa f ON fc.id_fluxoCaixa = f.id_fluxoCaixa
+								fluxo_caixa f ON fc.id_fluxo_caixa = f.id_fluxo_caixa
 							WHERE  
 								f.tipo = 'e'   /* E = Entrada de dinheiro , logo saida de item em estoque */
 							GROUP BY 
 								p.nome
 							ORDER BY 
-								TotalSaida DESC;			
+								total_saida DESC;			
 
 
 	CONSULTA DE FLUXO DE CAIXA 
 
 		Informacoes relacionadas a entrada e saidas de caixa,
-		movimentacao financeira e custos operacionais podem ser obtidos em pesquisas na tabela fluxoCaixa 
-		e tambem as vezes pode precisar do relacionamento da tabela fluxoCaixaItem
+		movimentacao financeira e custos operacionais podem ser obtidos em pesquisas na tabela fluxo_caixa 
+		e tambem as vezes pode precisar do relacionamento da tabela fluxo_caixaItem
 
 			Exemplo SQL 1
 				Quais são os custos operacionais mais significativos?
 				#SQL:  SELECT 
-							tipo AS TipoDespesa,
-							SUM(valor) AS TotalDespesas
+							tipo AS tipo_despesa,
+							SUM(valor) AS total_despesas
 						FROM 
-							fluxoCaixa
+							fluxo_caixa
 						WHERE tipo = 'S'  
-							AND fluxoCaixa.ativo = 1 
+							AND fluxo_caixa.ativo = 1 
 						GROUP BY 
 							tipo
 						ORDER BY 
-							TotalDespesas DESC;
+							total_despesas DESC;
 
 			Exemplo SQL 2 
 				#user_request_or_question: "Em que dia deste mes foi pago a tv por assinatura ?"
 				#SQL: SELECT 
-						DAY(fc.dataHora) AS DiaPagamento
+						DAY(fc.dataHora) AS dia_pagamento
 						FROM 
-							fluxoCaixa fc
+							fluxo_caixa fc
 						JOIN 
-							fluxoCaixaItem fci ON fc.id_fluxoCaixa = fci.id_fluxoCaixa
+							fluxo_caixa_item fci ON fc.id_fluxo_caixa = fci.id_fluxo_caixa
 						WHERE fci.descricao LIKE '%tv por assinatura%'
-							AND MONTH(fc.dataHora) = MONTH(CURRENT_DATE())
-							AND YEAR(fc.dataHora) = YEAR(CURRENT_DATE())
+							AND MONTH(fc.data_hora) = MONTH(CURRENT_DATE())
+							AND YEAR(fc.data_hora) = YEAR(CURRENT_DATE())
 							AND fc.ativo = 1
 						ORDER BY 			
 
@@ -308,8 +210,8 @@
 				#user_request_or_question: "Qual é o serviço mais demandado pelos clientes?"
 				#SQL: SELECT nome, COUNT(*) as quantidade  
 							FROM especialidade 
-								INNER JOIN agendaEspecialidade
-										ON especialidade.id_especialidade = agendaEspecialidade.id_especialidade 
+								INNER JOIN agenda_especialidade
+										ON especialidade.id_especialidade = agenda_especialidade.id_especialidade 
 							WHERE especialidade.ativo = 1 		
 							GROUP BY especialidade.nome 
 							ORDER BY quantidade DESC LIMIT 1 ;
@@ -319,7 +221,7 @@
 				#SQL: SELECT nome, COUNT(*) as quantidade  
 						FROM especialidade 
 							INNER JOIN agendaEspecialidade
-									ON especialidade.id_especialidade = agendaEspecialidade.id_especialidade 
+									ON especialidade.id_especialidade = agenda_especialidade.id_especialidade 
 						WHERE especialidade.ativo = 1 		
 						GROUP BY especialidade.nome 
 						ORDER BY quantidade LIMIT 10 ;
@@ -334,19 +236,19 @@
 				#user_request_or_question: "Qual é a taxa de ocupação diária dos funcionários ao longo da semana?"
 				#SQL: SELECT 
 						f.nome AS NomeFuncionario,
-						COALESCE(AVG(ocupacao_diaria), 0) AS TaxaOcupacaoMedia
+						COALESCE(AVG(ocupacao_diaria), 0) AS taxa_ocupacao_media_diaria
 						FROM 
 							funcionario f
 						LEFT JOIN (
 							SELECT 
 								id_funcionario,
-								ROUND(SUM(TIMESTAMPDIFF(MINUTE, dataHoraInicio, dataHoraFim)) / 4200 * 100, 2) AS ocupacao_diaria
+								ROUND(SUM(TIMESTAMPDIFF(MINUTE, data_hora_inicio, data_hora_fim)) / 4200 * 100, 2) AS ocupacao_diaria
 							FROM 
 								agenda
 							WHERE 
 								ativo = 1
 							GROUP BY 
-								id_funcionario, DATE(dataHoraInicio)
+								id_funcionario, DATE(data_hora_inicio)
 						) a ON f.id_funcionario = a.id_funcionario
 						GROUP BY 
 							f.nome;
@@ -354,22 +256,22 @@
 			Exemplo SQL 2 
 				#user_request_or_question: "Qual é a taxa de ocupação média dos funcionários ao longo da semana?"
 				#SQL:  SELECT f.nome AS NomeFuncionario,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 1, 1, 0)) AS TaxaOcupacaoMediaDomingo,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 2, 1, 0)) AS TaxaOcupacaoMediaSegunda,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 3, 1, 0)) AS TaxaOcupacaoMediaTerca,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 4, 1, 0)) AS TaxaOcupacaoMediaQuarta,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 5, 1, 0)) AS TaxaOcupacaoMediaQuinta,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 6, 1, 0)) AS TaxaOcupacaoMediaSexta,
-								AVG(IF(WEEKDAY(a.dataHoraInicio) = 7, 1, 0)) AS TaxaOcupacaoMediaSabado
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 1, 1, 0)) AS taxa_ocupacao_media_domingo,
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 2, 1, 0)) AS taxa_ocupacao_media_segunda,
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 3, 1, 0)) AS taxa_ocupacao_media_terca,
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 4, 1, 0)) AS taxa_ocupacao_media_quarta,
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 5, 1, 0)) AS taxa_ocupacao_media_quinta,
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 6, 1, 0)) AS taxa_ocupacao_media_sexta,
+								AVG(IF(WEEKDAY(a.data_hora_inicio) = 7, 1, 0)) AS taxa_ocupacao_media_sabado
 							FROM funcionario f
 							LEFT JOIN (
 							SELECT
-								dataHoraInicio,
+								data_hora_inicio,
 								id_funcionario,
-								WEEKDAY(dataHoraInicio) AS diaSemana
+								WEEKDAY(data_hora_inicio) AS diaSemana
 							FROM agenda a
-							WHERE MONTH(dataHoraInicio) = MONTH(CURRENT_DATE())
-								AND YEAR(dataHoraInicio) = YEAR(CURRENT_DATE())
+							WHERE MONTH(data_hora_inicio) = MONTH(CURRENT_DATE())
+								AND YEAR(data_hora_inicio) = YEAR(CURRENT_DATE())
 							) a ON f.id_funcionario = a.id_funcionario
 							GROUP BY f.nome;
 
@@ -379,9 +281,9 @@
 			#user_request_or_question:"Quais são os horários de pico para cada tipo de serviço?" 
 			#SQL: SELECT 
 						ae.id_especialidade,
-						e.nome AS Especialidade,
-						DATE_FORMAT(a.dataHoraInicio, '%H:%i') AS HorarioPico,
-						COUNT(*) AS QuantidadeAgendamentos
+						e.nome AS especialidade,
+						DATE_FORMAT(a.data_hora_inicio, '%H:%i') AS horario_pico,
+						COUNT(*) AS quantidade_agendamentos
 					FROM 
 						agenda a
 					JOIN 
@@ -391,23 +293,6 @@
 					WHERE 
 						a.ativo = 1
 					GROUP BY 
-						ae.id_especialidade, DATE_FORMAT(a.dataHoraInicio, '%H:%i')
+						ae.id_especialidade, DATE_FORMAT(a.data_hora_inicio, '%H:%i')
 					ORDER BY 
-						ae.id_especialidade, QuantidadeAgendamentos DESC;
-
-
-	INFORMAÇÕES NÃO CONTEMPLADAS NO APLICATIVO
-
-		Em casos onde se precise de informações em que a estrutura do banco de dados não contemple, 
-		devemos retornar a instrução SQL abaixo, 
-		com variações na resposta de retorno semelhantes aos Exemplo SQLs abaixo:
-
-			Exemplo SQL 1:
-			    #user_request_or_question:"Qual é a taxa de cancelamento ou não comparecimento dos clientes agendados?"
-				#SQL: SELECT "Desculpe, mas o gerenciador não possui uma maneira de saber a taxa de cancelamento ou não 
-								comparecimento dos clientes agendados" AS retorno;
-
-			Exemplo SQL 2:
-				#user_request_or_question: "Como está a satisfação dos clientes em relação aos serviços prestados?"
-				#SQL: SELECT "Desculpe, mas não tenho como saber a taxa de satisfação dos clientes, 
-								o gerenciador não possui esta informação salva" AS retorno;
+						ae.id_especialidade, quantidade_agendamentos DESC;
