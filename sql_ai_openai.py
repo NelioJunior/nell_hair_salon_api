@@ -19,7 +19,7 @@ db = SQLDatabase.from_uri(
                           )
 
 db_config = {'host': db_host,'user': db_user,'password': db_password,'database': db_name}
-conn = mysql.connector.connect(host=db_host,user=db_user,password=db_password,database="BusinessInteligence")
+conn = mysql.connector.connect(host=db_host,user=db_user,password=db_password,database=db_name)
 
 llm = ChatOpenAI(api_key=chave_openai,  model="gpt-3.5-turbo", temperature=0)
 

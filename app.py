@@ -21,7 +21,7 @@ message_info = {
                 "message" : "",
                 "detected" : "",
                 "lastMessageTime": datetime.now().strftime("%H:%M"),  
-                "pasta": "http://nelltek.ddns.net/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
+                "pasta": "https://iaeiot.com.br/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
 
 rule_file = "/home/nelljr/nell_hair_salon_api/intent_analysis.txt"
@@ -49,9 +49,9 @@ def root():
 def smartphone():
      return render_template('smartphone.html')
 
-@app.route("/bi_chat", methods=['GET'])
+@app.route("/ai4bi", methods=['GET'])
 def bi_chat():
-     return render_template('bi_chat.html')
+     return render_template('ai4bi.html')
 
 @app.route("/customer_service", methods=['POST'])
 def customer_service():

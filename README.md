@@ -13,8 +13,6 @@
 
 
 
-
-
 # Dica langchain (SQL) -----------------------------------------------------------------------------------------------------------
 
   Exemplo mais completo da string de conexao, quando incluido o parametro include_tables, so' as tabelas indicada seram pesquisadas
@@ -181,6 +179,7 @@ O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI
 
 Questoes testes ✓
 
+Produtos que estao com o estoque abaixo do estoque minimo (Elaborar mais sobre produtos em estoque minimo e estoque atual )
 Me de uma lista completa com o apelido dos funcionarios
 Qual é o serviço mais demandado pelos clientes?    
 Quais são os 5 produtos mais vendidos no salão?   
