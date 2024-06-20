@@ -10,7 +10,7 @@ chave_together = obter_chave_together()
 
 db_user = "root"
 db_password = "2246"
-db_host = "192.168.0.131"
+db_host = "raspinellserver.local"
 db_name = "BusinessInteligence"
 db = SQLDatabase.from_uri(f"mariadb+pymysql://{db_user}:{db_password}@{db_host}/{db_name}",view_support = True)                          
 

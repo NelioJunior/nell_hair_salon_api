@@ -11,7 +11,7 @@ chave_openai = obter_chave_openai()
 
 db_user = "root"
 db_password = "2246"
-db_host = "192.168.0.131"
+db_host = "raspinellserver.local"
 db_name = "BusinessInteligence"
 db = SQLDatabase.from_uri(
                           f"mariadb+pymysql://{db_user}:{db_password}@{db_host}/{db_name}"
@@ -27,7 +27,7 @@ rule_file = "/home/nelljr/nell_hair_salon_api/database_guide.txt"
 rule = open(rule_file, "r")  
 dba_rule = rule.read()
 
-def get_sql_statement(query):
+def get_sql_statement_and_execution (query):
 
     cursor = conn.cursor()
     try: 
@@ -47,7 +47,12 @@ def get_sql_statement(query):
         resultados = cursor.fetchall()
 
         for linha in resultados:
-            answer.append(linha)
+            if linha[0] is not None:
+                 answer.append(linha)
+
+        if len(answer) == 0:
+             answer = ("Comunique que,infelizmente, a busca da informação desejada resultou em nada."
+                       "Sugira ao usuário que refaça a pergunta." )
 
     except: 
         answer = "Responda da melhor maneira possivel" 
@@ -74,6 +79,6 @@ def ask_to_the_database(query):
 if __name__ ==  '__main__':
 
     query = "Quais sao os clientes que possuem agendamento marcados para o dia 14 deste mes?" 
-    results = get_sql_statement(query)
+    results = get_sql_statement_and_execution(query)
 
     print (results)

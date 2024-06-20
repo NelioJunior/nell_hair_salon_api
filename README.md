@@ -7,12 +7,6 @@
 
   Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
 
-# Cronograma para apresentacao --------------------------------------------------------------------------------------------------
-
-    12 - Concluir To Do 
-
-
-
 # Dica langchain (SQL) -----------------------------------------------------------------------------------------------------------
 
   Exemplo mais completo da string de conexao, quando incluido o parametro include_tables, so' as tabelas indicada seram pesquisadas
@@ -38,6 +32,10 @@
 ## TO DO ------------------------------------------------------------------------------------------------------------------------
 
   Sprint Semana de 09/Jun a 15 
+
+    Entre 18-19 Quando a consulta SQL nao retornar dados a AI4BI devera informar ao cliente devidamente.
+                Isso e' importante, porque quando nao ha retorno de dados a IA pode alucinar.     
+
     Entre 13-14 Fazendo uso de IA fazer um modulo de analise de sentimento 
                 Criar a view de analise de sentimento.
 

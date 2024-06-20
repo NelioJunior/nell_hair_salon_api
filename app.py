@@ -130,7 +130,7 @@ def business_inteligence():
     data = request.get_json()
     question = data.get('question') 
 
-    results = sql_ai_openai.get_sql_statement(question)
+    results = sql_ai_openai.get_sql_statement_and_execution(question)
     answer = results 
 
     question_and_answer = f"Pergunta:{question} / Resposta {answer}"

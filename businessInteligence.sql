@@ -266,5 +266,5 @@ create view compromissos_clientes_funcionarios as
   order by 
     a.data_hora_inicio, f.id_funcionario;
 
-    
-    
+create view pesquisa_satisfacao as 
+   select * from SalaoConsultorio.pesquisaSatisfacao ;

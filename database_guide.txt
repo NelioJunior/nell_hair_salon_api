@@ -1,10 +1,12 @@
 	Criterios para criação de Instrucoes SQL 
 
-        - So utilizar data atual como filtro de consulta em caso disto ser explicitado isso dentro da questao.
+        - Só utilizar data atual como filtro de consulta em caso disto ser explicitado isso dentro da questao.
 
-		- Os dados pesquisados nao devem ter limites de registros retornados.
+		- As consultas SQL só podem ter critérios de data e hora se o usuário deixar isso indicado na pergunta ou pedido dele.
 
-		- Em pesquisa que envolve nomes, deverao ser feitas pelo campo nome e apelido, nos caso que estes campos 
+		- Os dados pesquisados não devem ter limites de registros retornados.
+
+		- A pesquisa que envolve nomes, deverao ser feitas pelo campo 'nome' e 'apelido', nos caso que estes campos 
 		    existem na tabela em questao e utilizado a cláusula Like 'campo%'
 
 				Exemplo SQL: 
@@ -16,8 +18,8 @@
 								OR funcionario.apelido LIKE 'Nat%'  
 								AND ativo = 1;
 
-		- Em pesquisas que envolvem busca atraves de campos tipo varchar como clausa desta busca (com exceção do campo nome),
-		    devera ser utilizado a cláusula Like '%campo%' 
+		- As pesquisas que envolvem buscas através de campos do tipo varchar como cláusula desta busca (com exceção do campo nome) 
+		  devem usar a cláusula LIKE '%campo%'.
 
 			Exemplo SQL: 
 				# user question: 	"Por favor, eu preciso do telefone da cliente Natasha"
@@ -296,3 +298,19 @@
 						ae.id_especialidade, DATE_FORMAT(a.data_hora_inicio, '%H:%i')
 					ORDER BY 
 						ae.id_especialidade, quantidade_agendamentos DESC;
+
+	CONSULTA PESQUISA DE SATISFACAO
+
+	    As consultas SQL só podem ter critérios de data e hora se o usuário deixar isso indicado na pergunta ou pedido dele.
+
+		Exemplo 1  
+			#user_request_or_question:"Qual a media de satisfacao dos nossos clientes?" 
+			#SQL: SELECT AVG(avaliacao) AS media_satisfacao
+                         FROM pesquisa_satisfacao
+                         WHERE AND ativo = 1;	      
+		Exemplo 2  
+			#user_request_or_question:"Qual a media do mes corrente da satisfacao dos nossos clientes?" 
+			#SQL: SELECT AVG(avaliacao) AS media_satisfacao
+			FROM pesquisa_satisfacao
+			WHERE month(dataHora) =  EXTRACT(MONTH FROM CURDATE()) 
+			AND ativo = 1;
