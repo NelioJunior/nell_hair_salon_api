@@ -1388,7 +1388,9 @@ def processCrud (stts,contato,mensagemOriginal,intencao,respBaseConhecimento,pas
                 stts["ultimaMensagemAssistente"] = msgResposta   
                 stts["flagConfirmarAgendamento"] = True 
             else:
-                msgResposta = "Me de mais detalhes para que eu possa te ajudar."    
+                msgResposta = "Me dê mais detalhes para que eu possa te ajudar."
+                if stts["reservas"][0]["inicio"] == "":
+                    msgResposta += "\nMais ou menos que horas você quer vir e qual dia também?"  
 
     return msgResposta
 
