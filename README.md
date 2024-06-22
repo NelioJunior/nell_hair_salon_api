@@ -7,7 +7,7 @@
 
   Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
 
-# Dica langchain (SQL) -----------------------------------------------------------------------------------------------------------
+# Dica langchain (SQL) --------------------------------------------------------------------------------------------------------------
 
   Exemplo mais completo da string de conexao, quando incluido o parametro include_tables, so' as tabelas indicada seram pesquisadas
 
@@ -18,22 +18,22 @@
       view_support=True
   )
 
-## buscartratutor.json -  Regras  : -----------------------------------------------------------------------------------------------
+## buscartratutor.json -  Regras  : -------------------------------------------------------------------------------------------------
 
       -  Considerar a ordernação pela ordem de insert (id) 
       -  Usar gramatica "tarzan" todos verbos devem estar no infinitivo.
       -  Preferencia a palavra no femino, Exemplos: Obrigado se torna obrigada, masculino se torna masculina  
       -  todas as palavras no singular com excecao das horas 
       -  Evitar espaco em branco no inicio e no final , por exemplo ' centopeia ' 
-      -  Frases com mais de uma palavrava devem prevalecer sobre frases de apenas uma palavra, e por ultimo por ordem alfabetica 
+      -  Frases com mais de uma palavra devem prevalecer sobre frases de apenas uma palavra, e por ultimo por ordem alfabetica 
                                                                                                (ex: apenas prevalece sobre somente) 
-                                                - sexo masculino
+## TO DO -----------------------------------------------------------------------------------------------------------------------------
 
-## TO DO ------------------------------------------------------------------------------------------------------------------------
+  Sprint Semana de 16/Jun a 22
 
-  Sprint Semana de 09/Jun a 15 
+    20 - Adicionar no script de massa de dados um funcionario que cuida de acumputura, massagem, quiropraxia e tatuador.√
 
-    Entre 18-19 Quando a consulta SQL nao retornar dados a AI4BI devera informar ao cliente devidamente.
+    Entre 18-19 Quando a consulta SQL nao retornar dados a AI4BI devera informar ao cliente devidamente.   √
                 Isso e' importante, porque quando nao ha retorno de dados a IA pode alucinar.     
 
     Entre 13-14 Fazendo uso de IA fazer um modulo de analise de sentimento 

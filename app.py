@@ -21,7 +21,7 @@ message_info = {
                 "message" : "",
                 "detected" : "",
                 "lastMessageTime": datetime.now().strftime("%H:%M"),  
-                "pasta": "https://iaeiot.com.br/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
+                "pasta": "http://raspinellserver.local/nellSite/ClientesParceirosNell/gestorPai_SalaoConsultorioMVC/" 
 }
 
 rule_file = "/home/nelljr/nell_hair_salon_api/intent_analysis.txt"
@@ -29,14 +29,13 @@ rule = open(rule_file, "r")
 
 detection_rules = rule.read()                        
 
-rule_file = "/home/nelljr/nell_hair_salon_api/angel_guide.txt"
+rule_file = "/home/nelljr/nell_hair_salon_api/angel_spa_guide.txt"
 rule = open(rule_file, "r")  
 agent_rule = rule.read()
 
 rule_file = "/home/nelljr/nell_hair_salon_api/angel_bi_guide.txt"
 rule = open(rule_file, "r")  
 agent_bi_rule = rule.read()
-
 
 app = Flask(__name__)
 CORS(app)

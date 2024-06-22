@@ -1,5 +1,17 @@
 [
     {                  
+        "texto": "queropata",
+        "equivalente": "quiropraxia"
+    },
+    {                  
+        "texto": "espinhal",
+        "equivalente": "quiropraxia"
+    },
+    {                  
+        "texto": "espinha",
+        "equivalente": "quiropraxia"
+    },
+    {                  
         "texto": "uma hidratacao",
         "equivalente": "hidratacao"
     },

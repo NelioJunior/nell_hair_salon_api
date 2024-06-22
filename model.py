@@ -426,10 +426,10 @@ def buscarFuncionarioPorEspecialidades(lstEspecialidades):
                         ocorrencias = occurs
                         idsAptos = []                                  
                     
-                    idsAptos += item["id_funcionario"]
+                    idsAptos.append(item["id_funcionario"])
                 elif occurs >= ocorrencias:  
                     ocorrencias = occurs
-                    idsAptos += item["id_funcionario"]
+                    idsAptos.append(item["id_funcionario"])
 
         lstFuncionariosAptos = []
 

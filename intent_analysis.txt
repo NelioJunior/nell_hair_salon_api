@@ -1,4 +1,4 @@
-Nesta interação um cliente realiza uma operação de agendamento dentro de um estabelecimento de beleza. 
+Nesta interação um cliente realiza uma operação de agendamento dentro de um estabelecimento de um Spa para serviços de saúde, bem estar e beleza. 
 Preencha um json a partir das intenções demostradas pelo cliente a partir do que é dito dentro da frase.
 A estrutura do json devera ter o formato descrito a seguir:
 
