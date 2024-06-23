@@ -29,6 +29,11 @@
                                                                                                (ex: apenas prevalece sobre somente) 
 ## TO DO -----------------------------------------------------------------------------------------------------------------------------
 
+  Sprint Senana 23/Jun a 30 
+
+    28 - Desvincular os chatbots da AWS, para isso em vez, os fontes do nell_hair_salon_api deverao ser 
+         movidos para  raspinellserver.local/var/www/html/
+
   Sprint Semana de 16/Jun a 22
 
     20 - Adicionar no script de massa de dados um funcionario que cuida de acumputura, massagem, quiropraxia e tatuador.√
@@ -177,12 +182,12 @@ O TRECHO ABAIXO DEVERA SER REMOVIDO PARA A API IA DE BI
 
 Questoes testes ✓
 
-Produtos que estao com o estoque abaixo do estoque minimo (Elaborar mais sobre produtos em estoque minimo e estoque atual )
-Me de uma lista completa com o apelido dos funcionarios
-Qual é o serviço mais demandado pelos clientes?    
-Quais são os 5 produtos mais vendidos no salão?   
-Qual é a taxa de ocupação média dos funcionários ao longo da semana?  
-Quais são os horários de pico para cada tipo de serviço?  
+Produtos que estao com o estoque atual abaixo do estoque minimo.  ✓ 
+Me de uma lista completa com o apelido dos funcionarios.   ✓ 
+Qual é o serviço mais demandado pelos clientes?    ✓    
+Quais são os 5 produtos mais vendidos no salão?   ✓ 
+Qual é a taxa de ocupação média dos funcionários ao longo da semana?   ✓ 
+Quais são os horários de pico para cada tipo de serviço?   ✓ 
 Quais são os serviços menos procurados pelos clientes?   
 Qual é a margem de lucro média dos produtos de beleza?   
 Qual é a taxa de cancelamento ou não comparecimento dos clientes agendados? 
