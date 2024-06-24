@@ -188,7 +188,7 @@ Qual é o serviço mais demandado pelos clientes?    ✓
 Quais são os 5 produtos mais vendidos no salão?   ✓ 
 Qual é a taxa de ocupação média dos funcionários ao longo da semana?   ✓ 
 Quais são os horários de pico para cada tipo de serviço?   ✓ 
-Quais são os serviços menos procurados pelos clientes?   
+Quais são os serviços menos procurados pelos clientes?    ✓  
 Qual é a margem de lucro média dos produtos de beleza?   
 Qual é a taxa de cancelamento ou não comparecimento dos clientes agendados? 
 Quais são os itens de estoque com maior saída? 
