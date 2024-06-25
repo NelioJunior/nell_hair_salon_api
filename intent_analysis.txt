@@ -1,33 +1,33 @@
-Nesta interação um cliente realiza uma operação de agendamento dentro de um estabelecimento de um Spa para serviços de saúde, bem estar e beleza. 
-Preencha um json a partir das intenções demostradas pelo cliente a partir do que é dito dentro da frase.
-A estrutura do json devera ter o formato descrito a seguir:
+In this interaction, a client performs a booking operation within a Spa establishment for health, wellness, and beauty services.
+Fill in a JSON based on the client's intentions from what is said in the sentence.
+The JSON structure should have the following format:
 
-chave 'servicos', preenchido com um array com o nome dos serviços que o cliente demonstrou desejar, 
-       isso não inclui profissionais do estabelecimento nem data e hora de reservas.
-       
-chave 'intencao', Preenchido seguindo a regra a seguir:
-    'incluirReserva' para o caso em que cliente expressou o desejo de fazer uma nova reserva de serviço de beleza.
-    'incluirReserva' para o caso em que cliente expressou a preferencia a horario, serviço de beleza ou funcionário especialista em beleza.
-    'incluirReserva' para o caso em que cliente expressou o desejo de precisar de um serviço de um profissional especialista em beleza. 
-    'incluirReserva' para o caso em que cliente citou um nome de uma pessoa que nao seja ela mesmo,sinal que provalmente quer agendar um serviço com a pessoa citada.
-    'incluirReserva' para o caso de o cliente citou uma hora ou data aleatoria,sinal que provalmente o cliente esteja indicando a data ou horario da reserva.
-    'concordancia' para o caso em que cliente expressou sinal de aprovação, por exemplo dizendo sim.
-    'discordancia' para o caso em que cliente expressou discordância, por exemplo dizendo não.
-    'discordancia' para o caso em que cliente expreessou que acredita que ocorreu algum erro.  
-    'indiferenca' para o caso em que cliente expressou indiferença a qualquer opção oferecida.
-    'alterarReservaJaEfetuada' para o caso em que cliente expressou o desejo de fazer uma mudança em uma reserva anteriormente efetuada.
-    'cancelarReservaJaEfetuada' para o caso em que cliente expressou o desejo de cancelar uma reserva anteriormente efetuada.
-    'cancelarReservaJaEfetuada' para o caso em que cliente comunicou que nao vai poder vir ou ir ao estabelecimento.
-    'cancelarOperacaoEmAndamento' para o caso em que cliente expressou o desejo de desistir da operação que está realizando.
-    'listarReservaUsuario' para o caso em que cliente expressou o desejo de se informar sobre as reservas feitas por ele.
-    'listarHorariosLivres' para o caso em que cliente expressou o desejo de saber os horários livres do estabelecimento em um determinado período.
-    'listarFuncionarios' para o caso em que cliente expressou o desejo de agendar com algum funcionário específico do estabelecimento.
-    'listarFuncionarios' para o caso em que cliente expressou o desejo de saber quando algum funcionário esta disponivel no estabelecimento.
-    'listarFuncionarios' para o caso em que cliente expressou o desejo de saber qual funcionário é especialista em algum tipo de serviço do estabelecimento.
-    'listarEspecialidades' para o caso em que cliente expressou o desejo de obter informações sobre os serviços realizados pelos funcionários do estabelecimento.
-    'infoEmpresa' para o caso em que cliente expressou o desejo de saber sobre disponibilidade do estabelecimento.
-    'infoEmpresa' para o caso em que cliente expressou desejo de saber informações sobre a empresa, como por exemplo, horário de funcionamento e endereço.
-    'gratidao' para o caso em que cliente expressou gratidão. 
-    'semrelacao'= Resposta do cliente sem tem relação com os itens anteriores.
-    'semrelacao' para o caso em que cliente expressou comprimentos ou saudação. 
-    'semrelacao' para o caso em que cliente expressou satisfação por ter conseguido agendar.
+key 'servicos', filled with an array containing the names of the services the client expressed interest in,
+    this does not include establishment professionals nor reservation date and time.
+   
+key 'intencao', filled according to the following rule:
+    'incluirReserva' for the case where the client expressed the desire to make a new beauty service reservation.
+    'incluirReserva' for the case where the client expressed a preference for a time, beauty service, or beauty specialist.
+    'incluirReserva' for the case where the client expressed the need for a service from a beauty specialist.
+    'incluirReserva' for the case where the client mentioned someone else's name, indicating they likely want to book a service with that person.
+    'incluirReserva' for the case where the client mentioned a random time or date, indicating they are likely specifying the reservation time or date.
+    'concordancia' for the case where the client expressed approval, for example by saying yes.
+    'discordancia' for the case where the client expressed disagreement, for example by saying no.
+    'discordancia' for the case where the client expressed they believe an error occurred.
+    'indiferenca' for the case where the client expressed indifference to any offered option.
+    'alterarReservaJaEfetuada' for the case where the client expressed the desire to change a previously made reservation.
+    'cancelarReservaJaEfetuada' for the case where the client expressed the desire to cancel a previously made reservation.
+    'cancelarReservaJaEfetuada' for the case where the client communicated they won't be able to come or go to the establishment.
+    'cancelarOperacaoEmAndamento' for the case where the client expressed the desire to cancel the ongoing operation.
+    'listarReservaUsuario' for the case where the client expressed the desire to get information about their made reservations.
+    'listarHorariosLivres' for the case where the client expressed the desire to know the establishment's available times for a certain period.
+    'listarFuncionarios' for the case where the client expressed the desire to book with a specific establishment employee.
+    'listarFuncionarios' for the case where the client expressed the desire to know when an employee is available at the establishment.
+    'listarFuncionarios' for the case where the client expressed the desire to know which employee is a specialist in a certain service.
+    'listarEspecialidades' for the case where the client expressed the desire to get information about the services provided by the establishment's employees.
+    'infoEmpresa' for the case where the client expressed the desire to know about the establishment's availability.
+    'infoEmpresa' for the case where the client expressed the desire to know information about the company, such as opening hours and address.
+    'gratidao' for the case where the client expressed gratitude.
+    'semrelacao' for responses from the client not related to the above items.
+    'semrelacao' for the case where the client expressed greetings or salutation.
+    'semrelacao' for the case where the client expressed satisfaction for being able to book.

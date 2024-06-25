@@ -1,316 +1,121 @@
-	Criterios para criação de Instrucoes SQL 
+Criteria for Creating SQL Instructions
 
-        - Só utilizar data atual como filtro de consulta em caso disto ser explicitado isso dentro da questao.
+	- Only use the current date as a filter if explicitly requested in the query specified by the user.
+	- Date and time criteria in SQL queries should be used only if indicated by the user.
+	- Queries should not limit the number of returned records.
+	- For searches involving names, use the 'nome' and 'apelido' fields with the LIKE clause, if these fields exist in the table.
 
-		- As consultas SQL só podem ter critérios de data e hora se o usuário deixar isso indicado na pergunta ou pedido dele.
+	Example
+		User request: "Please, I need the phone number of the professional Nat"
+		Instruction: SELECT telefone FROM funcionario WHERE funcionario.nome LIKE 'Nat%' OR funcionario.apelido LIKE 'Nat%' AND ativo = 1;
 
-		- Os dados pesquisados não devem ter limites de registros retornados.
+	For searches involving varchar fields (except the name field), use the LIKE '%campo%' clause.
+		Example
+		User request: "Please, I need the phone number of the client Natasha"
+		Instruction: SELECT telefone FROM cliente WHERE nome LIKE 'Natasha%' AND ativo = 1;
 
-		- A pesquisa que envolve nomes, deverao ser feitas pelo campo 'nome' e 'apelido', nos caso que estes campos 
-		    existem na tabela em questao e utilizado a cláusula Like 'campo%'
+	For product name searches, use the LIKE '%campo%' clause.
+		Example
+		User request: "Who is the supplier of the product shampoo?"
+		Instruction: SELECT fornecedor.nome FROM fornecedor JOIN produto ON fornecedor.id_fornecedor = produto.id_fornecedor WHERE produto.nome LIKE 'shampoo%' AND fornecedor.ativo = 1 AND produto.ativo = 1;
 
-				Exemplo SQL: 
-					#user question: "Por favor, eu preciso do telefone da profissional Nat"
+	For employee profession searches, relate the professional and position tables, and use the male gender profession name.
+		Example
+		User request: "Which professionals work with depilation?"
+		Instruction: SELECT f.nome AS NomeFuncionario FROM funcionario f JOIN cargo c ON f.id_cargo = c.id_cargo WHERE c.nome = 'depilador' AND f.ativo = 1;
+		For employee remuneration:
+		If remuneracaoFixa = 0, return the field percentagemRemuneracaoGeral + '% sobre o serviço'.
+		Otherwise, return the field remuneracaoFixa.
 
-					#SQL:  SELECT telefone  
-							FROM funcionario 
-							WHERE funcionario.nome LIKE 'Nat%' 
-								OR funcionario.apelido LIKE 'Nat%'  
-								AND ativo = 1;
+		Example
+		User request: "What is the salary of the employee John Doe?"
+		Instruction: SELECT nome, apelido, CASE WHEN remuneracao_fixa = 0 THEN CONCAT(percentagem_remuneracao_geral, '% sobre o serviço') ELSE CAST(remuneracao_fixa AS CHAR) END AS remuneracao FROM funcionario WHERE nome LIKE 'John Doe%' OR apelido LIKE 'John Doe%' AND ativo = 1;
+		Note: In a spa, employees might also be referred to as colaboradores, técnicos, or empregados.
 
-		- As pesquisas que envolvem buscas através de campos do tipo varchar como cláusula desta busca (com exceção do campo nome) 
-		  devem usar a cláusula LIKE '%campo%'.
+	Client Appointment Queries
 
-			Exemplo SQL: 
-				# user question: 	"Por favor, eu preciso do telefone da cliente Natasha"
+		For client appointment-related queries, base the searches on the relationship between the "agenda" and "cliente" tables. Use the "data_hora_inicio" field for date and time parameters.
 
-				#SQL: SELECT telefone  FROM cliente  WHERE nome LIKE 'Natasha%' AND ativo = 1;  ;  
+		Example
+		User request: "Which clients have appointments on the 17th of this month?"
+		Instruction: SELECT c.nome FROM cliente c JOIN agenda a ON c.id_cliente = a.id_cliente WHERE DATE(a.data_hora_inicio) = '2024-01-17' AND c.ativo = 1;
+		Product Supplier Queries
 
-		- Em pesquisas que envolvem busca atraves de nome de produto dever  utilizado a cláusula Like '%campo%' 
-			Exemplo SQL: 
-				# user question:  "Qual é o fornecedor que distribui e vende o produto shampoo?"			
-				#SQL: SELECT fornecedor.nome  FROM fornecedor 
-							JOIN produto 
-							ON fornecedor.id_fornecedor = produto.id_fornecedor  
-							WHERE produto.nome LIKE 'shampoo%';
-							AND fornecedor.ativo = 1
-							AND produto.ativo = 1;
+		To find the supplier information for a specific product, relate the "produto" and "fornecedor" tables using the common field id_fornecedor.
+		Example
+		User request: "What is the name of the supplier of the product 'sunscreen'?"
+		Instruction: SELECT f.nome FROM fornecedor f JOIN produto p ON f.id_fornecedor = p.id_fornecedor WHERE p.nome LIKE '%protetor solar%' AND f.ativo = 1 AND p.ativo = 1;
+		Product Stock Queries
 
-        - Em pesquisas que envolvem a profissao dos funcionarios devera ser feito o relacionamento das tabelas profissional e cargo
-		  e o nome da profissao devera ser feita buscando o nome da profissao no genero masculino.
+		For top-selling products, relate the "produto" and "fluxo_caixaItem" tables.
+		Example
+		User request: "What are the top 5 best-selling products?"
+		Instruction: SELECT p.nome AS NomeProduto, COUNT(fc.id_fluxo_caixa_item) AS quantidade_vendida 
+		FROM produto p JOIN fluxo_caixa_item fc ON p.id_produto = fc.id_produto WHERE p.ativo = 1 GROUP BY p.nome ORDER BY quantidade_vendida DESC LIMIT 5;
+		For average profit margin of beauty products:
 
-			Exemplo SQL:
-				#user_request_or_question:	"Qual profissionais trabalham com depilação?" 
-				#SQL: SELECT f.nome AS NomeFuncionario
-						FROM funcionario f JOIN cargo c ON f.id_cargo = c.id_cargo
-						WHERE c.nome = 'depilador'
-						AND f.ativo = 1;
+		Example
+		User request: "What is the average profit margin of beauty products?"
+		Instruction: SELECT AVG((preco_venda - preco_compra) / preco_compra) * 100 AS margem_lucro_media FROM produto WHERE ativo = 1;
+		For stock item outflow:
 
-		- Em pesquisas que envolvem a Remuneração do Funcionario 
+		Example
+		User request: "Which stock items have the highest outflow?"
+		Instruction: SELECT p.nome AS nome_produto, SUM(fc.quantidade) AS total_saida FROM fluxo_caixa_item fc JOIN produto p ON fc.id_produto = p.id_produto JOIN fluxo_caixa f ON fc.id_fluxo_caixa = f.id_fluxo_caixa WHERE f.tipo = 'e' GROUP BY p.nome ORDER BY total_saida DESC;
 
-			A remuneração do funcionario pode ser uma salario fixo mensal ou uma porcentagem sobre os servicos prestados. 
-			Para saber o salario mensal de um funcionario, verificar entro da tabela funcionario se remuneracaoFixa = 0 retornar 
-			campo percentagemRemuneracaoGeral + '% sobre o servico'   
-			caso contrario se deve retornar o campo remuneracaoFixa, 
-			isso claro com a filtragem campo nome ou apelido = "nome ou apelido".
+	Cash Flow Queries
 
-			Exemplo SQL:
-				#user_request_or_question:	"Qual é o salario do funcionario John Doe?" 
-				#SQL: SELECT nome, 
-							apelido,
-							CASE 
-							WHEN remuneracao_fixa = 0 THEN 
-								CONCAT(percentagem_remuneracao_geral, '% sobre o serviço')
-							ELSE CAST(remuneracao_fixa AS CHAR) 
-							END AS remuneracao
-						FROM 
-							funcionario
-						WHERE 
-							nome LIKE 'John Doe%'
-							OR apelido LIKE 'John Doe%'
-							AND funcionario.ativo = 1;
+		For operational costs:
+		Example
+		User request: "What are the most significant operational costs?"
+		Instruction: SELECT tipo AS tipo_despesa, SUM(valor) AS total_despesas FROM fluxo_caixa WHERE tipo = 'S' AND ativo = 1 GROUP BY tipo ORDER BY total_despesas DESC;
+		For payment inquiries:
 
-				Nota  
+		User request: "On which day of this month was the cable TV subscription paid?"
+		Example
+		Instruction: SELECT DAY(fc.dataHora) AS dia_pagamento FROM fluxo_caixa fc JOIN fluxo_caixa_item fci ON fc.id_fluxo_caixa = fci.id_fluxo_caixa WHERE fci.descricao LIKE '%tv por assinatura%' AND MONTH(fc.data_hora) = MONTH(CURRENT_DATE()) AND YEAR(fc.data_hora) = YEAR(CURRENT_DATE()) AND fc.ativo = 1;
+		Service Queries
 
-					Muitas vez dentro do ambiente do salao, funcionario tambem pode ser chamado de colaborador, tecnico (no caso de beleza), 
-					empregado. 
-					Quando se pergunta se um funciorio possui um compromisso (ou um sinonimo disto), 
-					na verdade se esta perguntando se o funcionario possui algum agendamento para ele prestar servico. 
+		For service price inquiry:
+		Example
+		User request: "Find the price of the service named 'Corte Masculino'"
+		Instruction: SELECT preco FROM especialidade WHERE nome LIKE 'corte masculino%';
+		For most requested service:
 
+		User request: "What is the most demanded service by clients?"
+		Example
+		Instruction: SELECT nome, COUNT(*) AS quantidade FROM especialidade JOIN agenda_especialidade ON especialidade.id_especialidade = agenda_especialidade.id_especialidade WHERE especialidade.ativo = 1 GROUP BY especialidade.nome ORDER BY quantidade DESC LIMIT 1;
+		For least requested services:
 
-	CONSULTAS DE AGENDAMENTO DE CLIENTES
+		User request: "What are the least requested services by clients?"
+		Example
+		Instruction: SELECT nome, COUNT(*) AS quantidade FROM especialidade JOIN agendaEspecialidade ON especialidade.id_especialidade = agenda_especialidade.id_especialidade WHERE especialidade.ativo = 1 GROUP BY especialidade.nome ORDER BY quantidade LIMIT 10;
+		Employee Occupation Rate Queries
 
-		Em casos de questões relacionadas ao agendamento de clientes, recomenda-se realizar consultas baseadas no relacionamento 
-		entre as tabelas "agenda" e "cliente". Para parâmetros baseados em períodos de datas e horas, considere o campo da tabela 
-		"agenda" denominado "data_hora_inicio".
+		For daily occupation rate:
+		User request: "What is the daily occupation rate of employees over the week?"
+		Example
+		Instruction: SELECT f.nome AS NomeFuncionario, COALESCE(AVG(ocupacao_diaria), 0) AS taxa_ocupacao_media_diaria FROM funcionario f LEFT JOIN (SELECT id_funcionario, ROUND(SUM(TIMESTAMPDIFF(MINUTE, data_hora_inicio, data_hora_fim)) / 4200 * 100, 2) AS ocupacao_diaria FROM agenda WHERE ativo = 1 GROUP BY id_funcionario, DATE(data_hora_inicio)) a ON f.id_funcionario = a.id_funcionario GROUP BY f.nome;
+		For average weekly occupation rate:
 
-		Exemplo SQL: 
-		
-				"Quais sao os clientes que possuem agendamento marcados para o dia 17 deste mes?"
-				#SQL: SELECT c.nome  
-						FROM cliente c 
-							JOIN agenda a ON c.id_cliente = a.id_cliente 
-						WHERE DATE(a.data_hora_inicio) = '2024-01-17'
-							AND c.ativo = 1;			
+		User request: "What is the average weekly occupation rate of employees?"
+		Example
+		Instruction: SELECT f.nome AS NomeFuncionario, AVG(IF(WEEKDAY(a.data_hora_inicio) = 1, 1, 0)) AS taxa_ocupacao_media_domingo, AVG(IF(WEEKDAY(a.data_hora_inicio) = 2, 1, 0)) AS taxa_ocupacao_media_segunda, AVG(IF(WEEKDAY(a.data_hora_inicio) = 3, 1, 0)) AS taxa_ocupacao_media_terca, AVG(IF(WEEKDAY(a.data_hora_inicio) = 4, 1, 0)) AS taxa_ocupacao_media_quarta, AVG(IF(WEEKDAY(a.data_hora_inicio) = 5, 1, 0)) AS taxa_ocupacao_media_quinta, AVG(IF(WEEKDAY(a.data_hora_inicio) = 6, 1, 0)) AS taxa_ocupacao_media_sexta, AVG(IF(WEEKDAY(a.data_hora_inicio) = 7, 1, 0)) AS taxa_ocupacao_media_sabado FROM funcionario f LEFT JOIN (SELECT data_hora_inicio, id_funcionario, WEEKDAY(data_hora_inicio) AS diaSemana FROM agenda WHERE MONTH(data_hora_inicio) = MONTH(CURRENT_DATE()) AND YEAR(data_hora_inicio) = YEAR(CURRENT_DATE())) a ON f.id_funcionario = a.id_funcionario GROUP BY f.nome;
+		Peak Hours Queries
 
-	CONSULTA DE FORNECEDORES DE PRODUTOS EM ESTOQUE 
+	For peak service hours:
+		User request: "What are the peak hours for each type of service?"
+		Example
+		Instruction: SELECT ae.id_especialidade, e.nome AS especialidade, DATE_FORMAT(a.data_hora_inicio, '%H:%i') AS horario_pico, COUNT(*) AS quantidade_agendamentos FROM agenda a JOIN agendaEspecialidade ae ON a.id_agenda = ae.id_agenda JOIN especialidade e ON ae.id_especialidade = e.id_especialidade WHERE a.ativo = 1 GROUP BY ae.id_especialidade, DATE_FORMAT(a.data_hora_inicio, '%H:%i') ORDER BY ae.id_especialidade, quantidade_agendamentos DESC;
 
-		Todos os produtos mantidos em estoque estao descritos na tabela produto.
-		Em casos em queira saber informacoes do fornecedor de um determinado produto é necessario fazer o relacionamento entre as duas 
-		tabelas utilizando como campos de relacionamentos o id_fornecedor comum entre as duas tabelas. 
+	Customer Satisfaction Survey Queries
 
-			Exemplo SQL "Qual o nome do fornecedor do produto com o nome 'protetor solar'?" 
-			#SQL: SELECT f.nome 
-					FROM fornecedor f
-						JOIN produto p 
-							ON f.id_fornecedor = p.id_fornecedor
-					WHERE p.nome LIKE '%protetor solar%'
-						AND f.ativo = 1 
-						AND p.ativo = 1;
+		For average customer satisfaction:
+		Example
+		User request: "What is the average customer satisfaction?"
+		Instruction: SELECT AVG(avaliacao) AS media_satisfacao FROM pesquisa_satisfacao WHERE ativo = 1;
 
-
-	CONSULTA DE PRODUTOS EM ESTOQUE
-
-		Caso seja necessario saber a relacao de produtos mais vendidos, 
-		isso e obtido com o relacionamento das tabela produto e fluxo_caixaItem.
-
-			Exemplo SQL 1 
-				Quais são os 5 produtos mais vendidos no salão?  
-				
-				#SQL:  SELECT 
-							p.nome AS NomeProduto,
-							COUNT(fc.id_fluxo_caixa_item) AS quantidade_vendida
-						FROM 
-							produto p
-						JOIN 
-							fluxo_caixa_item fc ON p.id_produto = fc.id_produto
-						WHERE 
-							p.ativo = 1 	
-						GROUP BY 
-							p.nome
-						ORDER BY 
-							quantidade_vendida DESC
-						LIMIT 5;
-
-			Exemplo SQL 2 
-				Qual é a margem de lucro média dos produtos de beleza?			
-				#SQL: SELECT AVG((preco_venda - preco_compra) / preco_compra) * 100 AS margem_lucro_media
-								FROM produto
-								WHERE ativo = 1;
-
-
-			Em consultas sobre saida de produtos em estoque, deve ser feito o relacionamento entre as tabelas fluxo_caixa, 
-			fluxo_caixaItem e produto 
-			e nestes casos é importante que o campo tipo da tabela fluxo_caixa seja igual a 'é,
-			pois indica entrada de valor, logo houve uma venda de produto.
-
-				Exemplo SQL 3 
-					Quais são os itens de estoque com maior saída?	
-					#SQL:  SELECT 
-								p.nome AS nome_produto,
-								SUM(fc.quantidade) AS total_saida
-							FROM 
-								fluxo_caixa_item fc
-							JOIN 
-								produto p ON fc.id_produto = p.id_produto
-							JOIN 
-								fluxo_caixa f ON fc.id_fluxo_caixa = f.id_fluxo_caixa
-							WHERE  
-								f.tipo = 'e'   /* E = Entrada de dinheiro , logo saida de item em estoque */
-							GROUP BY 
-								p.nome
-							ORDER BY 
-								total_saida DESC;			
-
-
-	CONSULTA DE FLUXO DE CAIXA 
-
-		Informacoes relacionadas a entrada e saidas de caixa,
-		movimentacao financeira e custos operacionais podem ser obtidos em pesquisas na tabela fluxo_caixa 
-		e tambem as vezes pode precisar do relacionamento da tabela fluxo_caixaItem
-
-			Exemplo SQL 1
-				Quais são os custos operacionais mais significativos?
-				#SQL:  SELECT 
-							tipo AS tipo_despesa,
-							SUM(valor) AS total_despesas
-						FROM 
-							fluxo_caixa
-						WHERE tipo = 'S'  
-							AND fluxo_caixa.ativo = 1 
-						GROUP BY 
-							tipo
-						ORDER BY 
-							total_despesas DESC;
-
-			Exemplo SQL 2 
-				#user_request_or_question: "Em que dia deste mes foi pago a tv por assinatura ?"
-				#SQL: SELECT 
-						DAY(fc.dataHora) AS dia_pagamento
-						FROM 
-							fluxo_caixa fc
-						JOIN 
-							fluxo_caixa_item fci ON fc.id_fluxo_caixa = fci.id_fluxo_caixa
-						WHERE fci.descricao LIKE '%tv por assinatura%'
-							AND MONTH(fc.data_hora) = MONTH(CURRENT_DATE())
-							AND YEAR(fc.data_hora) = YEAR(CURRENT_DATE())
-							AND fc.ativo = 1
-						ORDER BY 			
-
-
-	CONSULTA DE SERVICOS 
-
-		Todos os servicos oferecidos pelo estabelecimento estao registrados na tabela de especialidade.
-		Nesta tabela contem informacoes como descricao, precos, tempo necessario, 
-		sessoes necessarias para serem feitos os serviço. 
-
-			Exemplo SQL 1
-				#user_request_or_question: "Encontrar o valor do servico cujo nome  é 'Corte Masculino'" 
-				#SQL: select preco from especialidade where nome like 'corte masculino%';
-
-			Exemplo SQL 2 
-				#user_request_or_question: "Qual é o serviço mais demandado pelos clientes?"
-				#SQL: SELECT nome, COUNT(*) as quantidade  
-							FROM especialidade 
-								INNER JOIN agenda_especialidade
-										ON especialidade.id_especialidade = agenda_especialidade.id_especialidade 
-							WHERE especialidade.ativo = 1 		
-							GROUP BY especialidade.nome 
-							ORDER BY quantidade DESC LIMIT 1 ;
-
-			Exemplo 3 								
-				#user_request_or_question: "Quais são os serviços menos procurados pelos clientes?"
-				#SQL: SELECT nome, COUNT(*) as quantidade  
-						FROM especialidade 
-							INNER JOIN agendaEspecialidade
-									ON especialidade.id_especialidade = agenda_especialidade.id_especialidade 
-						WHERE especialidade.ativo = 1 		
-						GROUP BY especialidade.nome 
-						ORDER BY quantidade LIMIT 10 ;
-
-
-	CONSULTA SE TAXA DE OCUPAÇÃO MÉDIA DE FUNCIONÁRIOS ESPECIALIZADOS NOS ATENDIMENTOS DO ESTABELECIMENTO
-
-		Para se saber o tempo de ocupacao ou ociosidade de um funcionario, 
-		relacionar a tabela funcionario com o de agendamento 
-
-			Exemplo SQL 1
-				#user_request_or_question: "Qual é a taxa de ocupação diária dos funcionários ao longo da semana?"
-				#SQL: SELECT 
-						f.nome AS NomeFuncionario,
-						COALESCE(AVG(ocupacao_diaria), 0) AS taxa_ocupacao_media_diaria
-						FROM 
-							funcionario f
-						LEFT JOIN (
-							SELECT 
-								id_funcionario,
-								ROUND(SUM(TIMESTAMPDIFF(MINUTE, data_hora_inicio, data_hora_fim)) / 4200 * 100, 2) AS ocupacao_diaria
-							FROM 
-								agenda
-							WHERE 
-								ativo = 1
-							GROUP BY 
-								id_funcionario, DATE(data_hora_inicio)
-						) a ON f.id_funcionario = a.id_funcionario
-						GROUP BY 
-							f.nome;
-
-			Exemplo SQL 2 
-				#user_request_or_question: "Qual é a taxa de ocupação média dos funcionários ao longo da semana?"
-				#SQL:  SELECT f.nome AS NomeFuncionario,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 1, 1, 0)) AS taxa_ocupacao_media_domingo,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 2, 1, 0)) AS taxa_ocupacao_media_segunda,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 3, 1, 0)) AS taxa_ocupacao_media_terca,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 4, 1, 0)) AS taxa_ocupacao_media_quarta,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 5, 1, 0)) AS taxa_ocupacao_media_quinta,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 6, 1, 0)) AS taxa_ocupacao_media_sexta,
-								AVG(IF(WEEKDAY(a.data_hora_inicio) = 7, 1, 0)) AS taxa_ocupacao_media_sabado
-							FROM funcionario f
-							LEFT JOIN (
-							SELECT
-								data_hora_inicio,
-								id_funcionario,
-								WEEKDAY(data_hora_inicio) AS diaSemana
-							FROM agenda a
-							WHERE MONTH(data_hora_inicio) = MONTH(CURRENT_DATE())
-								AND YEAR(data_hora_inicio) = YEAR(CURRENT_DATE())
-							) a ON f.id_funcionario = a.id_funcionario
-							GROUP BY f.nome;
-
-	CONSULTA HORÁRIO DE PICO 
-
-		Exemplo SQL 
-			#user_request_or_question:"Quais são os horários de pico para cada tipo de serviço?" 
-			#SQL: SELECT 
-						ae.id_especialidade,
-						e.nome AS especialidade,
-						DATE_FORMAT(a.data_hora_inicio, '%H:%i') AS horario_pico,
-						COUNT(*) AS quantidade_agendamentos
-					FROM 
-						agenda a
-					JOIN 
-						agendaEspecialidade ae ON a.id_agenda = ae.id_agenda
-					JOIN 
-						especialidade e ON ae.id_especialidade = e.id_especialidade
-					WHERE 
-						a.ativo = 1
-					GROUP BY 
-						ae.id_especialidade, DATE_FORMAT(a.data_hora_inicio, '%H:%i')
-					ORDER BY 
-						ae.id_especialidade, quantidade_agendamentos DESC;
-
-	CONSULTA PESQUISA DE SATISFACAO
-
-	    As consultas SQL só podem ter critérios de data e hora se o usuário deixar isso indicado na pergunta ou pedido dele.
-
-		Exemplo 1  
-			#user_request_or_question:"Qual a media de satisfacao dos nossos clientes?" 
-			#SQL: SELECT AVG(avaliacao) AS media_satisfacao
-                         FROM pesquisa_satisfacao
-                         WHERE AND ativo = 1;	      
-		Exemplo 2  
-			#user_request_or_question:"Qual a media do mes corrente da satisfacao dos nossos clientes?" 
-			#SQL: SELECT AVG(avaliacao) AS media_satisfacao
-			FROM pesquisa_satisfacao
-			WHERE month(dataHora) =  EXTRACT(MONTH FROM CURDATE()) 
-			AND ativo = 1;
+		For current month's average satisfaction:
+		Example
+		User request: "What is the current month's average customer satisfaction?"
+		Instruction: SELECT AVG(avaliacao) AS media_satisfacao FROM pesquisa_satisfacao WHERE MONTH(dataHora) = EXTRACT(MONTH FROM CURDATE()) AND ativo = 1;
