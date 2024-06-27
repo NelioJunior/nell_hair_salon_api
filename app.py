@@ -63,8 +63,8 @@ def customer_service():
     data = request.get_json()
 
     user = data.get('user')
-    user_msg = data.get('question') 
-    user_msg = re.sub(r'\bnao\b', 'não', user_msg, flags=re.IGNORECASE)
+    question =  data.get('question')
+    user_msg = re.sub(r'\bnao\b', 'não',  question, flags=re.IGNORECASE)
 
     prompt = {
         "cliente": user, 

@@ -1,7 +1,7 @@
 # nell_hair_salon_api   (prova de conceito)
 
-  Pode ser mais interessante na reducao da quandidade de tokens usados, montar o SQL com o langchain 
-  com openai ou together e para dar a resposta final usar o together 
+  Cuidado! aparentemente o IP interno do novo roteador da claro esta mudando randomicamente !
+
   
 # Marketing -------------------------------------------------------------------------------------------------------------------------
 
