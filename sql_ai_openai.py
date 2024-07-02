@@ -78,7 +78,7 @@ def ask_to_the_database(query):
 
 if __name__ ==  '__main__':
 
-    query = "Quais sao os clientes que possuem agendamento marcados para o dia 14 deste mes?" 
+    query = "Qual e' o telefone dai ?" 
     results = get_sql_statement_and_execution(query)
 
     print (results)

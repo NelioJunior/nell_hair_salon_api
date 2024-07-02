@@ -2,11 +2,7 @@
 
   Cuidado! aparentemente o IP interno do novo roteador da claro esta mudando randomicamente !
 
-  
-# Marketing -------------------------------------------------------------------------------------------------------------------------
-
-  Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
-
+ 
 # Dica langchain (SQL) --------------------------------------------------------------------------------------------------------------
 
   Exemplo mais completo da string de conexao, quando incluido o parametro include_tables, so' as tabelas indicada seram pesquisadas
@@ -28,13 +24,19 @@
       -  Frases com mais de uma palavra devem prevalecer sobre frases de apenas uma palavra, e por ultimo por ordem alfabetica 
                                                                                                (ex: apenas prevalece sobre somente) 
 ## TO DO -----------------------------------------------------------------------------------------------------------------------------
+  
+  Sprint Senana 1/Jun a 6/Jun 
+         
+       Tem pastas e arquivos (./model)  que so esta ocupando espaco.Precisa tirar com todo o cuidado.
 
-  Sprint Senana 23/Jun a 30 
+  Strint concluida ---------------------------------------------------------------------------------------------- 
+
+  Sprint Senana 23/Jun a 30/Jun 
 
     28 - Desvincular os chatbots da AWS, para isso em vez, os fontes do nell_hair_salon_api deverao ser 
          movidos para  raspinellserver.local/var/www/html/
 
-  Sprint Semana de 16/Jun a 22
+  Sprint Semana de 16/Jun a 22/Jun
 
     20 - Adicionar no script de massa de dados um funcionario que cuida de acumputura, massagem, quiropraxia e tatuador.√
 
@@ -51,8 +53,6 @@
 
     11/Jun/24 resolver a questao do acesso ao htts. 
 
-
-  Strint concluida ---------------------------------------------------------------------------------------------- 
   20/Abril/24 E'preciso uma mensagem adequanda para quando se cancela um agendamento e o cliente desiste de cancelar √.
 
   19/Abril/24 
@@ -92,6 +92,10 @@
   resultado em problemas ...    
       
       msgResposta = listarFuncionariosDisponiveis(stts,respBaseConhecimento, msgResposta)
+
+# Marketing -------------------------------------------------------------------------------------------------------------------------
+
+  Que tal vender o nosso Modelo como um SLM - Small Languagem Model? 
 
 ## SUGESTOES --------------------------------------------------------------------------------------------------------------------
 USAR PLAYGROUND EM VEZ DO CHATGPT PARA CRIACAO DE PROMPTS, A DIFERENCAS DE RESULTADOS ENTRE O PLAYGROUND E O CHATGTP 
