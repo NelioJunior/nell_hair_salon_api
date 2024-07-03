@@ -1,5 +1,5 @@
 import mysql.connector
-from tools import obter_chave_openai
+from tools import obter_chave_openai, log_message
 from datetime import datetime 
 
 from langchain_community.tools.sql_database.tool import QuerySQLDataBaseTool
@@ -39,7 +39,7 @@ def get_sql_statement_and_execution (query):
 
         query = query.replace("LIMIT 5;", "")    # palhativo  -- Nell 12 Jun 24
 
-        print(query)
+        log_message(query)
 
         cursor.execute(query)
 

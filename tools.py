@@ -45,7 +45,7 @@ def eliminar_duplicatas(palavras_chave):
 
 def log_message(message):
     with open("/home/nelljr/nell_hair_salon_api/historic.log", "a") as log_file:
-        log_file.write(message)
+        log_file.write(message + "\n\n" )
 
 def formalizador_de_linguagem_natural(message_info, nomeAssistente):
     mensagemTraduzida = message_info["message"].lower() 
