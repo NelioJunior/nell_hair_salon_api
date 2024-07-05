@@ -141,7 +141,8 @@ def business_inteligence():
 
     response = client_together.chat.completions.create(
         model="meta-llama/Llama-3-70b-chat-hf",
-        messages=message
+        messages=message,
+        temperature=0.1
     )
 
     return jsonify({'answer': response.choices[0].message.content})
