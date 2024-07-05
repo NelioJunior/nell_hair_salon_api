@@ -32,22 +32,24 @@ Criteria for Creating SQL Instructions
 		Instruction: SELECT nome, apelido, CASE WHEN remuneracao_fixa = 0 THEN CONCAT(percentagem_remuneracao_geral, '% sobre o serviço') ELSE CAST(remuneracao_fixa AS CHAR) END AS remuneracao FROM funcionario WHERE nome LIKE 'John Doe%' OR apelido LIKE 'John Doe%' AND ativo = 1;
 		Note: In a spa, employees might also be referred to as colaboradores, técnicos, or empregados.
 
-	Client Appointment Queries
+	For questions that involve existing, such as "ARE THERE" or "EXISTS", you must give only a quantitative answer, no further details.
+		Example
+		User request: "I would like to know if tomorrow, are there marked schedules?"
+		Instruction: SELECT COUNT(*) AS total_agendamentos FROM agenda   WHERE DATE(data_hora_inicio) = DATE_ADD(CURDATE(), INTERVAL 1 DAY) AND WEEKDAY(data_hora_inicio) = 5 AND ativo = 1;
 
-		For client appointment-related queries, base the searches on the relationship between the "agenda" and "cliente" tables. Use the "data_hora_inicio" field for date and time parameters.
-
+	For client appointment-related queries, base the searches on the relationship between the "agenda" and "cliente" tables. Use the "data_hora_inicio" field for date and time parameters.
 		Example
 		User request: "Which clients have appointments on the 17th of this month?"
 		Instruction: SELECT c.nome FROM cliente c JOIN agenda a ON c.id_cliente = a.id_cliente WHERE DATE(a.data_hora_inicio) = '2024-01-17' AND c.ativo = 1;
 		Product Supplier Queries
 
-		To find the supplier information for a specific product, relate the "produto" and "fornecedor" tables using the common field id_fornecedor.
+	To find the supplier information for a specific product, relate the "produto" and "fornecedor" tables using the common field id_fornecedor.
 		Example
 		User request: "What is the name of the supplier of the product 'sunscreen'?"
 		Instruction: SELECT f.nome FROM fornecedor f JOIN produto p ON f.id_fornecedor = p.id_fornecedor WHERE p.nome LIKE '%protetor solar%' AND f.ativo = 1 AND p.ativo = 1;
 		Product Stock Queries
 
-		For top-selling products, relate the "produto" and "fluxo_caixaItem" tables.
+	For top-selling products, relate the "produto" and "fluxo_caixaItem" tables.
 		Example
 		User request: "What are the top 5 best-selling products?"
 		Instruction: SELECT p.nome AS NomeProduto, COUNT(fc.id_fluxo_caixa_item) AS quantidade_vendida 
@@ -55,13 +57,13 @@ Criteria for Creating SQL Instructions
 		For average profit margin of beauty products:
 
 		Example
-		User request: "What is the average profit margin of beauty products?"
-		Instruction: SELECT AVG((preco_venda - preco_compra) / preco_compra) * 100 AS margem_lucro_media FROM produto WHERE ativo = 1;
-		For stock item outflow:
+			User request: "What is the average profit margin of beauty products?"
+			Instruction: SELECT AVG((preco_venda - preco_compra) / preco_compra) * 100 AS margem_lucro_media FROM produto WHERE ativo = 1;
+			For stock item outflow:
 
 		Example
-		User request: "Which stock items have the highest outflow?"
-		Instruction: SELECT p.nome AS nome_produto, SUM(fc.quantidade) AS total_saida FROM fluxo_caixa_item fc JOIN produto p ON fc.id_produto = p.id_produto JOIN fluxo_caixa f ON fc.id_fluxo_caixa = f.id_fluxo_caixa WHERE f.tipo = 'e' GROUP BY p.nome ORDER BY total_saida DESC;
+			User request: "Which stock items have the highest outflow?"
+			Instruction: SELECT p.nome AS nome_produto, SUM(fc.quantidade) AS total_saida FROM fluxo_caixa_item fc JOIN produto p ON fc.id_produto = p.id_produto JOIN fluxo_caixa f ON fc.id_fluxo_caixa = f.id_fluxo_caixa WHERE f.tipo = 'e' GROUP BY p.nome ORDER BY total_saida DESC;
 
 	Cash Flow Queries
 
