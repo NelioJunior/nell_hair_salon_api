@@ -67,6 +67,12 @@ Criteria for Creating SQL Instructions
 
 	Cash Flow Queries
 
+		To determine the payment method, you should check the meio_de_pagamento field in the fluxo_de_caixa table. The values can be:
+			meio_de_pagamento = 'DI' (cash)
+			meio_de_pagamento = 'DE' (debit card)
+			meio_de_pagamento = 'CR' (credit card)
+			meio_de_pagamento = 'CH' (check)"		
+
 		For operational costs:
 		Example
 		User request: "What are the most significant operational costs?"

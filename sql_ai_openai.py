@@ -52,11 +52,12 @@ def get_sql_statement_and_execution(query):
             if linha[0] is not None:
                 answer.append(linha)
         if len(answer) == 0:
-            answer = ("Comunique ao usuário que a busca da informação desejada resultou em nenhum registro."
-                      "Sugira ao usuário que talvez seja uma boa ideia refazer a pergunta com outras palavras.")
+            answer = ("Inform the user that the search for the desired information resulted in no records."
+                      "Suggest to the user that it might be a good idea to rephrase the question.")
 
     except:
-        answer = "Responda da melhor maneira possível"
+        answer = "Suggest to the user that it might be a good idea to rephrase the question."
+
     cursor.close()
     return answer
 
@@ -69,10 +70,10 @@ def ask_to_the_database(query):
             "question": f"{query} - (data atual {datetime.now().strftime('%A, %d de %B de %Y')}) -({dba_rule})",
         })
     except:
-        answer = "Responda da melhor maneira possível"
+        answer = "Suggest to the user that it might be a good idea to rephrase the question."
     return answer
 
 if __name__ == '__main__':
-    query = "Qual o nome do responsável do estabelecimento?"
+    query = "Qual sao os snacks favoritos de nossos clientes?"
     results = get_sql_statement_and_execution(query)
     print(results)
